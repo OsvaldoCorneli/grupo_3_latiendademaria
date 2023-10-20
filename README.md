@@ -1,3 +1,4 @@
 # grupo_3_latiendademaria
 Proyecto Integrador Digital house
-que mas de tarea profe?
+deja de hablarme en chino osvaldo
+
