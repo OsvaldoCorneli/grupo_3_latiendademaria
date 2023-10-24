@@ -3,7 +3,7 @@
 “La tienda de Maria”, es un emprendimiento que fabrica productos religiosos,cuenta con una linea estampada/sublimada, una linea artesanal pintada a mano y la venta de ilustraciones digitales. 
 La particularidad a destacar de este negocio es que cuenta con sus propias ilustraciones digitales, realizadas por la dueña, por lo que los productos se caracterizan por tener un estilo moderno y tierno, destacándose de los tradicionales productos con imágenes religiosas antiguas.
 
-En la tienda encontraras por un lado la venta minorista, que estará dividia en cuatro categorias:
+En la tienda encontraras por un lado la venta minorista, que estará dividia en tres categorias:
 
 1- Productos artesanales que incluye mates y cuadros pintados a mano.
 
@@ -11,7 +11,7 @@ En la tienda encontraras por un lado la venta minorista, que estará dividia en 
 
 3- Ilustraciones digitales personalizadas.
 
-4-servicio especial a parroquias y agentes pastorales, que contiene precios mayoristas y la disponibilidad de acceder de manera gratuita al banco de imágenes digitales siempre que ellas sean utilizadas sin fines de lucro.
+Y un servicio especial a parroquias y agentes pastorales, que contiene precios mayoristas y la disponibilidad de acceder de manera gratuita al banco de imágenes digitales siempre que ellas sean utilizadas sin fines de lucro.
 
 **Publico objetivo:** 
 La tienda de Maria es un emprendimiento puramente catolico, el publico objetivo se segmenta por este criterio principalmente, asi mismo dentro de este publico busca llegar a los mas jóvenes.
