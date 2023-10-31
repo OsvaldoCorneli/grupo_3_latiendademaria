@@ -29,6 +29,9 @@ Mis capacidades blandas a destacar son la capacidad de escucha, herramienta clav
 *Natalia Nora Rodriguez*: Hola soy Naty, tengo 33 años, estado civil soltera. Trabajo de manera independiente, poseo dos emprendimientos, ambos son de ventas de productos on line.Soy ilustradora digital y diseñadora de marroquineria en cuero. Realice cursos de marketing, creaciones de marcas, logistica, canales de venta on line, capacidades blandas, etc. que me han ayudado a desarrollarme como emprendedora y como persona.
 Mis fortalezas blandas: capacidad de adaptarme al cambio y la buena comunicación, aprendí que lo que voy a decir es igual de importante  que como lo voy a decir.
 
+*Gustavo Rodolfo Paz*: Hola soy Gustavo, tengo 33 años, estado civil soltero. Actualmente trabajo de "freelancer" en el rubro de teconologia. Fui estudiante de Tenico en redes de Computadoras en la Universidad Catolica de santiago del estero, posteriormente cambie de rumbo a estudiante de Contador Publico en la universidad Siglo 21, el cual solo me falta la Tesis. En ese periodo (2012 - 2020), trabajé en el rubro de Distribucion de Bebidas, donde me destaqué en las areas de logistica, facturacion, gestion de inventario, tesoreria y compras.
+Mis fortalezas son: Escuchar a los demas, tolerancia y respeto. Capacidad para adaptarme al cambio, afrontarlos de manera proactiva y perseverante. 
+
 ## **Sitios de referencia**
 https://thefishermen.es/
 
