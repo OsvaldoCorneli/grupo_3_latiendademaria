@@ -44,3 +44,6 @@ https://diostesalvemaria.com.ar/
 https://www.tiendanube.com/
 
 Fue un desafio buscar tiendas relacionadas a estos productos y al publico objetivo, si bien habia referentes de emprendedores catolicos, nos encontramos con que la gran mayoria, casi todos, no cuentan con tiendas on line, utilizamos las dos primeras paginas para inspirarnos en cuanto a colores y estetica, son paginas españolas, Santuario de Lujan nos sirvio para guiarnos en cuanto al carrito de compra y como logearse.Dios te Salve Maria fue el sitio que mas se asemeja a la propuesta de nuestra clienta, poseen algunos productos iguales y el estilo de ilustraciones, lo utilizamos mas que nada para encontrar fallas o cosas a mejorar y hacerlas diferentes. Tambien vimos tienda nube, que si bien no esta relacionado a nuestro cliente, sabemos que es una de las tiendas mas elegidas por los emprendedores asi que observamos las ventajas y facilidades que ofrece para implementarlas.
+
+## **Trello**
+[Trello La tienda de Maria](https://trello.com/b/0Hc3HXnb/la-tienda-de-mar%C3%ADa)
