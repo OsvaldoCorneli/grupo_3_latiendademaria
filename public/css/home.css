@@ -1,21 +1,39 @@
- /* *{
-    box-sizing: content-box;
+/* * {
     border: solid 1px red;
+    margin: 0px;
 } */
+
+main {
+    min-height: 100%;
+    margin-bottom: 4.5vh;
+}
 .logo {
     width: 10%;
+    height: 10%;
 }
 .logoLargo {
     align-items: center;
     justify-content: center;
     align-content: center;
-    height: cover;
+    width: 50%;
+    height: 10%;
 }
-
+.tituloNavbar {
+    padding: 0px 0px 0px 0px;
+    margin: auto;
+    font-family: 'Bimbo Trial';
+    color: black;
+    font-size: 2rem;
+    -webkit-text-stroke: 1px #32A97F;
+}
 nav > span {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+nav {
+    height: fit-content;
+    padding: 5px;
 }
 
 nav ul {
@@ -25,44 +43,318 @@ nav ul {
     align-items: center;
     text-align: center;
 }
+.loginNavbar {
+    margin: 0px;
+    padding: 0px 0px 0px 0px;
+    min-width: 5%;
+    max-width: 15%;
+}
 .loginNavbar ul {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    font-size: 2rem;
+    list-style-type: none;
+    padding: 0px 0px 0px 0px;
+    font-size: 1rem;
     height: 65%;
+}
+.loginNavbar ul li {
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-size: 1.5rem;
+    height: 3vh;
 }
 .loginNavbar button {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: 30%;
-    width: 90%;
+    height: 3vh;
     display: inline-block;
     text-align: center;
-    font-size: 2rem;
-}
-.site {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    font-size: 24px;
+    font-size: 0.5rem;
+    font-family: "Gidole";
 }
 
-.carrousel {
-    box-sizing: border-box;
-    border: solid 3px black;
-    width: cover;
-    height: 30%;
+.site {
+    padding: 5px;
     background-color: #32A97F;
-    border-radius: 10px;
+    font-size: 16px;
+    align-items: center;
+}
+
+.burger-menu {
+    display: none;
+}
+.carrousel {
+    position: relative;
+    box-sizing: border-box;
+    border: solid 1px #5394b0;
+    color: #32A97F;
+    font-size: 2rem;
+    width: cover;
+    height: 50vh;
+    background-color: #b6e5db;
+    border-radius: 20px;
     margin: 1%;
     padding: 3%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+}
+.carrousel img {
+    position: absolute;
+    margin: 0px;
+    z-index: 0;
+    background-color: whitesmoke;
+    width: 94%;
+    height: 90%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.carrousel i#left {
+    left: 3%;
+    z-index: 1;
+}
+.carrousel i#right {
+    right: 3%;
+    z-index: 1;
+}
+
+.productos {
+    border: solid 1px #5394b0;
+    border-radius: 5px;
+    padding: 0px 0px 5px 0px;
+    margin: 5px;
+}
+.productos article {
+    font-family: 'Gidole';
+    text-align: center;
+    box-shadow: 3px 3px 5px gray;
+}
+.productos article:hover {
+    box-shadow: 5px 5px black;
+}
+.productos > p{
+    font-family: 'Gidole';
+    text-align: center;
+    background-color: #b6e5db;
+    border-bottom: solid 1px #5394b0;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    font-weight: bold;
+    margin: 0px 0px 5px 0px;
+}
+.productos ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0px 0px 5px 0px;
+    padding: 0px 0px 5px 0px;
+    list-style-type: none;
+}
+.productos ul li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px #5394b0;
+    background-color: #b6e5db;
+    border-radius: 50%;
+    width: 15vw;
+    height: 15vh;
+
+}
+.productos ul li a {
+    z-index: 2;
+    font-family: 'Gistesy';
+    font-size: 2rem;
+    color:black;
+    font-weight: bold;
+    -webkit-text-stroke: 1px #32A97F;
+    position: relative;
+    bottom: 50px;
+}
+.productos ul li img {
+    position: absolute;
+    width: 10vw;
+    height: 10vh;
+    z-index: 1;
+}
+
+.productos a{
+    text-decoration: none;
+}
+
+.cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px
+}
+
+.cards article {
+    border: solid 1px #5394b0;
+    border-radius: 5px;
+}
+.cards article img {
+    width: fit-content;
+    border-radius: 5px;
+}
+.lineaArtesanal {
+    margin-top: 5px;
+    border: solid 1px #5394b0;
+    border-radius: 5px;
+    padding: 0px 0px 5px 0px;
+    margin: 5px;
+}
+.lineaArtesanal article {
+    font-family: 'Gidole';
+    text-align: center;
+    box-shadow: 3px 3px 5px gray;
+}
+.lineaArtesanal article:hover {
+    box-shadow: 5px 5px black;
+}
+.lineaArtesanal > p{
+    font-family: 'Gidole';
+    text-align: center;
+    background-color: #b6e5db;
+    border-bottom: solid 1px #5394b0;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    font-weight: bold;
+    margin: 0px 0px 0px 0px;
+}
+.lineaArtesanal ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0px 0px 5px 0px;
+    padding: 5px 0px 5px 0px;
+    list-style-type: none;
+    background-color: #32A97F;
+}
+.lineaArtesanal ul li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px #5394b0;
+    background-color: white;
+    border-radius: 50%;
+    width: 15vw;
+    height: 15vh;
+
+}
+.lineaArtesanal ul li a {
+    z-index: 2;
+    font-family: 'Gistesy';
+    font-size: 2rem;
+    color:black;
+    font-weight: bold;
+    -webkit-text-stroke: 1px #32A97F;
+    position: relative;
+    bottom: 50px;
+}
+.lineaArtesanal ul li img {
+    position: absolute;
+    width: 10vw;
+    height: 10vh;
+    z-index: 1;
+}
+
+.lineaArtesanal a {
+    text-decoration: none;
+}
+.servParroquias {
+    font-family: "Gidole";
+    font-size: 2rem;
+    font-weight: bold;
+    background-color: #32A97F;
+    border: solid 1px #5394b0;
+    border-radius: 10px;
+    text-align: center;
+    margin: 5px;
+}
+
+footer{
+    position:fixed;
+    left:0;
+    bottom:0;
+    height:4vh;
+    width:100%;
+    overflow:hidden;
+    z-index: 3;
+}
+footer section .socialMedia {
+    font-family: "Gidole";
+    font-weight: bold;
+    margin: 0px;
+    height: 4vh;
+    text-align: center;
+    justify-content: center;
+    background-color: #32A97F;
+    border: solid 1px #5394b0;
+    font-size: 1.5rem;
+}
+
+@media (width <= 361px) {
+    nav span {
+        height: 10vh; 
+    }
+    .logo {
+        display: none;
+    }
+    .logoLargo {
+        width: 75vw;
+        height: 8vh;
+    }
+    .site ul {
+        display: none
+    }
+    .site {
+        height: 4vh;
+    }
+    .burger-menu {
+        display: block;
+        text-align: center;
+        font-size: 1.5rem;
+    }
+    footer {
+        display: none
+    }
+}
+
+@media (width >= 361px) {
+    .site ul {
+        display: flex;
+        margin: 0px;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .site ul li {
+        margin: 0px;
+        background-color: white;
+        padding: 5px;
+        border: solid 1px #5394b0; */
+    }
+    .site li a {
+        text-decoration:none;
+        color: #32A97F;
+        font-family: 'Gidole';
+        font-weight: normal;
+    }
 }

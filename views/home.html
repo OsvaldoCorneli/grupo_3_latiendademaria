@@ -9,6 +9,7 @@
         referrerpolicy="no-referrer"
         />
         <link href="\css\home.css" rel="stylesheet"/>
+        <link href="\css\fonts.css" rel="stylesheet"/>
         <title>La tienda de Maria</title>
     </header>
     <main>
@@ -16,28 +17,107 @@
             <span>
                 <img class="logo" src="\images\4F5FA3DA-7648-4C42-B5F2-B01A0BA7C902.png"/>
                 <img class="logoLargo" src="\images\F41CA9F5-CC6B-4EF0-8A80-8769A56E7D89 (1).png" alt="La Tienda de Maria"/>
+                <!-- <h1 class="tituloNavbar">La Tienda de María</h1> -->
                 <span class="loginNavbar">
                     <ul>
-                        <li><i class="fa-solid fa-cart-shopping"></i>Carrito</li>
-                        <li><i class="fa-solid fa-user"></i>Perfil</li>
+                        <li><i class="fa-solid fa-cart-shopping"></i></li>
+                        <li><i class="fa-solid fa-user"></i></li>
                     </ul>
                     <button>Ingresá</button>
                 </span>
             </span>
-            <ul class="site">
-                <li><a href="">Inicio</a></li>
-                <li><a href="">Productos</a></li>
-                <li><a href="">Conocenos</a></li>
-                <li><a href="">Contado</a></li>
-            </ul>
+            <div class="site">
+                <ul>
+                    <li><a href="">Inicio</a></li>
+                    <li><a href="">Productos</a></li>
+                    <li><a href="">Conocenos</a></li>
+                    <li><a href="">Contacto</a></li>
+                    <li><a href="">Sobre Mi</a></li>
+                </ul>
+                <div class="burger-menu">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </div>
         </nav>
-        <div class="carrousel">
-            <i class="fa-solid fa-chevron-left"></i>
-                <img src="" alt="imagen carrousel"/>
-            <i class="fa-solid fa-chevron-right"></i>
-        </div>
+        <section class="carrousel">
+            <i id="left" class="fa-solid fa-chevron-left"></i>
+            <img src="https://random.imagecdn.app/600/300" alt="imagen carrousel"></img>
+            <i id="right" class="fa-solid fa-chevron-right"></i>
+        </section>
+        <section class="productos">
+                <p>Tienda/Productos</p>
+                <ul>
+                    <li><img src="/images/Taza.png" alt="img taza"/><a href="">Tazas</a></li>
+                    <li><img src="/images/mate.png" alt="img mate"/><a href="">Mates</a></li>
+                    <li><img src="/images/paletaPintura.png" alt="img ilustracion"/><a href="">Ilustraciones</a></li>
+                </ul>
+            <section class="cards">
+                <article>
+                    <img src="https://random.imagecdn.app/260/140" alt="articulo"/>
+                    <p>$1500</p>
+                    <p>Titulo del Articulo</p>
+                </article>
+                <article>
+                    <img src="https://random.imagecdn.app/260/140" alt="articulo"/>
+                    <p>$12500</p>
+                    <p>Titulo del Articulo</p>
+                </article>
+                <article>
+                    <img src="https://random.imagecdn.app/260/140" alt="articulo"/>
+                    <p>$30000</p>
+                    <p>Titulo del Articulo</p>
+                </article>
+                <article>
+                    <img src="https://random.imagecdn.app/260/140" alt="articulo"/>
+                    <p>$21000</p>
+                    <p>Titulo del Articulo</p>
+                </article>
+                <article>
+                    <img src="https://random.imagecdn.app/260/140" alt="articulo"/>
+                    <p>$5000</p>
+                    <p>Titulo del Articulo</p>
+                </article>
+                <article>
+                    <img src="https://random.imagecdn.app/260/140" alt="articulo"/>
+                    <p>Precio</p>
+                    <p>Titulo del Articulo</p>
+                </article>
+            </section>
+        </section>
+        <section class="lineaArtesanal">
+            <p>Linea 100% Artesanal</p>
+            <ul>
+                <li><img src="/images/mate.png" alt="img mate"/><a href="">Mates</a></li>
+                <li><img src="/images/paletaPintura.png" alt="img ilustracion"/><a href="">Cuadros</a></li>
+            </ul>
+            <section class="cards">
+                <article>
+                    <img src="https://random.imagecdn.app/260/140" alt="articulo"/>
+                    <p>$1500</p>
+                    <p>Titulo del Articulo</p>
+                </article>
+                <article>
+                    <img src="https://random.imagecdn.app/260/140" alt="articulo"/>
+                    <p>$12500</p>
+                    <p>Titulo del Articulo</p>
+                </article>
+                <article>
+                    <img src="https://random.imagecdn.app/260/140" alt="articulo"/>
+                    <p>$30000</p>
+                    <p>Titulo del Articulo</p>
+                </article>
+            </section>
+        </section>
+        <p class="servParroquias">Servicio para parroquias</p>
     </main>
     <footer>
-
+        <section>
+            <p class="socialMedia">Envianos tus dudas y consultas, seguinos en las redes!
+                <i class="fa-brands fa-facebook"></i>
+                <i class="fa-brands fa-square-instagram"></i>
+                <i class="fa-brands fa-square-whatsapp"></i>
+                <a href="">Contacto</a>
+            </p>
+        </section>
     </footer>
 </html>
