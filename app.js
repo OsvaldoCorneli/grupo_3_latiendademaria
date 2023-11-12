@@ -29,6 +29,21 @@ app.route("/profile")
         res.sendFile(path.join(__dirname,'/views/profile.html'))
     })
 ;
+app.route("/contacto")
+    .get((req,res) => {
+        res.sendFile(path.join(__dirname,'/views/contacto.html'))
+    })
+;
+app.route("/about")
+    .get((req,res) => {
+        res.sendFile(path.join(__dirname,'/views/about.html'))
+    })
+;
+app.route("/browser")
+    .get((req,res) => {
+        res.sendFile(path.join(__dirname,'/views/broser.html'))
+    })
+;
 
 app.listen(3001,(req,res) => {
     console.log(`Server corriendo en puerto http://localhost:3001`)
