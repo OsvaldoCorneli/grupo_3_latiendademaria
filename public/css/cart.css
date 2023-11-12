@@ -1,0 +1,86 @@
+* {
+    font-family: 'Gidole';
+    font-size: 1rem;
+    /* border: solid 1px red; */
+}
+
+
+.cart-modal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-top: 10px;
+}
+.cartdetail {
+    
+}
+.cart-modal th {
+    border-bottom: solid 4px black;
+}
+.cart-modal tr td {
+    padding: 5px;
+    text-align: right;
+    border-bottom: solid 2px gray;
+}
+.cartdetail #product {
+    text-align: left;
+    justify-content: center;
+    gap: 5px;
+}
+.cartdetail #x {
+    font-weight: bold;
+    color: red;
+    text-align: center;
+}
+.cartresume {
+    padding: 10px;
+    border-radius: 5px;
+    border: solid 1px gray;
+}
+.cartresume span {
+    border-bottom: solid 5px gray;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    gap: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.cartresume button {
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #1259c3;
+    color: white;
+    width: 35%;
+    transition: 500ms;
+}
+.cartresume button:hover {
+    background-color: #5394b0;
+}
+
+@media (max-width: 400px) {
+    .cartdetail img {
+        display: none;
+    }
+}
+
+@media (min-width: 700px) {
+    .cart-modal {
+        display: grid;
+        grid-template-columns: 1fr fit-content(60%);
+        gap: 10px;
+        grid-template-areas: "cartdetail cardresume";
+    }
+    .cart-modal section {
+        overflow: hidden;
+    }
+    .cartdetail {
+        grid-column: 1;
+    }
+    .cardresume {
+        grid-column: 2;
+    }
+}
