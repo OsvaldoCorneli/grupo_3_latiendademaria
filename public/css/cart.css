@@ -4,7 +4,6 @@
     /* border: solid 1px red; */
 }
 
-
 .cart-modal {
     display: flex;
     flex-direction: row;
@@ -79,6 +78,9 @@
     }
     .cartdetail {
         grid-column: 1;
+    }
+    .cartdetail table {
+        width: 100%;
     }
     .cardresume {
         grid-column: 2;

@@ -10,9 +10,10 @@
         />
         <link href="\css\home.css" rel="stylesheet"/>
         <link href="\css\fonts.css" rel="stylesheet"/>
+        <link href="\css\browser.css" rel="stylesheet"/>
         <title>La tienda de Maria</title>
     </header>
-    <main>
+    <body>
         <nav>
             <span>
                 <img class="logo" src="\images\4F5FA3DA-7648-4C42-B5F2-B01A0BA7C902.png"/>
@@ -39,18 +40,31 @@
                 </div>
             </div>
         </nav>
-        <section class="carrousel">
-            <i id="left" class="fa-solid fa-chevron-left"></i>
-            <img src="https://random.imagecdn.app/600/300" alt="imagen carrousel"></img>
-            <i id="right" class="fa-solid fa-chevron-right"></i>
-        </section>
-        <section class="productos">
-                <p>Tienda/Productos</p>
-                <ul>
-                    <li><img src="/images/Taza.png" alt="img taza"/><a href="">Tazas</a></li>
-                    <li><img src="/images/mate.png" alt="img mate"/><a href="">Mates</a></li>
-                    <li><img src="/images/paletaPintura.png" alt="img ilustracion"/><a href="">Ilustraciones</a></li>
-                </ul>
+        <main>
+            <section class="filter">
+                <p>Filtros</p>
+                <label for="categoria">Categoria:</label>
+                <select id="categoria" name="category">
+                    <option value="mates">Mates</option>
+                    <option value="tazas">Tazas</option>
+                    <option value="ilustraciones">Ilustraciones</option>
+                </select>
+                <label for="price">Precio menor a:</label>
+                <span class="filter-price" id="price">
+                    <label>Todos
+                        <input type="radio" name="price" value="allprices"/>
+                    </label>
+                    <label>$10.000
+                        <input type="radio" name="price" value="less10k"/>
+                    </label>
+                    <label>$25.000
+                        <input type="radio" name="price" value="less25k"/>
+                    </label>
+                    <label>$50.000
+                        <input type="radio" name="price" value="less50k"/>
+                    </label>
+                </span>
+            </section>
             <section class="cards">
                 <article>
                     <img src="https://random.imagecdn.app/260/140" alt="articulo"/>
@@ -83,41 +97,16 @@
                     <p>Titulo del Articulo</p>
                 </article>
             </section>
-        </section>
-        <section class="lineaArtesanal">
-            <p>Linea 100% Artesanal</p>
-            <ul>
-                <li><img src="/images/mate.png" alt="img mate"/><a href="">Mates</a></li>
-                <li><img src="/images/paletaPintura.png" alt="img ilustracion"/><a href="">Cuadros</a></li>
-            </ul>
-            <section class="cards">
-                <article>
-                    <img src="https://random.imagecdn.app/260/140" alt="articulo"/>
-                    <p>$1500</p>
-                    <p>Titulo del Articulo</p>
-                </article>
-                <article>
-                    <img src="https://random.imagecdn.app/260/140" alt="articulo"/>
-                    <p>$12500</p>
-                    <p>Titulo del Articulo</p>
-                </article>
-                <article>
-                    <img src="https://random.imagecdn.app/260/140" alt="articulo"/>
-                    <p>$30000</p>
-                    <p>Titulo del Articulo</p>
-                </article>
+        </main>
+        <footer>
+            <section>
+                <p class="socialMedia">Envianos tus dudas y consultas, seguinos en las redes!
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-square-instagram"></i>
+                    <i class="fa-brands fa-square-whatsapp"></i>
+                    <a href="">Contacto</a>
+                </p>
             </section>
-        </section>
-        <p class="servParroquias">Servicio para parroquias</p>
-    </main>
-    <footer>
-        <section>
-            <p class="socialMedia">Envianos tus dudas y consultas, seguinos en las redes!
-                <i class="fa-brands fa-facebook"></i>
-                <i class="fa-brands fa-square-instagram"></i>
-                <i class="fa-brands fa-square-whatsapp"></i>
-                <a href="/contacto">Contacto</a>
-            </p>
-        </section>
-    </footer>
+        </footer>
+    </body>
 </html>
