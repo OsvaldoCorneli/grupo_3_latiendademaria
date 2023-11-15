@@ -117,10 +117,6 @@ nav ul {
     margin: 1%;
     padding: 3%;
     display: block;
-    /* display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between; */
 }
 .carousel-item {
     position: absolute;
@@ -185,25 +181,6 @@ nav ul {
     z-index: 3;
     opacity: 1;
 }
-/* .carousel img {
-    position: absolute;
-    margin: 0px;
-    z-index: 0;
-    background-color: whitesmoke;
-    width: 94%;
-    height: 90%;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-}
-.carousel i#left {
-    left: 3%;
-    z-index: 1;
-}
-.carrousel i#right {
-    right: 3%;
-    z-index: 1;
-} */
 
 .productos {
     border: solid 1px #5394b0;
