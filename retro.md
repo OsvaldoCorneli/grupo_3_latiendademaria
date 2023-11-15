@@ -2,18 +2,17 @@
 
 * Vistas HTML segun los wireframes.
 * crear tablero de trello.
-* el portfolio de prouctos que ofrecera la tienda!!
+* el portfolio de productos que ofrecerá la tienda!!
    
 ## Hacer más.
 
 * Wireframes de etiquetas del sitio faltantes.
 * asignar y distribuir tareas de forma equitativa por cada integrante.
-* mas reuninos para mejorar la comunicacion.
+* mas reuniones para mejorar la comunicacion.
   
 ## Continuar haciendo.
 
 * Wireframes copados!
-* 
 
 ## Hacer menos.
 
