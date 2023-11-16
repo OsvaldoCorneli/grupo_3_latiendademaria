@@ -114,7 +114,7 @@ nav ul {
     max-height: 50vh;
     background-color: #b6e5db;
     border-radius: 20px;
-    margin: 1%;
+    margin: 30px 0;
     padding: 3%;
     display: block;
 }
@@ -252,7 +252,7 @@ nav ul {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: 10px
 }
@@ -344,7 +344,7 @@ nav ul {
 }
 
 footer{
-    position:fixed;
+    position:relative;
     left:0;
     bottom:0;
     height:4vh;
@@ -395,16 +395,18 @@ footer section .socialMedia {
 @media (width >= 361px) {
     .site ul {
         display: flex;
+        padding: 1%;
         margin: 0px;
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
     }
     .site ul li {
+        width: 10vw;
         margin: 0px;
         background-color: white;
         padding: 5px;
-        border: solid 1px #5394b0; */
+        border: solid 1px #5394b0; 
     }
     .site li a {
         text-decoration:none;
