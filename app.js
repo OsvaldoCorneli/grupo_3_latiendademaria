@@ -29,6 +29,24 @@ app.route("/profile")
         res.sendFile(path.join(__dirname,'/views/profile.html'))
     })
 ;
+app.route("/contacto")
+    .get((req,res) => {
+        res.sendFile(path.join(__dirname,'/views/contacto.html'))
+    })
+    .post((req,res) => {
+        res.send(req.body)
+    })
+;
+app.route("/about")
+    .get((req,res) => {
+        res.sendFile(path.join(__dirname,'/views/about.html'))
+    })
+;
+app.route("/browser")
+    .get((req,res) => {
+        res.sendFile(path.join(__dirname,'/views/browser.html'))
+    })
+;
 
 app.route("/register")
     .get((req,res) => {

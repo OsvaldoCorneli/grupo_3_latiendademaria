@@ -1,5 +1,5 @@
 <html lang="es">
-    <header>
+    <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link 
@@ -12,7 +12,10 @@
         <link href="\css\fonts.css" rel="stylesheet"/>
         <link href="\css\cart.css" rel="stylesheet"/>
         <title>La tienda de Maria</title>
-    </header>
+
+    </head>
+    <body>
+     
     <main>
         <nav>
             <span>
@@ -29,11 +32,11 @@
             </span>
             <div class="site">
                 <ul>
-                    <li><a href="">Inicio</a></li>
-                    <li><a href="">Productos</a></li>
-                    <li><a href="">Conocenos</a></li>
-                    <li><a href="">Contacto</a></li>
-                    <li><a href="">Sobre Mi</a></li>
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="/browser">Productos</a></li>
+                    <li><a href="/about">Conocenos</a></li>
+                    <li><a href="/contacto">Contacto</a></li>
+                    <li><a href="/autor">Sobre Mi</a></li>
                 </ul>
                 <div class="burger-menu">
                     <i class="fa-solid fa-bars"></i>
@@ -45,22 +48,24 @@
                 <table>
                     <tbody>
                         <tr>
-                            <th>Borrar</th>
-                            <th>Producto</th>
+                            <th></th>
+                            <th colspan="2">Producto</th>
                             <th>Precio</th>
                             <th>Cantidad</th>
                             <th>Subtotal</th>
                         </tr>
                         <tr>
                             <td id="X">X</td>
-                            <td id="product"><img src="https://random.imagecdn.app/110/70" alt="img product"/>Mate personalizado</td>
+                            <td ><img src="https://random.imagecdn.app/100/70" alt="img product"/></td>
+                            <td id="product">Mate personalizado</td>
                             <td>$1.500</td>
                             <td>2</td>
                             <td>$3.000</td>
                         </tr>
                         <tr>
                             <td id="X">X</td>
-                            <td id="product"><img src="https://random.imagecdn.app/110/70" alt="img product"/>Kit Matero</td>
+                            <td><img src="https://random.imagecdn.app/100/70" alt="img product"/></td>
+                            <td id="product">Kit Matero</td>
                             <td>$40.000</td>
                             <td>1</td>
                             <td>$40.000</td>
@@ -102,4 +107,5 @@
             </p>
         </section>
     </footer>
+</body>
 </html>

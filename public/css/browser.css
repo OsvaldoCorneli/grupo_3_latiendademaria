@@ -1,0 +1,22 @@
+.filter {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: solid 1px black;
+    padding: 5px;
+}
+.filter .filter-price {
+    display: flex;
+    flex-direction: column;
+}
+@media (min-width: 700px) {
+    main {
+        display: grid;
+    }
+    .filter {
+        grid-column: 1;
+    }
+    .cards {
+        grid-column: 2;
+    }
+}

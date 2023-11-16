@@ -10,12 +10,10 @@
         />
         <link href="\css\home.css" rel="stylesheet"/>
         <link href="\css\fonts.css" rel="stylesheet"/>
-        <link href="\css\login.css" rel="stylesheet"/>
         <title>La tienda de Maria</title>
 
     </head>
-
-   <body>
+ <body>
     <main>
         <nav>
             <span>
@@ -43,37 +41,7 @@
                 </div>
             </div>
         </nav>
-        <div class="login-modal">
-            <img src="https://assets.stickpng.com/images/585e4beacb11b227491c3399.png" alt="profile"/>
-            <form action="/login" method="POST">
-                <label for="username">Usuario / E-mail</label>
-                <input 
-                    type="text"
-                    name="username"
-                    id="username"
-                    placeholder="Ingresar usuario o email"
-                    required
-                    minlength="10"
-                    maxlength="20"
-                    class="validacionusername"
-                />
-                <label for="password">Contraseña</label>
-                <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    placeholder="Ingresar contraseña"
-                    required
-                    minlength="6"
-                    class="validacionpassword"
-                />
-                <button type="submit">LOGIN</button>
-            </form>
-            <span>
-                <span>¿No tienes cuenta? <a href="/register">¡Registrate!</a></span>
-                <span>¿Olvidaste la contraseña? <a href="/restore">¡Restablecer!</a></span>
-            </span>
-        </div>
+        
     </main>
     <footer>
         <section>

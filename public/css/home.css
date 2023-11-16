@@ -3,7 +3,7 @@
     margin: 0px;
 } */
 
-main {
+body {
     min-height: 100%;
     margin-bottom: 4.5vh;
 }
@@ -102,41 +102,84 @@ nav ul {
 .burger-menu {
     display: none;
 }
-.carrousel {
+.carousel {
     position: relative;
     box-sizing: border-box;
     border: solid 1px #5394b0;
     color: #32A97F;
     font-size: 2rem;
     width: cover;
-    height: 50vh;
+    min-height: 20vh;
+    height: 10vh;
+    max-height: 50vh;
     background-color: #b6e5db;
     border-radius: 20px;
     margin: 30px 0;
     padding: 3%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    display: block;
 }
-.carrousel img {
+.carousel-item {
     position: absolute;
-    margin: 0px;
-    z-index: 0;
-    background-color: whitesmoke;
-    width: 94%;
-    height: 90%;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 25px 50px;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
 }
-.carrousel i#left {
-    left: 3%;
-    z-index: 1;
+.arrow {
+    border: solid #32A97F;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 12px;
 }
-.carrousel i#right {
-    right: 3%;
-    z-index: 1;
+.arrow-prev {
+    left: 30px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) rotate(135deg);
+}
+.arrow-next {
+    right: 30px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) rotate(-45deg);
+}
+[id^= "item"] {
+    display: none;
+}
+.item-1 {
+    z-index: 2;
+    opacity: 1;
+    background: url('https://random.imagecdn.app/600/300');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.item-2 {
+    background: url('https://random.imagecdn.app/600/301');
+    padding: 10px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.item-3 {
+    background: url('https://random.imagecdn.app/600/302');
+    padding: 10px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+*:target ~ .item-1 {
+    opacity: 0;
+}
+#item-1:target ~ .item-1 {
+    opacity: 1;
+}
+#item-2:target ~ .item-2, #item-3:target ~ .item-3 {
+    z-index: 3;
+    opacity: 1;
 }
 
 .productos {
@@ -370,5 +413,8 @@ footer section .socialMedia {
         color: #32A97F;
         font-family: 'Gidole';
         font-weight: normal;
+    }
+    .carousel {
+        height: 50vh;
     }
 }
