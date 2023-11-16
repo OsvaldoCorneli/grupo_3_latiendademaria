@@ -30,6 +30,12 @@ app.route("/profile")
     })
 ;
 
+app.route("/register")
+    .get((req,res) => {
+        res.sendFile(path.join(__dirname,'/views/registro.html'))
+    })
+;
+
 app.listen(3001,(req,res) => {
     console.log(`Server corriendo en puerto http://localhost:3001`)
 });
