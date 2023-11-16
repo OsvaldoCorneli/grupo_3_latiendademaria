@@ -198,6 +198,7 @@ footer section .socialMedia {
     font-size: 1.5rem;
 }
 
+
 @media (width <= 361px) {
     nav span {
         height: 10vh; 
@@ -223,6 +224,13 @@ footer section .socialMedia {
     }
     footer {
         display: none
+    }
+}
+
+@media ( height < 875px ) {
+    .login-modal form {
+       position: relative;
+       top: 80px
     }
 }
 
