@@ -3,6 +3,7 @@
 * Vistas HTML segun los wireframes.
 * crear tablero de trello.
 * el portfolio de productos que ofrecerá la tienda!!
+* mantener actualizado el trello.
    
 ## Hacer más.
 
@@ -20,4 +21,5 @@
 
 ## Dejar de hacer.
 
+* 
 * Reproches y ponerse a codear!
