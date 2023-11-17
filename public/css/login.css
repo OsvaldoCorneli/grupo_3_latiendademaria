@@ -12,7 +12,9 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
+    width: 100%;
 }
+
 .login-modal form {
     display: flex;
     flex-direction: column;
@@ -23,13 +25,13 @@
     background-color: #32A97F;
     padding: 20px;
     border-radius: 5vh;
-    width: 50vw;
+    width: 90%;
     max-width: 50%;
 }
 .login-modal input {
     padding: 5px;
     border-radius: 5px;
-    width: 80%;
+    width: 90%;
 }
 .login-modal button {
     border-radius: 5px;
@@ -60,3 +62,12 @@
 .validacionpassword:invalid {
     border: 5px solid red;
 }
+
+/* @media (width >= 360px) {
+    .login-modal {
+        width: 100%;
+    }
+    .login-modal form {
+        width: 100%
+    }
+} */
