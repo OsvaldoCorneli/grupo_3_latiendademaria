@@ -55,6 +55,12 @@ app.route("/register")
     })
 ;
 
+app.route("/detail")
+    .get((req,res) => {
+        res.sendFile(path.join(__dirname,'/views/detail.html'))
+    })
+;
+
 
 
 app.listen(3001,(req,res) => {
