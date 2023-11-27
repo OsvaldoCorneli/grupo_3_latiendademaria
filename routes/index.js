@@ -5,61 +5,32 @@ const Controllers = require('../controllers')
 router.route('/')
     .get(Controllers.getHome);
 
-// router.route('/login')
-//     .get(Controllers.);
+router.route('/login')
+    .get(Controllers.getLogin);
 
-// app.get('/', (req,res) => {
-//     res.sendFile(path.join(__dirname,'/views/home.html'))
-// });
+router.route('/cart')
+    .get(Controllers.getCart);
 
-// app.route('/login')
-//     .get((req,res) => {
-//         res.sendFile(path.join(__dirname,'/views/login.html'))})
-//     .post((req,res) => {
-//         res.send(req.body)
-//     })
-// ;
+router.route("/profile")
+    .get(Controllers.getProfile)
+;
+router.route("/contacto")
+    .get(Controllers.getContacto)
+    .post(Controllers.postContacto)
+;
+router.route("/about")
+    .get(Controllers.getAbout)
+;
+router.route("/browser")
+    .get(Controllers.getBrowser)
+;
 
-// app.route("/cart")
-//     .get((req,res) => {
-//         res.sendFile(path.join(__dirname,'/views/cart.html'))
-//     })
-// ;
-// app.route("/profile")
-//     .get((req,res) => {
-//         res.sendFile(path.join(__dirname,'/views/profile.html'))
-//     })
-// ;
-// app.route("/contacto")
-//     .get((req,res) => {
-//         res.sendFile(path.join(__dirname,'/views/contacto.html'))
-//     })
-//     .post((req,res) => {
-//         res.send(req.body)
-//     })
-// ;
-// app.route("/about")
-//     .get((req,res) => {
-//         res.sendFile(path.join(__dirname,'/views/about.html'))
-//     })
-// ;
-// app.route("/browser")
-//     .get((req,res) => {
-//         res.sendFile(path.join(__dirname,'/views/browser.html'))
-//     })
-// ;
+router.route("/register")
+    .get(Controllers.getRegister)
+;
 
-
-// app.route("/register")
-//     .get((req,res) => {
-//         res.sendFile(path.join(__dirname,'/views/registro.html'))
-//     })
-// ;
-
-// app.route("/detail")
-//     .get((req,res) => {
-//         res.sendFile(path.join(__dirname,'/views/detail.html'))
-//     })
-// ;
+router.route("/detail")
+    .get(Controllers.getDetail)
+;
 
 module.exports = router
