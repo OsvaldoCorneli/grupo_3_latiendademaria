@@ -1,0 +1,198 @@
+[
+    {
+        "id": 1,
+        "name": "Mates de madera",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Mates",
+        "line": "artesanal",
+        "image": "https://random.imagecdn.app/260/140",
+        "price": 6609.33,
+        "color": [
+            "white",
+            "brown",
+            "orange"
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Mates de calabaza y cuero",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Mates",
+        "line": "artesanal",
+        "image": "https://random.imagecdn.app/260/140",
+        "price": 4127.83,
+        "color": [
+            "blue",
+            "pink",
+            "cyan"
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Estatuillas",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Estatuillas",
+        "line": "artesanal",
+        "image": "https://random.imagecdn.app/260/140",
+        "price": 825.48,
+        "color": [
+            "white",
+            "green",
+            "gray"
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Cuadros",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Cuadros",
+        "line": "artesanal",
+        "image": "https://random.imagecdn.app/260/140",
+        "price": 3002.72,
+        "color": [
+            "white",
+            "gray",
+            "blue"
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Tazas de cerámica",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Tazas",
+        "line": "sublimada",
+        "image": "https://random.imagecdn.app/260/140",
+        "price": 7096.17,
+        "color": [
+            "yellow",
+            "red",
+            "blue"
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Tazas de polimero",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Tazas",
+        "line": "sublimada",
+        "image": "https://random.imagecdn.app/260/140",
+        "price": 3463.07,
+        "color": [
+            "purple",
+            "magenta",
+            "blue"
+        ]
+    },
+    {
+        "id": 7,
+        "name": "Botellas hoppy",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Botellas",
+        "line": "sublimada",
+        "image": "https://random.imagecdn.app/260/140",
+        "price": 8016.62,
+        "color": [
+            "pink",
+            "black",
+            "green"
+        ]
+    },
+    {
+        "id": 8,
+        "name": "Botellas de aluminio",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Botellas",
+        "line": "sublimada",
+        "image": "https://random.imagecdn.app/260/140",
+        "price": 2790.11,
+        "color": [
+            "gray",
+            "green",
+            "white"
+        ]
+    },
+    {
+        "id": 9,
+        "name": "Jarrón térmico",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Jarrón",
+        "line": "sublimada",
+        "image": "https://random.imagecdn.app/260/140",
+        "price": 3030.63,
+        "color": [
+            "orange",
+            "red",
+            "blue"
+        ]
+    },
+    {
+        "id": 10,
+        "name": "Sublimate",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Sublimate",
+        "line": "sublimada",
+        "image": "https://random.imagecdn.app/260/140",
+        "price": 2599.27,
+        "color": [
+            "yellow",
+            "pink",
+            "blue"
+        ]
+    },
+    {
+        "id": 11,
+        "name": "Cuaderno tapa dura a5",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Cuaderno",
+        "line": "sublimada",
+        "image": "https://random.imagecdn.app/260/140",
+        "price": 7467.81,
+        "color": [
+            "red",
+            "blue",
+            "white"
+        ]
+    },
+    {
+        "id": 12,
+        "name": "Cuaderno tapa blanda a5",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Cuaderno",
+        "line": "sublimada",
+        "image": "https://random.imagecdn.app/260/140",
+        "price": 8515.71,
+        "color": [
+            "orange",
+            "turquoise",
+            "red"
+        ]
+    },
+    {
+        "id": 13,
+        "name": "Libreta tapa dura a6",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Libreta",
+        "line": "sublimada",
+        "image": "https://random.imagecdn.app/260/140",
+        "price": 4737.37,
+        "color": [
+            "red",
+            "blue",
+            "orange"
+        ]
+    },
+    {
+        "id": 14,
+        "name": "Agenda perpetua",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Agenda",
+        "line": "sublimada",
+        "image": "https://random.imagecdn.app/260/140",
+        "price": 6416.26,
+        "color": [
+            "white",
+            "green",
+            "turquoise"
+        ]
+    }
+]

@@ -1,66 +1,17 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const routes = require('./routes')
 
 
 app.use(express.static('public'));
-
 app.use(express.urlencoded({extended: true}))
 
-app.get('/', (req,res) => {
-    res.sendFile(path.join(__dirname,'/views/home.html'))
-});
-
-app.route('/login')
-    .get((req,res) => {
-        res.sendFile(path.join(__dirname,'/views/login.html'))})
-    .post((req,res) => {
-        res.send(req.body)
-    })
-;
-
-app.route("/cart")
-    .get((req,res) => {
-        res.sendFile(path.join(__dirname,'/views/cart.html'))
-    })
-;
-app.route("/profile")
-    .get((req,res) => {
-        res.sendFile(path.join(__dirname,'/views/profile.html'))
-    })
-;
-app.route("/contacto")
-    .get((req,res) => {
-        res.sendFile(path.join(__dirname,'/views/contacto.html'))
-    })
-    .post((req,res) => {
-        res.send(req.body)
-    })
-;
-app.route("/about")
-    .get((req,res) => {
-        res.sendFile(path.join(__dirname,'/views/about.html'))
-    })
-;
-app.route("/browser")
-    .get((req,res) => {
-        res.sendFile(path.join(__dirname,'/views/browser.html'))
-    })
-;
+app.set('view engine', 'ejs')
+//app.set('views', './carpeta-de-vistas')   <<--- ejemplo de codigo a usar si se quiere cambiar la ruta views por defecto(./views).
 
 
-app.route("/register")
-    .get((req,res) => {
-        res.sendFile(path.join(__dirname,'/views/registro.html'))
-    })
-;
-
-app.route("/detail")
-    .get((req,res) => {
-        res.sendFile(path.join(__dirname,'/views/detail.html'))
-    })
-;
-
+app.use('/', routes)
 
 
 app.listen(3001,(req,res) => {

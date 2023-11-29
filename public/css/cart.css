@@ -1,7 +1,6 @@
 * {
     font-family: 'Gidole';
     font-size: 1rem;
-    /* border: solid 1px red; */
 }
 
 .cart-modal {
@@ -28,10 +27,16 @@
     justify-content: center;
     gap: 5px;
 }
-.cartdetail #x {
+.cartdetail td#X {
     font-weight: bold;
     color: red;
     text-align: center;
+    transition: 500ms;
+    font-size: 1rem;
+}
+td#X:hover {
+    color: white;
+    background-color: red;
 }
 .cartresume {
     padding: 10px;
@@ -50,6 +55,7 @@
 
 .cartresume button {
     border-radius: 5px;
+    border: hidden;
     padding: 5px;
     background-color: #1259c3;
     color: white;
