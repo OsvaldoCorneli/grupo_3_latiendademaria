@@ -1,9 +1,12 @@
-
+const Models = require('../models');
 
 const Controllers = {
     getHome: async function (req, res) {
         try {
-            res.render('home')
+            res.render('home', {
+                sublimados: Models.filterProducts('line','sublimada').slice(0,8),
+                artesanales: Models.filterProducts('line','artesanal').slice(0,4)
+            })
         } catch (error) {
             res.status(500).json({error: error.message})
         }
