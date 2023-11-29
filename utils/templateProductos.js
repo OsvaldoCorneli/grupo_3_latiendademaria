@@ -1,5 +1,4 @@
 const fs = require('fs')
-const { createBrotliDecompress } = require('zlib')
 
 let sublimadas = [
     'Tazas de cerámica',
