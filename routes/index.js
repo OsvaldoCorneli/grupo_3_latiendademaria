@@ -23,6 +23,7 @@ router.route("/about")
 ;
 router.route("/browser")
     .get(Controllers.getBrowser)
+    .post(Controllers.postBrowser)
 ;
 
 router.route("/register")

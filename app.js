@@ -1,11 +1,12 @@
 const express = require('express');
+const morgan = require('morgan')
 const path = require('path');
 const app = express();
 const routes = require('./routes')
 
-
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}))
+app.use(morgan('dev'))
 
 app.set('view engine', 'ejs')
 //app.set('views', './carpeta-de-vistas')   <<--- ejemplo de codigo a usar si se quiere cambiar la ruta views por defecto(./views).

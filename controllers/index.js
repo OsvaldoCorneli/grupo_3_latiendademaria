@@ -4,8 +4,8 @@ const Controllers = {
     getHome: async function (req, res) {
         try {
             res.render('home', {
-                sublimados: Models.filterProducts('line','sublimada').slice(0,8),
-                artesanales: Models.filterProducts('line','artesanal').slice(0,4)
+                sublimados: Models.filterProducts({line: 'sublimada'}).slice(0,8),
+                artesanales: Models.filterProducts({line: 'artesanal'}).slice(0,4),
             })
         } catch (error) {
             res.status(500).json({error: error.message})
@@ -48,14 +48,18 @@ const Controllers = {
     },
     getBrowser: async function (req,res) {
         try {
-            res.render('browser')
+            console.log(Models.allCategories())
+            res.render('browser', { 
+                productos: Models.allProducts()
+                //categorias: Models.allCategories()
+            })
         } catch (error) {
             res.status(500).json({error: error.message})
         }
     },
     getRegister: async function (req,res) {
         try {
-            res.render('register')
+            res.render('registro')
         } catch (error) {
             res.status(500).json({error: error.message})
         }
@@ -70,6 +74,17 @@ const Controllers = {
     postContacto: async function (req,res) {
         try {
             res.status(200).json(req.body)
+        } catch (error) {
+            res.status(500).json({error: error.message})
+        }
+    },
+    postBrowser: async function (req,res) {
+        try {
+            //console.log(Models.filterProducts(req.body))
+            res.render('browser', { 
+                productos: Models.filterProducts(req.body),
+                categorias: Models.allCategories()
+            })
         } catch (error) {
             res.status(500).json({error: error.message})
         }

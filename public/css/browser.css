@@ -33,7 +33,27 @@
 }
 
 .cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
     padding: 10px;
+}
+
+.cards article {
+    border: solid 1px #5394b0;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgb(100, 100, 100);
+}
+.cards article img {
+    width: fit-content;
+    border-radius: 5px;
+}
+article:hover {
+    box-shadow: 0px 5px black;
 }
 
 .arrow-cards {
