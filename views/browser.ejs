@@ -11,7 +11,9 @@
                 <p>Filtros</p>
                 <label for="categoria">Categoria:</label>
                 <select id="categoria" name="category">
-                    <option value="Mates">Mates</option>
+                    <% for (let i in categorias) { %>
+                    <option value=<%= categorias[i] %>><%= categorias[i] %></option>
+                    <% } %>
                 </select>
                 <label for="price">Precio menor a:</label>
                 <span class="filter-price" id="price">

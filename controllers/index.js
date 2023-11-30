@@ -48,10 +48,9 @@ const Controllers = {
     },
     getBrowser: async function (req,res) {
         try {
-            console.log(Models.allCategories())
             res.render('browser', { 
+                categorias: Models.allCategories(),
                 productos: Models.allProducts()
-                //categorias: Models.allCategories()
             })
         } catch (error) {
             res.status(500).json({error: error.message})

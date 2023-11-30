@@ -40,11 +40,10 @@ const productModels = {
         let Categories = []
         for (let i in Productos) {
             let { category } = Productos[i]
-            if (!Categories.some(category)) {
+            if (!Categories.includes(category)) {
                 Categories.push(category)
             }
             if (i == Productos.length-1) {
-                console.log(Categories)
                 return Categories
             }
         }
