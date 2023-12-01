@@ -46,6 +46,13 @@ const Controllers = {
             res.status(500).json({error: error.message})
         }
     },
+    getAutor: async function (req,res) {
+        try {
+            res.render('autor')
+        } catch (error) {
+            res.status(500).json({error: error.message})
+        }
+    },
     getBrowser: async function (req,res) {
         try {
             res.render('browser', { 

@@ -21,6 +21,9 @@ router.route("/contacto")
 router.route("/about")
     .get(Controllers.getAbout)
 ;
+router.route("/autor")
+    .get(Controllers.getAutor)
+;
 router.route("/browser")
     .get(Controllers.getBrowser)
     .post(Controllers.postBrowser)
