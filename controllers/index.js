@@ -50,7 +50,8 @@ const Controllers = {
         try {
             res.render('browser', { 
                 categorias: Models.allCategories(),
-                productos: Models.allProducts()
+                productos: Models.allProducts(),
+                colors: Models.allColors()
             })
         } catch (error) {
             res.status(500).json({error: error.message})
@@ -82,7 +83,8 @@ const Controllers = {
             //console.log(Models.filterProducts(req.body))
             res.render('browser', { 
                 productos: Models.filterProducts(req.body),
-                categorias: Models.allCategories()
+                categorias: Models.allCategories(),
+                colors: Models.allColors()
             })
         } catch (error) {
             res.status(500).json({error: error.message})

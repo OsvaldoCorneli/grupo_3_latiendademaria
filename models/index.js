@@ -47,6 +47,18 @@ const productModels = {
                 return Categories
             }
         }
+    },
+    allColors: function () {
+        let Colors = []
+        for (let i in Productos) {
+            let {color} = Productos[i]
+            for (let x in color) {
+                if (!Colors.includes(color[x])) {
+                    Colors.push(color[x])
+                }
+            }
+            if (i == Productos.length-1) return Colors
+        }
     }
 }
 

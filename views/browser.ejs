@@ -7,33 +7,49 @@
         <%- include('./partials/navbar.ejs') %>
         <main>
             <section class="filter">
-                <form action="/browser" method="POST">
                 <p>Filtros</p>
-                <label for="categoria">Categoria:</label>
-                <select id="categoria" name="category">
-                    <% for (let i in categorias) { %>
-                    <option value=<%= categorias[i] %>><%= categorias[i] %></option>
-                    <% } %>
-                </select>
-                <label for="price">Precio menor a:</label>
-                <span class="filter-price" id="price">
-                    <label>Todos
-                        <input type="radio" name="price" value="999999"/>
-                    </label>
-                    <label>$5.000
-                        <input type="radio" name="price" value="5000"/>
-                    </label>
-                    <label>$10.000
-                        <input type="radio" name="price" value="10000"/>
-                    </label>
-                    <label>$50.000
-                        <input type="radio" name="price" value="50000"/>
-                    </label>
-                </span>
+                <form action="/browser" method="POST">
+                <label for="categoria">Categoria:
+                    <select id="categoria" name="category">
+                        <option disabled selected value>- seleccionar -</option>
+                        <% for (let i in categorias) { %>
+                            <option value=<%= categorias[i] %>><%= categorias[i] %></option>
+                        <% } %>
+                    </select>
+                </label>
+                <label for="color">Colores
+                    <select id="color" name="color">
+                        <option disabled selected value>- seleccionar -</option>
+                        <% for (let i in colors) {  %>
+                            <option value=<%= colors[i] %>> <%= colors[i] %></option>
+                        <% } %>
+                    </select>
+                </label>
+                <label for="price">Precio menor a:
+                    <span class="filter-price" id="price">
+                        <label>Todos
+                            <input type="radio" name="price" value="999999"/>
+                        </label>
+                        <label>$5.000
+                            <input type="radio" name="price" value="5000"/>
+                        </label>
+                        <label>$10.000
+                            <input type="radio" name="price" value="10000"/>
+                        </label>
+                        <label>$50.000
+                            <input type="radio" name="price" value="50000"/>
+                        </label>
+                    </span>
+                </label>
                 <input type="submit" value="ENVIAR"/>
+                <input formaction="/browser" formmethod="GET" type="submit" value="Reset"/>
             </form>
             </section>
             <span class="productos">
+                <form action="/browser" method="POST">
+                    <input type="search" name="search" placeholder="Busqueda por nombre..."/>
+                    <input type="submit"/>
+                </form>
             <section class="pagination">
                 <span><a class="arrow-prev1 arrow-cards"></a></span>
                 <span><a>1</a></span>
@@ -44,11 +60,16 @@
                 <span><a class="arrow-next1 arrow-cards"></a></span>
             </section>
             <section class="cards">
-                <% for (let i in productos) { let { image, price, name } = productos[i] %>
+                <% for (let i in productos) { let { image, price, name, color } = productos[i] %>
                     <article>
                         <a href="/detail"><img src= <%= image %> alt=<%= name %>/></a>
                         <p><%= price %></p>
                         <p><%= name %></p>
+                        <ul class="color">Colores:
+                            <% for (let x in color) { let background = `background-color:${color[x]};color:${color[x]};border-radius:50%;border:solid;` %>
+                                <li><i style=<%= background %>>oo</i></li>
+                            <% } %>
+                        </ul>
                     </article>
                 <% } %>
             </section>
