@@ -11,7 +11,9 @@
     flex-wrap: wrap;
     padding-top: 10px;
 }
-
+.cartdetail {
+    
+}
 .cart-modal th {
     border-bottom: solid 4px black;
 }
