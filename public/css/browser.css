@@ -39,6 +39,9 @@ main{
     text-align: center;
     box-shadow: 0px 0px 10px rgb(100, 100, 100);
 }
+.cards article:hover {
+    box-shadow: 0px 5px black;
+}
 .pagination {
     display: flex;
     flex-direction: row;
