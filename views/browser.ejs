@@ -50,15 +50,6 @@
                     <input type="search" name="search" placeholder="Busqueda por nombre..."/>
                     <input type="submit"/>
                 </form>
-            <section class="pagination">
-                <span><a class="arrow-prev1 arrow-cards"></a></span>
-                <span><a>1</a></span>
-                <span><a>2</a></span>
-                <span><a>3</a></span>
-                <span><a>4</a></span>
-                <span><a>5</a></span>
-                <span><a class="arrow-next1 arrow-cards"></a></span>
-            </section>
             <section class="cards">
                 <% for (let i in productos) { let { image, price, name, color } = productos[i] %>
                     <article>
@@ -72,6 +63,15 @@
                         </ul>
                     </article>
                 <% } %>
+            </section>
+            <section class="pagination">
+                <span><a class="arrow-prev1 arrow-cards"></a></span>
+                <span><a>1</a></span>
+                <span><a>2</a></span>
+                <span><a>3</a></span>
+                <span><a>4</a></span>
+                <span><a>5</a></span>
+                <span><a class="arrow-next1 arrow-cards"></a></span>
             </section>
         </span>
         </main>

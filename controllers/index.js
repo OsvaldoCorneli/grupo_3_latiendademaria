@@ -85,9 +85,15 @@ const Controllers = {
             res.status(500).json({error: error.message})
         }
     },
+    getAutor: async function (req,res) {
+        try {
+            res.render('autor')
+        } catch (error) {
+            res.status(500).json({error: error.message})
+        }
+    },
     postBrowser: async function (req,res) {
         try {
-            //console.log(Models.filterProducts(req.body))
             res.render('browser', { 
                 productos: Models.filterProducts(req.body),
                 categorias: Models.allCategories(),
