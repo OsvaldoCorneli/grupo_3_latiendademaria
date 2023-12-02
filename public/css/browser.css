@@ -1,47 +1,25 @@
 * {
     font-family: 'Gidole';
 }
-
-main{
-    padding-top: 20px;
-}
 .filter {
     display: flex;
     flex-direction: column;
     gap: 10px;
     border: solid 1px black;
     padding: 5px;
-    margin-bottom: 15px;
-    background-color: rgba(182, 229, 219, 0.2);
-}
-
-.filter p{
-    background-color: #32A97F;
 }
 
 .filter .filter-price {
     display: flex;
     flex-direction: column;
-
 }
 
-.filter-price label{
-    margin-top: 5px;
-}
-
-.cards article{
-    font-family: 'Gidole';
-    text-align: center;
-    box-shadow: 0px 0px 10px rgb(100, 100, 100);
-}
 .pagination {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 10px;
-
-
 }
 
 .pagination span {
@@ -54,8 +32,8 @@ main{
     box-shadow: 0px 5px black;
 }
 
-#categoria{
-    width: 30%;
+.cards {
+    padding: 10px;
 }
 
 .arrow-cards {
@@ -78,24 +56,19 @@ main{
 }
 
 @media (min-width: 700px) {
-
-
-    #categoria{
-        width: 50%;
+    main {
+        display: grid;
     }
-
-
-    
-   
-}
-
-@media (min-width: 1200px) {
-
-.filter{
-    width: 25%;
-}    
-main{    
-display: flex;
-}
-   
+    .filter {
+        grid-column: 1;
+    }
+    .productos {
+        grid-column: 2;
+    }
+    /* .pagination {
+        grid-column: 2;
+    }
+    .cards {
+        grid-column: 2;
+    } */
 }

@@ -11,15 +11,38 @@
         <link href="\css\home.css" rel="stylesheet"/>
         <link href="\css\fonts.css" rel="stylesheet"/>
         <link href="\css\profile.css" rel="stylesheet"/>
-        <link href="\css\navbar.css" rel="stylesheet"/>
         <title>La tienda de Maria</title>
 
     </head>
     
    <body>
-    <%- include('./partials/navbar.ejs') %>
     <main>
-       
+        <nav>
+            <span>
+                <img class="logo" src="\images\4F5FA3DA-7648-4C42-B5F2-B01A0BA7C902.png"/>
+                <img class="logoLargo" src="\images\F41CA9F5-CC6B-4EF0-8A80-8769A56E7D89 (1).png" alt="La Tienda de Maria"/>
+                <!-- <h1 class="tituloNavbar">La Tienda de María</h1> -->
+                <span class="loginNavbar">
+                    <ul>
+                        <li><a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                        <li><a href="/profile"><i class="fa-solid fa-user"></i></a></li>
+                    </ul>
+                    <button><a href="/login">Ingresá</a></button>
+                </span>
+            </span>
+            <div class="site">
+                <ul>
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="/browser">Productos</a></li>
+                    <li><a href="/about">Conocenos</a></li>
+                    <li><a href="/contacto">Contacto</a></li>
+                    <li><a href="/autor">Sobre Mi</a></li>
+                </ul>
+                <div class="burger-menu">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </div>
+        </nav>
         <div class="profile-modal">
 
         </div>
