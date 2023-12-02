@@ -1,7 +1,6 @@
-/* * {
-    border: solid 1px red;
-    margin: 0px;
-} */
+* {
+    box-sizing: border-box;
+}
 
 body {
     min-height: 100%;
@@ -18,8 +17,8 @@ body {
     min-height: 20vh;
     height: 10vh;
     max-height: 50vh;
-    background-color: #b6e5db;
-    border-radius: 20px;
+    background-color: rgba(182, 229, 219, 0.2);
+    border-radius: 15px;
     margin: 30px 0;
     padding: 3%;
     display: block;
@@ -115,10 +114,10 @@ body {
 .productos ul{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     margin: 0px 0px 5px 0px;
-    padding: 0px 0px 5px 0px;
+    padding: 15px;
     list-style-type: none;
 }
 .productos ul li {
@@ -128,25 +127,26 @@ body {
     align-items: center;
     border: solid 1px #5394b0;
     background-color: #b6e5db;
-    border-radius: 50%;
-    width: 15vw;
-    height: 15vh;
+    border-radius: 75%;
+    width: 20vw;
+    height: 20vw;
+   
 
 }
 .productos ul li a {
     z-index: 2;
     font-family: 'Gistesy';
-    font-size: 2rem;
+    font-size: 150%;
     color:black;
     font-weight: bold;
     -webkit-text-stroke: 1px #32A97F;
     position: relative;
-    bottom: 50px;
+    bottom: 35%;
 }
 .productos ul li img {
     position: absolute;
-    width: 10vw;
-    height: 10vh;
+    width: 10%;
+    
     z-index: 1;
 }
 
@@ -154,23 +154,7 @@ body {
     text-decoration: none;
 }
 
-.cards {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px
-}
 
-.cards article {
-    border: solid 1px #5394b0;
-    border-radius: 5px;
-}
-.cards article img {
-    width: fit-content;
-    border-radius: 5px;
-}
 .lineaArtesanal {
     margin-top: 5px;
     border: solid 1px #5394b0;
@@ -194,15 +178,16 @@ body {
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     font-weight: bold;
-    margin: 0px 0px 0px 0px;
+    margin-top: 20px;
+    margin-bottom: 0;
 }
 .lineaArtesanal ul{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
-    margin: 0px 0px 5px 0px;
-    padding: 5px 0px 5px 0px;
+    margin: 0px 0px 20px 0px;
+    padding: 15px;
     list-style-type: none;
     background-color: #32A97F;
 }
@@ -213,25 +198,25 @@ body {
     align-items: center;
     border: solid 1px #5394b0;
     background-color: white;
-    border-radius: 50%;
-    width: 15vw;
-    height: 15vh;
+    border-radius: 75%;
+    width: 20vw;
+    height: 20vw;
+    
 
 }
 .lineaArtesanal ul li a {
     z-index: 2;
     font-family: 'Gistesy';
-    font-size: 2rem;
+    font-size: 1rem;
     color:black;
     font-weight: bold;
     -webkit-text-stroke: 1px #32A97F;
     position: relative;
-    bottom: 50px;
+    bottom: 25%;
 }
 .lineaArtesanal ul li img {
     position: absolute;
-    width: 10vw;
-    height: 10vh;
+    width: 10%;
     z-index: 1;
 }
 
@@ -249,78 +234,43 @@ body {
     margin: 5px;
 }
 
-footer{
-    position:relative;
-    left:0;
-    bottom:0;
-    height:4vh;
-    width:100%;
-    overflow:hidden;
-    z-index: 3;
-}
-footer section .socialMedia {
-    font-family: "Gidole";
-    font-weight: bold;
-    margin: 0px;
-    height: 4vh;
-    text-align: center;
-    justify-content: center;
-    background-color: #32A97F;
-    border: solid 1px #5394b0;
-    font-size: 1.5rem;
+@media (min-width: 760px) {
+
+    .carousel {
+        border-radius: 15px;
+    }
+
+    .productos ul li{
+        width: 130px;
+        height: 130px;
+    }
+
+    .lineaArtesanal ul li{
+        width: 130px;
+        height: 130px;
+    }
+    .productos ul li img{
+        width: 75px;
+        height: 75px;
+    }
+
+    .lineaArtesanal ul li img{
+        width: 75px;
+        height: 75px;
+    }
+
+    .lineaArtesanal ul li a{
+        bottom: 35%;
+    }
+    
 }
 
-@media (width <= 361px) {
-    nav span {
-        height: 10vh; 
-    }
-    .logo {
-        display: none;
-    }
-    .logoLargo {
-        width: 75vw;
-        height: 8vh;
-    }
-    .site ul {
-        display: none
-    }
-    .site {
-        height: 4vh;
-    }
-    .burger-menu {
-        display: block;
-        text-align: center;
-        justify-content: center;
-        font-size: 1.5rem;
-    }
-    footer {
-        display: none
-    }
-}
+@media (min-width: 1200px) {
 
-@media (width >= 361px) {
-    .site ul {
-        display: flex;
-        padding: 1%;
-        margin: 0px;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-    }
-    .site ul li {
-        width: 10vw;
-        margin: 0px;
-        background-color: white;
-        padding: 5px;
-        border: solid 1px #5394b0; 
-    }
-    .site li a {
-        text-decoration:none;
-        color: #32A97F;
-        font-family: 'Gidole';
-        font-weight: normal;
-    }
+    
+    
     .carousel {
         height: 50vh;
+        border-radius: 0;
     }
 }
