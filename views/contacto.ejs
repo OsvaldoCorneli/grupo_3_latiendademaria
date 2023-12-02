@@ -12,55 +12,57 @@
                 <i class="fa-sharp fa-solid fa-paper-plane"></i>
             </span>
             <form class='form-contacto' action="/contacto" method="POST">
-                <label for="nombre">Nombre:
+                <label for="nombre">Nombre:</label>
                 <input 
                     id="nombre" 
                     type="text" 
                     name="nombre" 
                     placeholder="Ingresa tu nombre"
-                /></label>
-                <label for="email">E-mail:
+                />
+                <label for="email">E-mail:</label>  
                 <input 
                     id="email" 
                     type="email" 
                     name="email" 
                     placeholder="Ingresa tu email" 
                     required
-                /></label>
-                <label for="tipo">Tipo:</label>
+                />
+                
+                   <label for="tipo">Tipo:</label>
                 <span id="tipo">
-                    <label for="administrativo">Administrativo</label>
-                    <input type="radio" name="tipo" id="administrativo" value="administrativo"/>
-                    <label for="comercial">Comercial</label>
-                    <input type="radio" name="tipo" id="comercial" value="comercial"/>
-                    <label for="sugerencia">Sugerencia</label>
-                    <input type="radio" name="tipo" id="sugerencia" value="sugerencia"/>
-                    <label for="otros">Otros</label>
-                    <input type="radio" name="tipo" id="otros" value="otros"/>
+                    <label for="administrativo">Administrativo
+                    <input type="radio" name="tipo" id="administrativo" value="administrativo"/></label>
+                    <label for="comercial">Comercial
+                    <input type="radio" name="tipo" id="comercial" value="comercial"/></label>
+                    <label for="sugerencia">Sugerencia
+                    <input type="radio" name="tipo" id="sugerencia" value="sugerencia"/></label>
+                    <label for="otros">Otros
+                    <input type="radio" name="tipo" id="otros" value="otros"/></label>
                 </span>
-                <label for="motivo">Motivo:
+              
+                <label for="motivo">Motivo:</label>
                 <input
                     id="motivo"
                     type="text"
                     name="motivo"
                     placeholder="Ingresa tu nombre"
                     required
-                /></label>
-                <label for="descripcion">Descripcion:
+                />
+                <label for="descripcion">Descripcion: </label>
                     <textarea id="descripcion" type="text" name="descripcion" placeholder="Ingresa una descripcion"></textarea>
-                </label>
+               
                 <button type="submit">Enviar</button>
             </form>
             </span>
-            <span class="contacto-socialmedia">
+            <!-- <span class="contacto-socialmedia">
                 <ul>
                 <li><a href=""><i class="fa-brands fa-facebook"></i>Facebook</a></li>
                 <li><a href=""><i class="fa-brands fa-square-instagram"></i>Instagram</a></li>
                 <li><a href=""><i class="fa-brands fa-square-whatsapp"></i>Whatsapp</a></li>
                 </ul>
                 <img src="\images\4F5FA3DA-7648-4C42-B5F2-B01A0BA7C902.png" alt="Logo"/>
-            </span>
+            </span> -->
         </main>
-        <%- include('./partials/footer.ejs') %>
+        <!-- <%- include('./partials/footer.ejs') %> -->
     </body>
 </html>
