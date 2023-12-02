@@ -33,4 +33,8 @@ router.route("/detail")
     .get(Controllers.getDetail)
 ;
 
+router.route("/autor")
+    .get(Controllers.getAutor)
+;
+
 module.exports = router
