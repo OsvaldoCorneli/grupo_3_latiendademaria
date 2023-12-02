@@ -103,6 +103,9 @@ nav ul {
 .site ul {
     display: none
 }
+.target{
+    color: white;
+}
 .burger-menu {
     display: block;
     text-align: center;
