@@ -55,7 +55,7 @@ const Controllers = {
     },
     getRegister: async function (req,res) {
         try {
-            res.render('register')
+            res.render('registro')
         } catch (error) {
             res.status(500).json({error: error.message})
         }
@@ -73,7 +73,13 @@ const Controllers = {
         } catch (error) {
             res.status(500).json({error: error.message})
         }
-    }
-}
+    },
+    getAutor: async function (req,res) {
+        try {
+            res.render('autor')
+        } catch (error) {
+            res.status(500).json({error: error.message})
+        }
+}}
 
 module.exports = Controllers
