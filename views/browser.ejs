@@ -1,81 +1,68 @@
 <html lang="es">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link 
-        rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer"
-        />
-        <!-- <link href="\css\home.css" rel="stylesheet"/> -->
-        <link href="\css\fonts.css" rel="stylesheet"/>
+        <%- include('./partials/head.ejs') %>
         <link href="\css\browser.css" rel="stylesheet"/>
-        <link href="\css\navbar.css" rel="stylesheet"/>
-        <link href="\css\card.css" rel="stylesheet"/>
-        
-        <title>La tienda de Maria</title>
     </head>
     <body>
         <%- include('./partials/navbar.ejs') %>
         <main>
             <section class="filter">
                 <p>Filtros</p>
-                <label for="categoria">Categoria:</label>
-                <select id="categoria" name="category">
-                    <option value="mates">Mates</option>
-                    <option value="tazas">Tazas</option>
-                    <option value="ilustraciones">Ilustraciones</option>
-                </select>
-                <label for="price">Precio menor a:</label>
-                <span class="filter-price" id="price">
-                    <label>Todos
-                        <input type="radio" name="price" value="allprices"/>
-                    </label>
-                    <label>$10.000
-                        <input type="radio" name="price" value="less10k"/>
-                    </label>
-                    <label>$25.000
-                        <input type="radio" name="price" value="less25k"/>
-                    </label>
-                    <label>$50.000
-                        <input type="radio" name="price" value="less50k"/>
-                    </label>
-                </span>
+                <form action="/browser" method="POST">
+                <label for="categoria">Categoria:
+                    <select id="categoria" name="category">
+                        <option disabled selected value>- seleccionar -</option>
+                        <% for (let i in categorias) { %>
+                            <option value=<%= categorias[i] %>><%= categorias[i] %></option>
+                        <% } %>
+                    </select>
+                </label>
+                <label for="color">Colores
+                    <select id="color" name="color">
+                        <option disabled selected value>- seleccionar -</option>
+                        <% for (let i in colors) {  %>
+                            <option value=<%= colors[i] %>> <%= colors[i] %></option>
+                        <% } %>
+                    </select>
+                </label>
+                <label for="price">Precio menor a:
+                    <span class="filter-price" id="price">
+                        <label>Todos
+                            <input type="radio" name="price" value="999999"/>
+                        </label>
+                        <label>$5.000
+                            <input type="radio" name="price" value="5000"/>
+                        </label>
+                        <label>$10.000
+                            <input type="radio" name="price" value="10000"/>
+                        </label>
+                        <label>$50.000
+                            <input type="radio" name="price" value="50000"/>
+                        </label>
+                    </span>
+                </label>
+                <input type="submit" value="ENVIAR"/>
+                <input formaction="/browser" formmethod="GET" type="submit" value="Reset"/>
+            </form>
             </section>
             <span class="productos">
-           
+                <form action="/browser" method="POST">
+                    <input type="search" name="search" placeholder="Busqueda por nombre..."/>
+                    <input type="submit"/>
+                </form>
             <section class="cards">
-                <article>
-                    <img src="https://random.imagecdn.app/260/140" alt="articulo"/>
-                    <p>$1500</p>
-                    <p>Titulo del Articulo</p>
-                </article>
-                <article>
-                    <img src="https://random.imagecdn.app/260/140" alt="articulo"/>
-                    <p>$12500</p>
-                    <p>Titulo del Articulo</p>
-                </article>
-                <article>
-                    <img src="https://random.imagecdn.app/260/140" alt="articulo"/>
-                    <p>$30000</p>
-                    <p>Titulo del Articulo</p>
-                </article>
-                <article>
-                    <img src="https://random.imagecdn.app/260/140" alt="articulo"/>
-                    <p>$21000</p>
-                    <p>Titulo del Articulo</p>
-                </article>
-                <article>
-                    <img src="https://random.imagecdn.app/260/140" alt="articulo"/>
-                    <p>$5000</p>
-                    <p>Titulo del Articulo</p>
-                </article>
-                <article>
-                    <img src="https://random.imagecdn.app/260/140" alt="articulo"/>
-                    <p>Precio</p>
-                    <p>Titulo del Articulo</p>
-                </article>
+                <% for (let i in productos) { let { image, price, name, color } = productos[i] %>
+                    <article>
+                        <a href="/detail"><img src= <%= image %> alt=<%= name %>/></a>
+                        <p><%= price %></p>
+                        <p><%= name %></p>
+                        <ul class="color">Colores:
+                            <% for (let x in color) { let background = `background-color:${color[x]};color:${color[x]};border-radius:50%;border:solid;` %>
+                                <li><i style=<%= background %>>oo</i></li>
+                            <% } %>
+                        </ul>
+                    </article>
+                <% } %>
             </section>
             <section class="pagination">
                 <span><a class="arrow-prev1 arrow-cards"></a></span>
@@ -88,15 +75,6 @@
             </section>
         </span>
         </main>
-        <footer>
-            <section>
-                <p class="socialMedia">Envianos tus dudas y consultas, seguinos en las redes!
-                    <i class="fa-brands fa-facebook"></i>
-                    <i class="fa-brands fa-square-instagram"></i>
-                    <i class="fa-brands fa-square-whatsapp"></i>
-                    <a href="">Contacto</a>
-                </p>
-            </section>
-        </footer>
+        <%- include('./partials/footer.ejs') %>
     </body>
 </html>

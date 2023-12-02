@@ -1,20 +1,7 @@
 <html lang="es">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link 
-        rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer"
-        />
-        <!-- <link href="\css\home.css" rel="stylesheet"/> -->
-        <link href="\css\fonts.css" rel="stylesheet"/>
+        <%- include('./partials/head.ejs') %>
         <link href="\css\contacto.css" rel="stylesheet"/>
-        <link href="\css\navbar.css" rel="stylesheet"/>
-      
-        <title>La tienda de Maria</title>
-
     </head>
     <body>
         <%- include('./partials/navbar.ejs') %>
@@ -74,10 +61,6 @@
                 <img src="\images\4F5FA3DA-7648-4C42-B5F2-B01A0BA7C902.png" alt="Logo"/>
             </span>
         </main>
-        <footer>
-            <section>
-                <p class="socialMedia">La tienda de Maria</p>
-            </section>
-        </footer>
+        <%- include('./partials/footer.ejs') %>
     </body>
 </html>

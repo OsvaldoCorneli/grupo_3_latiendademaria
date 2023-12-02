@@ -1,5 +1,5 @@
 const db = {
-    productos: require('../utils/productos.json')
+    Productos: require('../utils/productos.json')
 }
 
 module.exports = db

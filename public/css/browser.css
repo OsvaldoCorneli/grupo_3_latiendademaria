@@ -18,6 +18,11 @@ main{
 .filter p{
     background-color: #32A97F;
 }
+.filter > form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
 .filter .filter-price {
     display: flex;
@@ -58,6 +63,20 @@ main{
     width: 30%;
 }
 
+.cards article {
+    border: solid 1px #5394b0;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgb(100, 100, 100);
+}
+.cards article img {
+    width: fit-content;
+    border-radius: 5px;
+}
+article:hover {
+    box-shadow: 0px 5px black;
+}
+
 .arrow-cards {
     border: solid #32A97F;
     border-width: 0 3px 3px 0;
@@ -76,12 +95,35 @@ main{
     margin-right: 5px;
     transform: translateY(-50%) rotate(-45deg);
 }
+ul.color {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    justify-content: flex-start;
+    align-items: center;
+    margin-block: 0px;
+    padding-inline: 5px;
+    gap: 10px;
+    padding-bottom: 5px;
+}
+ul > li {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
 
 @media (min-width: 700px) {
+<<<<<<< HEAD
+    main {
+        display: flex;
+        flex-direction: row;
+=======
 
 
     #categoria{
         width: 50%;
+>>>>>>> a2930c42251e949c07628d8b157956ab99be1b07
     }
 
 

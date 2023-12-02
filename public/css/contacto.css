@@ -1,6 +1,3 @@
-footer p.socialmedia {
-    font-family: 'Bimbo Trial';
-}
 .contacto {
     background-color: #32A97F;
     border-radius: 10px;
@@ -99,5 +96,4 @@ footer p.socialmedia {
         font-size: 2rem;
         color: black;
     }
-
 }

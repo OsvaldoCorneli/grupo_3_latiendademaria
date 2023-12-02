@@ -1,0 +1,27 @@
+footer{
+    position:relative;
+    left:0;
+    bottom:0;
+    height:4vh;
+    width:100%;
+    overflow:hidden;
+    z-index: 3;
+}
+footer section .socialMedia {
+    font-family: "Gidole";
+    font-weight: bold;
+    margin: 0px;
+    height: 4vh;
+    text-align: center;
+    justify-content: center;
+    background-color: #32A97F;
+    border: solid 1px #5394b0;
+    font-size: 1.5rem;
+}
+
+
+@media (width <= 361px) {
+    footer {
+        display: none
+    }
+}
