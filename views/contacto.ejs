@@ -11,16 +11,18 @@
                 <p>Contacto</p>
                 <i class="fa-sharp fa-solid fa-paper-plane"></i>
             </span>
+            <div class="contenedorForm">
             <form class='form-contacto' action="/contacto" method="POST">
                 <label for="nombre">Nombre:</label>
-                <input 
+                <input class="inputForm"
                     id="nombre" 
                     type="text" 
                     name="nombre" 
                     placeholder="Ingresa tu nombre"
                 />
                 <label for="email">E-mail:</label>  
-                <input 
+                <input class="inputForm"
+                
                     id="email" 
                     type="email" 
                     name="email" 
@@ -33,19 +35,19 @@
                     <label for="administrativo">Administrativo
                     <input type="radio" name="tipo" id="administrativo" value="administrativo"/></label>
                     <label for="comercial">Comercial
-                    <input type="radio" name="tipo" id="comercial" value="comercial"/></label>
+                    <input  type="radio" name="tipo" id="comercial" value="comercial"/></label>
                     <label for="sugerencia">Sugerencia
                     <input type="radio" name="tipo" id="sugerencia" value="sugerencia"/></label>
                     <label for="otros">Otros
                     <input type="radio" name="tipo" id="otros" value="otros"/></label>
                 </span>
               
-                <label for="motivo">Motivo:</label>
-                <input
+                <label  for="motivo">Motivo:</label>
+                <input class="inputForm"
                     id="motivo"
                     type="text"
                     name="motivo"
-                    placeholder="Ingresa tu nombre"
+                    placeholder="Motivo"
                     required
                 />
                 <label for="descripcion">Descripcion: </label>
@@ -53,6 +55,7 @@
                
                 <button type="submit">Enviar</button>
             </form>
+        </div>
             </span>
             <!-- <span class="contacto-socialmedia">
                 <ul>
