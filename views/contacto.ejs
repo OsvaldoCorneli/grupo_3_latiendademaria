@@ -11,7 +11,9 @@
                 <p>Contacto</p>
                 <i class="fa-sharp fa-solid fa-paper-plane"></i>
             </span>
+            
             <div class="contenedorForm">
+                <strong>ENVIANOS TU CONSULTA</strong>
             <form class='form-contacto' action="/contacto" method="POST">
                 <label for="nombre">Nombre:</label>
                 <input class="inputForm"
@@ -42,16 +44,16 @@
                     <input type="radio" name="tipo" id="otros" value="otros"/></label>
                 </span>
               
-                <label  for="motivo">Motivo:</label>
+                <label  for="asunto">Asunto:</label>
                 <input class="inputForm"
-                    id="motivo"
+                    id="asunto"
                     type="text"
-                    name="motivo"
-                    placeholder="Motivo"
+                    name="asunto"
+                    placeholder="asunto"
                     required
                 />
-                <label for="descripcion">Descripcion: </label>
-                    <textarea id="descripcion" type="text" name="descripcion" placeholder="Ingresa una descripcion"></textarea>
+                <label for="mensaje">Mensaje: </label>
+                    <textarea id="mensaje" type="text" name="mensaje" placeholder="Ingrese el mensaje"></textarea>
                
                 <button type="submit">Enviar</button>
             </form>
@@ -66,6 +68,7 @@
                 <img src="\images\4F5FA3DA-7648-4C42-B5F2-B01A0BA7C902.png" alt="Logo"/>
             </span> -->
         </main>
-        <!-- <%- include('./partials/footer.ejs') %> -->
+        <%- include('./partials/footer.ejs') %>
+        
     </body>
 </html>
