@@ -4,8 +4,13 @@
 }
 
 body {
-    min-height: 100%;
     margin-bottom: 4.5vh;
+}
+
+main{
+    margin: 15px 0 0 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .login-modal * {
@@ -15,14 +20,13 @@ body {
 
 }
 .login-modal {
-    position: relative;
-    height: 60vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 10px;
     width: 100%;
+    
 }
 
 .login-modal form {
@@ -30,18 +34,23 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
     font-weight: bold;
     background-color: #32A97F;
     padding: 20px;
-    border-radius: 5vh;
-    width: 90%;
-    max-width: 50%;
+    width: 95%;
+    border-radius: 5px;
+    margin: 0 0 10px 0 
+    
+}
+
+.login-modal form label{
+    margin: 10px 0 0 0;
 }
 .login-modal input {
     padding: 5px;
     border-radius: 5px;
-    width: 90%;
+    width: 95%;
+
 }
 .login-modal button {
     border-radius: 5px;
@@ -49,16 +58,29 @@ body {
     background-color: #1259c3;
     color: white;
     width: 35%;
+    margin: 10px 0 0 0;
     transition: 500ms;
 }
 .login-modal button:hover {
     background-color: #5394b0;
 }
 .login-modal img {
-    min-width: 20vh;
+    /* min-width: 20vh;
     width: 20vh;
-    max-height: 20vh;
+    max-height: 20vh; */
     max-width: 30%
+}
+
+.contenedorCuenta{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contenedorCuenta p, .contenedorCuenta a{
+    padding: 0;
+    margin: 5px;
+    font-size: 15px;
 }
 .validacionusername:valid {
     border: 5px solid green;
@@ -73,11 +95,3 @@ body {
     border: 5px solid red;
 }
 
-/* @media (width >= 360px) {
-    .login-modal {
-        width: 100%;
-    }
-    .login-modal form {
-        width: 100%
-    }
-} */

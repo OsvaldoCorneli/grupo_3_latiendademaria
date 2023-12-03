@@ -30,6 +30,11 @@ footer{
 }
 
 
+.footernav a:hover{
+    color: #32A97F;
+}
+
+
 .logosredes{
     width: 50%;
     margin-bottom: 15px;
@@ -40,8 +45,12 @@ footer{
 
 .fa-envelope, .fa-facebook, .fa-square-instagram, .fa-square-whatsapp {
     font-size: 30px; 
-    color: #32A97F;    
+    color: #32A97F;
+    transition: transform 0.3s ease; 
 }
+
+.fa-envelope:hover, .fa-facebook:hover, .fa-square-instagram:hover, .fa-square-whatsapp:hover {
+    transform: scale(1.2); }
 
 .derechosres{
     display: flex;
