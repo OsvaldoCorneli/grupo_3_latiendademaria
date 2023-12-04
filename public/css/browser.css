@@ -185,12 +185,14 @@ ul > li {
 
 .filter{
     width: 50%;
-    min-width: 400px;
-    max-width: 325px;
+    min-width: 300px;
+    max-width: 400px;
 }    
+
 main{    
 display: flex;
 }
+
 #categoria , #color{
     width: 50%;
 }
