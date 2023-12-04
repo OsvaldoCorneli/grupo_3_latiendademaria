@@ -10,12 +10,14 @@
 <body>
     <%- include('./partials/navbar.ejs') %>
     <main>
-        
+        <h2>Registrate</h2>   
   <article class="contenedor-form">
-        <div class="login-modal">
+
+    <div class="contenedores">
+    <div class="contenedor1">
             <form action="/login" method="POST">
                 <div class="inputform">
-                    <label for="nombre">Nombre/s</label>
+                    <label for="nombre">Nombre/s:</label>
                     <input 
                     type="text"
                     name="nombre"
@@ -29,7 +31,7 @@
                 </div>
                 <div class="inputform">
 
-                    <label for="apellido">Apellido/s</label>
+                    <label for="apellido">Apellido/s:</label>
                     <input
                     id="apellido"
                     name="apellido"
@@ -42,7 +44,7 @@
                 </div>
                 <div class="inputform">
 
-                    <label for="birthdate">fecha de nacimiento</label>
+                    <label for="birthdate">fecha de nacimiento:</label>
                     <input 
                     type="date"
                     name="fechanacimiento"
@@ -51,7 +53,7 @@
                     />
                 </div>
                  <div class="inputform">   
-                    <label for="username">provincia</label>
+                    <label for="username">provincia:</label>
                     <input 
                     type="text"
                     name="provincia"
@@ -65,7 +67,7 @@
                 </div>
                 <div class="inputform">
 
-                    <label for="username">localidad</label>
+                    <label for="username">localidad:</label>
                     <input 
                     type="text"
                     name="localidad"
@@ -79,7 +81,7 @@
                 </div>
                 <div class="inputform">
 
-                    <label for="username">Codigo postal</label>
+                    <label for="username">Codigo postal:</label>
                     <input 
                     type="text"
                     name="codigopostal"
@@ -93,7 +95,7 @@
             </div>
             <div class="inputform">
 
-                <label for="username">Calle</label>
+                <label for="username">Calle:</label>
                 <input 
                 type="text"
                 name="street"
@@ -106,10 +108,13 @@
                     />
                     
                 </div>
+            </div>
 
+
+            <div class="contenedor2">
                 <div class="inputform">
 
-                    <label for="username">Numero</label>
+                    <label for="username">Numero:</label>
                     <input 
                     type="text"
                     name="street"
@@ -125,7 +130,7 @@
 
                     <div class="inputform">
 
-                        <label for="username">Piso</label>
+                        <label for="username">Piso:</label>
                         <input 
                         type="text"
                         name="street"
@@ -142,7 +147,7 @@
 
                         <div class="inputform">
 
-                            <label for="username">Departamento</label>
+                            <label for="username">Departamento:</label>
                             <input 
                             type="text"
                             name="street"
@@ -157,7 +162,7 @@
                             </div>
                             <div class="inputform">
 
-                                <label for="username">Email</label>
+                                <label for="username">Email:</label>
                                 <input 
                                 type="text"
                                 name="street"
@@ -172,7 +177,7 @@
                                 </div>
                                 <div class="inputform">
 
-                                    <label for="username">Nombre de usuario</label>
+                                    <label for="username">Nombre de usuario:</label>
                                     <input 
                                     type="text"
                                     name="street"
@@ -187,7 +192,7 @@
                                     </div>
                                     <div class="inputform">
 
-                                        <label for="username">contraseña</label>
+                                        <label for="username">contraseña:</label>
                                         <input 
                                         type="text"
                                         name="street"
@@ -202,7 +207,7 @@
                                         </div>
                                         <div class="inputform">
 
-                                            <label for="username">repetir contraseña</label>
+                                            <label for="username">repetir contraseña:</label>
                                             <input 
                                             type="text"
                                             name="street"
@@ -214,6 +219,8 @@
                                                 
                                                 />
                                                 
+                                            </div>
+                                            </div>
                                             </div>
                 <button type="submit">Registrar</button>
             </form>

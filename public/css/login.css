@@ -41,7 +41,7 @@ main{
     border-radius: 5px;
     margin: 0 0 10px 0;
     max-width: 500px;
-    min-width: 350px;
+    
     
 }
 
@@ -113,6 +113,11 @@ main{
         width: 75%;
     
     }
+    .login-modal button {
+        
+        width: 16%;
+      
+    }
 
     .contenedorCuenta p, .contenedorCuenta a{
         padding: 0;
@@ -132,7 +137,7 @@ main{
     }
     .login-modal form {
     
-        max-width: 700px;
+        max-width: 650px;
      
     }
     
