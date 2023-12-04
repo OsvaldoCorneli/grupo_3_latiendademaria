@@ -1,61 +1,43 @@
 <html lang="es">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link 
-        rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer"
-        />
-        <link rel="icon" type="image/jpg" href="\images\" />
+        <%- include('./partials/head.ejs') %>
         <link href="\css\detalle.css" rel="stylesheet"/>
-        <link href="\css\fonts.css" rel="stylesheet"/>
-        <link href="\css\navbar.css" rel="stylesheet"/>
         <title>La tienda de Maria</title>
     </head>
 <body>
     <%- include('./partials/navbar.ejs') %>
     <main>
-        
+        <% let { id, name, image, price ,stock, description} = detalle; %>
         <article>
-        
-        <div class="imagenes">
-            <img src="https://random.imagecdn.app/260/140" alt="">
-            <img src="https://random.imagecdn.app/260/140" alt="">
-            <img src="https://random.imagecdn.app/260/140" alt="">
-        </div>
-
-        <img class="detalle" src="https://random.imagecdn.app/260/140" alt="">
-   
-        <div class="form-detalle">
-            <h2 class="tittled">Titulo del Articulo</h2>
-            <h2 class="precio">$1500</h3>
-            <h5>stock 100</h5>
-            <input type="number" placeholder="cantidad">
-            <select name="modelos" >
-                <option value="">modelos</option>
-            </select>
-            
-        </div>
-        
-    </article>
-    <div class="contenedordesciption">
-    <h3>Descripcion:</h3>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                Cupiditate suscipit reiciendis perspiciatis ab, deleniti 
-                aliquam incidunt iste et sed libero a, nihil voluptate 
-                temporibus delectus vitae magni molestiae! Doloremque, hic?</p> 
+            <div class="imagenes">
+                <img src="<%= image %>" alt="imagen1">
+                <img src="<%= image %>" alt="imagen2">
+                <img src="<%= image %>" alt="imagen3">
             </div>
-    <footer>
-        <section>
-            <p class="socialMedia">Envianos tus dudas y consultas, seguinos en las redes!
-                <i class="fa-brands fa-facebook"></i>
-                <i class="fa-brands fa-square-instagram"></i>
-                <i class="fa-brands fa-square-whatsapp"></i>
-                <a href="/contacto">Contacto</a>
-            </p>
-        </section>
-    </footer>
+    
+            <img class="detalle" src="<%= image %>" alt="<%= name %>">
+    
+            <div class="form-detalle">
+                <h2 class="tittled"><%= name %></h2>
+                <h2 class="precio">$<%= price %></h3>
+                <h5>stock: <%= stock %></h5>
+                <input type="number" placeholder="cantidad">
+                <select name="modelos">
+                    <option value="">modelos</option>
+                </select>
+                <button>Agregar a carrito</button>
+            </div>
+
+
+            
+        </article>
+        
+        <div class="contenedordescription">
+            <h3>Descripcion:</h3>
+            <p><%= description%></p> 
+        </div>
+    </main>
+        
+            <%- include('./partials/footer.ejs') %>
 </body>
 </html>

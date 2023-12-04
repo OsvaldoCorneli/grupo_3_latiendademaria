@@ -2,10 +2,16 @@
     <head>
         <%- include('./partials/head.ejs') %>
         <link href="\css\browser.css" rel="stylesheet"/>
+        <link href="\css\card.css" rel="stylesheet"/>
     </head>
     <body>
         <%- include('./partials/navbar.ejs') %>
+        <form class="searchbar" action="/browser" method="POST">
+            <input id="inputSearchBar" type="search" name="search" placeholder="Busqueda por nombre..."/>
+            <input id="botonSearchBar" type="submit"/>
+        </form>
         <main>
+            
             <section class="filter">
                 <p>Filtros</p>
                 <form action="/browser" method="POST">
@@ -41,40 +47,43 @@
                         </label>
                     </span>
                 </label>
-                <input type="submit" value="ENVIAR"/>
-                <input formaction="/browser" formmethod="GET" type="submit" value="Reset"/>
+                <div class="botonFilter">
+                    <input  type="submit" value="ENVIAR"/>
+                    <input  formaction="/browser" formmethod="GET" type="submit" value="Reset"/>
+                </div>
             </form>
             </section>
+            
             <span class="productos">
-                <form action="/browser" method="POST">
-                    <input type="search" name="search" placeholder="Busqueda por nombre..."/>
-                    <input type="submit"/>
-                </form>
+                
             <section class="cards">
-                <% for (let i in productos) { let { image, price, name, color } = productos[i] %>
+                <% for (let i in productos) { let { id, image, price, name, color } = productos[i] %>
                     <article>
-                        <a href="/detail"><img src= <%= image %> alt=<%= name %>/></a>
-                        <p><%= price %></p>
-                        <p><%= name %></p>
+                        <p class="titulocard"><%= name %></p>
+                        <a href="/detail/<%= id %>"><img src= <%= image %> alt=<%= name %>/></a>
+                        <p>$<%= price %></p>
                         <ul class="color">Colores:
-                            <% for (let x in color) { let background = `background-color:${color[x]};color:${color[x]};border-radius:50%;border:solid;` %>
+                            <% for (let x in color) { let background = `background-color:${color[x]};color:${color[x]};border-radius:50%; border:0.1px-solid-black;;` %>
                                 <li><i style=<%= background %>>oo</i></li>
                             <% } %>
                         </ul>
                     </article>
                 <% } %>
             </section>
-            <section class="pagination">
-                <span><a class="arrow-prev1 arrow-cards"></a></span>
-                <span><a>1</a></span>
-                <span><a>2</a></span>
-                <span><a>3</a></span>
-                <span><a>4</a></span>
-                <span><a>5</a></span>
-                <span><a class="arrow-next1 arrow-cards"></a></span>
-            </section>
+          
         </span>
+        
         </main>
+
+        <section class="pagination">
+            <span><a class="arrow-prev1 arrow-cards"></a></span>
+            <span><a>1</a></span>
+            <span><a>2</a></span>
+            <span><a>3</a></span>
+            <span><a>4</a></span>
+            <span><a>5</a></span>
+            <span><a class="arrow-next1 arrow-cards"></a></span>
+        </section>
         <%- include('./partials/footer.ejs') %>
     </body>
 </html>

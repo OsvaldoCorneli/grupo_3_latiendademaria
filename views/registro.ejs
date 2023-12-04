@@ -1,29 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link 
-    rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-    />
+    <%- include('./partials/head.ejs') %>
     <link href="\css\registro.css" rel="stylesheet"/>
-    <link href="\css\fonts.css" rel="stylesheet"/>
-    <link href="\css\navbar.css" rel="stylesheet"/>
+   
    
     <title>La tienda de Maria</title>
 </head>
 <body>
     <%- include('./partials/navbar.ejs') %>
     <main>
-        
+        <h2>Registrate</h2>   
   <article class="contenedor-form">
-        <div class="login-modal">
+
+    <div class="contenedores">
+    <div class="contenedor1">
             <form action="/login" method="POST">
                 <div class="inputform">
-                    <label for="nombre">Nombre/s</label>
+                    <label for="nombre">Nombre/s:</label>
                     <input 
                     type="text"
                     name="nombre"
@@ -37,7 +31,7 @@
                 </div>
                 <div class="inputform">
 
-                    <label for="apellido">Apellido/s</label>
+                    <label for="apellido">Apellido/s:</label>
                     <input
                     id="apellido"
                     name="apellido"
@@ -50,7 +44,7 @@
                 </div>
                 <div class="inputform">
 
-                    <label for="birthdate">fecha de nacimiento</label>
+                    <label for="birthdate">fecha de nacimiento:</label>
                     <input 
                     type="date"
                     name="fechanacimiento"
@@ -59,7 +53,7 @@
                     />
                 </div>
                  <div class="inputform">   
-                    <label for="username">provincia</label>
+                    <label for="username">provincia:</label>
                     <input 
                     type="text"
                     name="provincia"
@@ -73,7 +67,7 @@
                 </div>
                 <div class="inputform">
 
-                    <label for="username">localidad</label>
+                    <label for="username">localidad:</label>
                     <input 
                     type="text"
                     name="localidad"
@@ -87,7 +81,7 @@
                 </div>
                 <div class="inputform">
 
-                    <label for="username">Codigo postal</label>
+                    <label for="username">Codigo postal:</label>
                     <input 
                     type="text"
                     name="codigopostal"
@@ -101,7 +95,7 @@
             </div>
             <div class="inputform">
 
-                <label for="username">Calle</label>
+                <label for="username">Calle:</label>
                 <input 
                 type="text"
                 name="street"
@@ -114,10 +108,13 @@
                     />
                     
                 </div>
+            </div>
 
+
+            <div class="contenedor2">
                 <div class="inputform">
 
-                    <label for="username">Numero</label>
+                    <label for="username">Numero:</label>
                     <input 
                     type="text"
                     name="street"
@@ -133,7 +130,7 @@
 
                     <div class="inputform">
 
-                        <label for="username">Piso</label>
+                        <label for="username">Piso:</label>
                         <input 
                         type="text"
                         name="street"
@@ -150,7 +147,7 @@
 
                         <div class="inputform">
 
-                            <label for="username">Departamento</label>
+                            <label for="username">Departamento:</label>
                             <input 
                             type="text"
                             name="street"
@@ -165,7 +162,7 @@
                             </div>
                             <div class="inputform">
 
-                                <label for="username">Email</label>
+                                <label for="username">Email:</label>
                                 <input 
                                 type="text"
                                 name="street"
@@ -180,7 +177,7 @@
                                 </div>
                                 <div class="inputform">
 
-                                    <label for="username">Nombre de usuario</label>
+                                    <label for="username">Nombre de usuario:</label>
                                     <input 
                                     type="text"
                                     name="street"
@@ -195,7 +192,7 @@
                                     </div>
                                     <div class="inputform">
 
-                                        <label for="username">contraseña</label>
+                                        <label for="username">contraseña:</label>
                                         <input 
                                         type="text"
                                         name="street"
@@ -210,7 +207,7 @@
                                         </div>
                                         <div class="inputform">
 
-                                            <label for="username">repetir contraseña</label>
+                                            <label for="username">repetir contraseña:</label>
                                             <input 
                                             type="text"
                                             name="street"
@@ -223,23 +220,15 @@
                                                 />
                                                 
                                             </div>
+                                            </div>
+                                            </div>
                 <button type="submit">Registrar</button>
             </form>
         </article>
         </div>
+
     </main>
-    <footer>
-        <section>
-            <p class="socialMedia">Envianos tus dudas y consultas, seguinos en las redes!
-                <i class="fa-brands fa-facebook"></i>
-                <i class="fa-brands fa-square-instagram"></i>
-                <i class="fa-brands fa-square-whatsapp"></i>
-                <a href="">Contacto</a>
-            </p>
-        </section>
-    </footer>
-
-
+    <%- include('./partials/footer.ejs') %>
 
 </body>
 </html>

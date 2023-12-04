@@ -11,56 +11,64 @@
                 <p>Contacto</p>
                 <i class="fa-sharp fa-solid fa-paper-plane"></i>
             </span>
+            
+            <div class="contenedorForm">
+                <strong>ENVIANOS TU CONSULTA</strong>
             <form class='form-contacto' action="/contacto" method="POST">
-                <label for="nombre">Nombre:
-                <input 
+                <label for="nombre">Nombre:</label>
+                <input class="inputForm"
                     id="nombre" 
                     type="text" 
                     name="nombre" 
                     placeholder="Ingresa tu nombre"
-                /></label>
-                <label for="email">E-mail:
-                <input 
+                />
+                <label for="email">E-mail:</label>  
+                <input class="inputForm"
+                
                     id="email" 
                     type="email" 
                     name="email" 
                     placeholder="Ingresa tu email" 
                     required
-                /></label>
-                <label for="tipo">Tipo:</label>
+                />
+                
+                   <label for="tipo">Tipo:</label>
                 <span id="tipo">
-                    <label for="administrativo">Administrativo</label>
-                    <input type="radio" name="tipo" id="administrativo" value="administrativo"/>
-                    <label for="comercial">Comercial</label>
-                    <input type="radio" name="tipo" id="comercial" value="comercial"/>
-                    <label for="sugerencia">Sugerencia</label>
-                    <input type="radio" name="tipo" id="sugerencia" value="sugerencia"/>
-                    <label for="otros">Otros</label>
-                    <input type="radio" name="tipo" id="otros" value="otros"/>
+                    <label for="administrativo">Administrativo
+                    <input type="radio" name="tipo" id="administrativo" value="administrativo"/></label>
+                    <label for="comercial">Comercial
+                    <input  type="radio" name="tipo" id="comercial" value="comercial"/></label>
+                    <label for="sugerencia">Sugerencia
+                    <input type="radio" name="tipo" id="sugerencia" value="sugerencia"/></label>
+                    <label for="otros">Otros
+                    <input type="radio" name="tipo" id="otros" value="otros"/></label>
                 </span>
-                <label for="motivo">Motivo:
-                <input
-                    id="motivo"
+              
+                <label  for="asunto">Asunto:</label>
+                <input class="inputForm"
+                    id="asunto"
                     type="text"
-                    name="motivo"
-                    placeholder="Ingresa tu nombre"
+                    name="asunto"
+                    placeholder="asunto"
                     required
-                /></label>
-                <label for="descripcion">Descripcion:
-                    <textarea id="descripcion" type="text" name="descripcion" placeholder="Ingresa una descripcion"></textarea>
-                </label>
+                />
+                <label for="mensaje">Mensaje: </label>
+                    <textarea id="mensaje" type="text" name="mensaje" placeholder="Ingrese el mensaje"></textarea>
+               
                 <button type="submit">Enviar</button>
             </form>
+        </div>
             </span>
-            <span class="contacto-socialmedia">
+            <!-- <span class="contacto-socialmedia">
                 <ul>
                 <li><a href=""><i class="fa-brands fa-facebook"></i>Facebook</a></li>
                 <li><a href=""><i class="fa-brands fa-square-instagram"></i>Instagram</a></li>
                 <li><a href=""><i class="fa-brands fa-square-whatsapp"></i>Whatsapp</a></li>
                 </ul>
                 <img src="\images\4F5FA3DA-7648-4C42-B5F2-B01A0BA7C902.png" alt="Logo"/>
-            </span>
+            </span> -->
         </main>
         <%- include('./partials/footer.ejs') %>
+        
     </body>
 </html>
