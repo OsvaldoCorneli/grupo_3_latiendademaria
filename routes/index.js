@@ -33,7 +33,7 @@ router.route("/register")
     .get(Controllers.getRegister)
 ;
 
-router.route("/detail")
+router.route("/detail/:id")
     .get(Controllers.getDetail)
 ;
 

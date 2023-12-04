@@ -7,36 +7,37 @@
 <body>
     <%- include('./partials/navbar.ejs') %>
     <main>
-        
+        <% let { id, name, image, price ,stock, description} = detalle; %>
         <article>
-        
-        <div class="imagenes">
-            <img src="https://random.imagecdn.app/260/140" alt="">
-            <img src="https://random.imagecdn.app/260/140" alt="">
-            <img src="https://random.imagecdn.app/260/140" alt="">
-        </div>
-
-        <img class="detalle" src="https://random.imagecdn.app/260/140" alt="">
-   
-        <div class="form-detalle">
-            <h2 class="tittled">Titulo del Articulo</h2>
-            <h2 class="precio">$1500</h3>
-            <h5>stock 100</h5>
-            <input type="number" placeholder="cantidad">
-            <select name="modelos" >
-                <option value="">modelos</option>
-            </select>
-            
-        </div>
-        
-    </article>
-    <div class="contenedordesciption">
-    <h3>Descripcion:</h3>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                Cupiditate suscipit reiciendis perspiciatis ab, deleniti 
-                aliquam incidunt iste et sed libero a, nihil voluptate 
-                temporibus delectus vitae magni molestiae! Doloremque, hic?</p> 
+            <div class="imagenes">
+                <img src="<%= image %>" alt="imagen1">
+                <img src="<%= image %>" alt="imagen2">
+                <img src="<%= image %>" alt="imagen3">
             </div>
+    
+            <img class="detalle" src="<%= image %>" alt="<%= name %>">
+    
+            <div class="form-detalle">
+                <h2 class="tittled"><%= name %></h2>
+                <h2 class="precio">$<%= price %></h3>
+                <h5>stock: <%= stock %></h5>
+                <input type="number" placeholder="cantidad">
+                <select name="modelos">
+                    <option value="">modelos</option>
+                </select>
+                <button>Agregar a carrito</button>
+            </div>
+
+
+            
+        </article>
+        
+        <div class="contenedordescription">
+            <h3>Descripcion:</h3>
+            <p><%= description%></p> 
+        </div>
+    </main>
+        
             <%- include('./partials/footer.ejs') %>
 </body>
 </html>
