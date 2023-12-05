@@ -32,6 +32,16 @@ router.route("/browser")
 router.route("/register")
     .get(Controllers.getRegister)
 ;
+router.route('/product')
+    .get(Controllers.products.index)
+    .post(Controllers.products.create)
+;
+router.route('/product/:id')
+    .get(Controllers.products.index)
+    .put(Controllers.products.update)
+    .patch(Controllers.products.edit)
+    .delete(Controllers.products.delete)
+;
 
 router.route("/detail/:id")
     .get(Controllers.getDetail)

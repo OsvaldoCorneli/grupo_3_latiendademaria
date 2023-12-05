@@ -1,0 +1,66 @@
+<html lang="es">
+    <head>
+        <%- include('./partials/head.ejs') %>
+        <link href="\css\createForm.css" rel="stylesheet"/>
+    </head>
+<body>
+    <%- include('./partials/navbar.ejs') %>
+    <main class="createForm">
+        <span>
+            <span class="titulo">
+                <h1>Creacion de Producto</h1>
+            </span>
+            <div class="contenedorForm">
+                <strong>Formulario de Alta</strong>
+                <form class="form-producto" action="/product" method="POST">
+                    <label for="name">Nombre:</label>
+                        <input class="inputForm" 
+                        id="name" 
+                        type="text" 
+                        name="name" 
+                        placeholder="Ingresar Nombre"
+                        />
+                    <label for="description">Descripcion:</label>
+                    <textarea id="description" type="text" name="description" placeholder="Ingresar descripcion..."></textarea>
+                    <label for="image">Imagen:</label>
+                    <input class="inputForm" 
+                        type="url" 
+                        id="image" 
+                        name="image" 
+                        placeholder="ingresar URL de imagen..."
+                        />
+                    
+                    <label for="category">Categoria:
+                        <% for (let i in categorias) { %>
+                            <label>
+                                <input type="radio" name="category" value=<%= categorias[i] %>/>
+                            <%= categorias[i] %>
+                            </label>
+                        <% } %>
+                    </label>
+                    
+                    <label for="color">Colores:</label>
+                    <select class="inputForm" 
+                        id="color" 
+                        name="color" 
+                        multiple>
+                        <option disabled selected value>- seleccionar -</option>
+                        <% for (let i in colors) {  %>
+                            <option value=<%= colors[i] %>> <%= colors[i] %></option>
+                        <% } %>
+                    </select>
+                    
+                    <label for="price">Precio:</label>
+                    <input class="inputForm" 
+                        type="number" 
+                        id="price" 
+                        name="price"
+                    />
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+        </span>
+    </main>
+    <%- include('./partials/footer.ejs') %>
+</body>
+</html>

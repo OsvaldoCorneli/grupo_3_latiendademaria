@@ -105,7 +105,8 @@ const Controllers = {
         } catch (error) {
             res.status(500).json({error: error.message})
         }
-    }
+    },
+    products: require('./product')
 }
 
 module.exports = Controllers
