@@ -73,7 +73,10 @@ const Controllers = {
     },
     getDetail: async function (req,res) {
         try {
-            res.render('detail')
+            const {id} = req.params; 
+            res.render('detail',{
+                detalle: Models.productDetail(id)
+            })
         } catch (error) {
             res.status(500).json({error: error.message})
         }

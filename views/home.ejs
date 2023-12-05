@@ -35,9 +35,9 @@
             <section class="cards">
                 <% for (let i in sublimados) { let { id, image, price, name } = sublimados[i]; %>
                     <article>
-                        <a href="/detail"><img src= <%= image %> alt=<%= name %>/></a>
-                        <p><%= price %></p>
-                        <p><%= name %></p>
+                        <p class="titulocard"><%= name %></p>
+                        <a href="/detail/<%= id %>"><img src= <%= image %> alt=<%= name %>/></a>
+                        <p>$<%= price %></p>
                     </article>
                 <% } %>
             </section>
@@ -51,9 +51,9 @@
             <section class="cards">
                 <% for (let i in artesanales) { let { id, name, image, price } = artesanales[i] %>
                 <article>
-                    <a href="/detail"><img src= <%= image %> alt=<%= name %>/></a>
-                    <p><%= price %></p>
-                    <p><%= name %></p>
+                    <p class="titulocard"><%= name %></p>
+                    <a href="/detail/<%= id %>"><img src= <%= image %> alt=<%= name %>/></a>
+                    <p>$<%= price %></p>
                 </article>
                 <% } %>
             </section>
