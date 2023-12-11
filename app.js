@@ -14,7 +14,6 @@ app.use(methodOverride('_method'));
 app.set('view engine', 'ejs');
 //app.set('views', './carpeta-de-vistas')   <<--- ejemplo de codigo a usar si se quiere cambiar la ruta views por defecto(./views).
 
-app.use('/product', routes.products)
 app.use('/', routes);
 
 app.listen(3001,(req,res) => {
