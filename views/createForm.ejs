@@ -29,7 +29,11 @@
                         name="image" 
                         placeholder="ingresar URL de imagen..."
                         />
-                    
+                    <label for="line">Linea:</label>
+                    <select id="line" name="line">
+                        <option value="sublimada">Sublimada</option>
+                        <option value="artesanal">Artesanal</option>
+                    </select>
                     <label for="category">Categoria:
                         <% for (let i in categorias) { %>
                             <label>

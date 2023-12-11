@@ -11,218 +11,187 @@
     <%- include('./partials/navbar.ejs') %>
     <main>
         <h2>Registrate</h2>   
-  <article class="contenedor-form">
+    <article class="contenedor-form">
 
     <div class="contenedores">
-    <div class="contenedor1">
-            <form action="/login" method="POST">
+        <div class="contenedor1">
+            <form action="/user" method="POST">
                 <div class="inputform">
                     <label for="nombre">Nombre/s:</label>
                     <input 
-                    type="text"
-                    name="nombre"
-                    id="nombre"
-                    placeholder="ingrese su nombre"
-                    required
-                    minlength="10"
-                    maxlength="20"
-                   
+                        type="text"
+                        name="nombre"
+                        id="nombre"
+                        placeholder="ingrese su nombre"
+                        required
+                        minlength="10"
+                        maxlength="20"
                     />
                 </div>
                 <div class="inputform">
-
                     <label for="apellido">Apellido/s:</label>
                     <input
-                    id="apellido"
-                    name="apellido"
-                    type="text"
-                    placeholder="Ingresar apellido"
-                    required
-                    minlength="6"
-                   
+                        id="apellido"
+                        name="apellido"
+                        type="text"
+                        placeholder="Ingresar apellido"
+                        required
+                        minlength="6"
                     />
                 </div>
                 <div class="inputform">
-
-                    <label for="birthdate">fecha de nacimiento:</label>
+                    <label for="fechanacimiento">fecha de nacimiento:</label>
                     <input 
                     type="date"
                     name="fechanacimiento"
-                    id="fechadenacimiento"
+                    id="fechanacimiento"
                     required
                     />
                 </div>
-                 <div class="inputform">   
-                    <label for="username">provincia:</label>
+                <div class="inputform">   
+                    <label for="provincia">provincia:</label>
                     <input 
-                    type="text"
-                    name="provincia"
-                    id="provincia"
-                    placeholder="provincia"
-                    required
-                    minlength="10"
-                    maxlength="20"
-                   
-                    />
-                </div>
-                <div class="inputform">
-
-                    <label for="username">localidad:</label>
-                    <input 
-                    type="text"
-                    name="localidad"
-                    id="localidad"
-                    placeholder="localidad"
-                    required
-                    minlength="10"
-                    maxlength="20"
-                   
+                        type="text"
+                        name="provincia"
+                        id="provincia"
+                        placeholder="provincia"
+                        required
+                        minlength="10"
+                        maxlength="20"
                     />
                 </div>
                 <div class="inputform">
-
-                    <label for="username">Codigo postal:</label>
+                    <label for="localidad">localidad:</label>
                     <input 
-                    type="text"
-                    name="codigopostal"
-                    id="codigopostal"
-                    placeholder="Codigo Postal"
-                    required
-                    minlength="10"
-                    maxlength="20"
-                    
-                />
+                        type="text"
+                        name="localidad"
+                        id="localidad"
+                        placeholder="localidad"
+                        required
+                        minlength="10"
+                        maxlength="20"
+                    />
+                </div>
+                <div class="inputform">
+                    <label for="codigopostal">Codigo postal:</label>
+                    <input 
+                        type="text"
+                        name="codigopostal"
+                        id="codigopostal"
+                        placeholder="Codigo Postal"
+                        required
+                        minlength="10"
+                        maxlength="20"
+                    />
             </div>
             <div class="inputform">
-
-                <label for="username">Calle:</label>
+                <label for="street">Calle:</label>
                 <input 
-                type="text"
-                name="street"
-                id="street"
+                    type="text"
+                    name="street"
+                    id="street"
                     placeholder="calle"
                     required
                     minlength="10"
                     maxlength="20"
-                   
                     />
-                    
                 </div>
+        </div>
+        <div class="contenedor2">
+            <div class="inputform">
+                <label for="streetnumber">Numero:</label>
+                <input 
+                    type="text"
+                    name="streetnumber"
+                    id="streetnumber"
+                    placeholder="Numero"
+                    required
+                    minlength="10"
+                    maxlength="20"
+                />
             </div>
+            <div class="inputform">
 
-
-            <div class="contenedor2">
-                <div class="inputform">
-
-                    <label for="username">Numero:</label>
-                    <input 
+                <label for="buildingfloor">Piso:</label>
+                <input 
+                    type="text"
+                    name="buildingfloor"
+                    id="buildingfloor"
+                    placeholder="Piso"
+                    required
+                    minlength="10"
+                    maxlength="20"
+                    />
+            </div>
+            <div class="inputform">
+                <label for="username">Departamento:</label>
+                <input 
+                type="text"
+                name="street"
+                id="street"
+                    placeholder="Departamento"
+                    required
+                    minlength="10"
+                    maxlength="20"
+                    />
+            </div>
+            <div class="inputform">
+                <label for="username">Email:</label>
+                <input 
                     type="text"
                     name="street"
                     id="street"
-                        placeholder="Numero"
-                        required
-                        minlength="10"
-                        maxlength="20"
-                       
-                        />
-                        
-                    </div>
-
-                    <div class="inputform">
-
-                        <label for="username">Piso:</label>
-                        <input 
-                        type="text"
-                        name="street"
-                        id="street"
-                            placeholder="Piso"
-                            required
-                            minlength="10"
-                            maxlength="20"
-                           
-                            />
-                            
-                        </div>
-
-
-                        <div class="inputform">
-
-                            <label for="username">Departamento:</label>
-                            <input 
-                            type="text"
-                            name="street"
-                            id="street"
-                                placeholder="Departamento"
-                                required
-                                minlength="10"
-                                maxlength="20"
-                              
-                                />
-                                
-                            </div>
+                    placeholder="Email"
+                    required
+                    minlength="10"
+                    maxlength="20"
+                    />
+            </div>
+            <div class="inputform">
+                <label for="username">Nombre de usuario:</label>
+                <input 
+                    type="text"
+                    name="street"
+                    id="street"
+                    placeholder="Nombre de usuario"
+                    required
+                    minlength="10"
+                    maxlength="20"
+                />
+            </div>
                             <div class="inputform">
 
-                                <label for="username">Email:</label>
+                                <label for="username">contraseña:</label>
                                 <input 
                                 type="text"
                                 name="street"
                                 id="street"
-                                    placeholder="Email"
+                                    placeholder="contraseña"
                                     required
                                     minlength="10"
                                     maxlength="20"
-                                   
+                                    
                                     />
                                     
                                 </div>
                                 <div class="inputform">
 
-                                    <label for="username">Nombre de usuario:</label>
+                                    <label for="username">repetir contraseña:</label>
                                     <input 
                                     type="text"
                                     name="street"
                                     id="street"
-                                        placeholder="Nombre de usuario"
+                                        placeholder="repetir contraseña"
                                         required
                                         minlength="10"
                                         maxlength="20"
-                                     
+                                        
                                         />
                                         
                                     </div>
-                                    <div class="inputform">
-
-                                        <label for="username">contraseña:</label>
-                                        <input 
-                                        type="text"
-                                        name="street"
-                                        id="street"
-                                            placeholder="contraseña"
-                                            required
-                                            minlength="10"
-                                            maxlength="20"
-                                          
-                                            />
-                                            
-                                        </div>
-                                        <div class="inputform">
-
-                                            <label for="username">repetir contraseña:</label>
-                                            <input 
-                                            type="text"
-                                            name="street"
-                                            id="street"
-                                                placeholder="repetir contraseña"
-                                                required
-                                                minlength="10"
-                                                maxlength="20"
-                                                
-                                                />
-                                                
-                                            </div>
-                                            </div>
-                                            </div>
-                <button type="submit">Registrar</button>
+                                    </div>
+            </div>
+            <button type="submit">Registrar</button>
             </form>
         </article>
         </div>
