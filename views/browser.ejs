@@ -52,7 +52,7 @@
                     <input  formaction="/browser" formmethod="GET" type="submit" value="Reset"/>
                 </div>
             </form>
-            <button><a href="/product">Crear Producto</a></button>
+            <button><a href="/products/create">Crear Producto</a></button>
             </section>
             
             <span class="productos">
@@ -61,7 +61,7 @@
                 <% for (let i in productos) { let { id, image, price, name, color } = productos[i] %>
                     <article>
                         <p class="titulocard"><%= name %></p>
-                        <a href="/detail/<%= id %>"><img src= <%= image %> alt=<%= name %>/></a>
+                        <a href="/products/<%= id %>"><img src= <%= image %> alt=<%= name %>/></a>
                         <p>$<%= price %></p>
                         <ul class="color">Colores:
                             <% for (let x in color) { let background = `background-color:${color[x]};color:${color[x]};border-radius:50%; border:0.1px-solid-black;;` %>

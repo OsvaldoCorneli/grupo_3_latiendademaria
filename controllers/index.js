@@ -71,16 +71,6 @@ const Controllers = {
             res.status(500).json({error: error.message})
         }
     },
-    getDetail: async function (req,res) {
-        try {
-            const {id} = req.params; 
-            res.render('detail',{
-                detalle: Models.productDetail(id)
-            })
-        } catch (error) {
-            res.status(500).json({error: error.message})
-        }
-    },
     postContacto: async function (req,res) {
         try {
             res.status(200).json(req.body)

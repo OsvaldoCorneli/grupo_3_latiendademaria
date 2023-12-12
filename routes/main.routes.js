@@ -33,9 +33,6 @@ router.route("/register")
     .get(Controllers.getRegister)
 ;
 
-router.route("/detail/:id")
-    .get(Controllers.getDetail)
-;
 
 router.route("/autor")
     .get(Controllers.getAutor)

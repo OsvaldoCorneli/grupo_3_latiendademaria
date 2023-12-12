@@ -1,5 +1,5 @@
 const routes = {
-    products: require('./product.route'),
+    products: require('./products.routes'),
     main: require('./main.routes')
 }
 
