@@ -5,9 +5,6 @@ const Controllers = require('../controllers')
 router.route('/')
     .get(Controllers.getHome);
 
-router.route('/login')
-    .get(Controllers.getLogin);
-
 router.route('/cart')
     .get(Controllers.getCart);
 
