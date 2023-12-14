@@ -21,14 +21,8 @@ router.route("/about")
 router.route("/autor")
     .get(Controllers.getAutor)
 ;
-router.route("/browser")
-    .get(Controllers.getBrowser)
-    .post(Controllers.postBrowser)
-;
 
-router.route("/register")
-    .get(Controllers.getRegister)
-;
+
 
 
 router.route("/autor")

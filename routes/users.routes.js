@@ -6,7 +6,7 @@ router.route('/login')
     .get()
     .post();
 
-router.get('/create', )
+router.get('/register', )
 
 router.get('/profile', )
 

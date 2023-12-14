@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "nombre": "Gustavo",
+        "apellido": "Paz",
+        "fechaNacimiento": "1990-06-11T03:00:00.000Z",
+        "provincia": "Santiago del estero",
+        "localidad": "capital",
+        "codigopostal": 4200,
+        "calle": "tomas edison",
+        "callenumero": 520,
+        "piso": null,
+        "departamento": null,
+        "username": "gpaz",
+        "email": "gpaz@latiendademaria.com",
+        "password": "abc123"
+    }
+]

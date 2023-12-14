@@ -1,7 +1,7 @@
 <html lang="es">
     <head>
         <%- include('./partials/head.ejs') %>
-        <link href="\css\browser.css" rel="stylesheet"/>
+        <link href="\css\products.css" rel="stylesheet"/>
         <link href="\css\card.css" rel="stylesheet"/>
     </head>
     <body>
@@ -14,7 +14,7 @@
             
             <section class="filter">
                 <p>Filtros</p>
-                <form action="/browser" method="POST">
+                <form action="/products" method="POST">
                 <label for="categoria">Categoria:
                     <select id="categoria" name="category">
                         <option disabled selected value>- seleccionar -</option>
@@ -49,7 +49,7 @@
                 </label>
                 <div class="botonFilter">
                     <input  type="submit" value="ENVIAR"/>
-                    <input  formaction="/browser" formmethod="GET" type="submit" value="Reset"/>
+                    <input  formaction="/products" formmethod="GET" type="submit" value="Reset"/>
                 </div>
             </form>
             <button><a href="/products/create">Crear Producto</a></button>
