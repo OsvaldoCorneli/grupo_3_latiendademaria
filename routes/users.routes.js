@@ -1,13 +1,15 @@
 const express = require('express')
 const router = express.Router()
-const { products } = require('../controllers')
+const { users } = require('../controllers')
 
 router.route('/login')
-    .get()
-    .post();
+    .get(users.index)
+    .post(users.login);
 
-router.get('/register', )
+router.get('/register', users.create)
 
-router.get('/profile', )
+router.get('/:id/update', users.update)
+
+router.get('/:id', users.index)
 
 module.exports = router

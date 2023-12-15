@@ -65,3 +65,5 @@ const productsModels = {
         }
     }
 }
+
+module.exports = productsModels

@@ -18,6 +18,22 @@ let usuarios = [
         username: 'gpaz',
         email: 'gpaz@latiendademaria.com',
         password: 'abc123',
+    },
+    {
+        id: id+2,
+        nombre: 'Omar',
+        apellido: 'Perez',
+        fechaNacimiento: new Date(1996,1,7,0,0,0),
+        provincia: 'Santiago del estero',
+        localidad: 'capital',
+        codigopostal: 4200,
+        calle: 'calle publica',
+        callenumero: 's/n',
+        piso: null,
+        departamento: null,
+        username: 'operez',
+        email: 'operez@latiendademaria.com',
+        password: 'abc123',
     }
 ]
 

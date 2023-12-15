@@ -2,7 +2,10 @@ const express = require('express')
 const router = express.Router()
 const { products } = require('../controllers')
 
-router.get('/', products.index)
+router.route('/')
+    .get(products.index)  // para primera vista o resetear filtro
+    .post(products.index) // para el filtro de products
+;
 
 router.get('/create', products.create)
 
