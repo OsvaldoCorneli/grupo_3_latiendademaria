@@ -1,27 +1,41 @@
-const Models = require('../models')
+const { products } = require('../models')
 
-const products = {
+const productsController = {
     index: function (req,res) {
         let { id } = req.params
-        res.render('detail',{
-            detalle: Models.productDetail(id)
-        })
+        if (!id && req.method == 'POST') {
+            res.render('products', { 
+                productos: products.filter(req.body),
+                categorias: products.categories(),
+                colors: products.colors()
+            })
+        } else if (!id && req.method == 'GET') {
+            res.render('products', { 
+                productos: products.all(),
+                categorias: products.categories(),
+                colors: products.colors()
+            })
+        } else {
+            res.render('detail',{
+                detalle: products.detail(id)
+            })
+        }
     },
-    create: async function (req,res) {
+    create: function (req,res) {
         res.render('createForm', {
-            categorias: Models.allCategories(),
-            colors: Models.allColors()
+            categorias: products.categories(),
+            colors: products.colors()
         })
     },
-    update: async function (req,res) {
+    update: function (req,res) {
 
     },
-    edit: async function (req,res) {
+    edit: function (req,res) {
 
     },
-    delete: async function (req,res) {
+    delete: function (req,res) {
 
     }
 }
 
-module.exports = products
+module.exports = productsController

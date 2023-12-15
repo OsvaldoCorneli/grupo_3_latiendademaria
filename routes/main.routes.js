@@ -1,41 +1,26 @@
 const express = require('express')
 const router = express.Router()
-const Controllers = require('../controllers')
+const { main } = require('../controllers')
 
 router.route('/')
-    .get(Controllers.getHome);
-
-router.route('/login')
-    .get(Controllers.getLogin);
+    .get(main.getHome);
 
 router.route('/cart')
-    .get(Controllers.getCart);
+    .get(main.getCart);
 
-router.route("/profile")
-    .get(Controllers.getProfile)
-;
 router.route("/contacto")
-    .get(Controllers.getContacto)
-    .post(Controllers.postContacto)
+    .get(main.getContacto)
+    .post(main.postContacto)
 ;
 router.route("/about")
-    .get(Controllers.getAbout)
+    .get(main.getAbout)
 ;
 router.route("/autor")
-    .get(Controllers.getAutor)
+    .get(main.getAutor)
 ;
-router.route("/browser")
-    .get(Controllers.getBrowser)
-    .post(Controllers.postBrowser)
-;
-
-router.route("/register")
-    .get(Controllers.getRegister)
-;
-
 
 router.route("/autor")
-    .get(Controllers.getAutor)
+    .get(main.getAutor)
 ;
 
 module.exports = router
