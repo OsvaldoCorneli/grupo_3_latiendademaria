@@ -19,7 +19,8 @@ const usersServices = {
 
     },
     detail: function (id) {
-        return Users.find((x) => x.id == id)
+        const detailUser = Users.find((x) => x.id == id)
+        return detailUser
     }
 }
 

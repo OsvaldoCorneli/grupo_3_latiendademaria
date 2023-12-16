@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head.ejs') %>
+    <link href="\css\registro.css" rel="stylesheet"/>
+   
+   
+    <title>La tienda de Maria</title>
+</head>
+<body>
+    <%- include('./partials/navbar.ejs') %>
+    <main>
+        <h2>Registrate</h2>   
+    <article class="contenedor-form">
+
+    <div class="contenedores">
+        <div class="contenedor1">
+            <form action="/user/register" method="POST">
+                <div class="inputform">
+                    <label for="nombre">Nombre/s:</label>
+                    <input 
+                        type="text"
+                        name="nombre"
+                        id="nombre"
+                        placeholder="ingrese su nombre"
+                        required
+                        minlength="10"
+                        maxlength="20"
+                    />
+                </div>
+                <div class="inputform">
+                    <label for="apellido">Apellido/s:</label>
+                    <input
+                        id="apellido"
+                        name="apellido"
+                        type="text"
+                        placeholder="Ingresar apellido"
+                        required
+                        minlength="6"
+                    />
+                </div>
+                <div class="inputform">
+                    <label for="fechanacimiento">fecha de nacimiento:</label>
+                    <input 
+                    type="date"
+                    name="fechanacimiento"
+                    id="fechanacimiento"
+                    required
+                    />
+                </div>
+                <div class="inputform">   
+                    <label for="provincia">provincia:</label>
+                    <input 
+                        type="text"
+                        name="provincia"
+                        id="provincia"
+                        placeholder="provincia"
+                        required
+                        minlength="10"
+                        maxlength="20"
+                    />
+                </div>
+                <div class="inputform">
+                    <label for="localidad">localidad:</label>
+                    <input 
+                        type="text"
+                        name="localidad"
+                        id="localidad"
+                        placeholder="localidad"
+                        required
+                        minlength="10"
+                        maxlength="20"
+                    />
+                </div>
+            <div class="inputform">
+                <label for="codigopostal">Codigo postal:</label>
+                <input 
+                    type="text"
+                    name="codigopostal"
+                    id="codigopostal"
+                    placeholder="Codigo Postal"
+                    required
+                    minlength="10"
+                    maxlength="20"
+                />
+            </div>
+            <div class="inputform">
+                <label for="street">Calle:</label>
+                <input 
+                    type="text"
+                    name="calle"
+                    id="street"
+                    placeholder="calle"
+                    required
+                    minlength="10"
+                    maxlength="20"
+                    />
+            </div>
+            <div class="inputform">
+                <label for="imagen">Imagen:</label>
+                <input 
+                    type="file"
+                    name="imagen"
+                    id="imagen"
+                    placeholder="calle"
+                    required
+                    minlength="10"
+                    maxlength="20"
+                />
+            </div>
+        </div>
+        <div class="contenedor2">
+            <div class="inputform">
+                <label for="streetnumber">Numero:</label>
+                <input 
+                    type="number"
+                    name="callenumero"
+                    id="streetnumber"
+                    placeholder="Numero"
+                    required
+                    minlength="10"
+                    maxlength="20"
+                />
+            </div>
+            <div class="inputform">
+
+                <label for="buildingfloor">Piso:</label>
+                <input 
+                    type="text"
+                    name="piso"
+                    id="buildingfloor"
+                    placeholder="Piso"
+                    required
+                    minlength="10"
+                    maxlength="20"
+                    />
+            </div>
+            <div class="inputform">
+                <label for="departamento">Departamento:</label>
+                <input 
+                    type="text"
+                    name="departamento"
+                    id="departamento"
+                    placeholder="Departamento"
+                    required
+                    minlength="10"
+                    maxlength="20"
+                    />
+            </div>
+            <div class="inputform">
+                <label for="email">Email:</label>
+                <input 
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                    required
+                    minlength="10"
+                    maxlength="20"
+                    />
+            </div>
+            <div class="inputform">
+                <label for="username">Nombre de usuario:</label>
+                <input 
+                    type="text"
+                    name="street"
+                    id="street"
+                    placeholder="Nombre de usuario"
+                    required
+                    minlength="10"
+                    maxlength="20"
+                />
+            </div>
+            <div class="inputform">
+                <label for="password">contraseña:</label>
+                <input 
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="contraseña"
+                    required
+                    minlength="10"
+                    maxlength="20"
+                    />
+            </div>
+                <div class="inputform">
+                    <label for="repassword">repetir contraseña:</label>
+                    <input 
+                        type="password"
+                        name="repassword"
+                        id="repassword"
+                        placeholder="repetir contraseña"
+                        required
+                        minlength="10"
+                        maxlength="20"
+                    />
+                </div>
+                </div>
+            </div>
+            <button type="submit">Registrar</button>
+            </form>
+        </article>
+        </div>
+
+    </main>
+    <%- include('./partials/footer.ejs') %>
+</body>
+</html>

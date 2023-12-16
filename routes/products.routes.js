@@ -6,7 +6,7 @@ const path = require('path')
 
 let storage = multer.diskStorage({
 	destination: function (req, file, cb) {
-		cb(null, 'public/images/uploads')
+		cb(null, `/images/uploads`)
 	},
 	filename: function (req, file, cb) {
 		cb(null, file.fieldname + '-' + Date.now()+ path.extname(file.originalname))
@@ -25,13 +25,16 @@ router.route('/create')
     .get(products.create)
     .post(upload.any(), products.create)
 
+router.route('/:id/edit')
+    .get(products.edit) // para renderizar al front el form edit de producto
+    .put(products.update)
+; 
 
 router.route('/:id')
     .get(products.index)
-    .put(products.update)
-    .patch(products.edit)
     .delete(products.delete)
 ;
+
 
 
 
