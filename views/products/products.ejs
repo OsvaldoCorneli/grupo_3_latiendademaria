@@ -1,11 +1,11 @@
 <html lang="es">
     <head>
-        <%- include('./partials/head.ejs') %>
+        <%- include('../partials/head.ejs') %>
         <link href="\css\products.css" rel="stylesheet"/>
         <link href="\css\card.css" rel="stylesheet"/>
     </head>
     <body>
-        <%- include('./partials/navbar.ejs') %>
+        <%- include('../partials/navbar.ejs') %>
         <form class="searchbar" action="/browser" method="POST">
             <input id="inputSearchBar" type="search" name="search" placeholder="Busqueda por nombre..."/>
             <input id="botonSearchBar" type="submit"/>
@@ -85,6 +85,6 @@
             <span><a>5</a></span>
             <span><a class="arrow-next1 arrow-cards"></a></span>
         </section>
-        <%- include('./partials/footer.ejs') %>
+        <%- include('../partials/footer.ejs') %>
     </body>
 </html>
