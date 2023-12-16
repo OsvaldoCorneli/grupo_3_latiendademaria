@@ -26,16 +26,25 @@ const productsController = {
         }
     },
     create: function (req,res) {
-        res.render(view+'createForm', {
-            categorias: products.categories(),
-            colors: products.colors()
-        })
+        let {method} = req
+        if (method == 'GET') {
+            res.render(view+'createForm', {
+                categorias: products.categories(),
+                colors: products.colors()
+            })
+        } else if (method == 'POST') {
+            const newProduct = products.create(req.body, req.file)
+            console.log(req.body, req.file)
+            if (newProduct) {
+                res.send(`producto ${req.body.name} creado con exito!`)
+            }
+        }
     },
     update: function (req,res) {
 
     },
     edit: function (req,res) {
-
+        
     },
     delete: function (req,res) {
 
