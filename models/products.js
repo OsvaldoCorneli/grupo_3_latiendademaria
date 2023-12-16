@@ -64,8 +64,27 @@ const productsModels = {
             if (i == Productos.length-1) return Colors
         }
     },
-    create: function (data) {
-
+    create: function (data, image) {
+        const { name, description, line, category, color, price } = data
+        console.log(image)
+        let id = 0
+        for (let i in Productos) {
+            if (id < Productos[i].id) id = Productos[i].id
+        }
+        const newProduct = [
+            ...Productos, 
+            {
+                id: id+1,
+                ...data,
+                image: `images/uploads/${image}`
+            }
+        ]
+        fs.writeFileSync(productsFilePath, JSON.stringify(newProduct,0,4), 'utf-8')
+        if (newProduct) {
+            return data
+        } else {
+            throw new Error('error al crear producto')
+        }
     },
     edit: function (data) {
 

@@ -208,5 +208,19 @@
             "green",
             "turquoise"
         ]
+    },
+    {
+        "id": 15,
+        "name": "mate pokebola",
+        "description": "mate genial estilo pokmon",
+        "line": "sublimada",
+        "category": "Mates/",
+        "color": [
+            "white",
+            "brown",
+            "orange"
+        ],
+        "price": "10000",
+        "image": "images/uploads/undefined"
     }
 ]

@@ -33,8 +33,8 @@ const productsController = {
                 colors: products.colors()
             })
         } else if (method == 'POST') {
-            const newProduct = products.create(req.body)
-            console.log(req.body)
+            const newProduct = products.create(req.body, req.file)
+            console.log(req.body, req.file)
             if (newProduct) {
                 res.send(`producto ${req.body.name} creado con exito!`)
             }

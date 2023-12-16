@@ -3,6 +3,7 @@ const path = require('path');
 const app = express();
 const routes = require('./routes')
 const methodOverride = require('method-override');
+
 const {loguearRuta} = require('./middlewares')
 
 app.use(express.static('public'));
