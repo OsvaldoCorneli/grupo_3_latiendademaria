@@ -7,7 +7,10 @@ router.route('/')
     .post(products.index) // para el filtro de products
 ;
 
-router.get('/create', products.create)
+router.route('/create') 
+    .get(products.create)
+    .post(products.create)
+
 
 router.route('/:id')
     .get(products.index)

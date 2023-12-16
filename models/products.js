@@ -63,6 +63,12 @@ const productsModels = {
             }
             if (i == Productos.length-1) return Colors
         }
+    },
+    create: function (data) {
+
+    },
+    edit: function (data) {
+
     }
 }
 
