@@ -1,12 +1,11 @@
 <html lang="es">
     <head>
-        <%- include('./partials/head.ejs') %>
+        <%- include('../partials/head.ejs') %>
         <link href="\css\home.css" rel="stylesheet"/>
-        <link href="\css\navbar.css" rel="stylesheet"/>
         <link href="\css\card.css" rel="stylesheet"/>
     </head>
 <body>
-    <%- include('./partials/navbar.ejs') %>
+    <%- include('../partials/navbar.ejs') %>
     <main>
         <section class="carousel">
             <span id="item-1"></span>
@@ -34,7 +33,7 @@
                 </ul>
             <section class="cards">
                 <% for (let i in sublimados) { %>
-                    <%- include('./partials/card.ejs', {producto: sublimados[i]}) %>
+                    <%- include('./card.ejs', {producto: sublimados[i]}) %>
                 <% } %>
             </section>
         </section>
@@ -46,12 +45,12 @@
             </ul>
             <section class="cards">
                 <% for (let i in artesanales) { %>
-                    <%- include('./partials/card.ejs', {producto: artesanales[i]}) %>
+                    <%- include('./card.ejs', {producto: artesanales[i]}) %>
                 <% } %>
             </section>
         </section>
         <p class="servParroquias">Servicio para parroquias</p>
     </main>
-    <%- include('./partials/footer.ejs') %>
+    <%- include('../partials/footer.ejs') %>
 </body>
 </html>

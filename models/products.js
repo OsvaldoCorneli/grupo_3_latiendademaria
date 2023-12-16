@@ -64,9 +64,9 @@ const productsModels = {
             if (i == Productos.length-1) return Colors
         }
     },
-    create: function (data, image) {
+    create: function (data, images) {
         const { name, description, line, category, color, price } = data
-        console.log(image)
+        let image = images.map((x) => {return x.path})
         let id = 0
         for (let i in Productos) {
             if (id < Productos[i].id) id = Productos[i].id
@@ -76,7 +76,7 @@ const productsModels = {
             {
                 id: id+1,
                 ...data,
-                image: `images/uploads/${image}`
+                image
             }
         ]
         fs.writeFileSync(productsFilePath, JSON.stringify(newProduct,0,4), 'utf-8')

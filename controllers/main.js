@@ -3,7 +3,7 @@ const { products } = require('../models');
 
 const main = {
 	getHome: function (req, res) {
-		res.render('home', {
+		res.render('Home/home', {
 			sublimados: products.filter({line: 'sublimada'}).slice(0,8),
 			artesanales: products.filter({line: 'artesanal'}).slice(0,4)
 		})

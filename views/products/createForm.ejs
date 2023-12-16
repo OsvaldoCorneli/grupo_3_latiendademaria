@@ -28,6 +28,7 @@
                             id="image" 
                             name="image" 
                             placeholder="ingresar URL de imagen..."
+                            multiple
                             />
                     </label>
                     <label for="line">Linea:</label>
@@ -38,7 +39,7 @@
                     <label for="category">Categoria:
                         <% for (let i in categorias) { %>
                             <label>
-                                <input type="radio" name="category" value=<%= categorias[i] %>/>
+                                <input type="radio" name="category" value=<%= categorias[i] %>></input>
                             <%= categorias[i] %>
                             </label>
                         <% } %>

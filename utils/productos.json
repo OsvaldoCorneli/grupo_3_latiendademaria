@@ -214,13 +214,25 @@
         "name": "mate pokebola",
         "description": "mate genial estilo pokmon",
         "line": "sublimada",
-        "category": "Mates/",
+        "category": "Mates",
         "color": [
             "white",
             "brown",
             "orange"
-        ],
+        ],  
         "price": "10000",
-        "image": "images/uploads/undefined"
+        "image": "/images/uploads/undefined"
+    },
+    {
+        "id": 16,
+        "name": "asdasd",
+        "description": "asdasd",
+        "line": "artesanal",
+        "category": "Mates",
+        "color": "orange",
+        "price": "8500",
+        "image": [
+            "public/images/uploads/image-1702744640465.jpg"
+        ]
     }
 ]
