@@ -1,0 +1,45 @@
+<html lang="es">
+    <head>
+        <%- include('../partials/head.ejs') %>
+        <link href="\css\profile.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <%- include('../partials/navbar.ejs') %>
+    <main>
+        <h2>Mis Datos</h2>
+        <section class="profile">
+            <% let { nombre, apellido, email, calle, callenumero, provincia, imagen, codigopostal, piso, departamento } = userData %>
+            <span>
+                <img src=<%= imagen %> alt=<%= nombre %>/>
+            </span>
+            <span>
+                <p>Nombre: <%= nombre %>, <%= apellido %></p>
+                <p>email: <%= email %></p>
+                <p>Provincia: <%= provincia %></p>
+                <p>Domicilio: <%= calle %> <%= callenumero %> </p>
+                <% if (piso) { %>
+                    <p>Piso: <%= piso %></p>
+                <% } %>
+                <% if (departamento) { %>
+                    <p>Departamento: <%= departamento %> </p>
+                <% } %>
+                <p>Codigo Postal: <%= codigopostal %></p>
+            </span>
+        </section>
+        <h2>Mis Productos</h2>
+        <section class="productos">
+            <span class="header">
+                <p>imagen</p>
+                <p>Nombre</p>
+                <p class="color">Colores</p>
+                <p>Precio</p>
+                <p>Accion</p>
+            </span>
+        <% for (let i in productos) { %>
+            <%- include('./card.ejs', {producto: productos[i]}) %>
+        <% } %>
+        </section>
+    </main>
+    <%- include('../partials/footer.ejs') %>
+</body>
+</html>

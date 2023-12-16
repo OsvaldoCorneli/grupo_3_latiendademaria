@@ -1,10 +1,10 @@
 <html lang="es">
     <head>
-        <%- include('./partials/head.ejs') %>
+        <%- include('../partials/head.ejs') %>
         <link href="\css\createForm.css" rel="stylesheet"/>
     </head>
 <body>
-    <%- include('./partials/navbar.ejs') %>
+    <%- include('../partials/navbar.ejs') %>
     <main class="createForm">
         <span>
             <span class="titulo">
@@ -12,7 +12,7 @@
             </span>
             <div class="contenedorForm">
                 <strong>Formulario de Alta</strong>
-                <form class="form-producto" action="/product" method="POST">
+                <form class="form-producto" action="/products/create" method="POST" enctype="multipart/form-data">
                     <label for="name">Nombre:</label>
                         <input class="inputForm" 
                         id="name" 
@@ -22,13 +22,15 @@
                         />
                     <label for="description">Descripcion:</label>
                     <textarea id="description" type="text" name="description" placeholder="Ingresar descripcion..."></textarea>
-                    <label for="image">Imagen:</label>
-                    <input class="inputForm" 
-                        type="url" 
-                        id="image" 
-                        name="image" 
-                        placeholder="ingresar URL de imagen..."
-                        />
+                    <label for="image">Imagen:
+                        <input
+                            type="file" 
+                            id="image" 
+                            name="image" 
+                            placeholder="ingresar URL de imagen..."
+                            multiple
+                            />
+                    </label>
                     <label for="line">Linea:</label>
                     <select id="line" name="line">
                         <option value="sublimada">Sublimada</option>
@@ -37,7 +39,7 @@
                     <label for="category">Categoria:
                         <% for (let i in categorias) { %>
                             <label>
-                                <input type="radio" name="category" value=<%= categorias[i] %>/>
+                                <input type="radio" name="category" value=<%= categorias[i] %>></input>
                             <%= categorias[i] %>
                             </label>
                         <% } %>
@@ -65,6 +67,6 @@
             </div>
         </span>
     </main>
-    <%- include('./partials/footer.ejs') %>
+    <%- include('../partials/footer.ejs') %>
 </body>
 </html>

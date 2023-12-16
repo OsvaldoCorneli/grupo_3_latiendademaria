@@ -1,12 +1,11 @@
 <html lang="es">
     <head>
-        <%- include('./partials/head.ejs') %>
+        <%- include('../partials/head.ejs') %>
         <link href="\css\home.css" rel="stylesheet"/>
-        <link href="\css\navbar.css" rel="stylesheet"/>
         <link href="\css\card.css" rel="stylesheet"/>
     </head>
 <body>
-    <%- include('./partials/navbar.ejs') %>
+    <%- include('../partials/navbar.ejs') %>
     <main>
         <section class="carousel">
             <span id="item-1"></span>
@@ -33,12 +32,8 @@
                     <li><img src="/images/paletaPintura.png" alt="img ilustracion"/><a href="">Ilustraciones</a></li>
                 </ul>
             <section class="cards">
-                <% for (let i in sublimados) { let { id, image, price, name } = sublimados[i]; %>
-                    <article>
-                        <p class="titulocard"><%= name %></p>
-                        <a href="/products/<%= id %>"><img src= <%= image %> alt=<%= name %>/></a>
-                        <p>$<%= price %></p>
-                    </article>
+                <% for (let i in sublimados) { %>
+                    <%- include('./card.ejs', {producto: sublimados[i]}) %>
                 <% } %>
             </section>
         </section>
@@ -49,17 +44,13 @@
                 <li><img src="/images/paletaPintura.png" alt="img ilustracion"/><a href="">Cuadros</a></li>
             </ul>
             <section class="cards">
-                <% for (let i in artesanales) { let { id, name, image, price } = artesanales[i] %>
-                <article>
-                    <p class="titulocard"><%= name %></p>
-                    <a href="/products/<%= id %>"><img src= <%= image %> alt=<%= name %>/></a>
-                    <p>$<%= price %></p>
-                </article>
+                <% for (let i in artesanales) { %>
+                    <%- include('./card.ejs', {producto: artesanales[i]}) %>
                 <% } %>
             </section>
         </section>
         <p class="servParroquias">Servicio para parroquias</p>
     </main>
-    <%- include('./partials/footer.ejs') %>
+    <%- include('../partials/footer.ejs') %>
 </body>
 </html>

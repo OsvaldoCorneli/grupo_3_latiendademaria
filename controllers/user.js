@@ -1,17 +1,19 @@
-const { users } = require('../models')
+const { users, products } = require('../models')
 
 const usersController = {
     index: function (req, res) {
-        let {id} = req.params
-        if (id) {
-            res.render('profile', {userData: users.detail(id)})
+        if (req.url == '/profile') {
+            res.render('users/profile', {
+                userData: users.detail(1),
+                productos: products.all() 
+            })
         } else {
-            res.render('login')
+            res.render('users/login')
         }
     },
     login: function (req,res) {
 
-        res.render('login')
+        res.render('users/login')
     },
     create: function (req,res) {
         const newUser = users.create(req.body)
@@ -20,7 +22,7 @@ const usersController = {
         }
     },
     update: function (req,res) {
-        res.render('edit-user', { user: users.detail()})
+        res.render('users/edit-user', { user: users.detail()})
         const updatedUser = users.update(req.body)
         if (updatedUser) {
             res.send(`el usuario ${newUser.name} fue actualizado con exito!`)

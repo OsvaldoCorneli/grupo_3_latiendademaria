@@ -10,6 +10,6 @@ router.get('/register', users.create)
 
 router.get('/:id/update', users.update)
 
-router.get('/:id', users.index)
+router.get('/profile', users.index)
 
 module.exports = router
