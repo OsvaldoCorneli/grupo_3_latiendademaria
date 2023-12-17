@@ -221,6 +221,7 @@
             "orange"
         ],  
         "price": "10000",
+        "stock": 1,
         "image": ["/images/uploads/image-1702699424547.jpg"]
     },
     {
@@ -231,6 +232,7 @@
         "category": "Mates",
         "color": ["orange"],
         "price": "8500",
+        "stock": 1,
         "image": [
             "/images/uploads/image-1702744640465.jpg"
         ]

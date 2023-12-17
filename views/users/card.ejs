@@ -1,15 +1,17 @@
-<% let { id, image, category, price, name, color } = producto %>
+<% let { id, image, category, price, name, color, stock } = producto %>
 <article>
     <img src=<%= image %> alt=<%= name %>/>
     <a href="/products/<%= id %>"><p class="titulocard"><%= name %></p></a>
+    <p class="category"><%= category %></p>
     <ul class="color">
         <% for (let x in color) { let background = `background-color:${color[x]};color:${color[x]};border-radius:50%; border:0.1px-solid-black;;` %>
             <li><i style=<%= background %>>oo</i></li>
         <% } %>
     </ul>
     <p class="price">$<%= price %></p>
+    <p class="stock"><%= stock %></p>
     <span class="actions">
-        <a href="/product/<%= id %>"><button>editar</button></a>
-        <button>eliminar</button>
+        <a href="/product/<%= id %>"><button class="edit">Editar</button></a>
+        <a href="/product/<%= id %>?_method=DELETE"><button class="delete">X</button></a>
     </span>
 </article>

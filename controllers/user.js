@@ -8,17 +8,27 @@ const usersController = {
                 productos: products.all() 
             })
         } else {
-            res.render('users/login')
+            res.render('users/login', {errors: {}})
         }
     },
     login: function (req,res) {
-
-        res.render('users/login')
+        const user = users.login(req.body)
+        if (user.access) {
+            res.send(user)
+        } else {
+            res.render('users/login', {errors: {login: `Usuario y/o contraseña incorrecta`}})
+        }
     },
     create: function (req,res) {
-        const newUser = users.create(req.body)
-        if (newUser) {
-            res.send(`el usuario ${newUser.name} fue registrado con exito!`)
+        if (req.method == 'GET') {
+            res.render('users/register')
+        }
+        if (req.method == 'POST') {
+            console.log(req.body)
+            const newUser = users.create(req.body)
+            if (newUser) {
+                res.send(`el usuario ${newUser.name} fue registrado con exito!`)
+            }
         }
     },
     update: function (req,res) {

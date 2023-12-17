@@ -27,6 +27,7 @@ section.profile img {
     width: 150px;
 }
 section.productos {
+    width: fit-content;
     gap: 10px;
 }
 
@@ -59,18 +60,54 @@ section.productos > article > img{
 section.productos > article > ul{
     display: none;
 }
+section.productos > article > .category{
+    display: none;
+}
 section.productos > .header > .color{
     display: none;
 }
+section.productos > .header > .category{
+    display: none;
+}
+
 section.productos a {
     flex: 0 0 125px;
 }
 section.productos .price {
-    flex: 0 0 75px;
+    flex: 0 0 50px;
+    text-align: center;
+}
+section.productos .stock {
+    flex: 0 0 25px;
+    text-align: center;
 }
 section.productos .actions {
     flex: 0 1 60px;
     text-align: center;
+}
+article > span > a > button.edit {
+    border-radius: 5px;
+    border: hidden;
+    padding: 5px;
+    background-color: #1259c3;
+    color: white;
+    transition: 500ms;
+}
+article > span > a > button.edit:hover {
+    background-color: #5394b0;
+}
+article > span > a > button.delete {
+    border-radius: 5px;
+    border: hidden;
+    padding: 5px;
+    background-color: inherit;
+    color: red;
+    font-weight: bold;
+    transition: 500ms;
+}
+article > span > a > button.delete:hover {
+    color:white;
+    background-color: red;
 }
 
 @media (min-width: 760px) {
@@ -81,11 +118,30 @@ section.productos .actions {
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        gap: 10px;
+        gap: 5px;
         margin: 0px;
         list-style: none;
         margin: 0px;
         padding: 0px;
+    }
+    section.productos > .header > .name{
+        display: inline-block;
+        flex: 0 0 100px;
+        text-align: center;
+    }
+    section.productos > .header > .category{
+        display: inline-block;
+        flex: 0 0 50px;
+        text-align: center;
+    }
+    section.productos > article > .category{
+        display: inline-block;
+        flex: 0 0 50px;
+    }
+    section.productos > .header > .price {
+        display: inline-block;
+        flex: 0 0 50px;
+        text-align: center;
     }
     section.productos > article > ul > li{
         border: solid 1px black;
@@ -94,7 +150,6 @@ section.productos .actions {
     section.productos > .header > .color{
         display: inline-block;
         flex: 0 0 50px;
-
     }
     section.productos a {
         flex: 0 0 150px;
@@ -104,6 +159,6 @@ section.productos .actions {
         text-align: center;
     }
     section.productos .actions {
-        flex: 0 1 70px;
+        flex: 0 0 70px;
     }
 }
