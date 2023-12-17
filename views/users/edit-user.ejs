@@ -16,7 +16,7 @@
 
     <div class="contenedores">
         <div class="contenedor1">
-            <form action="/user/register?_method=PUT">" method="POST">
+            <form action="/user/register?_method=PUT" method="POST">
                 <div class="inputform">
                     <label for="nombre">Nombre/s:</label>
                     <input 
@@ -26,7 +26,7 @@
                         placeholder="ingrese su nombre"
                         required
                         minlength="10"
-           value=<%=  %>
+                        value=<%= nombre %>
                     />
                 </div>
                 <div class="inputform">
@@ -38,7 +38,7 @@
                         placeholder="Ingresar apellido"
                         required
                         minlength="6"
-
+                        value=<%= apellido %>
                     />
                 </div>
                 <div class="inputform">
@@ -48,6 +48,7 @@
                     name="fechanacimiento"
                     id="fechanacimiento"
                     required
+                    value=<%= fechanacimiento %>
                     />
                 </div>
                 <div class="inputform">   
@@ -60,6 +61,7 @@
                         required
                         minlength="10"
                         maxlength="20"
+                        value=<%= provincia %>
                     />
                 </div>
                 <div class="inputform">
@@ -72,6 +74,7 @@
                         required
                         minlength="10"
                         maxlength="20"
+                        value=<%= localidad %>
                     />
                 </div>
             <div class="inputform">
@@ -84,6 +87,7 @@
                     required
                     minlength="10"
                     maxlength="20"
+                    value=<%= codigopostal %>
                 />
             </div>
             <div class="inputform">
@@ -96,6 +100,7 @@
                     required
                     minlength="10"
                     maxlength="20"
+                    value=<%= calle %>
                     />
                 </div>
         </div>
@@ -110,6 +115,7 @@
                     required
                     minlength="10"
                     maxlength="20"
+                    value=<%= callenumero %>
                 />
             </div>
             <div class="inputform">
@@ -123,6 +129,7 @@
                     required
                     minlength="10"
                     maxlength="20"
+                    value=<%= piso %>
                     />
             </div>
             <div class="inputform">
@@ -135,6 +142,7 @@
                     required
                     minlength="10"
                     maxlength="20"
+                    value=<%= departamento %>
                     />
             </div>
             <div class="inputform">
@@ -147,6 +155,7 @@
                     required
                     minlength="10"
                     maxlength="20"
+                    value=<%= email %>
                     />
             </div>
             <div class="inputform">
@@ -159,6 +168,7 @@
                     required
                     minlength="10"
                     maxlength="20"
+                    value=<%= username %>
                 />
             </div>
             <div class="inputform">
@@ -171,6 +181,7 @@
                     required
                     minlength="10"
                     maxlength="20"
+                    value=<%= password %>
                     />
             </div>
                 <div class="inputform">
@@ -183,6 +194,7 @@
                         required
                         minlength="10"
                         maxlength="20"
+                        value=<%= repassword %>
                     />
                 </div>
                 </div>
