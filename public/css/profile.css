@@ -14,14 +14,13 @@ main {
     justify-content: center;
 }
 
-
-
 section.profile {
     display: flex;
     flex-direction: row;
     justify-content: start;
     align-items: center;
     gap: 10px;
+    text-wrap: balance;
 }
 section.profile img {
     width: 150px;
@@ -85,7 +84,7 @@ section.productos .actions {
     flex: 0 1 60px;
     text-align: center;
 }
-article > span > a > button.edit {
+button.edit {
     border-radius: 5px;
     border: hidden;
     padding: 5px;
@@ -93,7 +92,7 @@ article > span > a > button.edit {
     color: white;
     transition: 500ms;
 }
-article > span > a > button.edit:hover {
+button.edit:hover {
     background-color: #5394b0;
 }
 article > span > a > button.delete {

@@ -19,10 +19,12 @@ router.route('/login')
     .get(users.index)
     .post(users.login);
 
-router.get('/register', users.create)
+router.get('/register', upload.any(), users.create)
 
 router.get('/profile', users.index)
 
-router.get('/:id/update', users.update)
+router.get('/:id/update', users.update);
+router.put('/:id/update', upload.any(), users.update)
+;
 
 module.exports = router

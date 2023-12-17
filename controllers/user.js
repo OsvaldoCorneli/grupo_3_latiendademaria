@@ -32,11 +32,22 @@ const usersController = {
         }
     },
     update: function (req,res) {
-        res.render('users/edit-user', { user: users.detail()})
-        const updatedUser = users.update(req.body)
-        if (updatedUser) {
-            res.send(`el usuario ${newUser.name} fue actualizado con exito!`)
+        let { id } = req.params
+        if (req.method == 'GET') {
+            res.render('users/edit-user', { userData: users.detail(id)})
         }
+        else if (req.method == 'PUT') {
+            console.log(req.files)
+            //const imagen = req.files.map(x => {return x.path})
+            const updatedData = users.update({...req.body, imagen })
+            if (updatedData) {
+                res.send(updatedData)
+            }
+        }
+        // const updatedUser = users.update(req.body)
+        // if (updatedUser) {
+        //     res.send(`el usuario ${newUser.name} fue actualizado con exito!`)
+        // }
     }
 }
 
