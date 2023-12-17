@@ -97,6 +97,11 @@ main{
     border: 5px solid red;
 }
 
+.errors {
+    font-weight: 400;
+    color: red
+}
+
 @media (min-width: 760px){
     .login-modal img {
         max-width: 170px

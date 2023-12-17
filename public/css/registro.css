@@ -30,9 +30,13 @@ main{
     margin: 15px;
 }
 
+
 .contenedor-form input{
     width: 100%;
     max-width: 500px;
+    border-radius: 5px;
+    padding: 5px;
+    border: none;
 }
 
 .contenedor1{
@@ -43,6 +47,45 @@ main{
 .contenedor2{
     width: 90%;
     margin: 0;
+}
+
+form > div > button {
+    border-radius: 5px;
+    border: hidden;
+    padding: 5px;
+    background-color: #1259c3;
+    color: white;
+    width: 35%;
+    transition: 500ms;
+}
+form > div > button:hover {
+    background-color: #5394b0;
+}
+
+/* input.uploadFile {
+    border-radius: 5px;
+    border: hidden;
+    padding: 5px;
+    background-color: #1259c3;
+    color: white;
+    width: 35%;
+    transition: 500ms;
+}
+input.uploadFile:hover {
+    background-color: #5394b0;
+} */
+
+.requiredinput:valid {
+    border: 2px solid green;
+}
+.requiredinput:invalid {
+    border: 2px solid red;
+}
+.requiredinput:valid {
+    border: 2px solid green;
+}
+.requiredinput:invalid {
+    border: 2px solid red;
 }
 
 @media (min-width: 760px){

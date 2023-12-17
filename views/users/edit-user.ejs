@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <%- include('./partials/head.ejs') %>
+    <%- include('../partials/head.ejs') %>
     <link href="\css\registro.css" rel="stylesheet"/>
    
    
     <title>La tienda de Maria</title>
 </head>
 <body>
-    <%- include('./partials/navbar.ejs') %>
+    <%- include('../partials/navbar.ejs') %>
     <main>
+<% let { nombre, apellido, fechanacimiento, provincia, localidad, codigopostal, calle, callenumero, piso, departamento, email,username, password } = userData %>
         <h2>Registrate</h2>   
     <article class="contenedor-form">
 
     <div class="contenedores">
         <div class="contenedor1">
-            <form action="/user/register" method="POST">
+            <form action="/user/register?_method=PUT" method="POST">
                 <div class="inputform">
                     <label for="nombre">Nombre/s:</label>
                     <input 
@@ -25,7 +26,7 @@
                         placeholder="ingrese su nombre"
                         required
                         minlength="10"
-                        maxlength="20"
+                        value=<%= nombre %>
                     />
                 </div>
                 <div class="inputform">
@@ -37,6 +38,7 @@
                         placeholder="Ingresar apellido"
                         required
                         minlength="6"
+                        value=<%= apellido %>
                     />
                 </div>
                 <div class="inputform">
@@ -46,6 +48,7 @@
                     name="fechanacimiento"
                     id="fechanacimiento"
                     required
+                    value=<%= fechanacimiento %>
                     />
                 </div>
                 <div class="inputform">   
@@ -58,6 +61,7 @@
                         required
                         minlength="10"
                         maxlength="20"
+                        value=<%= provincia %>
                     />
                 </div>
                 <div class="inputform">
@@ -70,6 +74,7 @@
                         required
                         minlength="10"
                         maxlength="20"
+                        value=<%= localidad %>
                     />
                 </div>
             <div class="inputform">
@@ -82,6 +87,7 @@
                     required
                     minlength="10"
                     maxlength="20"
+                    value=<%= codigopostal %>
                 />
             </div>
             <div class="inputform">
@@ -94,6 +100,7 @@
                     required
                     minlength="10"
                     maxlength="20"
+                    value=<%= calle %>
                     />
                 </div>
         </div>
@@ -108,6 +115,7 @@
                     required
                     minlength="10"
                     maxlength="20"
+                    value=<%= callenumero %>
                 />
             </div>
             <div class="inputform">
@@ -121,6 +129,7 @@
                     required
                     minlength="10"
                     maxlength="20"
+                    value=<%= piso %>
                     />
             </div>
             <div class="inputform">
@@ -133,6 +142,7 @@
                     required
                     minlength="10"
                     maxlength="20"
+                    value=<%= departamento %>
                     />
             </div>
             <div class="inputform">
@@ -145,18 +155,20 @@
                     required
                     minlength="10"
                     maxlength="20"
+                    value=<%= email %>
                     />
             </div>
             <div class="inputform">
                 <label for="username">Nombre de usuario:</label>
                 <input 
                     type="text"
-                    name="street"
+                    name="username"
                     id="street"
                     placeholder="Nombre de usuario"
                     required
                     minlength="10"
                     maxlength="20"
+                    value=<%= username %>
                 />
             </div>
             <div class="inputform">
@@ -169,6 +181,7 @@
                     required
                     minlength="10"
                     maxlength="20"
+                    value=<%= password %>
                     />
             </div>
                 <div class="inputform">
@@ -181,6 +194,7 @@
                         required
                         minlength="10"
                         maxlength="20"
+                        value=<%= repassword %>
                     />
                 </div>
                 </div>
@@ -191,6 +205,6 @@
         </div>
 
     </main>
-    <%- include('./partials/footer.ejs') %>
+    <%- include('../partials/footer.ejs') %>
 </body>
 </html>

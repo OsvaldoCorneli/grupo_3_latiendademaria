@@ -10,10 +10,27 @@ const usersServices = {
         return Users
     },
     create: function (data) {
+        let id = 0
+        for (let i in Users) {
+            if (id < Users[i].id) id = Users[i].id
+        }
+        const newUser = [
+            ...Users,
+            {
+                id: id+1,
+                ...data
+            }
+        ]
 
     },
     login: function (data) {
-        let user = Users.find((user) => user.email == data.email)
+        let { email, password } = data
+        let user = Users.find((user) => user.email == email)
+        if (user?.password == password) {
+            return {...user, access: true}
+        } else {
+            return {access: false}
+        }
     },
     update: function (data) {
 
