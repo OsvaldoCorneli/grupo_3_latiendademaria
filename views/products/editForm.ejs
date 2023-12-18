@@ -6,6 +6,13 @@
 <body>
     <%- include('../partials/navbar.ejs') %>
     <main class="createForm">
+        <% if(message !== null){ %>
+        <script>
+            window.onload = function() {
+                alert("Producto editado con exito");
+            };
+        </script>
+        <%}%>
         <span>
             <span class="titulo">
                 <h1>Editar Producto</h1>
@@ -25,14 +32,14 @@
                         />
                     <label for="description" >Descripcion:</label>
                     <textarea id="description" type="text" name="description" placeholder="Ingresar descripción..."><%= productEdit.description %></textarea>
-                    <!-- <label for="image">Imagen:
+                    <label for="image">Imagen:
                     <input
                         type="file" 
                         id="image" 
                         name="image" 
                         placeholder="Ingresar URL de imagen..."
                         multiple
-                    /> -->
+                    />
                 </label>
                     <label for="line">Linea:</label>
                      <select id="line" name="line">

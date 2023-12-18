@@ -46,8 +46,8 @@ const productsController = {
         console.log(req.body);
         if(req.params.id && req.body){
         const response = products.edited(req.params.id,req.body)
-        console.log("ingreso", response)
-        res.send(response)
+        res.status(200).render(`${view}/editForm`, {productEdit: response , categorias: products.categories(), message: "producto editado",
+            colors: products.colors()})
         }
     },
 
@@ -56,12 +56,12 @@ const productsController = {
         const response = products.edit(req.params.id)
 
         res.render(`${view}/editForm`, {productEdit: response , categorias: products.categories(),
-            colors: products.colors()})
+            colors: products.colors() , message: null})
         }
         catch(error){
-            res.status(404).send(error)
+            res.status(404).send(error) 
         }
-    },
+    }, 
     delete: function (req,res) {
 
     }
