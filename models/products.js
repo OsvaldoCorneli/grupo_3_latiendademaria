@@ -86,8 +86,8 @@ const productsModels = {
             throw new Error('error al crear producto')
         }
     },
-    edit: function (data) {
-
+    edit: function (id) {
+        return Productos.find((product) => product.id === +id)
     }
 }
 

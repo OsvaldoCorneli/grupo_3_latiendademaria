@@ -44,7 +44,15 @@ const productsController = {
 
     },
     edit: function (req,res) {
-        
+        try{
+        const response = products.edit(req.params.id)
+        console.log(response)
+        res.render(`${view}/createForm`, {productEdit: response , categorias: products.categories(),
+            colors: products.colors()})
+        }
+        catch(error){
+            res.status(404).send(error)
+        }
     },
     delete: function (req,res) {
 
