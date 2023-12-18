@@ -27,10 +27,10 @@ router.route('/create')
 
 router.route('/:id/edit')
     .get(products.edit) // para renderizar al front el form edit de producto
-    .put(products.update)
+    .put(upload.any(), products.update)
 ; 
 
-router.route('/:id')
+router.route('/:id/delete')
     .get(products.index)
     .delete(products.delete)
 ;
