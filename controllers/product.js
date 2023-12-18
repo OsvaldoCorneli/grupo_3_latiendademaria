@@ -29,6 +29,7 @@ const productsController = {
         let {method} = req
         if (method == 'GET') {
             res.render(view+'createForm', {
+                productEdit: null,
                 categorias: products.categories(),
                 colors: products.colors()
             })
