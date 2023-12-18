@@ -186,9 +186,7 @@
         "category": "Libreta",
         "line": "sublimada",
         "stock": 28,
-        "image": [
-            "https://i0.wp.com/papeleracontemporanea.com/wp-content/uploads/2019/12/Cuaderno-Kraft-A6.jpg?fit=800%2C800&ssl=1"
-        ],
+        "image": ["https://i0.wp.com/papeleracontemporanea.com/wp-content/uploads/2019/12/Cuaderno-Kraft-A6.jpg?fit=800%2C800&ssl=1"],
         "price": 4737.37,
         "color": [
             "red",
@@ -203,9 +201,7 @@
         "category": "Agenda",
         "line": "sublimada",
         "stock": 1,
-        "image": [
-            "https://http2.mlstatic.com/D_NQ_NP_2X_813248-MLA72092373311_102023-F.webp"
-        ],
+        "image": ["https://http2.mlstatic.com/D_NQ_NP_2X_813248-MLA72092373311_102023-F.webp"],
         "price": 6416.26,
         "color": [
             "white",
@@ -223,12 +219,10 @@
             "white",
             "brown",
             "orange"
-        ],
+        ],  
         "price": "10000",
         "stock": 1,
-        "image": [
-            "/images/uploads/image-1702699424547.jpg"
-        ]
+        "image": ["/images/uploads/image-1702699424547.jpg"]
     },
     {
         "id": 16,
@@ -236,27 +230,11 @@
         "description": "asdasd",
         "line": "artesanal",
         "category": "Mates",
-        "color": [
-            "orange"
-        ],
+        "color": ["orange"],
         "price": "8500",
         "stock": 1,
         "image": [
             "/images/uploads/image-1702744640465.jpg"
         ]
-    },
-    {
-        "id": 17,
-        "name": "Mates de madera",
-        "description": "EDITANDO DESCRIPCION",
-        "line": "artesanal",
-        "category": "Mates",
-        "color": [
-            "white",
-            "brown",
-            "orange"
-        ],
-        "price": "6609.33",
-        "image": []
     }
 ]

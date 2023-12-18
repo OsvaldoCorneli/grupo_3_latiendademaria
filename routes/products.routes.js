@@ -30,7 +30,7 @@ router.route('/:id/edit')
     .put(upload.any(), products.update)
 ; 
 
-router.route('/:id')
+router.route('/:id/delete')
     .get(products.index)
     .delete(products.delete)
 ;
