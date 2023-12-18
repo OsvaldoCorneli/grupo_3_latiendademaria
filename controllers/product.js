@@ -41,14 +41,21 @@ const productsController = {
             }
         }
     },
-    update: function (req,res) {
 
+    update: function (req, res) {
+        console.log(req.body);
+        if(req.params.id && req.body){
+        const response = products.edited(req.params.id,req.body)
+        console.log("ingreso", response)
+        res.send(response)
+        }
     },
+
     edit: function (req,res) {
         try{
         const response = products.edit(req.params.id)
-        console.log(response)
-        res.render(`${view}/createForm`, {productEdit: response , categorias: products.categories(),
+
+        res.render(`${view}/editForm`, {productEdit: response , categorias: products.categories(),
             colors: products.colors()})
         }
         catch(error){

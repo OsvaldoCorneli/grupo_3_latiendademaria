@@ -8,60 +8,72 @@
     <main class="createForm">
         <span>
             <span class="titulo">
-                <h1>Creacion de Producto</h1>
+                <h1>Editar Producto</h1>
             </span>
             <div class="contenedorForm">
-                <strong>Formulario de Alta</strong>
-                <form class="form-producto" action="/product" method="POST" enctype="multipart/form-data">
+                <strong>Formulario Editar producto</strong>
+                <form class="form-producto" action="/products/<%= productEdit.id %>/edit?_method=PUT" method="POST" enctype="multipart/form-data">
+
+
                     <label for="name">Nombre:</label>
                         <input class="inputForm" 
                         id="name" 
                         type="text" 
                         name="name" 
                         placeholder="Ingresar Nombre"
+                        value="<%= productEdit.name %>" 
                         />
-                    <label for="description">Descripcion:</label>
-                    <textarea id="description" type="text" name="description" placeholder="Ingresar descripcion..."></textarea>
-                    <label for="image">Imagen:
-                        <input
-                            type="file" 
-                            id="image" 
-                            name="image" 
-                            placeholder="ingresar URL de imagen..."
-                            />
-                    </label>
+                    <label for="description" >Descripcion:</label>
+                    <textarea id="description" type="text" name="description" placeholder="Ingresar descripción..."><%= productEdit.description %></textarea>
+                    <!-- <label for="image">Imagen:
+                    <input
+                        type="file" 
+                        id="image" 
+                        name="image" 
+                        placeholder="Ingresar URL de imagen..."
+                        multiple
+                    /> -->
+                </label>
                     <label for="line">Linea:</label>
-                    <select id="line" name="line">
-                        <option value="sublimada">Sublimada</option>
-                        <option value="artesanal">Artesanal</option>
+                     <select id="line" name="line">
+                     <option value="sublimada" <%= productEdit.line === "sublimada" ? "selected" : null %>>Sublimada</option>
+                     <option value="artesanal" <%= productEdit.line === "artesanal" ? "selected" : null %>>Artesanal</option>
                     </select>
+                    
                     <label for="category">Categoria:
                         <% for (let i in categorias) { %>
                             <label>
-                                <input type="radio" name="category" value=<%= categorias[i] %>/>
-                            <%= categorias[i] %>
+                                <input type="radio" name="category" value="<%= categorias[i] %>" <%= categorias[i] === productEdit.category ? "checked" : "" %>>
+                                <%= categorias[i] %></input>
+                            
                             </label>
                         <% } %>
                     </label>
                     
                     <label for="color">Colores:</label>
-                    <select class="inputForm" 
-                        id="color" 
-                        name="color" 
-                        multiple>
-                        <option disabled selected value>- seleccionar -</option>
-                        <% for (let i in colors) {  %>
-                            <option value=<%= colors[i] %>> <%= colors[i] %></option>
-                        <% } %>
+                    <select class="inputForm" id="color" name="color" multiple>
+                      <option disabled selected value="-1">- seleccionar -</option>
+                      <% for(let i = 0; i < colors.length; i++) { %>
+                        <option value="<%= colors[i] %>" 
+                          <% if (productEdit.color.includes(colors[i])) { %>
+                            selected
+                          <% } %>
+                        >
+                          <%= colors[i] %>
+                        </option>
+                      <% } %>
                     </select>
+                    
+                    
                     
                     <label for="price">Precio:</label>
                     <input class="inputForm" 
-                        type="number" 
+                        type="number"
                         id="price" 
                         name="price"
+                        value="<%= productEdit.price %>" 
                     />
-                    <button type="submit">Enviar</button>
+                    <button type="submit">Editar</button>
                 </form>
             </div>
         </span>

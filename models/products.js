@@ -88,7 +88,18 @@ const productsModels = {
     },
     edit: function (id) {
         return Productos.find((product) => product.id === +id)
+    },
+    edited: function (id,body){
+        id = +id - 1
+        Productos[id].name = body.name ? body.name : Productos[id].name
+        Productos[id].description = body.description ? body.description : Productos[id].description
+        Productos[id].line = body.line ? body.line : Productos[id].line 
+        Productos[id].category = body.category ? body.category : Productos[id].category 
+        Productos[id].color = body.color ? [body.color] : Productos[id].color
+        Productos[id].price = body.price ? +body.price : Productos[id].price
+        
+        return Productos[id]
     }
 }
 
-module.exports = productsModels
+module.exports = productsModels 
