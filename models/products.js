@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 
 const productsFilePath = path.join(__dirname, '../utils/productos.json');
-const Productos = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
+let Productos = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
 
 const productsModels = {
     all: function () {
@@ -86,9 +86,24 @@ const productsModels = {
             throw new Error('error al crear producto')
         }
     },
-    edit: function (data) {
-
+    edit: function (id) {
+        return Productos.find((product) => product.id === +id)
+    },
+    edited: function (id,body){
+        id = +id - 1
+        Productos[id].name = body.name ? body.name : Productos[id].name
+        Productos[id].description = body.description ? body.description : Productos[id].description
+        Productos[id].line = body.line ? body.line : Productos[id].line 
+        Productos[id].category = body.category ? body.category : Productos[id].category 
+        Productos[id].price = body.price ? +body.price : Productos[id].price
+        
+        return Productos[id]
+    },
+    destroy: function(id){
+        Productos = Productos.filter((product) => product.id !== +id);
+        return Productos;
+     
     }
 }
 
-module.exports = productsModels
+module.exports = productsModels  

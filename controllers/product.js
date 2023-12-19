@@ -1,5 +1,5 @@
 const path = require('path')
-const { products } = require('../models')
+const { products,users } = require('../models')
 
 const view = path.join(__dirname,'../views/products/');
 
@@ -29,6 +29,7 @@ const productsController = {
         let {method} = req
         if (method == 'GET') {
             res.render(view+'createForm', {
+                productEdit: null,
                 categorias: products.categories(),
                 colors: products.colors()
             })
@@ -39,13 +40,39 @@ const productsController = {
             }
         }
     },
-    update: function (req,res) {
 
+    update: function (req, res) {
+        console.log(req.body);
+        if(req.params.id && req.body){
+        const response = products.edited(req.params.id,req.body)
+        res.status(200).redirect(`/products/${req.params.id}/edit?message=editado`)
+        }
     },
+
     edit: function (req,res) {
+        try{
+        if(req.query.message === "editado"){
+            const response = products.edit(req.params.id)
+
+            res.render(`${view}/editForm`, {productEdit: response , categorias: products.categories(),
+                colors: products.colors() , message: req.query}) 
+        }else{    
+        const response = products.edit(req.params.id)
+
+        res.render(`${view}/editForm`, {productEdit: response , categorias: products.categories(),
+            colors: products.colors() , message: null})
+        }}
+        catch(error){
+            res.status(404).send(error) 
+        }
+    }, 
+    delete:  function (req,res) {
         
-    },
-    delete: function (req,res) {
+        const {id} = req.params
+        const responseDelete = products.destroy(id)
+        res.status(200).redirect('/users/profile'); 
+        
+
 
     }
 }

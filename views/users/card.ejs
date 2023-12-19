@@ -11,7 +11,10 @@
     <p class="price">$<%= price %></p>
     <p class="stock"><%= stock %></p>
     <span class="actions">
-        <a href="/product/<%= id %>"><button class="edit">Editar</button></a>
-        <a href="/product/<%= id %>?_method=DELETE"><button class="delete">X</button></a>
+        <a href="/products/<%= id %>/edit"><button class="edit">Editar</button></a>
+        <form action="/products/<%= id %>/delete?_method=DELETE" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este producto?');">
+            <input type="hidden">
+            <button type="submit" class="delete">X</button>
+        </form>
     </span>
 </article>
