@@ -1,19 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const { products } = require('../controllers')
-const multer = require('multer')
-const path = require('path')
+const { upload } = require('../middlewares')
 
-let storage = multer.diskStorage({
-	destination: function (req, file, cb) {
-		cb(null, `/images/uploads`)
-	},
-	filename: function (req, file, cb) {
-		cb(null, file.fieldname + '-' + Date.now()+ path.extname(file.originalname))
-	}
-})
-
-let upload = multer({storage: storage})
 
 
 router.route('/')
@@ -31,9 +20,11 @@ router.route('/:id/edit')
 ; 
 
 router.route('/:id/delete')
-    .get(products.index)
     .delete(products.delete)
 ;
 
+router.route('/:id')
+    .get(products.index) // esta es para el detalle, entra en el ultimo else del controller
+;
 
 module.exports = router

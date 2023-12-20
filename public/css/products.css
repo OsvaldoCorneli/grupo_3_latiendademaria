@@ -162,18 +162,7 @@ ul > li {
     color: white;
     font-size: 1rem;
 }
-.filter > button {
-    border-radius: 5px;
-    border: hidden;
-    padding: 5px;
-    background-color: #1259c3;
-    color: white;
-    width: 35%;
-    transition: 500ms;
-}
-.filter > button:hover {
-    background-color: #5394b0;
-}
+
 
 @media (min-width: 760px) {
 

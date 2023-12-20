@@ -29,7 +29,9 @@
             
         </section>
         <h2>Mis Productos</h2>
+        
         <section class="productos">
+            <a href="/products/create"><button class="create">Crear Producto</button></a>
             <span class="header">
                 <p>imagen</p>
                 <p class="name">Nombre</p>
@@ -37,7 +39,7 @@
                 <p class="color">Colores</p>
                 <p class="price">Precio</p>
                 <p class="stock">Stock</p>
-                <p>Accion</p>
+                <p class="action">Accion</p>
             </span>
         <% for (let i in productos) { %>
             <%- include('./card.ejs', {producto: productos[i]}) %>
