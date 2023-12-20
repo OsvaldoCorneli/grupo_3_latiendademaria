@@ -21,7 +21,7 @@ const usersServices = {
                 ...data
             }
         ]
-
+        fs.writeFileSync(usersFilePath, JSON.stringify(newUser,0,4), 'utf-8')
     },
     login: function (data) {
         let { email, password } = data
@@ -33,7 +33,21 @@ const usersServices = {
         }
     },
     update: function (data) {
-
+        let { id } = data
+        console.log(data)
+        let UpdatedUsers = Users.filter(x => x.id !== id)
+        const updateUser = Users.find(u => u.id == id)
+        if (updateUser) {
+            UpdatedUsers = [
+                ...UpdatedUsers,
+                {
+                    ...updateUser,
+                    ...data
+                }
+            ]
+        }
+        fs.writeFileSync(usersFilePath, JSON.stringify(UpdatedUsers,0,4), 'utf-8')
+        return Users.find(u => u.id == id)
     },
     detail: function (id) {
         const detailUser = Users.find((x) => x.id == id)

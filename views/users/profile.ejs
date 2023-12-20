@@ -8,7 +8,7 @@
     <main>
         <h2>Mis Datos</h2>
         <section class="profile">
-            <% let { nombre, apellido, email, calle, callenumero, provincia, imagen, codigopostal, piso, departamento } = userData %>
+            <% let { id, nombre, apellido, email, calle, callenumero, provincia, imagen, codigopostal, piso, departamento } = userData %>
             <span>
                 <img src=<%= imagen %> alt=<%= nombre %>/>
             </span>
@@ -24,10 +24,14 @@
                     <p>Departamento: <%= departamento %> </p>
                 <% } %>
                 <p>Codigo Postal: <%= codigopostal %></p>
+                <a href="/users/<%= id %>/update"><button class="edit">Editar</button></a>
             </span>
+            
         </section>
         <h2>Mis Productos</h2>
+        
         <section class="productos">
+            <button class="create"><a href="/products/create">Crear Producto</a></button>
             <span class="header">
                 <p>imagen</p>
                 <p class="name">Nombre</p>
@@ -35,7 +39,7 @@
                 <p class="color">Colores</p>
                 <p class="price">Precio</p>
                 <p class="stock">Stock</p>
-                <p>Accion</p>
+                <p class="action">Accion</p>
             </span>
         <% for (let i in productos) { %>
             <%- include('./card.ejs', {producto: productos[i]}) %>

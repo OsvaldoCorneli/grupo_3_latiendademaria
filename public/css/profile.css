@@ -14,20 +14,21 @@ main {
     justify-content: center;
 }
 
-
-
 section.profile {
     display: flex;
     flex-direction: row;
     justify-content: start;
     align-items: center;
     gap: 10px;
+    text-wrap: balance;
 }
 section.profile img {
     width: 150px;
 }
 section.productos {
-    width: fit-content;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     gap: 10px;
 }
 
@@ -40,13 +41,12 @@ section.productos > .header{
     background-color: #32A97F;
     padding: 5px;
     border-radius: 5px;
-    gap: 5px;
 }
 
 section.productos > article{
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
     background-color: #efefef;
     border-radius: 5px;
@@ -55,6 +55,7 @@ section.productos > article{
 
 section.productos > article > img{
     width: 50px;
+    border-radius: 5px;
 }
 
 section.productos > article > ul{
@@ -69,23 +70,30 @@ section.productos > .header > .color{
 section.productos > .header > .category{
     display: none;
 }
+section.productos > .header > .name{
+    flex: 0 0 125px;
+    text-align: center;
+}
 
-section.productos a {
+section.productos > article a.titulocard {
     flex: 0 0 125px;
 }
-section.productos .price {
+section.productos > article > .price {
     flex: 0 0 50px;
     text-align: center;
 }
-section.productos .stock {
+section.productos > article > .stock {
     flex: 0 0 25px;
     text-align: center;
 }
-section.productos .actions {
-    flex: 0 1 60px;
-    text-align: center;
+section.productos > article > span.actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
 }
-article > span > a > button.edit {
+
+button.edit {
     border-radius: 5px;
     border: hidden;
     padding: 5px;
@@ -93,10 +101,24 @@ article > span > a > button.edit {
     color: white;
     transition: 500ms;
 }
-article > span > a > button.edit:hover {
+button.edit:hover {
     background-color: #5394b0;
 }
-article > span > a > button.delete {
+
+button.create {
+    width: 150px;
+    border-radius: 5px;
+    border: hidden;
+    padding: 5px;
+    background-color: #1259c3;
+    color: white;
+    width: 150px;
+    transition: 500ms;
+}
+button.create:hover {
+    background-color: #5394b0;
+}
+button.delete {
     border-radius: 5px;
     border: hidden;
     padding: 5px;
@@ -105,12 +127,22 @@ article > span > a > button.delete {
     font-weight: bold;
     transition: 500ms;
 }
-article > span > a > button.delete:hover {
+button.delete:hover {
     color:white;
     background-color: red;
 }
+a {
+    text-decoration: none;
+}
+button > a {
+    text-decoration: none;
+    color: white;
+}
 
 @media (min-width: 760px) {
+    section.productos {
+        width: 90%;
+    }
     section.productos > article > ul{
         display: inline-block;
         list-style: none;
@@ -151,7 +183,7 @@ article > span > a > button.delete:hover {
         display: inline-block;
         flex: 0 0 50px;
     }
-    section.productos a {
+    section.productos > a.titulocard {
         flex: 0 0 150px;
     }
     section.productos .price {
