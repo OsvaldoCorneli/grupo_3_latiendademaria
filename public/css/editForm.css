@@ -1,0 +1,149 @@
+* {
+    font-family: 'Gidole';
+    box-sizing: border-box;
+}
+
+body {
+    margin-bottom: 4.5vh;
+}
+
+.createForm {
+    padding: 5px;
+    margin-top: 20px;
+    border-radius: 10px;
+    border: none;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.createForm .titulo {
+    background-color: rgba(182, 229, 219, 0.2);
+    width: 100%;
+    border: solid #32A97F 1px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 2rem;
+    -webkit-text-stroke: 1px white;
+    flex-wrap: wrap;
+}
+
+.createForm .titulo i {
+    width: 100%;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: white;
+    padding: 1rem
+}
+
+.form-producto{
+    background-color: #32A97F ;
+    border: black solid 2px;
+    /* border-radius: 20px; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 15px 20px 15px;
+    gap: 10px;
+    border-radius: 5px;
+    flex-wrap: wrap;
+}
+form > .contenedor1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    gap: 5px
+}
+form > .contenedor2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px
+}
+select {
+    min-width: 200px;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+}
+form > span > input {
+    width: 100%; 
+}
+
+.contenedor2 > img {
+    width: 200px;
+    border-radius: 5px;
+}
+.form-producto button{
+    width: 25%;
+}
+
+.form-producto textarea{
+    width: 100%;
+    height: 100px;
+    border-radius: 5px;
+    border: none;
+}
+
+.inputForm{
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+}
+select.inputForm {
+    height: 100%;
+}
+
+#tipo{
+    display: flex;
+    font-size: 17px;
+    justify-content: space-evenly;
+    
+}
+
+button.send {
+    border-radius: 5px;
+    border: hidden;
+    padding: 5px;
+    background-color: #1259c3;
+    color: white;
+    width: 35%;
+    transition: 500ms;
+}
+button.send:hover {
+    background-color: #5394b0;
+}
+    
+@media (min-width: 760px) {
+
+ .form-producto{
+    width: 75%;
+    max-width: 625px;
+}
+
+.contenedorForm{
+    margin: 20px 0 0 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+}
+@media (min-width: 1200px) {
+    .form-producto{
+        width: 60%;
+        max-width: 600px;
+        height: 90%;
+    }
+
+}
+

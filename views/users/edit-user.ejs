@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head.ejs') %>
+    <link href="\css\edit-user.css" rel="stylesheet"/>
+
+    <title>La tienda de Maria</title>
+</head>
+<body>
+    <%- include('../partials/navbar.ejs') %>
+    <main>
+<% let { id, nombre, apellido, fechaNacimiento, provincia, localidad, codigopostal, calle, callenumero, piso, departamento, email,username, password, imagen } = userData %>
+<% const fechanac = fechaNacimiento.slice(0,10) %>
+        <h2>Modificar Datos de Usuario</h2>   
+    <article class="contenedor-form">
+
+    <div class="contenedores">
+        <div class="contenedor1">
+            <form action="/users/<%= id %>/update?_method=PUT" method="POST" enctype="multipart/form-data">
+                <div class="inputform">
+                    <label for="nombre">Nombre/s:</label>
+                    <input 
+                        type="text"
+                        name="nombre"
+                        id="nombre"
+                        placeholder="ingrese su nombre"
+                        required
+                        minlength="10"
+                        value=<%= nombre %>
+                    />
+                </div>
+                <div class="inputform">
+                    <label for="apellido">Apellido/s:</label>
+                    <input
+                        id="apellido"
+                        name="apellido"
+                        type="text"
+                        placeholder="Ingresar apellido"
+                        required
+                        minlength="6"
+                        value=<%= apellido %>
+                    />
+                </div>
+                <div class="inputform">
+                    <label for="fechanacimiento">fecha de nacimiento:</label>
+                    <input 
+                    type="date"
+                    name="fechanacimiento"
+                    id="fechanacimiento"
+                    required
+                    value=<%= fechanac %>
+                    />
+                </div>
+                <div class="inputform">   
+                    <label for="provincia">provincia:</label>
+                    <input 
+                        type="text"
+                        name="provincia"
+                        id="provincia"
+                        placeholder="provincia"
+                        required
+                        minlength="10"
+                        maxlength="20"
+                        value=<%= provincia %>
+                    />
+                </div>
+                <div class="inputform">
+                    <label for="localidad">localidad:</label>
+                    <input 
+                        type="text"
+                        name="localidad"
+                        id="localidad"
+                        placeholder="localidad"
+                        required
+                        minlength="10"
+                        maxlength="20"
+                        value=<%= localidad %>
+                    />
+                </div>
+            <div class="inputform">
+                <label for="codigopostal">Codigo postal:</label>
+                <input 
+                    type="text"
+                    name="codigopostal"
+                    id="codigopostal"
+                    placeholder="Codigo Postal"
+                    required
+                    minlength="10"
+                    maxlength="20"
+                    value=<%= codigopostal %>
+                />
+            </div>
+            <div class="inputform">
+                <label for="street">Calle:</label>
+                <input 
+                    type="text"
+                    name="calle"
+                    id="street"
+                    placeholder="calle"
+                    required
+                    minlength="10"
+                    maxlength="20"
+                    value=<%= calle %>
+                />
+            </div>
+
+        </div>
+        <div class="contenedor2">
+            <div class="inputform">
+                <label for="streetnumber">Numero:</label>
+                <input 
+                    type="number"
+                    name="callenumero"
+                    id="streetnumber"
+                    placeholder="Numero"
+                    required
+                    minlength="10"
+                    maxlength="20"
+                    value=<%= callenumero %>
+                />
+            </div>
+            <div class="inputform">
+                <label for="buildingfloor">Piso:</label>
+                <input 
+                    type="text"
+                    name="piso"
+                    id="buildingfloor"
+                    placeholder="Piso"
+                    required
+                    minlength="10"
+                    maxlength="20"
+                    value=<%= piso %>
+                    />
+            </div>
+            <div class="inputform">
+                <label for="departamento">Departamento:</label>
+                <input 
+                    type="text"
+                    name="departamento"
+                    id="departamento"
+                    placeholder="Departamento"
+                    required
+                    minlength="10"
+                    maxlength="20"
+                    value=<%= departamento %>
+                    />
+            </div>
+            <div class="inputform">
+                <label for="email">Email:</label>
+                <input 
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                    required
+                    minlength="10"
+                    maxlength="20"
+                    value=<%= email %>
+                    />
+            </div>
+            <div class="inputform">
+                <label for="username">Nombre de usuario:</label>
+                <input 
+                    type="text"
+                    name="username"
+                    id="street"
+                    placeholder="Nombre de usuario"
+                    required
+                    minlength="10"
+                    maxlength="20"
+                    value=<%= username %>
+                />
+            </div>
+            <div class="inputform">
+                <label for="password">contraseña:</label>
+                <input 
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="contraseña"
+                    required
+                    minlength="10"
+                    maxlength="20"
+                    value=<%= password %>
+                    />
+            </div>
+            <div class="inputform">
+                <label for="repassword">repetir contraseña:</label>
+                <input 
+                    type="password"
+                    name="repassword"
+                    id="repassword"
+                    placeholder="repetir contraseña"
+                    required
+                    minlength="10"
+                    maxlength="20"
+                    value=<%= password %>
+                />
+            </div>
+        </div>
+        <div class="contenedor3">
+            <img src=<%= imagen %> alt=<%= nombre %>/>
+            <div class="inputform">
+                <label for="imagen">Imagen:</label>
+                <input 
+                    class="uploadFile"
+                    type="file"
+                    name="imagen"
+                    id="imagen"
+                    placeholder="calle"
+                />
+            </div>
+        </div>
+    </div>
+        <button type="submit" class="send">Modificar</button>
+        </form>
+        </article>
+    </div>
+
+    </main>
+    <%- include('../partials/footer.ejs') %>
+</body>
+</html>

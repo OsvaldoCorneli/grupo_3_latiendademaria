@@ -1,20 +1,20 @@
 <html lang="es">
     <head>
-        <%- include('./partials/head.ejs') %>
+        <%- include('../partials/head.ejs') %>
         <link href="\css\login.css" rel="stylesheet"/>
     </head>
    <body>
-    <%- include('./partials/navbar.ejs') %>
+    <%- include('../partials/navbar.ejs') %>
     <main>
         <div class="login-modal">
             <img src="https://assets.stickpng.com/images/585e4beacb11b227491c3399.png" alt="profile"/>
-            <form action="/login" method="POST">
-                <label for="username">Usuario / E-mail</label>
+            <form action="/users/login" method="POST">
+                <label for="email">Usuario / E-mail</label>
                 <input 
                     type="text"
-                    name="username"
-                    id="username"
-                    placeholder="Ingresar usuario o email"
+                    name="email"
+                    id="email"
+                    placeholder="Ingresar email"
                     required
                     minlength="7"
                     class="validacionusername"
@@ -30,13 +30,16 @@
                     class="validacionpassword"
                 />
                 <button type="submit">LOGIN</button>
+                <% if (errors.hasOwnProperty('login')) { %>
+                    <p class="errors"><%= errors.login %></p>
+                <% } %>
             </form>
             <div class="contenedorCuenta">
-                <p>¿No tienes cuenta? <a href="/register">¡Registrate!</a></p>
+                <p>¿No tienes cuenta? <a href="/users/register">¡Registrate!</a></p>
                 <p>¿Olvidaste la contraseña? <a href="/restore">¡Restablecer!</a></p>
             </div>
         </div>
     </main>
-    <%- include('./partials/footer.ejs') %>
+    <%- include('../partials/footer.ejs') %>
 </body>
 </html>

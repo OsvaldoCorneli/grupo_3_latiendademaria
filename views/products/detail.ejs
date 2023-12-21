@@ -1,13 +1,13 @@
 <html lang="es">
     <head>
-        <%- include('./partials/head.ejs') %>
+        <%- include('../partials/head.ejs') %>
         <link href="\css\detalle.css" rel="stylesheet"/>
         <title>La tienda de Maria</title>
     </head>
 <body>
-    <%- include('./partials/navbar.ejs') %>
+    <%- include('../partials/navbar.ejs') %>
     <main>
-        <% let { id, name, image, price ,stock, description} = detalle; %>
+        <% let { id, name, image, price ,stock, description } = detalle; %>
         <article>
             <div class="imagenes">
                 <img src="<%= image %>" alt="imagen1">
@@ -26,9 +26,8 @@
                     <option value="">modelos</option>
                 </select>
                 <button>Agregar a carrito</button>
+                <button>Editar</button>
             </div>
-
-
             
         </article>
         
@@ -38,6 +37,6 @@
         </div>
     </main>
         
-            <%- include('./partials/footer.ejs') %>
+            <%- include('../partials/footer.ejs') %>
 </body>
 </html>
