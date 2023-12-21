@@ -36,7 +36,7 @@ const productsController = {
         } else if (method == 'POST') {
             const newProduct = products.create(req.body, req.files)
             if (newProduct) {
-                res.send(`producto ${req.body.name} creado con exito!`)
+                res.redirect('/users/profile')
             }
         }
     },

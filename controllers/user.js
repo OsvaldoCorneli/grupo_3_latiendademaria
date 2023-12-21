@@ -24,10 +24,9 @@ const usersController = {
             res.render('users/register')
         }
         if (req.method == 'POST') {
-            console.log(req.body)
-            const newUser = users.create(req.body)
+            const newUser = users.create(req.body, req.files)
             if (newUser) {
-                res.send(`el usuario ${newUser.name} fue registrado con exito!`)
+                res.redirect(`users/login`)
             }
         }
     },

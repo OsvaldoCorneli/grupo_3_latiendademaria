@@ -1,7 +1,7 @@
 <html lang="es">
     <head>
         <%- include('../partials/head.ejs') %>
-        <link href="\css\createForm.css" rel="stylesheet"/>
+        <link href="\css\editForm.css" rel="stylesheet"/>
     </head>
 <body>
     <%- include('../partials/navbar.ejs') %>
@@ -13,15 +13,12 @@
             };
         </script>
         <%}%>
-        <span>
             <span class="titulo">
                 <h1>Editar Producto</h1>
             </span>
-            <div class="contenedorForm">
-                <strong>Formulario Editar producto</strong>
-                <form class="form-producto" action="/products/<%= productEdit.id %>/edit?_method=PUT" method="POST" enctype="multipart/form-data">
-
-
+            <!-- <strong>Formulario Editar producto</strong> -->
+            <form class="form-producto" action="/products/<%= productEdit.id %>/edit?_method=PUT" method="POST" enctype="multipart/form-data">
+                <span class="contenedor1">
                     <label for="name">Nombre:</label>
                         <input class="inputForm" 
                         id="name" 
@@ -31,20 +28,12 @@
                         value="<%= productEdit.name %>" 
                         />
                     <label for="description" >Descripcion:</label>
-                    <textarea id="description" type="text" name="description" placeholder="Ingresar descripción..."><%= productEdit.description %></textarea>
-                    <label for="image">Imagen:
-                    <input
-                        type="file" 
-                        id="image" 
-                        name="image" 
-                        placeholder="Ingresar URL de imagen..."
-                        multiple
-                    />
-                </label>
+                        <textarea id="description" type="text" name="description" placeholder="Ingresar descripción..."><%= productEdit.description %></textarea>
+                    </label>
                     <label for="line">Linea:</label>
-                     <select id="line" name="line">
-                     <option value="sublimada" <%= productEdit.line === "sublimada" ? "selected" : null %>>Sublimada</option>
-                     <option value="artesanal" <%= productEdit.line === "artesanal" ? "selected" : null %>>Artesanal</option>
+                    <select id="line" name="line">
+                        <option value="sublimada" <%= productEdit.line === "sublimada" ? "selected" : null %>>Sublimada</option>
+                        <option value="artesanal" <%= productEdit.line === "artesanal" ? "selected" : null %>>Artesanal</option>
                     </select>
                     
                     <label for="category">Categoria:
@@ -87,10 +76,22 @@
                         name="stock"
                         value="<%= productEdit.stock %>" 
                     />
-                    <button type="submit">Editar</button>
+                </span>
+                <span class="contenedor2">
+                    <img src="<%= productEdit.image %>" alt="<%= productEdit.name %>"/>
+                    <label for="image">Imagen:
+                        <input
+                            type="file" 
+                            id="image" 
+                            name="image" 
+                            placeholder="Ingresar URL de imagen..."
+                            multiple
+                        />
+                    <button class="send" type="submit">Editar</button>
                 </form>
+            </span>
             </div>
-        </span>
+        
     </main>
     <%- include('../partials/footer.ejs') %>
 </body>

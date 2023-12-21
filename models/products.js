@@ -66,22 +66,16 @@ const productsModels = {
     },
     create: function (data, images) {
         const { name, description, line, category, color, price } = data
-        let image = images.map((x) => {return x.path})
+        let image = images.map((x) => {return x.path.split('grupo_3_latiendademaria/public')[1]})
         let id = 0
         for (let i in Productos) {
             if (id < Productos[i].id) id = Productos[i].id
         }
-        const newProduct = [
-            ...Productos, 
-            {
-                id: id+1,
-                ...data,
-                image
-            }
-        ]
-        fs.writeFileSync(productsFilePath, JSON.stringify(newProduct,0,4), 'utf-8')
+        const newProduct = { id: id+1, ...data, image }
+        const allProduct = [...Productos, newProduct ]
+        fs.writeFileSync(productsFilePath, JSON.stringify(allProduct,0,4), 'utf-8')
         if (newProduct) {
-            return data
+            return newProduct
         } else {
             throw new Error('error al crear producto')
         }
@@ -102,7 +96,6 @@ const productsModels = {
     destroy: function(id){
         Productos = Productos.filter((product) => product.id !== +id);
         return Productos;
-     
     }
 }
 

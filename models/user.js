@@ -9,19 +9,16 @@ const usersServices = {
     index: function () {
         return Users
     },
-    create: function (data) {
+    create: function (data, image) {
+        const imagen = image.map((x) => {return x.path.split('/public')[1]})
         let id = 0
         for (let i in Users) {
             if (id < Users[i].id) id = Users[i].id
         }
-        const newUser = [
-            ...Users,
-            {
-                id: id+1,
-                ...data
-            }
-        ]
-        fs.writeFileSync(usersFilePath, JSON.stringify(newUser,0,4), 'utf-8')
+        const newUser = {id: id+1, ...data, imagen }
+        const allUsers = [...Users, newUser ]
+        fs.writeFileSync(usersFilePath, JSON.stringify(allUsers,0,4), 'utf-8')
+        return newUser
     },
     login: function (data) {
         let { email, password } = data
@@ -32,22 +29,19 @@ const usersServices = {
             return {access: false}
         }
     },
-    update: function (data) {
+    update: function (data, image) {
         let { id } = data
-        console.log(data)
-        let UpdatedUsers = Users.filter(x => x.id !== id)
-        const updateUser = Users.find(u => u.id == id)
+        const imagen = image.map((x) => {return x.path.split('/public')[1]})
+        const unupdatedUsers = Users.filter(x => x.id !== id)
+        let updateUser = Users.find(u => u.id == id)
         if (updateUser) {
-            UpdatedUsers = [
-                ...UpdatedUsers,
-                {
-                    ...updateUser,
-                    ...data
-                }
-            ]
+            updateUser = {...updateUser, ...data, imagen}
+            const allUsers = [...unupdatedUsers, updateUser]
+            fs.writeFileSync(usersFilePath, JSON.stringify(allUsers,0,4), 'utf-8')
+            return updateUser
+        } else {
+            throw new Error('error en la edicion de usuario')
         }
-        fs.writeFileSync(usersFilePath, JSON.stringify(UpdatedUsers,0,4), 'utf-8')
-        return Users.find(u => u.id == id)
     },
     detail: function (id) {
         const detailUser = Users.find((x) => x.id == id)
