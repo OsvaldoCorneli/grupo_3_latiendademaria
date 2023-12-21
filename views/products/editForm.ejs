@@ -36,7 +36,8 @@
                         <option value="artesanal" <%= productEdit.line === "artesanal" ? "selected" : null %>>Artesanal</option>
                     </select>
                     
-                    <label for="category">Categoria:
+                    <p class="inputForm">Categoria:</p>
+                    <span class="categoria">
                         <% for (let i in categorias) { %>
                             <label>
                                 <input type="radio" name="category" value="<%= categorias[i] %>" <%= categorias[i] === productEdit.category ? "checked" : "" %>>
@@ -44,8 +45,7 @@
                             
                             </label>
                         <% } %>
-                    </label>
-                    
+                    </span>
                     <label for="color">Colores:</label>
                     <select class="inputForm" id="color" name="color" multiple>
                       <option disabled selected value="-1">- seleccionar -</option>
