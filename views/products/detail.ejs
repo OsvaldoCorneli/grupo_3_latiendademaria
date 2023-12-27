@@ -7,33 +7,35 @@
 <body>
     <%- include('../partials/navbar.ejs') %>
     <main>
-        <% let { id, name, image, price ,stock, description } = detalle; %>
+        <% let { id, name, image, price ,stock, description, color } = detalle; %>
         <article>
             <div class="imagenes">
-                <img src="<%= image %>" alt="imagen1">
-                <img src="<%= image %>" alt="imagen2">
-                <img src="<%= image %>" alt="imagen3">
+                <% for (let i in image) { %>
+                    <img src="<%= image[i] %>" alt="imagen<%= i+1 %>">
+                <% } %>
             </div>
     
             <img class="detalle" src="<%= image %>" alt="<%= name %>">
     
-            <div class="form-detalle">
+            <form class="form-detalle" action="/user/cart/<%= id %>" method="POST">
                 <h2 class="tittled"><%= name %></h2>
                 <h2 class="precio">$<%= price %></h3>
                 <h5>stock: <%= stock %></h5>
-                <input type="number" placeholder="cantidad">
-                <select name="modelos">
-                    <option value="">modelos</option>
+                <input type="number" placeholder="cantidad" name="cantidad">
+                <select name="color">
+                    <option disabled selected value> - seleccionar - </option>
+                    <% color.forEach(element => { %>
+                        <option value=<%= element %>><%= element %></option>
+                    <% })%>
                 </select>
-                <button>Agregar a carrito</button>
-                <button>Editar</button>
-            </div>
+                <button type="submit">Agregar a carrito</button>
+            </form>
             
         </article>
         
         <div class="contenedordescription">
             <h3>Descripcion:</h3>
-            <p><%= description%></p> 
+            <p><%= description %></p> 
         </div>
     </main>
         
