@@ -3,12 +3,16 @@ const path = require('path');
 const app = express();
 const routes = require('./routes')
 const methodOverride = require('method-override');
-const {loguearRuta, rutaNoEncontrada} = require('./middlewares')
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const {loguearRuta, rutaNoEncontrada} = require('./middlewares');
 
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(methodOverride('_method'));
+app.use(session({secret: 'la tienda de maria 2024'}))
+app.use(cookieParser())
 
 app.set('view engine', 'ejs');
 //app.set('views', './carpeta-de-vistas')   <<--- ejemplo de codigo a usar si se quiere cambiar la ruta views por defecto(./views).
