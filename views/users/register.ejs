@@ -49,18 +49,17 @@
                 </div>
                 <div class="inputform">   
                     <label for="provincia">Provincia:</label>
-                    <input 
-                        type="text"
-                        name="provincia"
-                        id="provincia"
-                        placeholder="provincia"
-                        minlength="10"
-                        maxlength="20"
-                    />
+                    <select id='pronvincia' name="provincia" onclick="">
+                        <option disabled selected value>- seleccionar -</option>
+                        <% provincias.forEach((prov) => { %>
+                            <option value="<%= prov %>"><%= prov %></option>
+                        <% }) %>
+                    </select>
                 </div>
                 <div class="inputform">
                     <label for="localidad">localidad:</label>
-                    <input 
+                    <% if (localidades.length == 0) { %>
+                        <input 
                         type="text"
                         name="localidad"
                         id="localidad"
@@ -68,6 +67,14 @@
                         minlength="10"
                         maxlength="20"
                     />
+                    <% } else { %>
+                        <select id='localidad' name="localidad" onclick="">
+                            <option disabled selected value>- seleccionar -</option>
+                            <% localidades.forEach((loc) => { %>
+                                <option value="<%= loc %>"><%= loc %></option>
+                            <% }) %>
+                        </select>
+                    <% } %>
                 </div>
             <div class="inputform">
                 <label for="codigopostal">Codigo postal:</label>

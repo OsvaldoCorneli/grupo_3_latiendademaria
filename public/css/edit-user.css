@@ -29,8 +29,6 @@ main{
 .inputform{
     margin: 15px;
 }
-
-
 .contenedor-form input{
     width: 100%;
     max-width: 500px;
@@ -38,7 +36,13 @@ main{
     padding: 5px;
     border: none;
 }
-
+.contenedor-form select {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 5px;
+    padding: 5px;
+    border: none;
+}
 .contenedor1{
     width: 90%;
     margin: 0;

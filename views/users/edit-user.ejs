@@ -52,17 +52,13 @@
                     />
                 </div>
                 <div class="inputform">   
-                    <label for="provincia">provincia:</label>
-                    <input 
-                        type="text"
-                        name="provincia"
-                        id="provincia"
-                        placeholder="provincia"
-                        required
-                        minlength="10"
-                        maxlength="20"
-                        value=<%= provincia %>
-                    />
+                    <label for="provincia">Provincia:</label>
+                    <select id='pronvincia' name="provincia">
+                        <option disabled selected value>- seleccionar -</option>
+                        <% provincias.forEach((prov) => { %>
+                            <option value="<%= prov %>" <%= provincia == prov? "selected" : "" %>><%= prov %></option>
+                        <% }) %>
+                    </select>
                 </div>
                 <div class="inputform">
                     <label for="localidad">localidad:</label>

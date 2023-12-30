@@ -6,6 +6,9 @@ const bcrypt = require('bcryptjs');
 const usersFilePath = path.join(__dirname, '../utils/users.json');
 const Users = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
 
+const dataGeoFilePath = path.join(__dirname, '../utils/users.json');
+const dataGeo = JSON.parse(fs.readFileSync(dataGeoFilePath, 'utf-8'));
+
 const usersServices = {
     index: function () {
         return Users

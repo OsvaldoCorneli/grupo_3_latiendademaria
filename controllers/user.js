@@ -1,4 +1,4 @@
-const { users, products } = require('../models')
+const { users, products, dataGeo } = require('../models')
 
 const usersController = {
     index: function (req, res) {
@@ -21,8 +21,21 @@ const usersController = {
         }
     },
     create: function (req,res) {
+        const {provincia} = req.query
         if (req.method == 'GET') {
-            res.render('users/register')
+            if (!provincia) {
+                console.log('asd')
+                res.render('users/register', {
+                    provincias: dataGeo.all(),
+                    localidades: []
+                })
+            } else {
+                res.render('users/register', {
+                    provincias: dataGeo.all(),
+                    localidades: dataGeo.localidades(provincia)
+                })
+            }
+            
         }
         if (req.method == 'POST') {
             const newUser = users.create(req.body, req.files)
@@ -34,7 +47,10 @@ const usersController = {
     update: function (req,res) {
         let { id } = req.params
         if (req.method == 'GET') {
-            res.render('users/edit-user', { userData: users.detail(id)})
+            res.render('users/edit-user', { 
+                userData: users.detail(id),
+                provincias: dataGeo.all(),
+            })
         }
         else if (req.method == 'PUT') {
             const updatedData = users.update({...req.body, imagen })
