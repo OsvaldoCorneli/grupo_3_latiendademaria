@@ -29,20 +29,20 @@ const usersServices = {
     login: function (data) {
         let { email, password } = data
         let user = Users.find((user) => user.email == email)
+        if (!user) return {access: false}
         const checkPass = bcrypt.compareSync(password, user?.password)
         if (checkPass) {
             return {...user, access: true}
-        } else {
-            return {access: false}
         }
     },
-    update: function (data, image) {
+    update: function (data) {
         let { id } = data
-        const imagen = image.map((x) => {return x.path.split('/public')[1]})
+        const imagenes = data.imagen.map((x) => {return x.path.split('public')[1]})
+        console.log(imagenes)
         const unupdatedUsers = Users.filter(x => x.id !== id)
         let updateUser = Users.find(u => u.id == id)
         if (updateUser) {
-            updateUser = {...updateUser, ...data, imagen}
+            updateUser = {...updateUser, ...data, imagen: imagenes}
             const allUsers = [...unupdatedUsers, updateUser]
             fs.writeFileSync(usersFilePath, JSON.stringify(allUsers,0,4), 'utf-8')
             return updateUser

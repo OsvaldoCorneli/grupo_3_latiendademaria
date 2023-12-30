@@ -22,9 +22,7 @@ main{
         border-radius: 5px;
         margin: 10px 0 10px 0;
         max-width: 500px;
-    
-
-    }
+}
 
 .inputform{
     margin: 15px;
@@ -57,6 +55,8 @@ main{
     margin: 0;
 }
 .contenedor3 > img {
+    border-radius: 50%;
+    border: solid 1px black;
     width: 200px;
 }
 

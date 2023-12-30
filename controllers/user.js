@@ -24,7 +24,6 @@ const usersController = {
         const {provincia} = req.query
         if (req.method == 'GET') {
             if (!provincia) {
-                console.log('asd')
                 res.render('users/register', {
                     provincias: dataGeo.all(),
                     localidades: []
@@ -40,7 +39,7 @@ const usersController = {
         if (req.method == 'POST') {
             const newUser = users.create(req.body, req.files)
             if (newUser) {
-                res.redirect(`/login`)
+                res.redirect('/users/login')
             }
         }
     },
@@ -53,9 +52,9 @@ const usersController = {
             })
         }
         else if (req.method == 'PUT') {
-            const updatedData = users.update({...req.body, imagen })
+            const updatedData = users.update({id: parseInt(id), ...req.body, imagen: req.files })
             if (updatedData) {
-                res.send(updatedData)
+                res.redirect('/users/profile')
             }
         }
     },
