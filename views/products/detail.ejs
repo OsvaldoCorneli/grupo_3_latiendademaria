@@ -22,7 +22,9 @@
                 <h2 class="precio">$<%= price %></h3>
                 <h5>stock disponible: <%= stock %></h5>
                 <label for="cantidad">
-                    <input id="cantidad" type="number" placeholder="cantidad" name="cantidad">
+                    <a onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</a>
+                    <input id="cantidad" type="number" min="1" placeholder="cantidad" name="cantidad" value="1"/>
+                    <a onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+</a>
                 </label>
                 <span class="color"> Color:
                 <% color.forEach(element => { let background = `background-color:${element};color:${element};border-radius:50%; border:0.1px-solid-black;;` %>

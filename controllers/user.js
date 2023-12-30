@@ -47,6 +47,13 @@ const usersController = {
         // if (updatedUser) {
         //     res.send(`el usuario ${newUser.name} fue actualizado con exito!`)
         // }
+    },
+    restore: function (req,res) {
+        if (req.method == "GET") {
+            res.render('users/restore')
+        } else if (req.method == "POST") {
+            
+        }
     }
 }
 

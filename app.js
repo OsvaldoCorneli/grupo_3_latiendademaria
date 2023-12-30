@@ -11,7 +11,11 @@ app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(methodOverride('_method'));
-app.use(session({secret: 'la tienda de maria 2024'}))
+app.use(session({
+    secret: 'la tienda de maria 2024', 
+    resave: false, 
+    saveUninitialized: false
+}));
 app.use(cookieParser())
 
 app.set('view engine', 'ejs');

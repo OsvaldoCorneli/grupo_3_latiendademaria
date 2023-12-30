@@ -49,13 +49,43 @@ main article{
     align-items: center;
     justify-content: space-evenly;
     gap: 10px;
-    padding: 5px;;
+    padding: 5px;
     background-color: rgba(182, 229, 219, 0.2);
-    width: 100%
+    width: 100%;
+    border: solid 1px #5394b0;
+    border-radius: 5px;
 }
 
 label > i {
     border: solid 1px black;
+}
+
+.form-detalle > label > input {
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    width: 60px;
+    text-align: center;
+}
+input[type="number"] {
+    -webkit-appearance: textfield;
+       -moz-appearance: textfield;
+            appearance: textfield;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+}
+.form-detalle > label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.form-detalle > label > a {
+    font-weight: bold;
+    font-size: 1.5rem;
 }
 
 .form-detalle > button{
@@ -64,9 +94,7 @@ label > i {
     padding: 5px;
     background-color: #1259c3;
     color: white;
-    width: 35%;
     transition: 500ms;
-    width: 20%;
 }
 .form-detalle > button:hover{
     background-color: #5394b0;
