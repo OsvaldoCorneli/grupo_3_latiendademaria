@@ -8,7 +8,10 @@ router.route('/login')
     .get(users.index)
     .post(users.login);
 
-router.get('/register', upload.any(), users.create)
+router.route('/register')
+    .get(users.create)
+    .post(upload.any(), users.create);
+
 router.get('/restore', users.restore)
 
 router.get('/profile', users.index)

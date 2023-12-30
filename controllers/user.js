@@ -12,6 +12,7 @@ const usersController = {
         }
     },
     login: function (req,res) {
+        console.log(req.body)
         const user = users.login(req.body)
         if (user.access) {
             res.send(user)
@@ -26,7 +27,7 @@ const usersController = {
         if (req.method == 'POST') {
             const newUser = users.create(req.body, req.files)
             if (newUser) {
-                res.redirect(`users/login`)
+                res.redirect(`/login`)
             }
         }
     },
@@ -36,17 +37,11 @@ const usersController = {
             res.render('users/edit-user', { userData: users.detail(id)})
         }
         else if (req.method == 'PUT') {
-            console.log(req.files)
-            //const imagen = req.files.map(x => {return x.path})
             const updatedData = users.update({...req.body, imagen })
             if (updatedData) {
                 res.send(updatedData)
             }
         }
-        // const updatedUser = users.update(req.body)
-        // if (updatedUser) {
-        //     res.send(`el usuario ${newUser.name} fue actualizado con exito!`)
-        // }
     },
     restore: function (req,res) {
         if (req.method == "GET") {
