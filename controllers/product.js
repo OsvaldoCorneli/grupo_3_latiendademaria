@@ -42,10 +42,12 @@ const productsController = {
     },
 
     update: function (req, res) {
-        console.log(req.body);
-        if(req.params.id && req.body){
-        const response = products.edited(req.params.id,req.body)
-        res.status(200).redirect(`/products/${req.params.id}/edit?message=editado`)
+        let {id} = req.params
+        if(id && req.body){
+            const response = products.edited({id: parseInt(id), ...req.body, imagen: req.files})
+            if (response) {
+                res.status(200).redirect(`/products/${id}/edit?message=editado`)
+            }
         }
     },
 
@@ -53,15 +55,21 @@ const productsController = {
         try{
         if(req.query.message === "editado"){
             const response = products.edit(req.params.id)
-
-            res.render(`${view}/editForm`, {productEdit: response , categorias: products.categories(),
-                colors: products.colors() , message: req.query}) 
-        }else{    
-        const response = products.edit(req.params.id)
-
-        res.render(`${view}/editForm`, {productEdit: response , categorias: products.categories(),
-            colors: products.colors() , message: null})
-        }}
+            res.render(`${view}/editForm`, {
+                productEdit: response,
+                categorias: products.categories(),
+                colors: products.colors(),
+                message: req.query
+            }) 
+        } else {    
+            const response = products.edit(req.params.id)
+            res.render(`${view}/editForm`, {
+                productEdit: response,
+                categorias: products.categories(),
+                colors: products.colors(),
+                message: null
+            })
+            }}
         catch(error){
             res.status(404).send(error) 
         }

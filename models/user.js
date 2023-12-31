@@ -30,7 +30,7 @@ const usersServices = {
         let { email, password } = data
         let user = Users.find((user) => user.email == email)
         if (!user) return {access: false}
-        const checkPass = bcrypt.compareSync(password, user?.password)
+        const checkPass = bcrypt.compareSync(password, user.password)
         if (checkPass) {
             return {...user, access: true}
         }
@@ -38,7 +38,6 @@ const usersServices = {
     update: function (data) {
         let { id } = data
         const imagenes = data.imagen.map((x) => {return x.path.split('public')[1]})
-        console.log(imagenes)
         const unupdatedUsers = Users.filter(x => x.id !== id)
         let updateUser = Users.find(u => u.id == id)
         if (updateUser) {
