@@ -1,5 +1,3 @@
-
-
 const productModels = {
     products: require('./products'),
     users: require('./user'),

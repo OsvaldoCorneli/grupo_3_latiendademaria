@@ -86,7 +86,9 @@ const productsModels = {
     edited: function (body) {
         const updateProduct = Productos.find((prod) => prod.id == body.id);
         const filterProduct = Productos.filter((prod) => prod.id != body.id);
-        const image = body.imagen.map((img) => {return img.path.split('public')[1]})
+        const image = body.imagen.length > 0
+            ? body.imagen.map((img) => {return img.path.split('public')[1]})
+            : updateProduct.image;
         const editedProduct = {...updateProduct, ...body, image}
         const allProducts = [...filterProduct, editedProduct].sort((a,b) => a.id - b.id)
 

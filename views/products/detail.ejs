@@ -14,8 +14,23 @@
                     <img src="<%= image[i] %>" alt="imagen<%= i+1 %>">
                 <% } %>
             </div>
-    
-            <img class="detalle" src="<%= image[0] %>" alt="<%= name %>">
+            <section class="carousel">
+                <% for (let i in image) { i = parseInt(i); %>
+                    <span id="item-<%= i+1 %>"></span>
+                    <div class="carousel-item item-<%= i+1 %>" style="background-image:url('<%= image[i] %>');">
+                    <% if (i+1 == 1) { %>
+                        <a href="#item-<%= image.length %>" class="arrow-prev arrow"></a>
+                    <% } else { %>
+                        <a href="#item-<%= i %>" class="arrow-prev arrow"></a>
+                    <% } if (i+1 == image.length) {%>
+                        <a href="#item-1" class="arrow-next arrow"></a>
+                    <% } else { %>
+                        <a href="#item-<%= i+2 %>" class="arrow-prev arrow"></a>
+                    <% } %>
+                    </div>
+                <% } %>
+            </section>
+            <!-- <img class="detalle" src="<%= image[0] %>" alt="<%= name %>"> -->
     
             <form class="form-detalle" action="/user/cart/<%= id %>" method="POST">
                 <h2 class="tittled"><%= name %></h2>

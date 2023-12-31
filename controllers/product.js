@@ -80,8 +80,6 @@ const productsController = {
         const responseDelete = products.destroy(id)
         res.status(200).redirect('/users/profile'); 
         
-
-
     }
 }
 

@@ -1,5 +1,23 @@
 [
     {
+        "id": 1,
+        "name": "Mates de madera",
+        "description": " descripcion Lorem ipsum dolor, sit amet consectetur adipisicing elit.\r\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \r\naliquam incidunt iste et sed libero a, nihil voluptate \r\ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Mates",
+        "line": "artesanal",
+        "stock": "10",
+        "image": [
+            "/images/uploads/image-1703994594448.jpeg",
+            "/images/uploads/image-1703994594449.jpg"
+        ],
+        "price": "6609.33",
+        "color": [
+            "white",
+            "orange",
+            "brown"
+        ]
+    },
+    {
         "id": 2,
         "name": "Mates de calabaza y cuero",
         "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
@@ -250,27 +268,6 @@
         "stock": 1,
         "image": [
             "/images/uploads/image-1702744640465.jpg"
-        ]
-    },
-    {
-        "id": 1,
-        "name": "Mates de madera",
-        "description": " descripcion Lorem ipsum dolor, sit amet consectetur adipisicing elit.\r\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \r\naliquam incidunt iste et sed libero a, nihil voluptate \r\ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
-        "category": "Mates",
-        "line": "artesanal",
-        "stock": "10",
-        "image": [
-            "https://http2.mlstatic.com/D_NQ_NP_2X_651553-MLA46272939500_062021-F.webp"
-        ],
-        "price": "6609.33",
-        "color": [
-            "white",
-            "brown",
-            "orange"
-        ],
-        "image": [
-            "/images/uploads/image-1703994594448.jpeg",
-            "/images/uploads/image-1703994594449.jpg"
         ]
     }
 ]
