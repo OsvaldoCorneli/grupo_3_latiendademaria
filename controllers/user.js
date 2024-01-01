@@ -1,4 +1,5 @@
-const { users, products, dataGeo } = require('../models')
+const { users, products, dataGeo } = require('../models');
+const { validationResult } = require('express-validator');
 
 const usersController = {
     index: function (req, res) {
@@ -12,12 +13,18 @@ const usersController = {
         }
     },
     login: function (req,res) {
-        console.log(req.body)
-        const user = users.login(req.body)
-        if (user.access) {
-            res.send(user)
+        const errores = validationResult(req)
+        console.log(errores.mapped())
+        if (errores.isEmpty()) {
+            const user = users.login(req.body)
+            if (user.access) {
+                res.status(200).redirect('/')
+            } else {
+                res.render('users/login', {errors: {login: user.error}})
+            }
         } else {
-            res.render('users/login', {errors: {login: `Usuario y/o contraseña incorrecta`}})
+            console.log(errores.mapped())
+            res.render('users/login', {errors: errores.mapped()})
         }
     },
     create: function (req,res) {

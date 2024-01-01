@@ -29,10 +29,12 @@ const usersServices = {
     login: function (data) {
         let { email, password } = data
         let user = Users.find((user) => user.email == email)
-        if (!user) return {access: false}
+        if (!user) return {access: false, error: 'usuario inexistente'}
         const checkPass = bcrypt.compareSync(password, user.password)
         if (checkPass) {
             return {...user, access: true}
+        } else {
+            return {access: false, error: 'contraseña incorrecta'}
         }
     },
     update: function (data) {
