@@ -17,10 +17,10 @@ main{
         justify-content: space-around;
         font-weight: bold;
         background-color: #32A97F;
-        padding: 20px;
+        padding: 10px;
         width: 100%;
         border-radius: 5px;
-        margin: 10px 0 10px 0;
+        margin: 5px 0 5px 0;
         max-width: 500px;
     
 
@@ -47,25 +47,28 @@ main{
 }
 
 .contenedor1{
-    width: 90%;
+    width: 100%;
     margin: 0;
 }
 
 .contenedor2{
-    width: 90%;
+    width: 100%;
     margin: 0;
 }
 
-button.send {
+input.send {
     border-radius: 5px;
     border: hidden;
-    padding: 5px;
+    padding: 10px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
     background-color: #1259c3;
     color: white;
     width: 35%;
     transition: 500ms;
 }
-button.send:hover {
+input.send:hover {
     background-color: #5394b0;
 }
 
@@ -82,6 +85,33 @@ input.uploadFile:hover {
     background-color: #5394b0;
 } */
 
+input[type="file"] {
+    position: absolute;
+    z-index: -1;
+    top: 10px;
+    left: 8px;
+    font-size: inherit;
+    color: #b8b8b8;
+}
+
+.button-wrap {
+    position: relative;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #1259c3;
+    font-size: inherit;
+    font-weight: bold;
+    color: #fff;
+    transition: all 500ms;
+}
+.button:hover {
+    background-color: #5394b0;
+}
 .requiredinput:valid {
     border: 2px solid green;
 }
@@ -93,6 +123,10 @@ input.uploadFile:hover {
 }
 .requiredinput:invalid {
     border: 2px solid red;
+}
+.errors {
+    font-weight: 400;
+    color: red
 }
 
 @media (min-width: 760px){

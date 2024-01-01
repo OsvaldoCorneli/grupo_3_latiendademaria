@@ -1,5 +1,5 @@
 const { users, products, dataGeo } = require('../models');
-const { validationResult } = require('express-validator');
+const { check, validationResult } = require('express-validator');
 
 const usersController = {
     index: function (req, res) {
@@ -14,7 +14,6 @@ const usersController = {
     },
     login: function (req,res) {
         const errores = validationResult(req)
-        console.log(errores.mapped())
         if (errores.isEmpty()) {
             const user = users.login(req.body)
             if (user.access) {
@@ -28,25 +27,24 @@ const usersController = {
         }
     },
     create: function (req,res) {
-        const {provincia} = req.query
+        const errores = validationResult(req)
         if (req.method == 'GET') {
-            if (!provincia) {
-                res.render('users/register', {
-                    provincias: dataGeo.all(),
-                    localidades: []
-                })
-            } else {
-                res.render('users/register', {
-                    provincias: dataGeo.all(),
-                    localidades: dataGeo.localidades(provincia)
-                })
-            }
-            
+            res.render('users/register', {
+                localidades: dataGeo.localidades()
+            })
         }
         if (req.method == 'POST') {
-            const newUser = users.create(req.body, req.files)
-            if (newUser) {
-                res.redirect('/users/login')
+            if (errores.isEmpty()) {
+                const newUser = users.create(req.body, req.files)
+                if (newUser) {
+                    res.redirect('/users/login')
+                }
+            } else {
+                res.render('users/register', {
+                    body: req.body,
+                    localidades: dataGeo.localidades(),
+                    errors: errores.mapped()
+                })
             }
         }
     },
