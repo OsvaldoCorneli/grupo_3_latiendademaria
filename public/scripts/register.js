@@ -11,7 +11,6 @@ let password = document.querySelector('input[name="password"]')
 let repassword = document.querySelector('input[name="repassword"]')
 
 password.addEventListener('change', function() {
-    console.log(password)
     if (password.value != repassword.value) {
         repassword.style = "border:solid-3px-red;"
     } else {
@@ -19,7 +18,6 @@ password.addEventListener('change', function() {
     }
 })
 repassword.addEventListener('change', function() {
-    console.log(repassword)
     if (password.value != repassword.value) {
         repassword.style = "border: solid 3px red;"
     } else {
