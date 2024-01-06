@@ -1,19 +1,19 @@
 [
     {
         "id": 1,
-        "nombre": "Gustavo",
+        "nombre": "Gustavo Rodolfo",
         "apellido": "Paz",
         "fechaNacimiento": "1990-06-11T03:00:00.000Z",
         "provincia": "Santiago del Estero",
-        "localidad": "capital",
+        "localidad": "Santiago del Estero",
         "codigopostal": "4200",
-        "calle": "tomas",
+        "calle": "tomas edison",
         "callenumero": "520",
         "imagen": [
-            "\\images\\users\\imagen-1703976273915.jpg"
+            "/images/users/imagen-1703976273915.jpg"
         ],
-        "piso": "/",
-        "departamento": "/",
+        "piso": "",
+        "departamento": "",
         "username": "gpaz",
         "email": "gpaz@latiendademaria.com",
         "password": "abc123",

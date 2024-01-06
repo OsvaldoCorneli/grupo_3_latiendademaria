@@ -1,5 +1,6 @@
 let provincias = document.querySelector('select[name="provincia"]');
-let previous;
+let selectedLocalidad = provincias.selectedOptions[0].innerText
+let previous = document.querySelector('label#'+selectedLocalidad.split(" ").join(""))
 
 provincias.addEventListener('change', function() {
     previous? previous.style = "display:none;" : null;
@@ -8,14 +9,9 @@ provincias.addEventListener('change', function() {
     previous = document.querySelector(selected)
     previous.style = "display:block;"
 })
-
 let password = document.querySelector('input[name="password"]')
 let repassword = document.querySelector('input[name="repassword"]')
-let formRegistro = document.querySelector('form');
 
-formRegistro.addEventListener('submit', function() {
-    document.querySelector('input#repassword').remove()
-})
 password.addEventListener('change', function() {
     if (password.value != repassword.value) {
         repassword.style = "border:solid-3px-red;"

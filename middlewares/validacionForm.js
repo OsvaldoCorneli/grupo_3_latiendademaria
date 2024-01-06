@@ -10,7 +10,7 @@ const validacionForm = {
                 .isLength({min: 6, max: 20}).withMessage('la contraseña debe ser mayor a 6 y menor a 20 caracteres'),
         ]
     },
-    register: function () {
+    users: function () {
         return [
             check('email')
                 .isEmail().withMessage('el correo es invalido'),

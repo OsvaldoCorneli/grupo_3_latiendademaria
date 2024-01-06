@@ -60,10 +60,20 @@ const usersController = {
             })
         }
         else if (req.method == 'PUT') {
-            if ()
-            const updatedData = users.update({id: parseInt(id), ...req.body, imagen: req.files })
-            if (updatedData) {
-                res.redirect('/users/profile')
+            const errores = validationResult(req)
+            console.log(errores)
+            if (errores.isEmpty()) {
+                const updatedData = users.update({id: parseInt(id), ...req.body, imagen: req.files })
+                if (updatedData) {
+                    res.redirect('/users/profile')
+                }
+            } else {
+                res.render('users/edit-user', { 
+                    userData: users.detail(id),
+                    localidades: dataGeo.localidades(),
+                    body: req.body,
+                    errors: errores.mapped()
+                })
             }
         }
     },

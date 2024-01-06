@@ -13,8 +13,9 @@ const dataGeografica = {
         if (!provincia) {
             const response = dataGeo.map((x) => {return {
                 provincia: x.provincia,
-                localidades: x.localidades.map((l) =>{return l.nombre})}})
-            return response
+                localidades: x.localidades.map((l) =>{return l.nombre}).sort((a,b) => a.localeCompare(b))
+            }})
+            return response.sort((a,b)=> a.provincia.localeCompare(b.provincia))
         } else {
             const localidadesProv = dataGeo.find((e) => e.provincia == provincia)
             const localidades = localidadesProv.localidades.map((loc) => {return loc.nombre})
