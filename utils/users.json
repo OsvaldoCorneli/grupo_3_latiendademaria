@@ -8,10 +8,8 @@
         "localidad": "Santiago del Estero",
         "codigopostal": "4200",
         "calle": "tomas edison",
-        "callenumero": "520",
-        "imagen": [
-            "/images/users/imagen-1703976273915.jpg"
-        ],
+        "callenumero": "",
+        "imagen": [],
         "piso": "",
         "departamento": "",
         "username": "gpaz",

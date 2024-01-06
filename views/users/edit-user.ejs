@@ -28,6 +28,9 @@
                         minlength="10"
                         value="<%- body.nombre? body.nombre : nombre %>"
                     />
+                    <% if (locals.errors && errors.nombre) { %>
+                        <p class="errors"><%= errors.nombre.msg %></p>
+                    <% } %>
                 </div>
                 <div class="inputform">
                     <label for="apellido">Apellido/s:</label>
@@ -37,9 +40,11 @@
                         type="text"
                         placeholder="Ingresar apellido"
                         required
-                        minlength="6"
                         value="<%= body.apellido? body.apellido : apellido %>"
                     />
+                    <% if (locals.errors && errors.apellido) { %>
+                        <p class="errors"><%= errors.apellido.msg %></p>
+                    <% } %>
                 </div>
                 <div class="inputform">
                     <label for="fechanacimiento">fecha de nacimiento:</label>
@@ -50,6 +55,9 @@
                     required
                     value="<%= body.fechanacimiento? body.fechanacimiento : fechanacimiento %>"
                     />
+                    <% if (locals.errors && errors.fechanacimiento) { %>
+                        <p class="errors"><%= errors.fechanacimiento.msg %></p>
+                    <% } %>
                 </div>
                 <div class="inputform">
                     <label for="provincia">Provincia:</label>
@@ -90,7 +98,12 @@
                     maxlength="20"
                     value="<%= codigopostal %>"
                 />
+                <% if (locals.errors && errors.codigopostal) { %>
+                    <p class="errors"><%= errors.codigopostal.msg %></p>
+                <% } %>
             </div>
+        </div>
+        <div class="contenedor2">
             <div class="inputform">
                 <label for="street">Calle:</label>
                 <input 
@@ -103,22 +116,23 @@
                     maxlength="20"
                     value="<%= calle %>"
                 />
+                <% if (locals.errors && errors.calle) { %>
+                    <p class="errors"><%= errors.calle.msg %></p>
+                <% } %>
             </div>
-
-        </div>
-        <div class="contenedor2">
             <div class="inputform">
-                <label for="streetnumber">Numero:</label>
+                <label for="callenumero">Numero:</label>
                 <input 
                     type="number"
                     name="callenumero"
-                    id="streetnumber"
-                    placeholder="Numero"
-                    required
-                    minlength="10"
+                    id="callenumero"
+                    placeholder="Numero/Altura de calle"
                     maxlength="20"
                     value=<%= callenumero %>
                 />
+                <% if (locals.errors && errors.callenumero) { %>
+                    <p class="errors"><%= errors.callenumero.msg %></p>
+                <% } %>
             </div>
             <div class="inputform">
                 <label for="buildingfloor">Piso:</label>
@@ -127,11 +141,12 @@
                     name="piso"
                     id="buildingfloor"
                     placeholder="Piso"
-                    required
-                    minlength="10"
                     maxlength="20"
                     value="<%= piso %>"
                     />
+                    <% if (locals.errors && errors.piso) { %>
+                        <p class="errors"><%= errors.piso.msg %></p>
+                    <% } %>
             </div>
             <div class="inputform">
                 <label for="departamento">Departamento:</label>
@@ -140,11 +155,12 @@
                     name="departamento"
                     id="departamento"
                     placeholder="Departamento"
-                    required
-                    minlength="10"
                     maxlength="20"
                     value="<%= departamento %>"
                     />
+                    <% if (locals.errors && errors.departamento) { %>
+                        <p class="errors"><%= errors.departamento.msg %></p>
+                    <% } %>
             </div>
             <div class="inputform">
                 <label for="email">Email:</label>
@@ -158,8 +174,11 @@
                     maxlength="20"
                     value="<%= email %>"
                     />
+                    <% if (locals.errors && errors.email) { %>
+                        <p class="errors"><%= errors.email.msg %></p>
+                    <% } %>
             </div>
-            <div class="inputform">
+            <!-- <div class="inputform">
                 <label for="username">Nombre de usuario:</label>
                 <input 
                     type="text"
@@ -171,8 +190,8 @@
                     maxlength="20"
                     value="<%= username %>"
                 />
-            </div>
-            <div class="inputform">
+            </div> -->
+            <!-- <div class="inputform">
                 <label for="password">contraseña:</label>
                 <input 
                     type="password"
@@ -197,23 +216,28 @@
                     maxlength="20"
                     value=<%= password %>
                 />
-            </div>
+            </div> -->
         </div>
         <div class="contenedor3">
             <img src=<%= imagen %> alt=<%= nombre %>/>
             <div class="inputform">
-                <label for="imagen">Imagen:</label>
-                <input 
-                    class="uploadFile"
-                    type="file"
-                    name="imagen"
-                    id="imagen"
-                    placeholder="calle"
-                />
+                <div class="inputform button-wrap">
+                    <label class="button" for="imagen">Subir imagen</label>
+                    <input 
+                        class="uploadFile"
+                        type="file"
+                        name="imagen"
+                        id="imagen"
+                        placeholder="calle"
+                    />
+                    <% if (locals.errors && errors.imagen) { %>
+                        <p class="errors"><%= errors.imagen.msg %></p>
+                    <% } %>
+                </div>
             </div>
         </div>
     </div>
-        <button type="submit" class="send">Modificar</button>
+        <input type="submit" class="button" value="Modificar"/>
         </form>
         </article>
     </div>

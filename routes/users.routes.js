@@ -16,8 +16,8 @@ router.get('/restore', users.restore)
 
 router.get('/profile', users.index)
 
-router.get('/:id/update', validacionForm.users(), users.update);
-router.put('/:id/update', upload.any(), users.update)
+router.get('/:id/update', users.update);
+router.put('/:id/update', validacionForm.users(), upload.any(), users.update)
 ;
 
 module.exports = router

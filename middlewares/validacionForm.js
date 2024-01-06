@@ -23,12 +23,12 @@ const validacionForm = {
             check('fechaNacimiento')
                 .isDate().withMessage('ingresar una fecha valida'),
             check('provincia')
-                .notEmpty().withMessage('selecciona una provincia'),
+                .isEmpty().withMessage('selecciona una provincia'),
             check('codigopostal')
                 .isNumeric().withMessage('solo numeros')
-                .notEmpty().withMessage('el codigo postal no puede estar vacio'),
+                .isEmpty().withMessage('el codigo postal no puede estar vacio'),
             check('calle')
-                .notEmpty().withMessage('la calle no puede estar vacia'),
+                .isEmpty().withMessage('la calle no puede estar vacia'),
             check('callenumero')
                 .isNumeric().withMessage('ingresar el numero de calle'),
             check('imagen')

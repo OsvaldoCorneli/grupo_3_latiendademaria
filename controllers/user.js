@@ -35,6 +35,7 @@ const usersController = {
             })
         }
         if (req.method == 'POST') {
+            console.log(req.body)
             if (errores.isEmpty()) {
                 const newUser = users.create(req.body, req.files)
                 if (newUser) {
@@ -51,27 +52,22 @@ const usersController = {
     },
     update: function (req,res) {
         let { id } = req.params
-        const errores = validationResult(req)
         if (req.method == 'GET') {
             res.render('users/edit-user', { 
                 userData: users.detail(id),
-<<<<<<< HEAD
                 localidades: dataGeo.localidades(),
                 body: {}
-=======
-                provincias: dataGeo.localidades(),
->>>>>>> 03fc6de97ea077f4ae7ba1a3f0ebb8f986f03dde
             })
         }
         else if (req.method == 'PUT') {
             const errores = validationResult(req)
-            console.log(errores)
             if (errores.isEmpty()) {
                 const updatedData = users.update({id: parseInt(id), ...req.body, imagen: req.files })
                 if (updatedData) {
                     res.redirect('/users/profile')
                 }
             } else {
+                console.log(req.body)
                 res.render('users/edit-user', { 
                     userData: users.detail(id),
                     localidades: dataGeo.localidades(),
