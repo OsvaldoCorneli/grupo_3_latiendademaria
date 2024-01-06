@@ -26,7 +26,7 @@
                         placeholder="ingrese su nombre"
                         required
                         minlength="10"
-                        value=<%= nombre %>
+                        value=<%= body.nombre? body.nombre : nombre %>
                     />
                 </div>
                 <div class="inputform">
@@ -38,7 +38,7 @@
                         placeholder="Ingresar apellido"
                         required
                         minlength="6"
-                        value=<%= apellido %>
+                        value=<%= body.apellido? body.apellido : apellido %>
                     />
                 </div>
                 <div class="inputform">
@@ -48,7 +48,7 @@
                     name="fechanacimiento"
                     id="fechanacimiento"
                     required
-                    value=<%= fechanac %>
+                    value=<%= body.fechanacimiento? body.fechanacimiento : fechanacimiento %>
                     />
                 </div>
                 <div class="inputform">   

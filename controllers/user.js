@@ -30,6 +30,7 @@ const usersController = {
         const errores = validationResult(req)
         if (req.method == 'GET') {
             res.render('users/register', {
+                body: {},
                 localidades: dataGeo.localidades()
             })
         }
@@ -50,13 +51,16 @@ const usersController = {
     },
     update: function (req,res) {
         let { id } = req.params
+        const errores = validationResult(req)
         if (req.method == 'GET') {
             res.render('users/edit-user', { 
                 userData: users.detail(id),
-                provincias: dataGeo.all(),
+                localidades: dataGeo.localidades(),
+                body: {}
             })
         }
         else if (req.method == 'PUT') {
+            if ()
             const updatedData = users.update({id: parseInt(id), ...req.body, imagen: req.files })
             if (updatedData) {
                 res.redirect('/users/profile')
