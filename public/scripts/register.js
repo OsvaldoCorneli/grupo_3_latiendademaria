@@ -9,18 +9,24 @@ provincias.addEventListener('change', function() {
 })
 let password = document.querySelector('input[name="password"]')
 let repassword = document.querySelector('input[name="repassword"]')
+let showError = document.querySelector('p[class="error-contraseña"]')
+
 
 password.addEventListener('change', function() {
     if (password.value != repassword.value) {
-        repassword.style = "border:solid-3px-red;"
+        repassword.style = "border:solid-2px-red;"
+        showError.style = "display:block"
     } else {
-        repassword.style = "border:solid-3px-green;"
+        repassword.style = "border:solid-2px-green;"
+        showError.style = "display:none"
     }
 })
 repassword.addEventListener('change', function() {
     if (password.value != repassword.value) {
-        repassword.style = "border: solid 3px red;"
+        repassword.style = "border: solid 2px red;"
+        showError.style = "display:block"
     } else {
-        repassword.style = "border: solid 3px green;"
+        repassword.style = "border: solid 2px green;"
+        showError.style = "display:none"
     }
 })
