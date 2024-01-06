@@ -1,14 +1,18 @@
-const express = require('express')
-const router = express.Router()
-const { users } = require('../controllers')
-const { upload } = require('../middlewares')
-
+const express = require('express');
+const router = express.Router();
+const { users } = require('../controllers');
+const { upload, validacionForm } = require('../middlewares');
+const {check, validationResult} = require('express-validator')
 
 router.route('/login')
     .get(users.index)
-    .post(users.login);
+    .post(validacionForm.login(), users.login);
 
-router.get('/register', upload.any(), users.create)
+router.route('/register')
+    .get(users.create)
+    .post(upload.any(), validacionForm.register(), users.create);
+
+router.get('/restore', users.restore)
 
 router.get('/profile', users.index)
 

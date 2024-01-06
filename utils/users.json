@@ -4,16 +4,20 @@
         "nombre": "Gustavo",
         "apellido": "Paz",
         "fechaNacimiento": "1990-06-11T03:00:00.000Z",
-        "provincia": "Santiago del estero",
+        "provincia": "Santiago del Estero",
         "localidad": "capital",
-        "codigopostal": 4200,
-        "calle": "tomas edison",
-        "callenumero": 520,
-        "imagen": "https://assets.stickpng.com/images/585e4beacb11b227491c3399.png",
-        "piso": null,
-        "departamento": null,
+        "codigopostal": "4200",
+        "calle": "tomas",
+        "callenumero": "520",
+        "imagen": [
+            "\\images\\users\\imagen-1703976273915.jpg"
+        ],
+        "piso": "/",
+        "departamento": "/",
         "username": "gpaz",
         "email": "gpaz@latiendademaria.com",
-        "password": "abc123"
+        "password": "abc123",
+        "fechanacimiento": "1990-06-11",
+        "repassword": "abc123"
     }
 ]

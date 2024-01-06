@@ -3,7 +3,8 @@ const middlewares = {
     isAdmin: require('./isAdmin'),
     rutaNoEncontrada: require('./rutaNoEncontrada'),
     ensureLogin: require('./ensureLogin'),
-    upload: require('./multerMid')
+    upload: require('./multerMid'),
+    validacionForm: require('./validacionForm')
 }
 
 module.exports = middlewares

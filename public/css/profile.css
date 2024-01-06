@@ -24,6 +24,8 @@ section.profile {
 }
 section.profile img {
     width: 150px;
+    border-radius: 50%;
+    border: solid 1px black;
 }
 section.productos {
     width: 100%;

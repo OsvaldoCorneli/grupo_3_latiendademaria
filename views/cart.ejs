@@ -2,7 +2,6 @@
     <head>
         <%- include('./partials/head.ejs') %>
         <link href="\css\cart.css" rel="stylesheet"/>
-        <link href="\css\navbar.css" rel="stylesheet"/>
     </head>
     <body>
         <%- include('./partials/navbar.ejs') %>
@@ -23,15 +22,23 @@
                             <td ><img src="https://random.imagecdn.app/100/70" alt="img product"/></td>
                             <td id="product">Mate personalizado</td>
                             <td>$1.500</td>
-                            <td>2</td>
-                            <td>$3.000</td>
+                            <td>
+                                <a onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</a>
+                                <input id="cantidad" type="number" min="1" placeholder="cantidad" name="cantidad" value="1"/>
+                                <a onclick="this.parentNode.querySelector('input[type=number]').stepUp();this.querySelector('.total').innerText=3000">+</a>
+                            </td>
+                            <td class="total"></td>
                         </tr>
                         <tr>
                             <td id="X">X</td>
                             <td><img src="https://random.imagecdn.app/100/70" alt="img product"/></td>
                             <td id="product">Kit Matero</td>
                             <td>$40.000</td>
-                            <td>1</td>
+                            <td>
+                                <a onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</a>
+                                <input id="cantidad" type="number" min="1" placeholder="cantidad" name="cantidad" value="1"/>
+                                <a onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+</a>
+                            </td>
                             <td>$40.000</td>
                         </tr>
                     </tbody>

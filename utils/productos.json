@@ -2,16 +2,19 @@
     {
         "id": 1,
         "name": "Mates de madera",
-        "description": " descripcion Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "description": " descripcion Lorem ipsum dolor, sit amet consectetur adipisicing elit.\r\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \r\naliquam incidunt iste et sed libero a, nihil voluptate \r\ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
         "category": "Mates",
         "line": "artesanal",
-        "stock": 10,
-        "image": "https://http2.mlstatic.com/D_NQ_NP_2X_651553-MLA46272939500_062021-F.webp",
-        "price": 6609.33,
+        "stock": "10",
+        "image": [
+            "/images/uploads/image-1703994594448.jpeg",
+            "/images/uploads/image-1703994594449.jpg"
+        ],
+        "price": "6609.33",
         "color": [
             "white",
-            "brown",
-            "orange"
+            "orange",
+            "brown"
         ]
     },
     {
@@ -21,7 +24,9 @@
         "category": "Mates",
         "line": "artesanal",
         "stock": 18,
-        "image": "https://http2.mlstatic.com/D_NQ_NP_2X_814598-MLA43768156184_102020-F.webp",
+        "image": [
+            "https://http2.mlstatic.com/D_NQ_NP_2X_814598-MLA43768156184_102020-F.webp"
+        ],
         "price": 4127.83,
         "color": [
             "blue",
@@ -36,7 +41,9 @@
         "category": "Estatuillas",
         "line": "artesanal",
         "stock": 3,
-        "image": "https://http2.mlstatic.com/D_NQ_NP_2X_611445-MLA49153801786_022022-F.webp",
+        "image": [
+            "https://http2.mlstatic.com/D_NQ_NP_2X_611445-MLA49153801786_022022-F.webp"
+        ],
         "price": 825.48,
         "color": [
             "white",
@@ -51,7 +58,9 @@
         "category": "Cuadros",
         "line": "artesanal",
         "stock": 15,
-        "image": "https://canvasbynumbers.es/cdn/shop/products/ezgif.com-gif-maker_40_9b05be40-d052-4411-871d-f3d9f2f378f7.jpg?crop=center&height=600&v=1668950492&width=600",
+        "image": [
+            "https://canvasbynumbers.es/cdn/shop/products/ezgif.com-gif-maker_40_9b05be40-d052-4411-871d-f3d9f2f378f7.jpg?crop=center&height=600&v=1668950492&width=600"
+        ],
         "price": 3002.72,
         "color": [
             "white",
@@ -66,7 +75,9 @@
         "category": "Tazas",
         "line": "sublimada",
         "stock": 30,
-        "image": "https://d22fxaf9t8d39k.cloudfront.net/0e97fce301e0e550163ccdfb905f890410d5d4d7a0daa77d2f1c8879edf24c5281650.jpeg",
+        "image": [
+            "https://d22fxaf9t8d39k.cloudfront.net/0e97fce301e0e550163ccdfb905f890410d5d4d7a0daa77d2f1c8879edf24c5281650.jpeg"
+        ],
         "price": 7096.17,
         "color": [
             "yellow",
@@ -81,7 +92,9 @@
         "category": "Tazas",
         "line": "sublimada",
         "stock": 45,
-        "image": "https://sublitextil.com.ar/wp-content/uploads/2019/01/Taza-de-Polimero-Para-sublimar-Sublitex.jpg",
+        "image": [
+            "https://sublitextil.com.ar/wp-content/uploads/2019/01/Taza-de-Polimero-Para-sublimar-Sublitex.jpg"
+        ],
         "price": 3463.07,
         "color": [
             "purple",
@@ -96,7 +109,9 @@
         "category": "Botellas",
         "line": "sublimada",
         "stock": 6,
-        "image": "https://http2.mlstatic.com/D_NQ_NP_2X_802274-MLA54782633883_032023-F.webp",
+        "image": [
+            "https://http2.mlstatic.com/D_NQ_NP_2X_802274-MLA54782633883_032023-F.webp"
+        ],
         "price": 8016.62,
         "color": [
             "pink",
@@ -111,7 +126,9 @@
         "category": "Botellas",
         "line": "sublimada",
         "stock": 12,
-        "image": "https://cdn.elementi.com.ar/wp-content/uploads/2022/01/29191508/03-botella-aluminio-plata-sin-impresion.jpg",
+        "image": [
+            "https://cdn.elementi.com.ar/wp-content/uploads/2022/01/29191508/03-botella-aluminio-plata-sin-impresion.jpg"
+        ],
         "price": 2790.11,
         "color": [
             "gray",
@@ -126,7 +143,9 @@
         "category": "Jarrón",
         "line": "sublimada",
         "stock": 11,
-        "image": "https://http2.mlstatic.com/D_NQ_NP_2X_890499-MLA72064176158_102023-F.webp",
+        "image": [
+            "https://http2.mlstatic.com/D_NQ_NP_2X_890499-MLA72064176158_102023-F.webp"
+        ],
         "price": 3030.63,
         "color": [
             "orange",
@@ -141,7 +160,9 @@
         "category": "Sublimate",
         "line": "sublimada",
         "stock": 22,
-        "image": "https://i.etsystatic.com/28158696/r/il/22661c/3980682768/il_794xN.3980682768_ko98.jpg",
+        "image": [
+            "https://i.etsystatic.com/28158696/r/il/22661c/3980682768/il_794xN.3980682768_ko98.jpg"
+        ],
         "price": 2599.27,
         "color": [
             "yellow",
@@ -156,7 +177,9 @@
         "category": "Cuaderno",
         "line": "sublimada",
         "stock": 20,
-        "image": "https://santeria.santuariodelujan.org.ar/wp-content/uploads/2023/07/Cuaderno-A5-1.jpg",
+        "image": [
+            "https://santeria.santuariodelujan.org.ar/wp-content/uploads/2023/07/Cuaderno-A5-1.jpg"
+        ],
         "price": 7467.81,
         "color": [
             "red",
@@ -171,7 +194,9 @@
         "category": "Cuaderno",
         "line": "sublimada",
         "stock": 5,
-        "image": "https://http2.mlstatic.com/D_NQ_NP_2X_987102-MLA51617498795_092022-F.webp",
+        "image": [
+            "https://http2.mlstatic.com/D_NQ_NP_2X_987102-MLA51617498795_092022-F.webp"
+        ],
         "price": 8515.71,
         "color": [
             "orange",
