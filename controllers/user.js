@@ -55,8 +55,12 @@ const usersController = {
         if (req.method == 'GET') {
             res.render('users/edit-user', { 
                 userData: users.detail(id),
+<<<<<<< HEAD
                 localidades: dataGeo.localidades(),
                 body: {}
+=======
+                provincias: dataGeo.localidades(),
+>>>>>>> 03fc6de97ea077f4ae7ba1a3f0ebb8f986f03dde
             })
         }
         else if (req.method == 'PUT') {

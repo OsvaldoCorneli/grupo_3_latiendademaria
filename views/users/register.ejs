@@ -240,6 +240,7 @@
                     maxlength="20"
                     value="<%= body.repassword? body.repassword : null %>"
                 />
+                <p class="error-contraseña">la contraseña no coincide</p>
                 <% if (locals.errors && errors.repassword) { %>
                     <p class="errors"><%= errors.repassword.msg %></p>
                 <% } %>
