@@ -30,6 +30,7 @@ const usersController = {
         const errores = validationResult(req)
         if (req.method == 'GET') {
             res.render('users/register', {
+                body: {},
                 localidades: dataGeo.localidades()
             })
         }
@@ -53,7 +54,7 @@ const usersController = {
         if (req.method == 'GET') {
             res.render('users/edit-user', { 
                 userData: users.detail(id),
-                provincias: dataGeo.all(),
+                provincias: dataGeo.localidades(),
             })
         }
         else if (req.method == 'PUT') {
