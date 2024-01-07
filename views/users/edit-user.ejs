@@ -94,9 +94,9 @@
                     id="codigopostal"
                     placeholder="Codigo Postal"
                     required
-                    minlength="10"
+                    minlength="3"
                     maxlength="20"
-                    value="<%= codigopostal %>"
+                    value="<%= body.codigopostal? body.codigopostal : codigopostal %>"
                 />
                 <% if (locals.errors && errors.codigopostal) { %>
                     <p class="errors"><%= errors.codigopostal.msg %></p>
@@ -114,7 +114,7 @@
                     required
                     minlength="10"
                     maxlength="20"
-                    value="<%= calle %>"
+                    value="<%= body.calle? body.calle : calle %>"
                 />
                 <% if (locals.errors && errors.calle) { %>
                     <p class="errors"><%= errors.calle.msg %></p>
@@ -128,7 +128,7 @@
                     id="callenumero"
                     placeholder="Numero/Altura de calle"
                     maxlength="20"
-                    value=<%= callenumero %>
+                    value="<%= body.callenumero? body.callenumero : callenumero %>"
                 />
                 <% if (locals.errors && errors.callenumero) { %>
                     <p class="errors"><%= errors.callenumero.msg %></p>
@@ -142,7 +142,7 @@
                     id="buildingfloor"
                     placeholder="Piso"
                     maxlength="20"
-                    value="<%= piso %>"
+                    value="<%= body.piso? body.piso : piso %>"
                     />
                     <% if (locals.errors && errors.piso) { %>
                         <p class="errors"><%= errors.piso.msg %></p>
@@ -156,7 +156,7 @@
                     id="departamento"
                     placeholder="Departamento"
                     maxlength="20"
-                    value="<%= departamento %>"
+                    value="<%= body.departamento? body.departamento : departamento %>"
                     />
                     <% if (locals.errors && errors.departamento) { %>
                         <p class="errors"><%= errors.departamento.msg %></p>
@@ -171,8 +171,8 @@
                     placeholder="Email"
                     required
                     minlength="10"
-                    maxlength="20"
-                    value="<%= email %>"
+                    maxlength="40"
+                    value="<%= body.email? body.email : email %>"
                     />
                     <% if (locals.errors && errors.email) { %>
                         <p class="errors"><%= errors.email.msg %></p>
@@ -219,7 +219,7 @@
             </div> -->
         </div>
         <div class="contenedor3">
-            <img src=<%= imagen %> alt=<%= nombre %>/>
+            <img src="<%= imagen.length>0? imagen[0] : "https://www.seekpng.com/png/detail/41-410093_male-symbol-png.png" %>" alt=<%= nombre  %>/>
             <div class="inputform">
                 <div class="inputform button-wrap">
                     <label class="button" for="imagen">Subir imagen</label>
@@ -229,6 +229,7 @@
                         name="imagen"
                         id="imagen"
                         placeholder="calle"
+                        value="<%= imagen %>"
                     />
                     <% if (locals.errors && errors.imagen) { %>
                         <p class="errors"><%= errors.imagen.msg %></p>

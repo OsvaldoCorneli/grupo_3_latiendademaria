@@ -9,7 +9,10 @@ const usersController = {
                 productos: products.all() 
             })
         } else {
-            res.render('users/login', {errors: {}})
+            res.render('users/login', {
+                body: {},
+                errors: {}
+            })
         }
     },
     login: function (req,res) {
@@ -19,11 +22,17 @@ const usersController = {
             if (user.access) {
                 res.status(200).redirect('/')
             } else {
-                res.render('users/login', {errors: {login: user.error}})
+                res.render('users/login', {
+                    body: {},
+                    errors: {login: user.error}
+                })
             }
         } else {
             console.log(errores.mapped())
-            res.render('users/login', {errors: errores.mapped()})
+            res.render('users/login', {
+                body: req.body,
+                errors: errores.mapped()
+            })
         }
     },
     create: function (req,res) {
@@ -67,7 +76,6 @@ const usersController = {
                     res.redirect('/users/profile')
                 }
             } else {
-                console.log(req.body)
                 res.render('users/edit-user', { 
                     userData: users.detail(id),
                     localidades: dataGeo.localidades(),

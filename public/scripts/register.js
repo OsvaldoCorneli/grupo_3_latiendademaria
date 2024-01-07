@@ -33,8 +33,8 @@ repassword.addEventListener('change', function() {
     }
 })
 
-let formRegistro = document.querySelector('form');
+// let formRegistro = document.querySelector('form');
 
-formRegistro.addEventListener('submit', function() {
-    document.querySelector('input#repassword').remove()
-})
+// formRegistro.addEventListener('submit', function() {
+//     document.querySelector('input#repassword').remove()
+// })
