@@ -1,6 +1,6 @@
 const productModels = {
     products: require('./products'),
-    users: require('./user.ts'),
+    users: require('./user'),
     dataGeo: require('./dataGeo')
 }
 
