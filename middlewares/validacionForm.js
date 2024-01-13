@@ -17,7 +17,7 @@ const validacionForm = {
             body('password')
                 .notEmpty().withMessage('La contraseña no puede estar en blanco')
                 .custom((value,{req}) => {
-                    const user = users.index().find((u) => u.username == req.email || u.email == req.email)
+                    const user = users.index().find((u) => u.username == req.body.email || u.email == req.body.email)
                     if (user) {
                         const checkPass = bcrypt.compareSync(value, user.password)
                         if (checkPass) {

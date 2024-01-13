@@ -44,7 +44,7 @@ const usersServices = {
     },
     login: function (data) {
         let { email, password } = data
-        let user = Users.find((user) => user.email == email)
+        let user = Users.find((user) => user.email == email || user.username == email)
         if (!user) return {access: false, error: 'usuario inexistente'}
         const checkPass = bcrypt.compareSync(password, user.password)
         if (checkPass) {
