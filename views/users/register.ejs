@@ -64,7 +64,7 @@
                     <select id='provincia' name="provincia">
                         <option disabled selected value>- seleccionar -</option>
                         <% localidades.forEach((el) => { %>
-                            <option value="<%= el.provincia %>" <%= body.provincia == el.provincia? selected : null %>><%= el.provincia %></option>
+                            <option value="<%= el.provincia %>" <%= body.provincia == el.provincia? "selected" : null %>><%= el.provincia %></option>
                         <% }) %>
                     </select>
                     <% if (locals.errors && errors.provincia) { %>
@@ -77,7 +77,7 @@
                             <select id="<%= el.provincia %>" name="localidad">
                                 <option disabled selected value>- seleccionar -</option>
                                 <% el.localidades.forEach((loc) => { %>
-                                    <option value="<%= loc %>" <%= body.localidad == loc? selected : null %>><%= loc %></option>
+                                    <option value="<%= loc %>" <%= body.localidad == loc? "selected" : null %>><%= loc %></option>
                                 <% }) %>
                             </select>
                             </label>

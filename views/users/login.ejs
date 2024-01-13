@@ -16,8 +16,9 @@
                     id="email"
                     placeholder="Ingresar email"
                     required
-                    minlength="7"
+                    minlength="4"
                     class="validacionusername"
+                    value="<%= body.email? body.email : null %>"
                 />
                 <% if (locals.errors && errors.email) { %>
                     <p class="errors"><%= errors.email.msg %></p>
@@ -31,6 +32,7 @@
                     required
                     minlength="6"
                     class="validacionpassword"
+                    value="<%= body.password? body.password : null %>"
                 />
                 <% if (locals.errors && errors.password) { %>
                     <p class="errors"><%= errors.password.msg %></p>

@@ -10,14 +10,13 @@ router.route('/login')
 
 router.route('/register')
     .get(users.create)
-    .post(upload.any(), validacionForm.register(), users.create);
+    .post(upload.any(), validacionForm.registerUser(), users.create);
 
 router.get('/restore', users.restore)
 
 router.get('/profile', users.index)
 
 router.get('/:id/update', users.update);
-router.put('/:id/update', upload.any(), users.update)
-;
+router.put('/:id/update', upload.any(), validacionForm.editUser(), users.update);
 
 module.exports = router

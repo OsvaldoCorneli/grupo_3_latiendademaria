@@ -9,7 +9,10 @@ const usersController = {
                 productos: products.all() 
             })
         } else {
-            res.render('users/login', {errors: {}})
+            res.render('users/login', {
+                body: {},
+                errors: {}
+            })
         }
     },
     login: function (req,res) {
@@ -19,11 +22,17 @@ const usersController = {
             if (user.access) {
                 res.status(200).redirect('/')
             } else {
-                res.render('users/login', {errors: {login: user.error}})
+                res.render('users/login', {
+                    body: {},
+                    errors: {login: user.error}
+                })
             }
         } else {
             console.log(errores.mapped())
-            res.render('users/login', {errors: errores.mapped()})
+            res.render('users/login', {
+                body: req.body,
+                errors: errores.mapped()
+            })
         }
     },
     create: function (req,res) {
@@ -35,6 +44,7 @@ const usersController = {
             })
         }
         if (req.method == 'POST') {
+            console.log(req.body)
             if (errores.isEmpty()) {
                 const newUser = users.create(req.body, req.files)
                 if (newUser) {
@@ -54,13 +64,24 @@ const usersController = {
         if (req.method == 'GET') {
             res.render('users/edit-user', { 
                 userData: users.detail(id),
-                provincias: dataGeo.localidades(),
+                localidades: dataGeo.localidades(),
+                body: {}
             })
         }
         else if (req.method == 'PUT') {
-            const updatedData = users.update({id: parseInt(id), ...req.body, imagen: req.files })
-            if (updatedData) {
-                res.redirect('/users/profile')
+            const errores = validationResult(req)
+            if (errores.isEmpty()) {
+                const updatedData = users.update({id: parseInt(id), ...req.body, imagen: req.files })
+                if (updatedData) {
+                    res.redirect('/users/profile')
+                }
+            } else {
+                res.render('users/edit-user', { 
+                    userData: users.detail(id),
+                    localidades: dataGeo.localidades(),
+                    body: req.body,
+                    errors: errores.mapped()
+                })
             }
         }
     },

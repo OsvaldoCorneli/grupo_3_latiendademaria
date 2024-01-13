@@ -60,16 +60,24 @@ main{
     width: 200px;
 }
 
-button.send {
-    border-radius: 5px;
-    border: hidden;
-    padding: 5px;
-    background-color: #1259c3;
-    color: white;
-    width: 35%;
-    transition: 500ms;
+.button-wrap {
+    position: relative;
 }
-button.send:hover {
+
+.button {
+    display: inline-block;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #1259c3;
+    font-size: inherit;
+    font-weight: bold;
+    color: #fff;
+    transition: all 500ms;
+    width: fit-content;
+    max-width: 250px;
+}
+.button:hover {
     background-color: #5394b0;
 }
 
@@ -85,20 +93,30 @@ button.send:hover {
 input.uploadFile:hover {
     background-color: #5394b0;
 } */
-
+input[type="file"] {
+    position: absolute;
+    background-color: #1259c3;
+    z-index: -1;
+    top: 10px;
+    left: 8px;
+    font-size: inherit;
+    color: #b8b8b8;
+}
 .requiredinput:valid {
     border: 2px solid green;
 }
 .requiredinput:invalid {
     border: 2px solid red;
 }
-.requiredinput:valid {
-    border: 2px solid green;
+.errors {
+    font-weight: 400;
+    color: red
 }
-.requiredinput:invalid {
-    border: 2px solid red;
+.error-contraseña {
+    display: none;
+    color: red;
+    font-weight: bold;
 }
-
 @media (min-width: 760px){
 
     .contenedor-form{
