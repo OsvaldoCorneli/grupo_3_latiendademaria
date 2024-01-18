@@ -1,7 +1,9 @@
-const { users, products, dataGeo } = require('../models');
+const dataGeo = require('../models/dataGeo');
+const products = require('../models/products');
+const users = require('../models/user')
 const { check, validationResult } = require('express-validator');
 
-const usersController = {
+module.exports = {
     index: function (req, res) {
         if (req.url == '/profile') {
             res.render('users/profile', {
@@ -93,5 +95,3 @@ const usersController = {
         }
     }
 }
-
-module.exports = usersController

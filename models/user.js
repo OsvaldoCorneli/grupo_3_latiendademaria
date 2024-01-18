@@ -3,13 +3,13 @@ const fs = require('fs');
 const path = require('path');
 const bcrypt = require('bcryptjs');
 
-const usersFilePath = path.join(__dirname, '../utils/users.json');
+const usersFilePath = path.join(__dirname, '../data/users.json');
 const Users = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
 
-const dataGeoFilePath = path.join(__dirname, '../utils/users.json');
+const dataGeoFilePath = path.join(__dirname, '../data/users.json');
 const dataGeo = JSON.parse(fs.readFileSync(dataGeoFilePath, 'utf-8'));
 
-const usersServices = {
+module.exports = {
     index: function () {
         return Users
     },
@@ -75,5 +75,3 @@ const usersServices = {
         
     }
 }
-
-module.exports = usersServices

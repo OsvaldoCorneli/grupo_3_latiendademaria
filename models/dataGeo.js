@@ -1,10 +1,10 @@
 const path = require('path')
 const fs = require('fs')
 
-const dataGeoFilePath = path.join(__dirname, '../utils/dataGeo.json');
+const dataGeoFilePath = path.join(__dirname, '../data/dataGeo.json');
 const dataGeo = JSON.parse(fs.readFileSync(dataGeoFilePath, 'utf-8'));
 
-const dataGeografica = {
+module.exports = {
     provincias: function() {
         const provincias = dataGeo.map((el) => {return el.provincia})
         return provincias
@@ -23,5 +23,3 @@ const dataGeografica = {
         }
     }
 }
-
-module.exports = dataGeografica

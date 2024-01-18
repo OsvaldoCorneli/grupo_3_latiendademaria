@@ -1,7 +1,7 @@
 
-const { products } = require('../models');
+const products = require('../models/products');
 
-const main = {
+module.exports = {
 	getHome: function (req, res) {
 		res.render('Home/home', {
 			sublimados: products.filter({line: 'sublimada'}).slice(0,8),
@@ -27,5 +27,3 @@ const main = {
         res.render('autor')
     }
 }
-
-module.exports = main

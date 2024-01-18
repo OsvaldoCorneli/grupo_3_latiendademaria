@@ -1,9 +1,10 @@
-const path = require('path')
-const { products,users } = require('../models')
+const path = require('path');
+const users = require('../models/user');
+const products = require('../models/products');
 
 const view = path.join(__dirname,'../views/products/');
 
-const productsController = {
+module.exports = {
     index: function (req,res) {
         let { id } = req.params
         if (!id && req.method == 'POST') { //este if es para el filtro
@@ -82,5 +83,3 @@ const productsController = {
         
     }
 }
-
-module.exports = productsController

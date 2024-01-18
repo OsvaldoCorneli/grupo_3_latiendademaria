@@ -1,9 +1,9 @@
 const { body, validationResult } = require('express-validator');
-const {users} = require('../models')
+const users = require('../models/user')
 const bcrypt = require('bcryptjs')
 const path = require('path')
 
-const validacionForm = {
+module.exports = {
     login: function () {
         return [
             body('email')
@@ -124,5 +124,3 @@ const validacionForm = {
         ]
     } 
 }
-
-module.exports = validacionForm

@@ -1,11 +1,14 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const routes = require('./routes')
+const mainRoutes = require('./routes/main.routes');
+const userRoutes = require('./routes/users.routes');
+const productRoutes = require('./routes/products.routes');
 const methodOverride = require('method-override');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const {loguearRuta, rutaNoEncontrada} = require('./middlewares');
+const loguearRuta = require('./middlewares/loguearRutas') 
+const rutaNoEncontrada = require('./middlewares/rutaNoEncontrada');
 
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
@@ -23,9 +26,9 @@ app.set('view engine', 'ejs');
 
 app.use(loguearRuta)
 
-app.use('/products', routes.products)
-app.use('/users', routes.users)
-app.use('/', routes.main);
+app.use('/products', productRoutes);
+app.use('/users', userRoutes);
+app.use('/', mainRoutes);
 
 app.use(rutaNoEncontrada)
 

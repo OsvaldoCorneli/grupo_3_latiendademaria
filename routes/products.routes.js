@@ -1,8 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const { products } = require('../controllers')
-const { upload } = require('../middlewares')
-
+const products = require('../controllers/product')
+const upload = require('../middlewares/multerMid')
 
 
 router.route('/')
