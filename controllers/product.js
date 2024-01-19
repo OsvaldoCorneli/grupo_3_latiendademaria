@@ -6,25 +6,31 @@ const view = path.join(__dirname,'../views/products/');
 
 module.exports = {
     index: function (req,res) {
-        let { id } = req.params
-        if (!id && req.method == 'POST') { //este if es para el filtro
-            res.render(view+'products', { 
-                productos: products.filter(req.body),
-                categorias: products.categories(),
-                colors: products.colors()
-            })
-        } else if (!id && req.method == 'GET') { // este if es para primera vista o resetear filtro
+        res.render(view+'products', { 
+            productos: products.all(),
+            categorias: products.categories(),
+            colors: products.colors()
+        })
+    },
+    filter: function (req,res) {
+        if (Object.keys(req.query).length == 0) {
             res.render(view+'products', { 
                 productos: products.all(),
                 categorias: products.categories(),
                 colors: products.colors()
             })
         } else {
-            const detalle = products.detail(id)
-            if (detalle) res.render(view+'detail',{ detalle }) // si no, renderiza el detalle de producto que recibo por params
-            else res.render('404notFound', {url: req.url}) // si no encuentra el producto, devuelve 404
-            
+            res.render(view+'products', { 
+                productos: products.filter(req.query),
+                categorias: products.categories(),
+                colors: products.colors()
+            })
         }
+    },
+    detail: function (req,res) {
+        const detalle = products.detail(req.params.id)
+        if (detalle) res.render(view+'detail',{ detalle }) // si no, renderiza el detalle de producto que recibo por params
+        else res.render('404notFound', {url: req.url}) // si no encuentra el producto, devuelve 404
     },
     create: function (req,res) {
         let {method} = req

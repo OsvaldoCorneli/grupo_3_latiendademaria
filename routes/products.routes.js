@@ -6,8 +6,8 @@ const upload = require('../middlewares/multerMid')
 
 router.route('/')
     .get(products.index)  // para primera vista o resetear filtro
-    .post(products.index) // para el filtro de products
 ;
+router.get('/filter', products.filter);
 
 router.route('/create') 
     .get(products.create)
@@ -23,7 +23,7 @@ router.route('/:id/delete')
 ;
 
 router.route('/:id')
-    .get(products.index) // esta es para el detalle, entra en el ultimo else del controller
+    .get(products.detail) // esta es para el detalle, entra en el ultimo else del controller
 ;
 
 module.exports = router
