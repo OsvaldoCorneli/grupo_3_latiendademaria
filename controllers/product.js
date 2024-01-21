@@ -32,19 +32,17 @@ module.exports = {
         if (detalle) res.render(view+'detail',{ detalle }) // si no, renderiza el detalle de producto que recibo por params
         else res.render('404notFound', {url: req.url}) // si no encuentra el producto, devuelve 404
     },
-    create: function (req,res) {
-        let {method} = req
-        if (method == 'GET') {
-            res.render(view+'createForm', {
-                productEdit: null,
-                categorias: products.categories(),
-                colors: products.colors()
-            })
-        } else if (method == 'POST') {
-            const newProduct = products.create(req.body, req.files)
-            if (newProduct) {
-                res.redirect('/users/profile')
-            }
+    getCreateForm: function(req,res) {
+        res.render(view+'createForm', {
+            productEdit: null,
+            categorias: products.categories(),
+            colors: products.colors()
+        })
+    },
+    postCreateForm: function (req,res) {
+        const newProduct = products.create(req.body, req.files)
+        if (newProduct) {
+            res.redirect('/users/profile')
         }
     },
 

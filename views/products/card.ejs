@@ -2,7 +2,7 @@
 <article>
     <p class="titulocard"><%= name %></p>
     <a href="/products/<%= id %>"><img src=<%= image[0] %> alt=<%= name %>/></a>
-    <p>$<%= price %></p>
+    <p class="number" style="text-align:center">$<%= price %></p>
     <ul class="color">Colores:
         <% for (let x in color) { let background = `background-color:${color[x]};color:${color[x]};border-radius:50%; border:0.1px-solid-black;;` %>
             <li><i style=<%= background %>>oo</i></li>

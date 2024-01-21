@@ -1,5 +1,6 @@
 
 const products = require('../models/products');
+const cart = require('../models/cart');
 
 module.exports = {
 	getHome: function (req, res) {
@@ -8,9 +9,6 @@ module.exports = {
 			artesanales: products.filter({line: 'artesanal'}).slice(0,4)
 		})
 	},
-    getCart: function (req,res) {
-		res.render('cart')
-    },
     getContacto: function (req,res) {
 		res.render('contacto')
     },
@@ -25,5 +23,14 @@ module.exports = {
     },
     getAutor: function (req,res) {
         res.render('autor')
-    }
+    },
+    getCart: function (req,res) {
+      const cartDetail = cart.cart(req.session.user?.id)
+      if (cartDetail) {
+        console.log(res.locals)
+          res.render('cart/cart', {cartDetail})
+      } else {
+          res.render('404notfound', {url: req.url})
+      }
+  },
 }

@@ -7,7 +7,13 @@
                 <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
                 <a href="/users/profile"><i class="fa-solid fa-user"></i></a>
             </span>
-            <button><a href="/users/login">Ingresá</a></button>
+            <button>
+                <% if (locals.login) { %>
+                    <a href="/users/logout">Cerrar Sesion</a>
+                <% } else { %>
+                    <a href="/users/login">Ingresá</a>
+                <% } %>
+            </button>
         </span>
     </span>
     <div class="site">
