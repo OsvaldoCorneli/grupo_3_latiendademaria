@@ -24,8 +24,6 @@ section.profile {
 }
 section.profile img {
     width: 150px;
-    border-radius: 50%;
-    border: solid 1px black;
 }
 section.productos {
     width: 100%;
@@ -43,7 +41,6 @@ section.productos > .header{
     background-color: #32A97F;
     padding: 5px;
     border-radius: 5px;
-    text-wrap: nowrap;
 }
 
 section.productos > article{
@@ -142,71 +139,6 @@ button > a {
     color: white;
 }
 
-section.common-profile {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: start;
-    gap: 10px;
-}
-.historialpagos .favoritos{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    text-wrap: nowrap;
-}
-/* .historialpagos > section > .pago {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #efefef;
-    border-radius: 5px;
-    gap: 10px;
-    text-wrap: nowrap;
-    width: 600px;
-} */
-.historialpagos > section > span.pago > *{
-   
-}
-table > tbody tr th {
-    font-weight: bold;
-    background-color: #32A97F;
-    padding: 5px;
-    border-radius: 5px;
-    text-wrap: nowrap;
-}
-table > tbody > tr.subtitle td {
-    background-color: #32A97F;
-    padding: 5px;
-    border-radius: 5px;
-    text-wrap: nowrap;
-    text-align: center;
-}
-td {
-    background-color: #efefef;
-}
-
-tr.article {
-    padding: 5px;
-}
-
-tr.article > td {
-    font-size: 12px;
-}
-
-img.perfil {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    background-color: #1259c3;
-    font-size: 120px;
-    color: white;
-    font-weight: bold;
-}
 @media (min-width: 760px) {
     section.productos {
         width: 90%;

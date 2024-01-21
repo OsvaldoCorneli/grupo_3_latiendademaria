@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const main = require('../controllers/main')
+const { main } = require('../controllers')
 
 router.route('/')
     .get(main.getHome);
@@ -19,5 +19,8 @@ router.route("/autor")
     .get(main.getAutor)
 ;
 
+router.route("/autor")
+    .get(main.getAutor)
+;
 
 module.exports = router
