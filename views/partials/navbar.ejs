@@ -1,13 +1,19 @@
 <nav>
-    <span>
+    <span class="barrasuperior">
         <img class="logo" src="\images\4F5FA3DA-7648-4C42-B5F2-B01A0BA7C902.png"/>
-        <a href="/" class="logoA"><img class="logoLargo" src="\images\F41CA9F5-CC6B-4EF0-8A80-8769A56E7D89 (1).png" alt="La Tienda de Maria"/></a>
+        <a href="/" class="logoa"><img class="logoLargo" src="\images\F41CA9F5-CC6B-4EF0-8A80-8769A56E7D89 (1).png" alt="La Tienda de Maria"/></a>
         <span class="loginNavbar">
-            <ul>
-                <li><a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
-                <li><a href="/users/profile"><i class="fa-solid fa-user"></i></a></li>
-            </ul>
-            <button><a href="/users/login">Ingresá</a></button>
+            <span>
+                <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
+                <a href="/users/profile"><i class="fa-solid fa-user"></i></a>
+            </span>
+            <button>
+                <% if (locals.login) { %>
+                    <a href="/users/logout">Cerrar Sesion</a>
+                <% } else { %>
+                    <a href="/users/login">Ingresá</a>
+                <% } %>
+            </button>
         </span>
     </span>
     <div class="site">

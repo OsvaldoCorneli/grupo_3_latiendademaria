@@ -1,0 +1,25 @@
+
+<% let {referencia, fecha, products, total, estado_pago} = pago %>
+<tr rowspan="<%= products.length %>" class="article">
+    <td rowspan="<%= products.length %>"><%= fecha.slice(0,10)  %></td>
+    <% for (let x in products) {  let { id, color,cantidad, price } = products[x] %>
+        <% if (x == 0) { %>
+            <td><%= id %></td>
+            <td><%= color %></td>
+            <td><%= cantidad %></td>
+            <td class="number"><%= price %></td>
+            <td class="number"><%= (cantidad*price).toFixed(2) %></td>
+            <td rowspan="<%= products.length %>"class="number"><%= total %></td>
+            <td rowspan="<%= products.length %>"><%= estado_pago %></td>
+        </tr>
+        <% } else { %>
+        <tr class="article">
+            <td><%= id %></td>
+            <td><%= color %></td>
+            <td><%= cantidad %></td>
+            <td class="number"><%= price %></td>
+            <td class="number"><%= (cantidad*price).toFixed(2) %></td>
+        </tr>
+        <% } %>
+    <% } %>
+

@@ -1,0 +1,88 @@
+[
+    {
+        "id": 1,
+        "nombre": "Gustavo Rodolfo",
+        "apellido": "Paz",
+        "provincia": "Santiago del Estero",
+        "localidad": "Santiago del Estero",
+        "codigopostal": "4200",
+        "calle": "tomas edison",
+        "callenumero": "520",
+        "imagen": [
+            "\\images\\users\\imagen-1704600266186.jpg"
+        ],
+        "piso": "",
+        "departamento": "",
+        "username": "gpaz",
+        "email": "gpaz@latiendademaria.com",
+        "password": "abc123",
+        "fechanacimiento": "1990-06-12",
+        "admin": true,
+        "carrito": [
+            {
+                "id": 1,
+                "cantidad": 1
+            },
+            {
+                "id": 3,
+                "cantidad": 2
+            },
+            {
+                "id": 9,
+                "cantidad": 5
+            }
+        ],
+        "favoritos": [1, 5, 15]
+    },
+    {
+        "id": 2,
+        "nombre": "pepe",
+        "apellido": "argento",
+        "fechanacimiento": "1990-06-11",
+        "provincia": "Catamarca",
+        "localidad": "Alijilán",
+        "codigopostal": "4200",
+        "calle": "tomas edison",
+        "callenumero": "520",
+        "piso": "",
+        "departamento": "",
+        "email": "pepe@latiendademaria.com",
+        "username": "pepearg",
+        "password": "$2a$10$IBS5IRK8aczv26KmeiANIO1i/eZXTPnUY7gw7ArxZZ48s2HAGScPW",
+        "imagen": [],
+        "admin": false
+    },
+    {
+        "id": 3,
+        "nombre": "jaimito",
+        "apellido": "terrible",
+        "fechanacimiento": "1990-06-11",
+        "provincia": "Buenos Aires",
+        "localidad": "12 de Octubre",
+        "codigopostal": "1001",
+        "calle": "lomas de zamora",
+        "callenumero": "5100",
+        "piso": "",
+        "departamento": "",
+        "email": "jiamito@latiendademaria.com",
+        "username": "jaimeterrible",
+        "password": "$2a$10$BSB4xD7pqxg.XEPuaIqYHeum4Rgwxm2hFEp46vHp.a.JtRw.jJpHC",
+        "imagen": [],
+        "admin": false,
+        "carrito": [
+            {
+                "id": 1,
+                "cantidad": 1
+            },
+            {
+                "id": 3,
+                "cantidad": 2
+            },
+            {
+                "id": 9,
+                "cantidad": 5
+            }
+        ],
+        "favoritos": [1, 5, 15]
+    }
+]

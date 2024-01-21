@@ -3,56 +3,64 @@
     box-sizing: border-box;
 }
 
-body {
+/* body {
     margin-bottom: 4.5vh;
-}
+} */
 
-.createForm {
-    
-    margin-top: 20px;
-    border-radius: 10px;
+.containerForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    place-items: center;
+    gap: 10px;
     border: none;
     font-size: 1.2rem;
 }
-.createForm .titulo {
-    background-color: rgba(182, 229, 219, 0.2);
-    border: solid #32A97F 1px;
-    display: flex;
-    flex-direction: row;
-    font-family: "Gidole";
-    justify-content: space-evenly;
+.tituloCreate {
+    background-color: rgba(182, 229, 219, 0.5);
+    margin-top: 10px;
+    border-bottom: solid 1px #263631;
+    border-top: solid 1px #263631;
+    text-align: center;
     align-items: center;
-    font-size: 3rem;
-    -webkit-text-stroke: 1px white;
+    width: 100%;
+    height: 100%;
+    font-size: 2rem;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.8);
 }
-.createForm .titulo i {
+/* .container .titulo i {
 
     border: 1px solid white;
     border-radius: 50%;
     background-color: white;
     padding: 1rem
-}
-
-
+} */
 
 .form-producto{
     background-color: #32A97F ;
     border: black solid 2px;
-    /* border-radius: 20px; */
-    min-height: 340px;
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height:70%;
+    gap: 10px;
     padding: 20px 15px 20px 15px;
-    margin: 25px 0 0 0 
 }
 
 .form-producto button{
     width: 25%;
-
+    border-radius: 5px;
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 5px;
+    transition: 500ms;
 }
-
+.form-producto button:hover {
+    background-color: lightseagreen;
+}
 .form-producto textarea{
     width: 100%;
     height: 35%;
@@ -78,7 +86,6 @@ select.inputForm {
 @media (min-width: 760px) {
 
  .form-producto{
-
     width: 75%;
     max-width: 625px;
 }
@@ -89,19 +96,14 @@ select.inputForm {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height:70%;
-    
+    gap: 10px;
 }
 
-
- 
 }
 @media (min-width: 1200px) {
     .form-producto{
-
         width: 60%;
         max-width: 600px;
-        height: 90%;
     }
 
 }

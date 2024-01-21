@@ -1,0 +1,64 @@
+<% let { nombre, apellido, provincia, localidad, codigopostal, calle, callenumero, piso, departamento, carrito } = cartDetail %>
+<div class="cart-modal">
+    <section class="cartdetail">
+        <table>
+            <tbody>
+                <tr>
+                    <th></th>
+                    <th colspan="2">Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                </tr>
+            <% carrito.forEach(el => { %>
+                <tr>
+                    <td id="X">X</td>
+                    <td ><img src="<%= el.image[0] %>" alt="<%= el.name %>"/></td>
+                    <td id="product"><%= el.name %></td>
+                    <td class="number"><%= el.price %></td>
+                    <td>
+                        <a onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</a>
+                        <input id="cantidad" type="number" min="1" placeholder="cantidad" name="cantidad" value="<%= el.cantidad %>"/>
+                        <a onclick="this.parentNode.querySelector('input[type=number]').stepUp();this.querySelector('.total').innerText=3000">+</a>
+                    </td>
+                    <td class="total number"><%= (el.price*el.cantidad).toFixed(2) %></td>
+                </tr>
+            <% }); %>
+                <tr>
+                    <td colspan="4">Totales:</td>
+                    <td><%= carrito.reduce((acum, el) => acum + el.cantidad, 0) %></td>
+                    <td class="number"><b class="number"><%= carrito.reduce((acum, el) => acum + (el.cantidad*el.price), 0).toFixed(2) %></b></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section class="cartresume">
+        <h2>Total del carrito</h2>
+        </br>
+  
+            <p><b>Destinatario:</b> <%= `${nombre} ${apellido}`%></p>
+            <p><b>Provincia:</b> <%= provincia %></p>
+            <p><b>Localidad:</b> <%= localidad %></p>
+            <p><b>Codigo postal:</b> <%= codigopostal %></p>
+            <p><b>Calle:</b> <%= `${calle} ${callenumero}` %></p>
+       
+        <span id="cartsubtotal">
+            <h3>Subtotal</h3>
+            <p class="number"><%= carrito.reduce((acum, el) => acum + (el.cantidad*el.price), 0).toFixed(2) %></p>
+        </span>
+        <span id="cartenvio">
+            <h3>Envio</h3>
+            <div>
+                <select name="envio" required>
+                    <option value="moto">Moto $1000</option>
+                    <option value="micro">Terminal de Micro $1000</option>
+                    <option value="local">Retiro en local $0</option>
+                    <option value="domicilio">Domicilio</option>
+                </select></br>
+                <button>Calcular envio</button>
+            </div>
+        </span>
+        <h3>Total</h3>
+        <button>Finalizar Compra</button>
+    </section>
+</div>

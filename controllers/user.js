@@ -1,53 +1,96 @@
-const { users, products } = require('../models')
+const payments = require('../models/payments');
+const dataGeo = require('../models/dataGeo');
+const products = require('../models/products');
+const users = require('../models/user');
+const { check, validationResult } = require('express-validator');
 
-const usersController = {
+module.exports = {
     index: function (req, res) {
-        if (req.url == '/profile') {
-            res.render('users/profile', {
-                userData: users.detail(1),
-                productos: products.all() 
-            })
-        } else {
-            res.render('users/login', {errors: {}})
-        }
+        res.render('users/login', {
+            body: {},
+            errors: {}
+        })
+    },
+    profile: function (req,res){
+        res.render('users/profile', {
+            userData: users.detail(req.session.user?.id),
+            productos: products.all(),
+            historialPagos: payments.historialPagos(req.session.user?.id)
+        })
     },
     login: function (req,res) {
-        const user = users.login(req.body)
-        if (user.access) {
-            res.send(user)
+        const errores = validationResult(req)
+        if (errores.isEmpty()) {
+            const user = users.login(req.body)
+            if (user.access) {
+                delete user?.password
+                req.session.user = user? user : {}
+                res.status(200).redirect('/')
+            } else {
+                res.render('users/login', {
+                    body: {},
+                    errors: {login: user.error}
+                })
+            }
         } else {
-            res.render('users/login', {errors: {login: `Usuario y/o contraseña incorrecta`}})
+            res.render('users/login', {
+                body: req.body,
+                errors: errores.mapped()
+            })
         }
     },
-    create: function (req,res) {
-        if (req.method == 'GET') {
-            res.render('users/register')
-        }
-        if (req.method == 'POST') {
+    logout: function (req,res) {
+        delete req.session.user
+        res.redirect('/')
+    },
+    getCreateForm: function (req,res) {
+        res.render('users/register', {
+            body: {},
+            localidades: dataGeo.localidades()
+        })
+    },
+    postCreateForm: function (req,res) {
+        const errores = validationResult(req)
+        if (errores.isEmpty()) {
             const newUser = users.create(req.body, req.files)
             if (newUser) {
-                res.redirect(`users/login`)
+                res.redirect('/users/login')
             }
+        } else {
+            res.render('users/register', {
+                body: req.body,
+                localidades: dataGeo.localidades(),
+                errors: errores.mapped()
+            })
         }
     },
-    update: function (req,res) {
-        let { id } = req.params
-        if (req.method == 'GET') {
-            res.render('users/edit-user', { userData: users.detail(id)})
-        }
-        else if (req.method == 'PUT') {
-            console.log(req.files)
-            //const imagen = req.files.map(x => {return x.path})
-            const updatedData = users.update({...req.body, imagen })
+    getUpdateForm: function (req,res) {
+        res.render('users/edit-user', { 
+            userData: users.detail(req.params.id),
+            localidades: dataGeo.localidades(),
+            body: {}
+        })
+    },
+    putUpdateForm: function (req,res) {
+        const errores = validationResult(req)
+        if (errores.isEmpty()) {
+            const updatedData = users.update({id: parseInt(id), ...req.body, imagen: req.files })
             if (updatedData) {
-                res.send(updatedData)
+                res.redirect('/users/profile')
             }
+        } else {
+            res.render('users/edit-user', { 
+                userData: users.detail(id),
+                localidades: dataGeo.localidades(),
+                body: req.body,
+                errors: errores.mapped()
+            })
         }
-        // const updatedUser = users.update(req.body)
-        // if (updatedUser) {
-        //     res.send(`el usuario ${newUser.name} fue actualizado con exito!`)
-        // }
+    },
+    getRestoreUser: function (req,res) {
+        res.render('users/restore')
+    },
+    postRestoreUser: function (req,res) {
+        res.render('404notfound',{url: req.url})
     }
 }
-
-module.exports = usersController
