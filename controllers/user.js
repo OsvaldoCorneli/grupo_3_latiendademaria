@@ -1,3 +1,4 @@
+const payments = require('../models/payments');
 const dataGeo = require('../models/dataGeo');
 const products = require('../models/products');
 const users = require('../models/user');
@@ -13,7 +14,8 @@ module.exports = {
     profile: function (req,res){
         res.render('users/profile', {
             userData: users.detail(req.session.user?.id),
-            productos: products.all() 
+            productos: products.all(),
+            historialPagos: payments.historialPagos(req.session.user?.id)
         })
     },
     login: function (req,res) {

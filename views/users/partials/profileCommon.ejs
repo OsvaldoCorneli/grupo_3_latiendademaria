@@ -30,9 +30,10 @@
             <p class="color">Estado del pago</p>
             <p class="price">Estado de envio</p>
         </span>
-    <!-- <% for (let i in productos) { %>
-        <%- include('./card.ejs', {producto: productos[i]}) %>
-    <% } %> -->
+    <% historialPagos.forEach(pago => { %>
+        <%- include('./cardPago.ejs', {pago: pago}) %>
+    <% }) %>
+    </section>
 </div>
 <div>
     <h2>Mis Favoritos</h2>

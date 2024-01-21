@@ -1,0 +1,18 @@
+
+<% let {referencia, fecha, products, total, estado_pago} = pago %>
+<span>
+    <p><%= fecha.slice(1,10)  %></p>
+    <div>
+        <% products.forEach(prod => { %>
+            <span>
+                <p><%= prod.id %></p>
+                <p><%= prod.color %></p>
+                <p><%= prod.cantidad %></p>
+                <p><%= prod.price %></p>
+                <p><%= (prod.cantidad*prod.price).toFixed(2) %></p>
+            </span>
+        <% }) %>
+    </div> 
+    <p><%= total %></p>
+    <p><%= estado_pago %></p>
+</span>

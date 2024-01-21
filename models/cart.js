@@ -1,5 +1,9 @@
+const fs = require('fs');
+const path = require('path');
+
 const products = require('./products')
 const users = require('./user')
+
 
 module.exports = {
     cart: function (userId) {
