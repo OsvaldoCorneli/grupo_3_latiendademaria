@@ -1,25 +1,19 @@
-const express = require('express');
-const router = express.Router();
-const users = require('../controllers/user');
-const validacionForm = require('../middlewares/validacionForm') 
-const upload = require('../middlewares/multerMid');
-const {check, validationResult} = require('express-validator')
+const express = require('express')
+const router = express.Router()
+const { users } = require('../controllers')
+const { upload } = require('../middlewares')
+
 
 router.route('/login')
     .get(users.index)
-    .post(validacionForm.login(), users.login);
+    .post(users.login);
 
-router.get('/logout', users.logout)
+router.get('/register', upload.any(), users.create)
 
-router.route('/register')
-    .get(users.getCreateForm)
-    .post(upload.any(), validacionForm.registerUser(), users.postCreateForm);
+router.get('/profile', users.index)
 
-router.get('/restore', users.getRestoreUser);
-
-router.get('/profile', users.profile);
-
-router.get('/:id/update', users.getUpdateForm);
-router.put('/:id/update', upload.any(), validacionForm.editUser(), users.putUpdateForm);
+router.get('/:id/update', users.update);
+router.put('/:id/update', upload.any(), users.update)
+;
 
 module.exports = router

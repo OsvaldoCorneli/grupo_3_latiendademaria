@@ -1,10 +1,10 @@
 const fs = require('fs')
 const path = require('path')
 
-const productsFilePath = path.join(__dirname, '../data/productos.json');
-const Productos = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
+const productsFilePath = path.join(__dirname, '../utils/productos.json');
+let Productos = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
 
-module.exports = {
+const productsModels = {
     all: function () {
         return Productos
     },
@@ -83,21 +83,20 @@ module.exports = {
     edit: function (id) {
         return Productos.find((product) => product.id === +id)
     },
-    edited: function (body) {
-        const updateProduct = Productos.find((prod) => prod.id == body.id);
-        const filterProduct = Productos.filter((prod) => prod.id != body.id);
-        const image = body.imagen.length > 0
-            ? body.imagen.map((img) => {return img.path.split('public')[1]})
-            : updateProduct.image;
-        const editedProduct = {...updateProduct, ...body, image}
-        const allProducts = [...filterProduct, editedProduct].sort((a,b) => a.id - b.id)
-
-        fs.writeFileSync(productsFilePath, JSON.stringify(allProducts,0,4),'utf-8')
+    edited: function (id,body){
+        id = +id - 1
+        Productos[id].name = body.name ? body.name : Productos[id].name
+        Productos[id].description = body.description ? body.description : Productos[id].description
+        Productos[id].line = body.line ? body.line : Productos[id].line 
+        Productos[id].category = body.category ? body.category : Productos[id].category 
+        Productos[id].price = body.price ? +body.price : Productos[id].price
         
-        return editedProduct
+        return Productos[id]
     },
     destroy: function(id){
         Productos = Productos.filter((product) => product.id !== +id);
         return Productos;
     }
 }
+
+module.exports = productsModels  

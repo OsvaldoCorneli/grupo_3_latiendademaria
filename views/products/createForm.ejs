@@ -5,71 +5,76 @@
     </head>
 <body>
     <%- include('../partials/navbar.ejs') %>
-    <main class="containerForm">
-        <span class="tituloCreate">
-            <p>Creacion de Producto</p>
-        </span>
-        <form class="form-producto" action="/products/create" method="POST" enctype="multipart/form-data">
-            <label for="name">Nombre:</label>
-                <input class="inputForm" 
-                id="name" 
-                type="text" 
-                name="name" 
-                placeholder="Ingresar Nombre"
-                required
-                />
-            <label for="description">Descripcion:</label>
-            <textarea id="description" type="text" name="description" placeholder="Ingresar descripcion..."></textarea>
-            <label for="image">Imagen:
-                <input
-                    type="file" 
-                    id="image"
-                    name="image"
-                    placeholder="ingresar URL de imagen..."
-                    multiple
-                    />
-            </label>
-            <label for="line">Linea:</label>
-            <select id="line" name="line" required>
-                <option value="sublimada">Sublimada</option>
-                <option value="artesanal">Artesanal</option>
-            </select>
-            <label for="category">Categoria:
-                <% for (let i in categorias) { %>
-                    <label>
-                        <input type="radio" name="category" value=<%= categorias[i] %> required></input>
-                    <%= categorias[i] %>
+    <main class="createForm">
+        <span>
+            <span class="titulo">
+                <h1>Creacion de Producto</h1>
+            </span>
+            <div class="contenedorForm">
+                <strong>Formulario de Alta</strong>
+                <form class="form-producto" action="/products/create" method="POST" enctype="multipart/form-data">
+                    <label for="name">Nombre:</label>
+                        <input class="inputForm" 
+                        id="name" 
+                        type="text" 
+                        name="name" 
+                        placeholder="Ingresar Nombre"
+                        required
+                        />
+                    <label for="description">Descripcion:</label>
+                    <textarea id="description" type="text" name="description" placeholder="Ingresar descripcion..."></textarea>
+                    <label for="image">Imagen:
+                        <input
+                            type="file" 
+                            id="image"
+                            name="image"
+                            placeholder="ingresar URL de imagen..."
+                            multiple
+                            />
                     </label>
-                <% } %>
-            </label>
-            
-            <label for="color">Colores:</label>
-            <select class="inputForm" 
-                id="color" 
-                name="color" 
-                multiple>
-                <option disabled selected value>- seleccionar -</option>
-                <% for (let i in colors) {  %>
-                    <option value=<%= colors[i] %>> <%= colors[i] %></option>
-                <% } %>
-            </select>
-            
-            <label for="price">Precio:</label>
-            <input class="inputForm" 
-                type="number"
-                id="price" 
-                name="price"
-                required
-            />
-            <label for="stock">Stock:</label>
-            <input class="inputForm" 
-                type="number"
-                id="stock" 
-                name="stock"
-                required
-            />
-            <button type="submit">Enviar</button>
-        </form>
+                    <label for="line">Linea:</label>
+                    <select id="line" name="line" required>
+                        <option value="sublimada">Sublimada</option>
+                        <option value="artesanal">Artesanal</option>
+                    </select>
+                    <label for="category">Categoria:
+                        <% for (let i in categorias) { %>
+                            <label>
+                                <input type="radio" name="category" value=<%= categorias[i] %> required></input>
+                            <%= categorias[i] %>
+                            </label>
+                        <% } %>
+                    </label>
+                    
+                    <label for="color">Colores:</label>
+                    <select class="inputForm" 
+                        id="color" 
+                        name="color" 
+                        multiple>
+                        <option disabled selected value>- seleccionar -</option>
+                        <% for (let i in colors) {  %>
+                            <option value=<%= colors[i] %>> <%= colors[i] %></option>
+                        <% } %>
+                    </select>
+                    
+                    <label for="price">Precio:</label>
+                    <input class="inputForm" 
+                        type="number"
+                        id="price" 
+                        name="price"
+                        required
+                    />
+                    <label for="stock">Stock:</label>
+                    <input class="inputForm" 
+                        type="number"
+                        id="stock" 
+                        name="stock"
+                        required
+                    />
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+        </span>
     </main> 
     <%- include('../partials/footer.ejs') %>
 </body>

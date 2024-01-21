@@ -85,16 +85,16 @@ main{
     font-size: 15px;
 }
 .validacionusername:valid {
-    border: 2px solid green;
+    border: 5px solid green;
 }
 .validacionusername:invalid {
-    border: 2px solid red;
+    border: 5px solid red;
 }
 .validacionpassword:valid {
-    border: 2px solid green;
+    border: 5px solid green;
 }
 .validacionpassword:invalid {
-    border: 2px solid red;
+    border: 5px solid red;
 }
 
 .errors {

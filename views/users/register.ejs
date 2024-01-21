@@ -4,7 +4,7 @@
     <%- include('../partials/head.ejs') %>
     <link href="\css\registro.css" rel="stylesheet"/>
    
-
+   
     <title>La tienda de Maria</title>
 </head>
 <body>
@@ -25,13 +25,10 @@
                         required
                         minlength="3"
                         maxlength="20"
-                        value="<%= body.nombre? body.nombre : null  %>"
                     />
-                    <% if (locals.errors && errors.nombre) { %>
-                        <p class="errors"><%= errors.nombre.msg %></p>
-                    <% } %>
                 </div>
                 <div class="inputform">
+
                     <label for="apellido">Apellido/s:</label>
                     <input
                         id="apellido"
@@ -39,11 +36,7 @@
                         type="text"
                         placeholder="Ingresar apellido"
                         minlength="6"
-                        value="<%= body.apellido? body.apellido : null  %>"
                     />
-                    <% if (locals.errors && errors.apellido) { %>
-                        <p class="errors"><%= errors.apellido.msg %></p>
-                    <% } %>
                 </div>
                 <div class="inputform">
 
@@ -52,39 +45,29 @@
                     type="date"
                     name="fechanacimiento"
                     id="fechanacimiento"
-                    value="<%= body.fechanacimiento? body.fechanacimiento : null  %>"
                     />
-                    <% if (locals.errors && errors.fechanacimiento) { %>
-                        <p class="errors"><%= errors.fechanacimiento.msg %></p>
-                    <% } %>
                 </div>
-
                 <div class="inputform">   
                     <label for="provincia">Provincia:</label>
-                    <select id='provincia' name="provincia">
-                        <option disabled selected value>- seleccionar -</option>
-                        <% localidades.forEach((el) => { %>
-                            <option value="<%= el.provincia %>" <%= body.provincia == el.provincia? "selected" : null %>><%= el.provincia %></option>
-                        <% }) %>
-                    </select>
-                    <% if (locals.errors && errors.provincia) { %>
-                        <p class="errors"><%= errors.provincia.msg %></p>
-                    <% } %>
+                    <input 
+                        type="text"
+                        name="provincia"
+                        id="provincia"
+                        placeholder="provincia"
+                        minlength="10"
+                        maxlength="20"
+                    />
                 </div>
                 <div class="inputform">
-                        <% localidades.forEach((el) => { %>
-                            <label id="<%= el.provincia.split(" ").join("") %>" for="<%= el.provincia %>" style="display:none;">Localidad:
-                            <select id="<%= el.provincia %>" name="localidad">
-                                <option disabled selected value>- seleccionar -</option>
-                                <% el.localidades.forEach((loc) => { %>
-                                    <option value="<%= loc %>" <%= body.localidad == loc? "selected" : null %>><%= loc %></option>
-                                <% }) %>
-                            </select>
-                            </label>
-                        <% }) %>
-                    <% if (locals.errors && errors.localidades) { %>
-                        <p class="errors"><%= errors.localidades.msg %></p>
-                    <% } %>
+                    <label for="localidad">localidad:</label>
+                    <input 
+                        type="text"
+                        name="localidad"
+                        id="localidad"
+                        placeholder="localidad"
+                        minlength="10"
+                        maxlength="20"
+                    />
                 </div>
             <div class="inputform">
                 <label for="codigopostal">Codigo postal:</label>
@@ -93,13 +76,9 @@
                     name="codigopostal"
                     id="codigopostal"
                     placeholder="Codigo Postal"
-                    minlength="4"
-                    maxlength="10"
-                    value="<%= body.codigopostal? body.codigopostal : null %>"
+                    minlength="10"
+                    maxlength="20"
                 />
-                <% if (locals.errors && errors.codigopostal) { %>
-                    <p class="errors"><%= errors.codigopostal.msg %></p>
-                <% } %>
             </div>
             <div class="inputform">
                 <label for="street">Calle:</label>
@@ -110,12 +89,22 @@
                     placeholder="calle"
                     minlength="10"
                     maxlength="20"
-                    value="<%= body.calle? body.calle : null %>"
                     />
-                    <% if (locals.errors && errors.calle) { %>
-                        <p class="errors"><%= errors.calle.msg %></p>
-                    <% } %>
             </div>
+            <div class="inputform">
+                <label for="imagen">Imagen:</label>
+                <input 
+                    class="uploadFile"
+                    type="file"
+                    name="imagen"
+                    id="imagen"
+                    placeholder="calle"
+                    minlength="10"
+                    maxlength="20"
+                />
+            </div>
+        </div>
+        <div class="contenedor2">
             <div class="inputform">
                 <label for="streetnumber">Numero:</label>
                 <input 
@@ -125,25 +114,22 @@
                     placeholder="Numero"
                     minlength="10"
                     maxlength="20"
-                    value="<%= body.callenumero? body.callenumero : null %>"
+                   
                     />
-                    <% if (locals.errors && errors.callenumero) { %>
-                        <p class="errors"><%= errors.callenumero.msg %></p>
-                    <% } %>
-            </div>
-        </div>
-        <div class="contenedor2">
-            <div class="inputform button-wrap">
-                <label class=button for="imagen">Imagen de perfil</label>
-                <input 
-                    type="file"
-                    name="imagen"
-                    id="imagen"
-                    value="<%= body.imagen? body.imagen : null %>"
+                </div>
+                <div class="inputform">
+
+                    <label for="username">Codigo postal:</label>
+                    <input 
+                    type="text"
+                    name="codigopostal"
+                    id="codigopostal"
+                    placeholder="Codigo Postal"
+                    required
+                    minlength="10"
+                    maxlength="20"
+                    
                 />
-                <% if (locals.errors && errors.imagen) { %>
-                    <p class="errors"><%= errors.imagen.msg %></p>
-                <% } %>
             </div>
             <div class="inputform">
                 <label for="buildingfloor">Piso:</label>
@@ -154,11 +140,7 @@
                     placeholder="Piso"
                     minlength="10"
                     maxlength="20"
-                    value="<%= body.piso? body.piso : null %>"
                     />
-                    <% if (locals.errors && errors.piso) { %>
-                        <p class="errors"><%= errors.piso.msg %></p>
-                    <% } %>
             </div>
             <div class="inputform">
                 <label for="departamento">Departamento:</label>
@@ -169,11 +151,7 @@
                     placeholder="Departamento"
                     minlength="10"
                     maxlength="20"
-                    value="<%= body.departamento? body.departamento : null %>"
                     />
-                    <% if (locals.errors && errors.departamento) { %>
-                        <p class="errors"><%= errors.departamento.msg %></p>
-                    <% } %>
             </div>
             <div class="inputform">
                 <label for="email">Email:</label>
@@ -186,30 +164,21 @@
                     required
                     minlength="10"
                     maxlength="30"
-                    value="<%= body.email? body.email : null %>"
                     />
-                    <% if (locals.errors && errors.email) { %>
-                        <p class="errors"><%= errors.email.msg %></p>
-                    <% } %>
             </div>
             <div class="inputform">
                 <label for="username">Nombre de usuario:</label>
                 <input 
                     class="requiredinput"
                     type="text"
-                    name="username"
-                    id="username"
+                    name="street"
+                    id="street"
                     placeholder="Nombre de usuario"
                     required
-                    minlength="6"
+                    minlength="10"
                     maxlength="20"
-                    value="<%= body.username? body.username : null %>"
                 />
-                <% if (locals.errors && errors.username) { %>
-                    <p class="errors"><%= errors.username.msg %></p>
-                <% } %>
             </div>
-
             <div class="inputform">
                 <label for="password">contraseña:</label>
                 <input 
@@ -221,11 +190,7 @@
                     required
                     minlength="6"
                     maxlength="20"
-                    value="<%= body.password? body.password : null %>"
                     />
-                    <% if (locals.errors && errors.password) { %>
-                        <p class="errors"><%= errors.password.msg %></p>
-                    <% } %>
             </div>
             <div class="inputform">
                 <label for="repassword">repetir contraseña:</label>
@@ -238,20 +203,12 @@
                     required
                     minlength="6"
                     maxlength="20"
-                    value="<%= body.repassword? body.repassword : null %>"
                 />
-                <p class="error-contraseña">la contraseña no coincide</p>
-                <% if (locals.errors && errors.repassword) { %>
-                    <p class="errors"><%= errors.repassword.msg %></p>
-                <% } %>
             </div>
-            <div class="inputform">
-                <input type="submit" class="send" value="Registrar"/>
-            </div>
+            <button type="submit" class="send">Registrar</button>
         </div>
         </form>
     </article>
-    <script src="\scripts\register.js"></script>
     </main>
     <%- include('../partials/footer.ejs') %>
 </body>

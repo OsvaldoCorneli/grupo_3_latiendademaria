@@ -22,11 +22,15 @@ main{
         border-radius: 5px;
         margin: 10px 0 10px 0;
         max-width: 500px;
-}
+    
+
+    }
 
 .inputform{
     margin: 15px;
 }
+
+
 .contenedor-form input{
     width: 100%;
     max-width: 500px;
@@ -34,13 +38,7 @@ main{
     padding: 5px;
     border: none;
 }
-.contenedor-form select {
-    width: 100%;
-    max-width: 500px;
-    border-radius: 5px;
-    padding: 5px;
-    border: none;
-}
+
 .contenedor1{
     width: 90%;
     margin: 0;
@@ -55,29 +53,19 @@ main{
     margin: 0;
 }
 .contenedor3 > img {
-    border-radius: 50%;
-    border: solid 1px black;
     width: 200px;
 }
 
-.button-wrap {
-    position: relative;
-}
-
-.button {
-    display: inline-block;
-    padding: 10px 16px;
-    cursor: pointer;
+button.send {
     border-radius: 5px;
+    border: hidden;
+    padding: 5px;
     background-color: #1259c3;
-    font-size: inherit;
-    font-weight: bold;
-    color: #fff;
-    transition: all 500ms;
-    width: fit-content;
-    max-width: 250px;
+    color: white;
+    width: 35%;
+    transition: 500ms;
 }
-.button:hover {
+button.send:hover {
     background-color: #5394b0;
 }
 
@@ -93,14 +81,12 @@ main{
 input.uploadFile:hover {
     background-color: #5394b0;
 } */
-input[type="file"] {
-    position: absolute;
-    background-color: #1259c3;
-    z-index: -1;
-    top: 10px;
-    left: 8px;
-    font-size: inherit;
-    color: #b8b8b8;
+
+.requiredinput:valid {
+    border: 2px solid green;
+}
+.requiredinput:invalid {
+    border: 2px solid red;
 }
 .requiredinput:valid {
     border: 2px solid green;
@@ -108,15 +94,7 @@ input[type="file"] {
 .requiredinput:invalid {
     border: 2px solid red;
 }
-.errors {
-    font-weight: 400;
-    color: red
-}
-.error-contraseña {
-    display: none;
-    color: red;
-    font-weight: bold;
-}
+
 @media (min-width: 760px){
 
     .contenedor-form{

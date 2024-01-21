@@ -78,9 +78,7 @@
                     />
                 </span>
                 <span class="contenedor2">
-                    <% productEdit.image.forEach((img) => { %>
-                        <img src="<%= img %>" alt="<%= productEdit.name %>"/>
-                    <% }) %>
+                    <img src="<%= productEdit.image %>" alt="<%= productEdit.name %>"/>
                     <label for="image">Imagen:
                         <input
                             type="file" 
