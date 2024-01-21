@@ -12,3 +12,7 @@
     font-family: 'Gidole';
     src: url('../fonts/Gidole-Regular.ttf') format("truetype");
 }
+@font-face {
+    font-family: 'Dejavu-Sans';
+    src: url('../fonts/DejaVuSanswithNommasNoDecimals.ttf') format("truetype");
+}

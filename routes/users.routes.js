@@ -9,15 +9,17 @@ router.route('/login')
     .get(users.index)
     .post(validacionForm.login(), users.login);
 
+router.get('/logout', users.logout)
+
 router.route('/register')
-    .get(users.create)
-    .post(upload.any(), validacionForm.registerUser(), users.create);
+    .get(users.getCreateForm)
+    .post(upload.any(), validacionForm.registerUser(), users.postCreateForm);
 
-router.get('/restore', users.restore);
+router.get('/restore', users.getRestoreUser);
 
-router.get('/profile', users.index);
+router.get('/profile', users.profile);
 
-router.get('/:id/update', users.update);
-router.put('/:id/update', upload.any(), validacionForm.editUser(), users.update);
+router.get('/:id/update', users.getUpdateForm);
+router.put('/:id/update', upload.any(), validacionForm.editUser(), users.putUpdateForm);
 
 module.exports = router

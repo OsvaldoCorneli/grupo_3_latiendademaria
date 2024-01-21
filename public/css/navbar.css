@@ -1,4 +1,9 @@
 
+
+.number {
+    font-family: 'Dejavu-Sans';
+    text-align: right;
+}
 .logo {
     display: none;
 }
@@ -33,6 +38,7 @@ a.logoa{
 }
 
 .barrasuperior {
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -158,7 +164,7 @@ nav ul {
       }
 
     nav span {
-        height: 10vh; 
+        height: 80px;
     }
     img.logo {
         display: block;
@@ -183,17 +189,22 @@ nav ul {
         display: flex;
         margin: 0px;
         flex-direction: row;
-        justify-content: space-evenly;
+        justify-content: space-around;
         align-items: center;
         padding: 1%;
 
     }
     .site ul a li {
-        width: 10vw;
+        /* width: 10vw; */
         margin: 0px;
         background-color: #32A97F;
         padding: 5px;
+        transition: 250ms;
         /* border: solid 1px #5394b0;  */
+    }
+    .site ul li:hover {
+        background-color: #3ecf9c;
+        border-radius: 5px;
     }
     .site a {
 

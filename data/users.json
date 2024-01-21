@@ -16,7 +16,23 @@
         "username": "gpaz",
         "email": "gpaz@latiendademaria.com",
         "password": "abc123",
-        "fechanacimiento": "1990-06-12"
+        "fechanacimiento": "1990-06-12",
+        "admin": true,
+        "carrito": [
+            {
+                "id": 1,
+                "cantidad": 1
+            },
+            {
+                "id": 3,
+                "cantidad": 2
+            },
+            {
+                "id": 9,
+                "cantidad": 5
+            }
+        ],
+        "favoritos": [1, 5, 15]
     },
     {
         "id": 2,
@@ -33,7 +49,8 @@
         "email": "pepe@latiendademaria.com",
         "username": "pepearg",
         "password": "$2a$10$IBS5IRK8aczv26KmeiANIO1i/eZXTPnUY7gw7ArxZZ48s2HAGScPW",
-        "imagen": []
+        "imagen": [],
+        "admin": false
     },
     {
         "id": 3,
@@ -50,6 +67,22 @@
         "email": "jiamito@latiendademaria.com",
         "username": "jaimeterrible",
         "password": "$2a$10$BSB4xD7pqxg.XEPuaIqYHeum4Rgwxm2hFEp46vHp.a.JtRw.jJpHC",
-        "imagen": []
+        "imagen": [],
+        "admin": false,
+        "carrito": [
+            {
+                "id": 1,
+                "cantidad": 1
+            },
+            {
+                "id": 3,
+                "cantidad": 2
+            },
+            {
+                "id": 9,
+                "cantidad": 5
+            }
+        ],
+        "favoritos": [1, 5, 15]
     }
 ]

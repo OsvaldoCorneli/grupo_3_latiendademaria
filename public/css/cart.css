@@ -79,6 +79,11 @@ td > a {
     font-size: 1.5rem;
 }
 
+td > img {
+    max-height: 70px;
+    max-width: 100px;
+}
+
 @media (max-width: 400px) {
     .cartdetail img {
         display: none;

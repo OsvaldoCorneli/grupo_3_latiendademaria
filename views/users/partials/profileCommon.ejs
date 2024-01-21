@@ -1,0 +1,49 @@
+<h2>Mis Datos</h2>
+<section class="profile">
+    <% let { id, nombre, apellido, email, calle, callenumero, provincia, imagen, codigopostal, piso, departamento } = userData %>
+    <span>
+        <img src=<%= imagen %> alt=<%= nombre %>/>
+    </span>
+    <span>
+        <p>Nombre: <%= nombre %>, <%= apellido %></p>
+        <p>email: <%= email %></p>
+        <p>Provincia: <%= provincia %></p>
+        <p>Domicilio: <%= calle %> <%= callenumero %> </p>
+        <% if (piso) { %>
+            <p>Piso: <%= piso %></p>
+        <% } %>
+        <% if (departamento) { %>
+            <p>Departamento: <%= departamento %> </p>
+        <% } %>
+        <p>Codigo Postal: <%= codigopostal %></p>
+        <a href="/users/<%= id %>/update"><button class="edit">Editar</button></a>
+    </span>
+    
+</section>
+<div>
+    <h2>Mis Compras</h2>
+    <section class="productos">
+        <span class="header">
+            <p>fecha</p>
+            <p class="name">Articulos</p>
+            <p class="category">Total</p>
+            <p class="color">Estado del pago</p>
+            <p class="price">Estado de envio</p>
+        </span>
+    <!-- <% for (let i in productos) { %>
+        <%- include('./card.ejs', {producto: productos[i]}) %>
+    <% } %> -->
+</div>
+<div>
+    <h2>Mis Favoritos</h2>
+    <section class="favoritos">
+        <span class="header">
+            <p>Imagen</p>
+            <p>Nombre</p>
+            <p>Color</p>
+            <p>Precio</p>
+            <p>Stock</p>
+        </span>
+    </section>
+</div>
+</section>

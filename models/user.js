@@ -9,6 +9,8 @@ const Users = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
 const dataGeoFilePath = path.join(__dirname, '../data/users.json');
 const dataGeo = JSON.parse(fs.readFileSync(dataGeoFilePath, 'utf-8'));
 
+const preferencias = path.join(__dirname, '../data/users.json');
+
 module.exports = {
     index: function () {
         return Users
@@ -69,7 +71,12 @@ module.exports = {
     },
     detail: function (id) {
         const detailUser = Users.find((x) => x.id == id)
-        return detailUser
+        if (detailUser) {
+            return detailUser
+        } else {
+            return {}
+        }
+        
     },
     restore: function (id) {
         

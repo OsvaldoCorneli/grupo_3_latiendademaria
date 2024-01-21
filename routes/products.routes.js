@@ -10,8 +10,8 @@ router.route('/')
 router.get('/filter', products.filter);
 
 router.route('/create') 
-    .get(products.create)
-    .post(upload.any(), products.create)
+    .get(products.getCreateForm)
+    .post(upload.any(), products.postCreateForm)
 
 router.route('/:id/edit')
     .get(products.edit) // para renderizar al front el form edit de producto

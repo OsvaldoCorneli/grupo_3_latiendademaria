@@ -20,6 +20,7 @@ app.use(session({
     saveUninitialized: false
 }));
 app.use(cookieParser())
+app.use(require('./middlewares/ensureLogin'))
 
 app.set('view engine', 'ejs');
 //app.set('views', './carpeta-de-vistas')   <<--- ejemplo de codigo a usar si se quiere cambiar la ruta views por defecto(./views).
