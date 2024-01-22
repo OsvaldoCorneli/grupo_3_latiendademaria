@@ -68,7 +68,7 @@
         "username": "jaimeterrible",
         "password": "$2a$10$BSB4xD7pqxg.XEPuaIqYHeum4Rgwxm2hFEp46vHp.a.JtRw.jJpHC",
         "imagen": [],
-        "admin": false,
+        "admin": true,
         "carrito": [
             {
                 "id": 1,

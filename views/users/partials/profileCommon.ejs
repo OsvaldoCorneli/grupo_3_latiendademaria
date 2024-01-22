@@ -22,22 +22,76 @@
 <section class="common-profile">
     <div class="historialpagos">
         <h2>Mis Compras</h2>
-        <table class="productos">
+        <table class="productos portraitlayout">
             <tbody>
                 <tr>
-                    <th rowspan="2">fecha</th>
-                    <th colspan="5">Articuos</th>
-                    <th rowspan="2">total</th>
-                    <th rowspan="2">Estado</th>
-                </tr>
-                <tr class="subtitle">
-                    <td>id</td><td>color</td><td>cant</td><td>precio</td><td>subtotal</td>
+                    <th>Referencia</th>
+                    <th>Fecha</th>
+                    <th>Producto</th>
+                    <th>cant</th>
+                    <th>Total</th>
+                    <th>Estado</th>
                 </tr>
                 <% historialPagos.forEach(pago => { %>
-                    <%- include('./cardPago.ejs', {pago: pago}) %>
+                    <%- include('./cardPago.ejs', {pago: pago, portrait: true, desktop: false}) %>
                 <% }) %>
             </tbody>
         </table>
+        <table class="productos desktoplayout">
+            <tbody>
+            <tr>
+                <th>Referencia</th>
+                <th>Fecha</th>
+                <th>Producto</th>
+                <th>color</th>
+                <th>cant</th>
+                <th >precio</th>
+                <th >subtotal</th>
+                <th>Total</th>
+                <th>Estado</th>
+            </tr>
+            <% historialPagos.forEach(pago => { %>
+                <%- include('./cardPago.ejs', {pago: pago, desktop: true, portrait: false}) %>
+            <% }) %>
+        </tbody>
+    </table>
+    <section class="mobilelayout">
+        <% historialPagos.forEach(pago => { let {referencia, fecha, products, total, estado_pago} = pago %>
+        <div>
+            <span>
+                <b>Referencia</b>
+                <p><%= referencia %></p>
+            </span>
+            <span>
+                <b>Fecha</b>
+                <p><%= fecha.slice(0,10) %></p>
+            </span>
+            <span>
+                <b>Total:</b>
+                <p class="number">$<%= total %></p>
+            </span>
+            <span>
+                <b>Estado de pago:</b>
+                <i class="<%= estado_pago %>"><%= estado_pago %></i>
+            </span>
+            <table>
+                <tbody>
+                    <tr><th>Producto</th><th>Color</th><th>Cant</th><th>Precio</th><th>Subtotal</th></tr>
+                    <% products.forEach(prod => { let { id, name, image, color, cantidad, price } = prod %>
+                    <% let background = `background-color:${color};color:${color};border-radius:50%; border:0.1px-solid-black;;` %>
+                        <tr>
+                            <td><img class="product" src="<%= image %>" alt=""/>(<%= id %>) <%= name %></td>
+                            <td><i style=<%= background %>>oo</i></td>
+                            <td><%= cantidad %></td>
+                            <td class="number"><%= price %></td>
+                            <td><b class="number"> <%= (cantidad*price).toFixed(2) %></b></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+        <% }) %>
+    </section>
     </div>
     <!-- <div class="favoritos">
         <h2>Mis Favoritos</h2>

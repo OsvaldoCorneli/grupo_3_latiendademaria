@@ -219,7 +219,7 @@
             </div> -->
         </div>
         <div class="contenedor3">
-            <img src="<%= imagen.length>0? imagen[0] : "https://www.seekpng.com/png/detail/41-410093_male-symbol-png.png" %>" alt=<%= nombre  %>/>
+            <img class="perfil" src="<%= imagen.length>0? imagen[0] : "" %>" alt="<%= nombre.slice(0,1).toUpperCase()+apellido.slice(0,1).toUpperCase() %>"/>
             <div class="inputform">
                 <div class="inputform button-wrap">
                     <label class="button" for="imagen">Subir imagen</label>
