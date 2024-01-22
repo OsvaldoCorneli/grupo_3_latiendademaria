@@ -24,7 +24,7 @@ for (let x = 0; x < 20; x++) {
             })
         }
     }
-    let estados_pago = ['completado','en proceso','cancelado', 'rechazado']
+    let estados_pago = ['completado','enproceso','cancelado', 'rechazado']
     comprasJson.push({
         referencia: referencia,
         Userid: users[Math.round((users.length-1)*Math.random())].id,

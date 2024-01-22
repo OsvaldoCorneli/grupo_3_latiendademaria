@@ -429,7 +429,7 @@
         ],
         "total": 49352.48,
         "fecha": "2023-12-12T03:00:00.000Z",
-        "estado_pago": "en proceso"
+        "estado_pago": "enproceso"
     },
     {
         "referencia": 17,
@@ -462,7 +462,7 @@
         ],
         "total": 126171.34,
         "fecha": "2023-11-11T03:00:00.000Z",
-        "estado_pago": "en proceso"
+        "estado_pago": "enproceso"
     },
     {
         "referencia": 18,
