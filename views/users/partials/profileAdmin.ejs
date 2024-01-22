@@ -2,7 +2,7 @@
 <section class="profile">
     <% let { id, nombre, apellido, email, calle, callenumero, provincia, imagen, codigopostal, piso, departamento } = userData %>
     <span>
-        <img src=<%= imagen %> alt=<%= nombre %>/>
+        <img class="perfil" src="<%= imagen %>" alt="<%= nombre.slice(0,1).toUpperCase()+apellido.slice(0,1).toUpperCase() %>"/>
     </span>
     <span>
         <p>Nombre: <%= nombre %>, <%= apellido %></p>
