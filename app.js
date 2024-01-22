@@ -9,6 +9,7 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const loguearRuta = require('./middlewares/loguearRutas') 
 const rutaNoEncontrada = require('./middlewares/rutaNoEncontrada');
+const recordameMiddleware = require('./middlewares/recordameMiddleware');
 
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
@@ -21,6 +22,7 @@ app.use(session({
 }));
 app.use(cookieParser())
 app.use(require('./middlewares/ensureLogin'))
+app.use(recordameMiddleware)
 
 app.set('view engine', 'ejs');
 //app.set('views', './carpeta-de-vistas')   <<--- ejemplo de codigo a usar si se quiere cambiar la ruta views por defecto(./views).

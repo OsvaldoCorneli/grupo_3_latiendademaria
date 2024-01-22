@@ -50,7 +50,22 @@
         "username": "pepearg",
         "password": "$2a$10$IBS5IRK8aczv26KmeiANIO1i/eZXTPnUY7gw7ArxZZ48s2HAGScPW",
         "imagen": [],
-        "admin": false
+        "admin": false,
+        "carrito": [
+            {
+                "id": 1,
+                "cantidad": 1
+            },
+            {
+                "id": 3,
+                "cantidad": 2
+            },
+            {
+                "id": 9,
+                "cantidad": 5
+            }
+        ],
+        "favoritos": [1, 5, 15]
     },
     {
         "id": 3,
