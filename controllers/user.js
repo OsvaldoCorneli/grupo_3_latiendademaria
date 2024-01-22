@@ -25,6 +25,9 @@ module.exports = {
             if (user.access) {
                 delete user?.password
                 req.session.user = user? user : {}
+                if(req.body.recordame != undefined){
+                    res.cookie('recordame', user.email, {expires: 0})
+                } 
                 res.status(200).redirect('/')
             } else {
                 res.render('users/login', {
