@@ -1,16 +1,14 @@
 
-const { products } = require('../models');
+const products = require('../models/products');
+const cart = require('../models/cart');
 
-const main = {
+module.exports = {
 	getHome: function (req, res) {
 		res.render('Home/home', {
 			sublimados: products.filter({line: 'sublimada'}).slice(0,8),
 			artesanales: products.filter({line: 'artesanal'}).slice(0,4)
 		})
 	},
-    getCart: function (req,res) {
-		res.render('cart')
-    },
     getContacto: function (req,res) {
 		res.render('contacto')
     },
@@ -35,5 +33,3 @@ const main = {
       }
   },
 }
-
-module.exports = main

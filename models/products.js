@@ -1,10 +1,10 @@
 const fs = require('fs')
 const path = require('path')
 
-const productsFilePath = path.join(__dirname, '../utils/productos.json');
-let Productos = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
+const productsFilePath = path.join(__dirname, '../data/productos.json');
+const Productos = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
 
-const productsModels = {
+module.exports = {
     all: function () {
         return Productos
     },
@@ -107,12 +107,10 @@ const productsModels = {
 
         fs.writeFileSync(productsFilePath, JSON.stringify(allProducts,0,4),'utf-8')
         
-        return Productos[id]
+        return editedProduct
     },
     destroy: function(id){
         Productos = Productos.filter((product) => product.id !== +id);
         return Productos;
     }
 }
-
-module.exports = productsModels  

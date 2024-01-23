@@ -1,9 +1,10 @@
 .cards {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
+    flex-wrap: wrap;
     gap: 20px
 }
 
@@ -16,9 +17,7 @@
     /* min-width: 225px;
     min-height: 310px;
     max-width: 305px;
-    max-height: 310px;
-
-
+    max-height: 310px; */
 }
 
 .titulocard{
@@ -35,18 +34,17 @@
 
 @media (min-width: 760px) {
 
-    .cards{
+    /* .cards{
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-evenly;
-       
     }
     .cards article{
         margin: 15px;
         min-width: 200px;
         max-width: 250px;
         max-height: 450px;
-    }
+    } */
 
 }

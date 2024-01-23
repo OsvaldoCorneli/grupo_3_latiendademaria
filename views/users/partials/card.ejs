@@ -1,0 +1,20 @@
+<% let { id, image, category, price, name, color, stock } = producto %>
+<article>
+    <img src=<%= image[0] %> alt=<%= name %>/>
+    <a class="titulocard" href="/products/<%= id %>"><%= name %></a>
+    <p class="category"><%= category %></p>
+    <ul class="color">
+        <% for (let x in color) { let background = `background-color:${color[x]};color:${color[x]};border-radius:50%; border:0.1px-solid-black;;` %>
+            <li><i style=<%= background %>>oo</i></li>
+        <% } %>
+    </ul>
+    <p class="price number">$<%= price %></p>
+    <p class="stock"><%= stock %></p>
+    <span class="actions">
+        <a href="/products/<%= id %>/edit"><button class="edit">Editar</button></a>
+        <form action="/products/<%= id %>/delete?_method=DELETE" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este producto?');">
+            <input type="hidden">
+            <button type="submit" class="delete">X</button>
+        </form>
+    </span>
+</article>

@@ -7,33 +7,52 @@
 <body>
     <%- include('../partials/navbar.ejs') %>
     <main>
-        <% let { id, name, image, price ,stock, description } = detalle; %>
+        <% let { id, name, image, price ,stock, description, color } = detalle; %>
         <article>
             <div class="imagenes">
-                <img src="<%= image %>" alt="imagen1">
-                <img src="<%= image %>" alt="imagen2">
-                <img src="<%= image %>" alt="imagen3">
+                <% for (let i in image) { %>
+                    <img src="<%= image[i] %>" alt="imagen<%= i+1 %>">
+                <% } %>
             </div>
-    
-            <img class="detalle" src="<%= image %>" alt="<%= name %>">
-    
-            <div class="form-detalle">
+            <section class="carousel">
+                <% for (let i in image) { i = parseInt(i); %>
+                    <span id="item-<%= i+1 %>"></span>
+                    <div class="carousel-item item-<%= i+1 %>" style="background-image:url('<%= image[i] %>');">
+                    <% if (i+1 == 1) { %>
+                        <a href="#item-<%= image.length %>" class="arrow-prev arrow"></a>
+                    <% } else { %>
+                        <a href="#item-<%= i %>" class="arrow-prev arrow"></a>
+                    <% } if (i+1 == image.length) {%>
+                        <a href="#item-1" class="arrow-next arrow"></a>
+                    <% } else { %>
+                        <a href="#item-<%= i+2 %>" class="arrow-prev arrow"></a>
+                    <% } %>
+                    </div>
+                <% } %>
+            </section>
+            <form class="form-detalle" action="/user/cart/<%= id %>" method="POST">
                 <h2 class="tittled"><%= name %></h2>
                 <h2 class="precio">$<%= price %></h3>
-                <h5>stock: <%= stock %></h5>
-                <input type="number" placeholder="cantidad">
-                <select name="modelos">
-                    <option value="">modelos</option>
-                </select>
-                <button>Agregar a carrito</button>
-                <button>Editar</button>
-            </div>
+                <h5>stock disponible: <%= stock %></h5>
+                <label for="cantidad">
+                    <a onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</a>
+                    <input id="cantidad" type="number" min="1" placeholder="cantidad" name="cantidad" value="1"/>
+                    <a onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+</a>
+                </label>
+                <span class="color"> Color:
+                <% color.forEach(element => { let background = `background-color:${element};color:${element};border-radius:50%; border:0.1px-solid-black;;` %>
+                    <label for=<%= element %>><i style=<%= background %>>oo</i></label>
+                    <input id=<%= element %> type="radio" name="color" value=<%= element %>/>
+                <% })%>
+                </span>
+                <button type="submit">Agregar a carrito</button>
+            </form>
             
         </article>
         
         <div class="contenedordescription">
             <h3>Descripcion:</h3>
-            <p><%= description%></p> 
+            <p><%= description %></p> 
         </div>
     </main>
         

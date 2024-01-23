@@ -24,6 +24,8 @@ section.profile {
 }
 section.profile img {
     width: 150px;
+    border-radius: 50%;
+    border: solid 1px black;
 }
 section.productos {
     width: 100%;
@@ -41,6 +43,7 @@ section.productos > .header{
     background-color: #32A97F;
     padding: 5px;
     border-radius: 5px;
+    text-wrap: nowrap;
 }
 
 section.productos > article{

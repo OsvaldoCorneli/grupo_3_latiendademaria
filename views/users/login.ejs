@@ -7,7 +7,7 @@
     <%- include('../partials/navbar.ejs') %>
     <main>
         <div class="login-modal">
-            <img src="https://assets.stickpng.com/images/585e4beacb11b227491c3399.png" alt="profile"/>
+            <!-- <img src="https://assets.stickpng.com/images/585e4beacb11b227491c3399.png" alt="profile"/> -->
             <form action="/users/login" method="POST">
                 <label for="email">Usuario / E-mail</label>
                 <input 
@@ -16,9 +16,13 @@
                     id="email"
                     placeholder="Ingresar email"
                     required
-                    minlength="7"
+                    minlength="4"
                     class="validacionusername"
+                    value="<%= body.email? body.email : null %>"
                 />
+                <% if (locals.errors && errors.email) { %>
+                    <p class="errors"><%= errors.email.msg %></p>
+                <% } %>
                 <label for="password">Contraseña</label>
                 <input
                     id="password"
@@ -28,8 +32,11 @@
                     required
                     minlength="6"
                     class="validacionpassword"
+                    value="<%= body.password? body.password : null %>"
                 />
-                <button type="submit">LOGIN</button>
+                <% if (locals.errors && errors.password) { %>
+                    <p class="errors"><%= errors.password.msg %></p>
+                <% } %>
                 <% if (errors.hasOwnProperty('login')) { %>
                     <p class="errors"><%= errors.login %></p>
                 <% } %>
@@ -40,7 +47,7 @@
             </form>
             <div class="contenedorCuenta">
                 <p>¿No tienes cuenta? <a href="/users/register">¡Registrate!</a></p>
-                <p>¿Olvidaste la contraseña? <a href="/restore">¡Restablecer!</a></p>
+                <p>¿Olvidaste la contraseña? <a href="/users/restore">¡Restablecer!</a></p>
             </div>
         </div>
     </main>

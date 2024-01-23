@@ -1,0 +1,19 @@
+<html lang="es">
+    <head>
+        <%- include('../partials/head.ejs') %>
+        <link href="\css\restore.css" rel="stylesheet"/>
+    </head>
+<body>
+    <%- include('../partials/navbar.ejs') %>
+    <main>
+        <h1 class="titulo">Restablecer Contraseña</h1>
+        <p>completa el formulario con tu email registrado en el sitio y te enviaremos un email a esa misma direccion con los pasos a seguir para el blanqueo de clave</p>
+        <form action="/users/restore" method="POST">
+            <label for="email">Email:</label>
+            <input id="email" type="email" name="email" placeholder="email..." required/>
+            <button>Enviar</button>
+        </form>
+    </main>
+    <%- include('../partials/footer.ejs') %>
+</body>
+</html>
