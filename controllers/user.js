@@ -25,6 +25,10 @@ module.exports = {
             if (user.access) {
                 delete user?.password
                 req.session.user = user? user : {}
+                if(req.body.recordame != undefined){
+                    const oneDayInMillis = 24 * 60 * 60 * 1000;
+                     res.cookie('recordame', user.email, { expires: new Date(Date.now() + oneDayInMillis), httpOnly: true });
+                } 
                 res.status(200).redirect('/')
             } else {
                 res.render('users/login', {
@@ -41,6 +45,7 @@ module.exports = {
     },
     logout: function (req,res) {
         delete req.session.user
+        res.clearCookie('recordame');
         res.redirect('/')
     },
     getCreateForm: function (req,res) {

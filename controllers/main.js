@@ -27,7 +27,6 @@ module.exports = {
     getCart: function (req,res) {
       const cartDetail = cart.cart(req.session.user?.id)
       if (cartDetail) {
-        console.log(res.locals)
           res.render('cart/cart', {cartDetail})
       } else {
           res.render('404notfound', {url: req.url})
