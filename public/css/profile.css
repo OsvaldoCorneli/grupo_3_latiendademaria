@@ -139,6 +139,145 @@ button > a {
     color: white;
 }
 
+section.common-profile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: start;
+    gap: 10px;
+}
+.historialpagos .favoritos{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    text-wrap: nowrap;
+}
+/* .historialpagos > section > .pago {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #efefef;
+    border-radius: 5px;
+    gap: 10px;
+    text-wrap: nowrap;
+    width: 600px;
+} */
+.historialpagos > section > span.pago > *{
+   
+}
+table > tbody tr th {
+    font-weight: bold;
+    background-color: #32A97F;
+    padding: 5px;
+    border-radius: 5px;
+    text-wrap: nowrap;
+}
+table > tbody > tr.subtitle td {
+    background-color: #32A97F;
+    padding: 5px;
+    border-radius: 5px;
+    text-wrap: nowrap;
+    text-align: center;
+}
+td {
+    background-color: #efefef;
+}
+/* .hidethis {
+    display: none;
+} */
+
+tr.article {
+    padding: 5px;
+}
+
+tr.article > td {
+    font-size: 12px;
+}
+
+i.cancelado {
+    background-color: orangered;
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+}
+i.rechazado {
+    background-color: red;
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+}
+i.completado {
+    background-color: green;
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+}
+i.enproceso {
+    background-color: orange;
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+}
+td > img.product {
+    max-width: 50px;
+    max-height: 50px;
+}
+.desktoplayout {
+    display: none;
+}
+.portraitlayout {
+    display: none;
+}
+
+.mobilelayout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.mobilelayout > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #efefef;
+    border: solid 1px #5394b0;
+    border-radius: 5px;
+    padding: 10px;
+    flex-wrap: wrap;
+}
+.mobilelayout > div > span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border: solid 1px black;
+    border-radius: 5px;
+    gap: 10px;
+    padding: 5px;
+}
+.mobilelayout > div > table {
+    font-size: 12px;
+}
+
+@media (min-width: 540px) {
+    .portraitlayout {
+        display: block;
+    }
+    .mobilelayout {
+        display: none;
+    }
+}
+
 @media (min-width: 760px) {
     section.productos {
         width: 90%;
@@ -192,5 +331,14 @@ button > a {
     }
     section.productos .actions {
         flex: 0 0 70px;
+    }
+    .desktoplayout {
+        display: block;
+    }
+    .portraitlayout {
+        display: none;
+    }
+    .mobilelayout {
+        display: none
     }
 }

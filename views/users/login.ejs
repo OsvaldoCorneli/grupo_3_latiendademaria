@@ -33,6 +33,10 @@
                 <% if (errors.hasOwnProperty('login')) { %>
                     <p class="errors"><%= errors.login %></p>
                 <% } %>
+                <label for="">Recordame</label>
+                <input type="checkbox" name="recordame">
+                
+                <button type="submit">LOGIN</button>
             </form>
             <div class="contenedorCuenta">
                 <p>¿No tienes cuenta? <a href="/users/register">¡Registrate!</a></p>

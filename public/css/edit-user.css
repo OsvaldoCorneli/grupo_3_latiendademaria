@@ -53,7 +53,8 @@ main{
     margin: 0;
 }
 .contenedor3 > img {
-    width: 200px;
+    border-radius: 50%;
+    border: solid 1px black;
 }
 
 button.send {

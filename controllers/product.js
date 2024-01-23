@@ -1,5 +1,7 @@
-const path = require('path')
-const { products,users } = require('../models')
+const path = require('path');
+const users = require('../models/user');
+const products = require('../models/products');
+const {validationResult} = require('express-validator');
 
 const view = path.join(__dirname,'../views/products/');
 
@@ -42,10 +44,13 @@ const productsController = {
     },
 
     update: function (req, res) {
-        console.log(req.body);
-        if(req.params.id && req.body){
-        const response = products.edited(req.params.id,req.body)
-        res.status(200).redirect(`/products/${req.params.id}/edit?message=editado`)
+        let {id} = req.params
+        const errores = validationResult(req)
+        if(id && req.body){
+            const response = products.edited({id: parseInt(id), ...req.body, imagen: req.files})
+            if (response) {
+                res.status(200).redirect(`/products/${id}/edit?message=editado`)
+            }
         }
     },
 

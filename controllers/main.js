@@ -25,7 +25,15 @@ const main = {
     },
     getAutor: function (req,res) {
         res.render('autor')
-    }
+    },
+    getCart: function (req,res) {
+      const cartDetail = cart.cart(req.session.user?.id)
+      if (cartDetail) {
+          res.render('cart/cart', {cartDetail})
+      } else {
+          res.render('404notfound', {url: req.url})
+      }
+  },
 }
 
 module.exports = main
