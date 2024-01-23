@@ -37,7 +37,7 @@
     {
         "id": 3,
         "name": "Estatuillas",
-        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\r\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \r\naliquam incidunt iste et sed libero a, nihil voluptate \r\ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
         "category": "Estatuillas",
         "line": "artesanal",
         "stock": 3,

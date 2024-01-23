@@ -1,6 +1,7 @@
 const path = require('path');
 const users = require('../models/user');
 const products = require('../models/products');
+const {validationResult} = require('express-validator');
 
 const view = path.join(__dirname,'../views/products/');
 
@@ -48,6 +49,7 @@ module.exports = {
 
     update: function (req, res) {
         let {id} = req.params
+        const errores = validationResult(req)
         if(id && req.body){
             const response = products.edited({id: parseInt(id), ...req.body, imagen: req.files})
             if (response) {

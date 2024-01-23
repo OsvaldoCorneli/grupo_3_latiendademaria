@@ -65,13 +65,19 @@ module.exports = {
         }
     },
     create: function (data, images) {
-        const { name, description, line, category, color, price } = data
-        let image = images.map((x) => {return x.path.split('grupo_3_latiendademaria/public')[1]})
+        const { name, description, line, category, color, price, stock } = data
+        const image = images.map((x) => {return x.path.split('public')[1]})
         let id = 0
         for (let i in Productos) {
             if (id < Productos[i].id) id = Productos[i].id
         }
-        const newProduct = { id: id+1, ...data, image }
+        //delete data.imagen
+        const newProduct = { id: id+1, 
+            ...data,
+            stock: Number(stock),
+            price: Number(price),
+            image: image
+        }
         const allProduct = [...Productos, newProduct ]
         fs.writeFileSync(productsFilePath, JSON.stringify(allProduct,0,4), 'utf-8')
         if (newProduct) {
@@ -89,7 +95,14 @@ module.exports = {
         const image = body.imagen.length > 0
             ? body.imagen.map((img) => {return img.path.split('public')[1]})
             : updateProduct.image;
-        const editedProduct = {...updateProduct, ...body, image}
+        delete body.imagen
+        const editedProduct = {
+            ...updateProduct, 
+            ...body,
+            stock: Number(body.stock),
+            price: Number(body.price),
+            image: image
+        }
         const allProducts = [...filterProduct, editedProduct].sort((a,b) => a.id - b.id)
 
         fs.writeFileSync(productsFilePath, JSON.stringify(allProducts,0,4),'utf-8')

@@ -122,5 +122,15 @@ module.exports = {
             body('departamento', 'no puede superar 10 caracteres')
                 .isLength({max:10}) 
         ]
-    } 
+    },
+    formProducto: function () {
+        return [
+            
+        ]
+    },
+    editFormProducto: function () {
+        return [
+
+        ]
+    }
 }
