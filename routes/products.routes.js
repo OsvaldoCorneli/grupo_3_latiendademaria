@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const products = require('../controllers/product')
 const upload = require('../middlewares/multerMid')
+const validacionForm = require('../middlewares/validacionForm') 
 
 
 router.route('/')
@@ -11,8 +12,12 @@ router.get('/filter', products.filter);
 
 router.route('/create') 
     .get(products.getCreateForm)
-    .post(upload.any(), products.postCreateForm)
-
+    .post(upload.any(),
+        validacionForm.formProducto(),
+        products.postCreateForm
+    )
+;
+        // (req,res,next)=> {console.log(req.body); next()},
 router.route('/:id/edit')
     .get(products.edit) // para renderizar al front el form edit de producto
     .put(upload.any(), products.update)

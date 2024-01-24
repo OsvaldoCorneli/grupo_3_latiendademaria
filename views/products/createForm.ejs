@@ -16,60 +16,107 @@
                 type="text" 
                 name="name" 
                 placeholder="Ingresar Nombre"
+                value=<%= body.name && body.name %>
                 required
                 />
+            <% if (locals.errors && errors.name) { %>
+                <p class="errors"><%= errors.name.msg %></p>
+            <% } %>
             <label for="description">Descripcion:</label>
-            <textarea id="description" type="text" name="description" placeholder="Ingresar descripcion..."></textarea>
-            <label for="image">Imagen:
-                <input
-                    type="file" 
-                    id="image"
+            <textarea id="description" 
+                type="text" 
+                name="description"
+                value=<%= body.description && body.description %>
+                placeholder="Ingresar descripcion...">
+            </textarea>
+            <% if (locals.errors && errors.description) { %>
+                <p class="errors"><%= errors.description.msg %></p>
+            <% } %>
+            <div class="inputform button-wrap">
+                <label class="button" for="image">Subir imagen</label>
+                <input 
+                    class="uploadFile"
+                    type="file"
                     name="image"
-                    placeholder="ingresar URL de imagen..."
+                    id="image"
                     multiple
-                    />
-            </label>
+                />
+            </div>
+            <% if (locals.errors && errors.image) { %>
+                <p class="errors"><%= errors.image.msg %></p>
+            <% } %>
+            <% if (body.image && body.image.length > 0) { %>
+                <% body.image.forEach(el => { %>
+                    <img src="<%= body.image %>" alt="">
+                <% }) %>
+            <% } %>
             <label for="line">Linea:</label>
             <select id="line" name="line" required>
                 <option value="sublimada">Sublimada</option>
                 <option value="artesanal">Artesanal</option>
             </select>
+            <% if (locals.errors && errors.line) { %>
+                <p class="errors"><%= errors.line.msg %></p>
+            <% } %>
             <label for="category">Categoria:
-                <% for (let i in categorias) { %>
+                <% categorias.forEach(category => { %>
                     <label>
-                        <input type="radio" name="category" value=<%= categorias[i] %> required></input>
-                    <%= categorias[i] %>
+                        <input type="radio" name="category" value=<%= category %> <%= body.category == category && "selected" %> required/>
+                    <%= category %>
                     </label>
-                <% } %>
+                <% }) %>
             </label>
+            <% if (locals.errors && errors.category) { %>
+                <p class="errors"><%= errors.category.msg %></p>
+            <% } %>
             
-            <label for="color">Colores:</label>
-            <select class="inputForm" 
-                id="color" 
-                name="color" 
-                multiple>
-                <option disabled selected value>- seleccionar -</option>
-                <% for (let i in colors) {  %>
-                    <option value=<%= colors[i] %>> <%= colors[i] %></option>
-                <% } %>
-            </select>
-            
+            <label for="color">Colores: </label>
+            <div class="container-colorinputs"> 
+            <% if (body.color) { %> 
+                <% if (typeof(body.color) == 'string') { %>
+                    <div>
+                        <input class="c0" type="color" name="color" id="color" value="<%= body.color %>"/>
+                        <span id="c0"></span>
+                    </div>
+                <% } else { %>
+                    <% body.color.forEach(color => { %>
+                        <div>
+                            <input class="c0" type="color" name="color" id="color" value="<%= color %>"/>
+                            <span id="c0"></span>
+                        </div>
+            <% })}} %>
+                <span id="agregar" class="button">Agregar color</span>
+            </div>
+            <% if (locals.errors && errors.color) { %>
+                <p class="errors"><%= errors.color.msg %></p>
+            <% } %>
             <label for="price">Precio:</label>
             <input class="inputForm" 
                 type="number"
                 id="price" 
                 name="price"
+                step=".01"
+                value="<%= body.price && body.price %>"
                 required
             />
+            <% if (locals.errors && errors.price) { %>
+                <p class="errors"><%= errors.price.msg %></p>
+            <% } %>
             <label for="stock">Stock:</label>
             <input class="inputForm" 
                 type="number"
                 id="stock" 
                 name="stock"
+                step=".01"
+                value="<%= body.stock && body.stock %>"
                 required
             />
-            <button type="submit">Enviar</button>
+            <% if (locals.errors && errors.stock) { %>
+                <p class="errors"><%= errors.stock.msg %></p>
+            <% } %>
+            <button class="button" type="submit">Enviar</button>
         </form>
+        <script src="\scripts\color-validator.js"></script>
     </main> 
     <%- include('../partials/footer.ejs') %>
 </body>

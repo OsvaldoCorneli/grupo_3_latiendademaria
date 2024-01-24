@@ -1,7 +1,8 @@
 const { body, validationResult } = require('express-validator');
-const users = require('../models/user')
-const bcrypt = require('bcryptjs')
-const path = require('path')
+const users = require('../models/user');
+const Category = require('../data/category.json');
+const bcrypt = require('bcryptjs');
+const path = require('path');
 
 module.exports = {
     login: function () {
@@ -125,7 +126,32 @@ module.exports = {
     },
     formProducto: function () {
         return [
-            
+            body('name')
+                .notEmpty().withMessage('completar el nombre')
+                .isLength({min: 4, max:50}).withMessage('el nombre debe ser entre 4 a 50 caracteres'),
+            body('description')
+                .notEmpty().withMessage('no puede estar vacio')
+                .isLength({max: 256}).withMessage('Maximo 256 caracteres'),
+            body('image')
+                .custom((value, {req})=>{
+                    const extensionName = req.files.map((x) => {return path.extname(x.path)})
+                    const extNames = ['.jpg', '.png', '.jpeg']
+                    if (!extensionName.some((ext) => extNames.includes(ext))) {
+                        throw new Error(`solo se admiten archivos ${extNames.join(', ')}`)
+                    } else return true
+                }),
+            body('line')
+                .custom(value => {return value == 'artesanal' || value == 'sublimada'}).withMessage('Campo Categoria inexistente'),
+            body('category')
+                .custom(value => {return Category.some(c => c.name == value)}).withMessage('Campo linea inexistente'),
+            body('color.*')
+                .isHexColor().withMessage('Solo se admite color con valor hexadecimal'),
+            body('price')
+                .notEmpty()
+                .isDecimal().withMessage('Debe ser un numero con 2 decimales maximo'),
+            body('stock')
+                .notEmpty()
+                .isNumeric().withMessage('Solo numeros')
         ]
     },
     editFormProducto: function () {

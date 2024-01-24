@@ -37,13 +37,24 @@ module.exports = {
         res.render(view+'createForm', {
             productEdit: null,
             categorias: products.categories(),
-            colors: products.colors()
         })
     },
     postCreateForm: function (req,res) {
-        const newProduct = products.create(req.body, req.files)
-        if (newProduct) {
-            res.redirect('/users/profile')
+        const errores = validationResult(req)
+        console.log(req.body)
+        if (errores.isEmpty()) {
+            // const newProduct = products.create(req.body, req.files)
+            // if (newProduct) {
+            //     res.redirect('/users/profile')
+            // }
+            res.redirect('/products/create')
+        } else {
+            res.render(view+'createForm', {
+                productEdit: null,
+                body: req.body,
+                categorias: products.categories(),
+                errors: errores.mapped() 
+            })
         }
     },
 
