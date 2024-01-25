@@ -15,9 +15,9 @@
         "departamento": "",
         "username": "gpaz",
         "email": "gpaz@latiendademaria.com",
-        "password": "abc123",
+        "password": "$2a$10$BSB4xD7pqxg.XEPuaIqYHeum4Rgwxm2hFEp46vHp.a.JtRw.jJpHC",
         "fechanacimiento": "1990-06-12",
-        "admin": true,
+        "admin": false,
         "carrito": [
             {
                 "id": 1,
