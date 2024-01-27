@@ -37,6 +37,7 @@ module.exports = {
         res.render(view+'createForm', {
             productEdit: null,
             categorias: products.categories(),
+            body: {}
         })
     },
     postCreateForm: function (req,res) {

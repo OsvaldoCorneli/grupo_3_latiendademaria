@@ -27,7 +27,7 @@
                     <select id="color" name="color">
                         <option disabled selected value>- seleccionar -</option>
                         <% for (let i in colors) {  %>
-                            <option value=<%= colors[i] %>> <%= colors[i] %></option>
+                            <option value=<%= colors[i] %> style="background-color:<%= colors[i] %>"> <%= colors[i] %></option>
                         <% } %>
                     </select>
                 </label>
