@@ -74,6 +74,7 @@ module.exports = {
         //delete data.imagen
         const newProduct = { id: id+1, 
             ...data,
+            color: typeof(color) == 'string'? [color] : color,
             stock: Number(stock),
             price: Number(price),
             image: image

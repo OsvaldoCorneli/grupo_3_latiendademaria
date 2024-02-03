@@ -17,10 +17,13 @@ router.route('/create')
         products.postCreateForm
     )
 ;
-        // (req,res,next)=> {console.log(req.body); next()},
+
 router.route('/:id/edit')
     .get(products.edit) // para renderizar al front el form edit de producto
-    .put(upload.any(), products.update)
+    .put(upload.any(),
+        validacionForm.formProducto(),
+        products.update
+    )
 ; 
 
 router.route('/:id/delete')

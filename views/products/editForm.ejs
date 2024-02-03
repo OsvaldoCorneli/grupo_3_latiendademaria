@@ -19,7 +19,7 @@
             <!-- <strong>Formulario Editar producto</strong> -->
             <form class="form-producto" action="/products/<%= productEdit.id %>/edit?_method=PUT" method="POST" enctype="multipart/form-data">
                 <span class="contenedor1">
-                    <label for="name">Nombre:</label>
+                    <label for="name"><b>Nombre:</b></label>
                         <input class="inputForm" 
                         id="name" 
                         type="text" 
@@ -27,7 +27,7 @@
                         placeholder="Ingresar Nombre"
                         value="<%= productEdit.name %>" 
                         />
-                    <label for="description" >Descripcion:</label>
+                    <label for="description"><b>Descripcion:</b></label>
                         <textarea id="description" type="text" name="description" placeholder="Ingresar descripción..."><%= productEdit.description %></textarea>
                     </label>
                     <label for="line">Linea:</label>
@@ -36,40 +36,32 @@
                         <option value="artesanal" <%= productEdit.line === "artesanal" ? "selected" : null %>>Artesanal</option>
                     </select>
                     
-                    <p class="inputForm">Categoria:</p>
-                    <span class="categoria">
-                        <% for (let i in categorias) { %>
-                            <label>
-                                <input type="radio" name="category" value="<%= categorias[i] %>" <%= categorias[i] === productEdit.category ? "checked" : "" %>>
-                                <%= categorias[i] %></input>
-                            
-                            </label>
-                        <% } %>
-                    </span>
-                    <label for="color">Colores:</label>
-                    <select class="inputForm" id="color" name="color" multiple>
-                      <option disabled selected value="-1">- seleccionar -</option>
-                      <% for(let i = 0; i < colors.length; i++) { %>
-                        <option value="<%= colors[i] %>" 
-                          <% if (productEdit.color.includes(colors[i])) { %>
-                            selected
-                          <% } %>
-                        >
-                          <%= colors[i] %>
-                        </option>
-                      <% } %>
-                    </select>
-                    
-                    
-                    
-                    <label for="price">Precio:</label>
+                    <label for="category"><b>Categoria:</b>
+                        <% categorias.forEach((category) => { %>
+                                <input id="category" type="radio" name="category" value="<%= category %>" 
+                                <% if (category == productEdit.category) { %> <%= checked="checked" %> <% } %>>
+                                <%= category %></input>
+                        <% }) %>
+                    </label>
+                    <label for="color"><b>Colores:</b></label>
+                    <div class="container-colorinputs"> 
+                    <% productEdit.color?.forEach((color,index) =>  { %>
+                        <div>
+                            <input class="c<%= index %>" type="color" name="color" id="color" value="<%= color %>"/>
+                            <span id="c<%= index %>" style=<%= color %>></span>
+                        </div>
+                    <% }) %>
+                        <span id="agregar" class="button">Agregar color</span>
+                    </div>
+
+                    <label for="price"><b>Precio:</b></label>
                     <input class="inputForm" 
                         type="number"
                         id="price" 
                         name="price"
                         value="<%= productEdit.price %>" 
                     />
-                    <label for="stock">Stock:</label>
+                    <label for="stock"><b>Stock:</b></label>
                     <input class="inputForm" 
                         type="number"
                         id="stock" 
@@ -78,22 +70,31 @@
                     />
                 </span>
                 <span class="contenedor2">
-                    <% productEdit.image.forEach((img) => { %>
-                        <img src="<%= img %>" alt="<%= productEdit.name %>"/>
+                    <% productEdit.image.forEach((img, index) => { %>
+                        <span class="imageHold">
+                            <img src="<%= img %>" alt="<%= productEdit.name+index %>"/>
+                            <input type="hidden" id="<%= img %>input" name="imageHold" value="<%= img %>"/>
+                            <button id="deleteImage" value="<%= img %>">Borrar</button>
+                        </span>
                     <% }) %>
-                    <label for="image">Imagen:
+                    <label class="button" for="image">Subir Imagen
                         <input
+                            class="uploadfile"
                             type="file" 
                             id="image" 
                             name="image" 
+                            accept="image/jpeg, image/png, image/jpg"
                             placeholder="Ingresar URL de imagen..."
                             multiple
                         />
-                    <button class="send" type="submit">Editar</button>
+                    </label>
+                    <button class="button" type="submit">Editar</button>
                 </form>
             </span>
             </div>
-        
+        <script src="\scripts\ntc.js"></script>
+        <script src="\scripts\colorValidator.js"></script>
+        <script src="\scripts\productEdit.js"></script>
     </main>
     <%- include('../partials/footer.ejs') %>
 </body>

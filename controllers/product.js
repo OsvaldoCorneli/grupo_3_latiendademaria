@@ -44,11 +44,10 @@ module.exports = {
         const errores = validationResult(req)
         console.log(req.body)
         if (errores.isEmpty()) {
-            // const newProduct = products.create(req.body, req.files)
-            // if (newProduct) {
-            //     res.redirect('/users/profile')
-            // }
-            res.redirect('/products/create')
+            const newProduct = products.create(req.body, req.files)
+            if (newProduct) {
+                res.redirect('/users/profile')
+            }
         } else {
             res.render(view+'createForm', {
                 productEdit: null,
@@ -62,12 +61,15 @@ module.exports = {
     update: function (req, res) {
         let {id} = req.params
         const errores = validationResult(req)
-        if(id && req.body){
-            const response = products.edited({id: parseInt(id), ...req.body, imagen: req.files})
-            if (response) {
-                res.status(200).redirect(`/products/${id}/edit?message=editado`)
+        if (errores.isEmpty()) {
+            if(id && req.body){
+                const response = products.edited({id: parseInt(id), ...req.body, imagen: req.files})
+                if (response) {
+                    res.status(200).redirect(`/products/${id}/edit?message=editado`)
+                }
             }
         }
+
     },
 
     edit: function (req,res) {
