@@ -4,6 +4,9 @@ const path = require('path')
 const productsFilePath = path.join(__dirname, '../data/productos.json');
 const Productos = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
 
+const publicPath = path.join(__dirname+'/../public')
+
+
 module.exports = {
     all: function () {
         return Productos
@@ -74,6 +77,7 @@ module.exports = {
         //delete data.imagen
         const newProduct = { id: id+1, 
             ...data,
+            color: typeof(color) == 'string'? [color] : color,
             stock: Number(stock),
             price: Number(price),
             image: image
@@ -92,16 +96,17 @@ module.exports = {
     edited: function (body) {
         const updateProduct = Productos.find((prod) => prod.id == body.id);
         const filterProduct = Productos.filter((prod) => prod.id != body.id);
-        const image = body.imagen.length > 0
-            ? body.imagen.map((img) => {return img.path.split('public')[1]})
-            : updateProduct.image;
+        const images = this.editImages(body.imagen, body.imageHold, body.id)
         delete body.imagen
+        delete body.imageHold
         const editedProduct = {
             ...updateProduct, 
             ...body,
-            stock: Number(body.stock),
-            price: Number(body.price),
-            image: image
+            id: +body.id,
+            color: typeof(body.color) == 'string'? [body.color] : body.color,
+            stock: +body.stock,
+            price: +body.price,
+            image: images
         }
         const allProducts = [...filterProduct, editedProduct].sort((a,b) => a.id - b.id)
 
@@ -112,5 +117,24 @@ module.exports = {
     destroy: function(id){
         Productos = Productos.filter((product) => product.id !== +id);
         return Productos;
+    },
+    editImages: function (upload, local, prodId) {
+        const updateProduct = Productos.find((prod) => prod.id == prodId);
+        let newImage = []
+        if (upload.length > 0) {
+            newImage = upload.map((img) => {return img.path.split('public')[1]});
+        }
+        let holdImage = []
+        if (local) {
+            holdImage = !typeof(local) == 'string'? local : [local];
+        }
+        updateProduct.image.forEach(img => {
+            if (!holdImage.includes(img)) {
+                if (fs.readdirSync(publicPath+'/images/uploads').includes(img.split('uploads/')[1])) {
+                    fs.rmSync(publicPath+img)
+                }
+            }
+        })
+        return [...newImage, ...holdImage]
     }
 }

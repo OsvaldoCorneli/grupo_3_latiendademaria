@@ -24,10 +24,10 @@
                     </select>
                 </label>
                 <label for="color">Colores
-                    <select id="color" name="color">
-                        <option disabled selected value>- seleccionar -</option>
+                    <select id="color" name="color" style="width:50px;">
+                        <option disabled selected value style="width:50px;">seleccionar</option>
                         <% for (let i in colors) {  %>
-                            <option value=<%= colors[i] %>> <%= colors[i] %></option>
+                            <option value=<%= colors[i] %> style="background-color:<%= colors[i] %>;border-radius:5px;padding:5px;width:50px;"></option>
                         <% } %>
                     </select>
                 </label>

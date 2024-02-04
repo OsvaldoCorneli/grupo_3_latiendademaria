@@ -178,45 +178,6 @@
                         <p class="errors"><%= errors.email.msg %></p>
                     <% } %>
             </div>
-            <!-- <div class="inputform">
-                <label for="username">Nombre de usuario:</label>
-                <input 
-                    type="text"
-                    name="username"
-                    id="username"
-                    placeholder="Nombre de usuario"
-                    required
-                    minlength="10"
-                    maxlength="20"
-                    value="<%= username %>"
-                />
-            </div> -->
-            <!-- <div class="inputform">
-                <label for="password">contraseña:</label>
-                <input 
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder="contraseña"
-                    required
-                    minlength="10"
-                    maxlength="20"
-                    value=<%= password %>
-                    />
-            </div>
-            <div class="inputform">
-                <label for="repassword">repetir contraseña:</label>
-                <input 
-                    type="password"
-                    name="repassword"
-                    id="repassword"
-                    placeholder="repetir contraseña"
-                    required
-                    minlength="10"
-                    maxlength="20"
-                    value=<%= password %>
-                />
-            </div> -->
         </div>
         <div class="contenedor3">
             <img class="perfil" src="<%= imagen.length>0? imagen[0] : "" %>" alt="<%= nombre.slice(0,1).toUpperCase()+apellido.slice(0,1).toUpperCase() %>"/>
@@ -228,7 +189,8 @@
                         type="file"
                         name="imagen"
                         id="imagen"
-                        placeholder="calle"
+                        accept="image/jpeg, image/png, image/jpg"
+                        placeholder="subir una imagen"
                         value="<%= imagen %>"
                     />
                     <% if (locals.errors && errors.imagen) { %>

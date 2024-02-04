@@ -37,25 +37,46 @@ module.exports = {
         res.render(view+'createForm', {
             productEdit: null,
             categorias: products.categories(),
-            colors: products.colors()
+            body: {}
         })
     },
     postCreateForm: function (req,res) {
-        const newProduct = products.create(req.body, req.files)
-        if (newProduct) {
-            res.redirect('/users/profile')
+        const errores = validationResult(req)
+        if (errores.isEmpty()) {
+            const newProduct = products.create(req.body, req.files)
+            if (newProduct) {
+                res.redirect('/users/profile')
+            }
+        } else {
+            res.render(view+'createForm', {
+                productEdit: null,
+                body: req.body,
+                categorias: products.categories(),
+                errors: errores.mapped() 
+            })
         }
     },
 
     update: function (req, res) {
         let {id} = req.params
         const errores = validationResult(req)
-        if(id && req.body){
-            const response = products.edited({id: parseInt(id), ...req.body, imagen: req.files})
+        if (errores.isEmpty()) {
+            const response = products.edited({id: +id, ...req.body, imagen: req.files})
             if (response) {
                 res.status(200).redirect(`/products/${id}/edit?message=editado`)
             }
+        } else {
+            const newImage = Array.isArray(req.files)? req.files.map((img) => {return img.path.split('public')[1]}) : [req.files.path.split('public')[1]];
+            const holdImage = typeof(req.body.imageHold) == 'string'? [req.body.imageHold] : req.body.imageHold;
+            res.render(`${view}/editForm`, {
+                productEdit: {...req.body, image: [...newImage, ...holdImage]},
+                categorias: products.categories(),
+                colors: products.colors(),
+                message: null,
+                errors: errores.mapped()
+            })
         }
+
     },
 
     edit: function (req,res) {

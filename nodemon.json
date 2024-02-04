@@ -1,7 +1,5 @@
 {
     "ignore": [
-        "data/productos.json",
-        "data/users.json",
         "public/uploads"
     ]
 }
