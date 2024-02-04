@@ -18,6 +18,7 @@
             </span>
             <!-- <strong>Formulario Editar producto</strong> -->
             <form class="form-producto" action="/products/<%= productEdit.id %>/edit?_method=PUT" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="<%= productEdit.id %>"/>
                 <span class="contenedor1">
                     <label for="name"><b>Nombre:</b></label>
                         <input class="inputForm" 
@@ -27,14 +28,50 @@
                         placeholder="Ingresar Nombre"
                         value="<%= productEdit.name %>" 
                         />
+                    <% if (locals.errors && errors.name) { %>
+                        <p class="errors"><%= errors.name.msg %></p>
+                    <% } %>
                     <label for="description"><b>Descripcion:</b></label>
                         <textarea id="description" type="text" name="description" placeholder="Ingresar descripción..."><%= productEdit.description %></textarea>
                     </label>
-                    <label for="line">Linea:</label>
+                    <% if (locals.errors && errors.description) { %>
+                        <p class="errors"><%= errors.description.msg %></p>
+                    <% } %>
+                    <div class="inputform button-wrap">
+                        <label class="button" for="imageinput">Subir Imagen
+                            <input
+                                class="uploadfile"
+                                type="file" 
+                                id="imageinput" 
+                                name="image" 
+                                accept="image/jpeg, image/png, image/jpg"
+                                placeholder="Ingresar URL de imagen..."
+                                multiple
+                            />
+                        </label>
+                        <% if (locals.errors && errors.image) { %>
+                            <p class="errors"><%= errors.image.msg %></p>
+                        <% } %>
+                    </div>
+                    <span id="imageRender">
+                        <% productEdit.image?.forEach((img, index) => { %>
+                            <span class="imageHold">
+                                <p><%= img.split('uploads/')[1] %> ? KB</p>
+                                <img src="<%= img %>" alt="<%= productEdit.name+index %>"/>
+                                <input type="hidden" id="<%= img %>input" name="imageHold" value="<%= img %>"/>
+                                <button id="deleteImageHold" class="deleteImage" value="<%= img %>">Borrar</button>
+                            </span>
+                        <% }) %>
+                    </span>
+
+                    <label for="line"><b>Linea:</b></label>
                     <select id="line" name="line">
                         <option value="sublimada" <%= productEdit.line === "sublimada" ? "selected" : null %>>Sublimada</option>
                         <option value="artesanal" <%= productEdit.line === "artesanal" ? "selected" : null %>>Artesanal</option>
                     </select>
+                    <% if (locals.errors && errors.line) { %>
+                        <p class="errors"><%= errors.line.msg %></p>
+                    <% } %>
                     
                     <label for="category"><b>Categoria:</b>
                         <% categorias.forEach((category) => { %>
@@ -44,57 +81,55 @@
                         <% }) %>
                     </label>
                     <label for="color"><b>Colores:</b></label>
-                    <div class="container-colorinputs"> 
-                    <% productEdit.color?.forEach((color,index) =>  { %>
+                    <div class="container-colorinputs">
+                    <% if (typeof(productEdit.color) == 'string') { let background=`color:${productEdit.color};`%>
+                        <div>
+                            <input class="c0" type="color" name="color" id="color" value="<%= productEdit.color %>"/>
+                            <span id="c0" style=<%= background %>></span>
+                        </div>
+                    <% } else { %>
+                    <% productEdit.color?.forEach((color,index) =>  { let background=`color:${color};`%>
                         <div>
                             <input class="c<%= index %>" type="color" name="color" id="color" value="<%= color %>"/>
-                            <span id="c<%= index %>" style=<%= color %>></span>
+                            <span id="c<%= index %>" style=<%= background %>></span>
                         </div>
-                    <% }) %>
+                    <% })} %>
                         <span id="agregar" class="button">Agregar color</span>
                     </div>
-
+                    <% if (locals.errors && errors.color) { %>
+                        <p class="errors"><%= errors.color.msg %></p>
+                    <% } %>
                     <label for="price"><b>Precio:</b></label>
                     <input class="inputForm" 
                         type="number"
                         id="price" 
                         name="price"
+                        required
                         value="<%= productEdit.price %>" 
                     />
+                    <% if (locals.errors && errors.price) { %>
+                        <p class="errors"><%= errors.price.msg %></p>
+                    <% } %>
                     <label for="stock"><b>Stock:</b></label>
                     <input class="inputForm" 
                         type="number"
                         id="stock" 
                         name="stock"
+                        required
                         value="<%= productEdit.stock %>" 
                     />
+                    <% if (locals.errors && errors.stock) { %>
+                        <p class="errors"><%= errors.stock.msg %></p>
+                    <% } %>
                 </span>
-                <span class="contenedor2">
-                    <% productEdit.image.forEach((img, index) => { %>
-                        <span class="imageHold">
-                            <img src="<%= img %>" alt="<%= productEdit.name+index %>"/>
-                            <input type="hidden" id="<%= img %>input" name="imageHold" value="<%= img %>"/>
-                            <button id="deleteImage" value="<%= img %>">Borrar</button>
-                        </span>
-                    <% }) %>
-                    <label class="button" for="image">Subir Imagen
-                        <input
-                            class="uploadfile"
-                            type="file" 
-                            id="image" 
-                            name="image" 
-                            accept="image/jpeg, image/png, image/jpg"
-                            placeholder="Ingresar URL de imagen..."
-                            multiple
-                        />
-                    </label>
-                    <button class="button" type="submit">Editar</button>
+                <button class="button" type="submit">Editar</button>
                 </form>
-            </span>
+            
             </div>
         <script src="\scripts\ntc.js"></script>
         <script src="\scripts\colorValidator.js"></script>
         <script src="\scripts\productEdit.js"></script>
+        <script src="\scripts\imageUpload.js"></script>
     </main>
     <%- include('../partials/footer.ejs') %>
 </body>

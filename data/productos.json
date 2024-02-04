@@ -241,7 +241,7 @@
     {
         "id": 15,
         "name": "mate pokebola",
-        "description": "mate genial estilo pokmon",
+        "description": "mate impreso en 3D con motivo Pokemon, Pokebola",
         "line": "sublimada",
         "category": "Mates",
         "color": [
@@ -257,8 +257,8 @@
     },
     {
         "id": 16,
-        "name": "asdasd",
-        "description": "asdasd",
+        "name": "Mate 3D Pokemon charmander",
+        "description": "Mate impreso en 3D con PLA/ABS con motivo de Pokemon nombre Charmander",
         "line": "artesanal",
         "category": "Mates",
         "color": [
@@ -271,22 +271,5 @@
         "image": [
             "/images/uploads/image-1702744640465.jpg"
         ]
-    },
-    {
-        "id": 17,
-        "name": "probando",
-        "description": "probando probando123",
-        "image": [
-            "\\images\\uploads\\image-1706973350763.jpg",
-            "\\images\\uploads\\image-1706973350765.jpg"
-        ],
-        "line": "artesanal",
-        "category": "Estatuillas",
-        "color": [
-            "#ff0000",
-            "#00ff00"
-        ],
-        "price": 103.5,
-        "stock": 10
     }
 ]

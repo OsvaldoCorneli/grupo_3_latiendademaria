@@ -147,24 +147,40 @@ input[type="file"] {
 .button-wrap {
     position: relative;
 }
-.imageHold {
-    display:flex;
+
+#imageRender {
+    display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-evenly;
-    gap: 10px,
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
 }
-.imageHold > img {
-    width: 200px;
+
+#imageRender > span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
 }
-button#deleteImage {
+#imageRender > span > img {
+    width: 150px;
+    border-radius: 5px;
+    border: solid 1px black;
+}
+#imageRender > span > p {
+    font-size: 12px;
+}
+button.deleteImage {
     color: white;
     background-color: red;
+    width:fit-content;
     border-radius: 5px;
     padding: 5px;
     transition: 250ms;
 }
-button#deleteImage:hover {
+button.deleteImage:hover {
     color: white;
     background-color: coral;
     border-radius: 5px;
@@ -178,13 +194,27 @@ button#deleteImage:hover {
     padding: 5px;
     background-color: #1259c3;
     color: white;
-    width: 35%;
+    width: fit-content;
     transition: 500ms;
 }
 .button:hover {
     background-color: #5394b0;
 }
-
+input:valid {
+    border: 2px solid green;
+}
+input:invalid {
+    border: 2px solid red;
+}
+.errors {
+    font-weight: 400;
+    color: red
+}
+.error-contraseña {
+    display: none;
+    color: red;
+    font-weight: bold;
+}
 @media (min-width: 760px) {
 
  .form-producto{

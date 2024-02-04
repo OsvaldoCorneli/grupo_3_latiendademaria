@@ -21,7 +21,7 @@ router.route('/create')
 router.route('/:id/edit')
     .get(products.edit) // para renderizar al front el form edit de producto
     .put(upload.any(),
-        validacionForm.formProducto(),
+        validacionForm.formEditProducto(),
         products.update
     )
 ; 

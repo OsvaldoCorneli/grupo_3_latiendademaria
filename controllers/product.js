@@ -42,7 +42,6 @@ module.exports = {
     },
     postCreateForm: function (req,res) {
         const errores = validationResult(req)
-        console.log(req.body)
         if (errores.isEmpty()) {
             const newProduct = products.create(req.body, req.files)
             if (newProduct) {
@@ -62,12 +61,20 @@ module.exports = {
         let {id} = req.params
         const errores = validationResult(req)
         if (errores.isEmpty()) {
-            if(id && req.body){
-                const response = products.edited({id: parseInt(id), ...req.body, imagen: req.files})
-                if (response) {
-                    res.status(200).redirect(`/products/${id}/edit?message=editado`)
-                }
+            const response = products.edited({id: +id, ...req.body, imagen: req.files})
+            if (response) {
+                res.status(200).redirect(`/products/${id}/edit?message=editado`)
             }
+        } else {
+            const newImage = Array.isArray(req.files)? req.files.map((img) => {return img.path.split('public')[1]}) : [req.files.path.split('public')[1]];
+            const holdImage = typeof(req.body.imageHold) == 'string'? [req.body.imageHold] : req.body.imageHold;
+            res.render(`${view}/editForm`, {
+                productEdit: {...req.body, image: [...newImage, ...holdImage]},
+                categorias: products.categories(),
+                colors: products.colors(),
+                message: null,
+                errors: errores.mapped()
+            })
         }
 
     },

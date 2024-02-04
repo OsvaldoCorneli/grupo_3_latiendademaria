@@ -30,11 +30,4 @@ ColorsError.forEach((c) => {
     })
 })
 
-let inputFile = document.querySelector('input[type="file"]')
 
-inputFile.addEventListener("change", (e) => {
-    for (let i = 0; i < inputFile.files.length; i++) {
-        let image = `<br/><span>${inputFile.files[i].name}, ${(inputFile.files[i].size/1024).toFixed(2)}KB</span>`;
-        inputFile.insertAdjacentHTML("beforebegin", image);
-    }
-})

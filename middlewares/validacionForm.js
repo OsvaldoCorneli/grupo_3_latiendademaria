@@ -1,11 +1,12 @@
 const { body, validationResult } = require('express-validator');
 const users = require('../models/user');
 const Category = require('../data/category.json');
+const productos = require('../data/productos.json');
 const bcrypt = require('bcryptjs');
 const path = require('path');
 
 const extNames = ['.jpg', '.png', '.jpeg']
-const maxFileSize = 2048000
+const maxFileSize = 2048000 //bytes
 
 module.exports = {
     login: function () {
@@ -129,6 +130,51 @@ module.exports = {
                     const filesSizes = req.files.map((x) => {return x.size})
                     return !filesSizes.some((file) => file >= maxFileSize)
                 }).withMessage(`el tamaño maximo permitido por imagen es ${maxFileSize/1024} KB`),
+            body('line')
+                .custom(value => {return value == 'artesanal' || value == 'sublimada'}).withMessage('Campo Categoria inexistente'),
+            body('category')
+                .custom(value => {return Category.some(c => c.name == value)}).withMessage('Campo linea inexistente'),
+            body('color.*')
+                .notEmpty()
+                .isHexColor().withMessage('Solo se admite colores con valor hexadecimal'),
+            body('price')
+                .notEmpty()
+                .isDecimal().withMessage('Debe ser un numero con 2 decimales maximo'),
+            body('stock')
+                .notEmpty()
+                .isNumeric().withMessage('Solo numeros')
+        ]
+    },
+    formEditProducto: function () {
+        return [
+            body('id')
+                .custom((value,{req}) => {
+                    return productos.some(product => product.id == +value) && +req.params.id == +value
+                }).withMessage('el product Id no existe'),
+            body('name')
+                .notEmpty().withMessage('completar el nombre')
+                .isLength({min: 4, max:50}).withMessage('el nombre debe ser entre 4 a 50 caracteres'),
+            body('description')
+                .notEmpty().withMessage('no puede estar vacio')
+                .isLength({max: 256}).withMessage('Maximo 256 caracteres'),
+            body('image')
+                .custom((value, {req})=>{
+                    if (!value) return true
+                    const extensionName = req.files.map((x) => {return path.extname(x.path)})
+                    return extensionName.some((ext) => extNames.includes(ext))
+                }).withMessage(`solo se admiten archivos ${extNames.join(', ')}`)
+                .custom((value, {req})=>{
+                    if (!value) return true
+                    const filesSizes = req.files.map((x) => {return x.size})
+                    return !filesSizes.some((file) => file >= maxFileSize)
+                }).withMessage(`el tamaño maximo permitido por imagen es ${maxFileSize/1024} KB`),
+            body('imageHold.*')
+                .custom((value,{req}) => {
+                    if (value) {
+                        const imageHold = products.some((prod) => prod.id == +req.body.id && prod.image.includes(value))
+                        return imageHold
+                    } else return true
+                }).withMessage('la imagen de origen local no existe o no es pertinente al producto'),
             body('line')
                 .custom(value => {return value == 'artesanal' || value == 'sublimada'}).withMessage('Campo Categoria inexistente'),
             body('category')

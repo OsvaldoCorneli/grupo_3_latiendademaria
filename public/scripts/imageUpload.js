@@ -1,41 +1,45 @@
 // Wait until the file input is changed
 const imageInput = document.getElementById("imageinput")
 imageInput.onchange = function() {
-    //console.log(imageInput)
-    const reader = new FileReader();
-    reader.onload = function() {
-        const image = new Image();
-        image.onload = function() {
-            //Create canvas which will the image to be modified
-            const canvas = document.createElement("canvas"),
-            ctx = canvas.getContext("2d");
-            
-            // Set canvas size to image size
-            const width = Math.round((image.width/image.height)*100);
-            const height = Math.round((image.height/image.width)*100);
-            console.log(width)
-            console.log(height)
-            image.width = width
-            image.height = height
-            canvas.width = width;
-            canvas.height = height;
-            //console.log(image)
-            ctx.drawImage(image, 0, 0);
-            
-            // Add circle
-            // ctx.beginPath();
-            // ctx.arc(100, 75, 50, 0, 2 * Math.PI);
-            // ctx.fill();
-            
-            // Display the canvas for visualizing purposes
-            const containerImage = document.getElementById("imageRender")
-            containerImage.appendChild(canvas);
-            
-            //Set the motified image to be content when the form is submited.
-            document.getElementById("modified_image").value = canvas.toDataURL("image/jpg");    
-        }
-        image.src = reader.result;
-        console.log(image)
-    };
-    reader.readAsDataURL(this.files[0]);
+    for (let i = 0; i < this.files.length; i++) { //por cada archivo subido, hacer todo lo que sigue -->
+        const containerImage = document.getElementById("imageRender");
+        
+        //img tag
+        const img = document.createElement('img')
+        img.src = URL.createObjectURL(imageInput.files[i])
+        
+        //img info
+        const imageInfo = document.createElement('span');
+        imageInfo.id = imageInput.files[i].name;
+        imageInfo.innerHTML = `<p>${imageInput.files[i].name}, ${(imageInput.files[i].size/1024).toFixed(2)}KB</p>`;
+        
+        //agrego button para borrar imagen subida
+        const deleteButton = document.createElement('button');
+        deleteButton.id = "deleteImage";
+        deleteButton.className = "deleteImage";
+        deleteButton.innerHTML = "Borrar";
+        deleteButton.addEventListener('click',(e) => {
+            e.preventDefault();
+            updateFileList(imageInput,i)
+            deleteButton.parentNode.remove()
+        })
+
+        //inserto los tags al HTML
+        containerImage.appendChild(imageInfo);
+        imageInfo.appendChild(img);
+        imageInfo.appendChild(deleteButton);
+
+    }; //fin de la presente iteracion, continuar con el siguiente archivo, si es que hay mas.
 };
+
+let updateFileList = function (fileField, index) {
+    let fileBuffer = Array.from(fileField.files);
+    fileBuffer.splice(index, 1);
+
+    /** Code from: https://stackoverflow.com/a/47172409/8145428 */
+    const dT = new ClipboardEvent('').clipboardData || // Firefox < 62 workaround exploiting https://bugzilla.mozilla.org/show_bug.cgi?id=1422655
+      new DataTransfer(); // specs compliant (as of March 2018 only Chrome)
+
+    for (let file of fileBuffer) { dT.items.add(file); }
+    fileField.files = dT.files;
+}
