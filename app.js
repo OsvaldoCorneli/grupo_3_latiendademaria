@@ -10,6 +10,21 @@ const cookieParser = require('cookie-parser');
 const loguearRuta = require('./middlewares/loguearRutas') 
 const rutaNoEncontrada = require('./middlewares/rutaNoEncontrada');
 const recordameMiddleware = require('./middlewares/recordameMiddleware');
+const { Sequelize } = require('sequelize');
+const dotenv = require('dotenv');
+dotenv.config();
+
+const { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT } = process.env;
+
+const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
+  host: DB_HOST,
+  port: DB_PORT,
+  dialect: 'mysql',
+});
+
+const PORT = 3001;
+
+
 
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
@@ -35,6 +50,18 @@ app.use('/', mainRoutes);
 
 app.use(rutaNoEncontrada)
 
-app.listen(3001,(req,res) => {
-    console.log(`Server corriendo en http://localhost:3001`)
-});
+// Verificar la conexión a la base de datos
+sequelize.authenticate()
+  .then(() => {
+    console.log(`Connected to the ${DB_NAME} database`);
+    
+    // Iniciar el servidor
+    app.listen(PORT, () => {
+      console.log(`Server corriendo en http://localhost:${PORT}`);
+    });
+  })
+  .catch(error => {
+    console.error(`Unable to connect to the database: ${error}`);
+  });
+
+
