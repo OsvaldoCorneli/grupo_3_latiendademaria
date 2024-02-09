@@ -8,3 +8,4 @@ module.exports = {
   'seeders-path': path.resolve('./database/seeders'),          // Ruta del directorio de seeders (si usas seeders)
   'migrations-path': path.resolve('./database/migrations')     // Ruta del directorio de migraciones
 };
+ 
