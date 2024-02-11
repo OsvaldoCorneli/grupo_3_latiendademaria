@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const db = require('../database/models')
 
 const productsFilePath = path.join(__dirname, '../data/productos.json');
 const Productos = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
@@ -8,8 +9,34 @@ const publicPath = path.join(__dirname+'/../public')
 
 
 module.exports = {
-    all: function () {
-        return Productos
+    all: async function () {
+        try {
+            const allProduct = await db.products.findAll({
+                include: [
+                    {
+                        model: db.colors,
+                        as: 'colors',
+                        attributes: ['id','name','hex'],
+                        through: { attributes: [] }
+                    },
+                    {
+                        model: db.images,
+                        as: 'images',
+                        attributes: ['id','pathName'],
+                        through: { attributes: [] }
+                    },
+                    {
+                        association: 'categories',
+                        attributes: ['id','name']
+                    }
+                ],
+                attributes: {exclude: ['category_id']}
+            })
+            //return Productos
+            return allProduct
+        } catch (error) {
+            return error
+        }
     },
     detail: function (id) {
         return Productos.find((x) => x.id == id)

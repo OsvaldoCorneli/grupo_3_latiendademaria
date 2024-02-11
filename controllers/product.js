@@ -6,12 +6,19 @@ const {validationResult} = require('express-validator');
 const view = path.join(__dirname,'../views/products/');
 
 module.exports = {
-    index: function (req,res) {
-        res.render(view+'products', { 
-            productos: products.all(),
-            categorias: products.categories(),
-            colors: products.colors()
-        })
+    index: async function (req,res) {
+        try {
+            const allProduct = await products.all()
+            res.status(200).json(allProduct)
+            // res.render(view+'products', { 
+            //     productos: products.all(),
+            //     categorias: products.categories(),
+            //     colors: products.colors()
+            // })
+        } catch (error) {
+            res.status(500).json(error.message)
+        }
+
     },
     filter: function (req,res) {
         if (Object.keys(req.query).length == 0) {

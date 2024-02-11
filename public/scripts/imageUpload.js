@@ -23,12 +23,10 @@ imageInput.onchange = function() {
             updateFileList(imageInput,i)
             deleteButton.parentNode.remove()
         })
-
         //inserto los tags al HTML
         containerImage.appendChild(imageInfo);
         imageInfo.appendChild(img);
         imageInfo.appendChild(deleteButton);
-
     }; //fin de la presente iteracion, continuar con el siguiente archivo, si es que hay mas.
 };
 

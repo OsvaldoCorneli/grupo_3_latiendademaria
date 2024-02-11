@@ -4,7 +4,7 @@ module.exports = (sequelize, dataTypes) => {
     
     const cols = {
        id:{
-        type: dataTypes.INTEGER(10),
+        type: dataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
@@ -22,8 +22,6 @@ module.exports = (sequelize, dataTypes) => {
         updatedAt: 'updated_at',
         deletedAt: false
     }
-    
-    
     
     
     const Images = sequelize.define(alias, cols, config);

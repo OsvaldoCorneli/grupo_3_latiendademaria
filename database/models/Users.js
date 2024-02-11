@@ -69,7 +69,7 @@ const cols = {
     allowNull: true,
    },
    admin:{
-    type: DataTypes.TINYINT,
+    type: dataTypes.BOOLEAN,
     allowNull: true,
    }
 
