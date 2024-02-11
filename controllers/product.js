@@ -1,6 +1,8 @@
 const path = require('path');
 const users = require('../models/user');
 const products = require('../models/products');
+const categories = require('../models/categories');
+const colors = require('../models/colors');
 const {validationResult} = require('express-validator');
 
 const view = path.join(__dirname,'../views/products/');
@@ -9,12 +11,14 @@ module.exports = {
     index: async function (req,res) {
         try {
             const allProduct = await products.all()
-            res.status(200).json(allProduct)
-            // res.render(view+'products', { 
-            //     productos: products.all(),
-            //     categorias: products.categories(),
-            //     colors: products.colors()
-            // })
+            const allCategories = await categories.countAll()
+            const allColors = await colors.countAll()
+            //res.status(200).json(allProduct)
+            res.render(view+'products', { 
+                productos: allProduct,
+                categorias: allCategories,
+                colors: allColors
+            })
         } catch (error) {
             res.status(500).json(error.message)
         }

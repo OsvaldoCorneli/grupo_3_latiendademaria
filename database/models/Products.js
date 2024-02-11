@@ -50,7 +50,6 @@ module.exports = (sequelize, dataTypes) => {
             as: 'categories',
             foreignKey: "category_id",
             timestamps: false,
-            through: {attributes: []}
         })
         Products.belongsToMany(models.colors, {
             as: 'colors',

@@ -18,17 +18,17 @@
                 <label for="categoria">Categoria:
                     <select id="categoria" name="category">
                         <option disabled selected value>- seleccionar -</option>
-                        <% for (let i in categorias) { %>
-                            <option value=<%= categorias[i] %>><%= categorias[i] %></option>
-                        <% } %>
+                        <% categorias.forEach((category) => { %>
+                            <option value=<%= category.id %>><%= category.name %>(<%= category.productsCount %>)</option>
+                        <% }) %>
                     </select>
                 </label>
                 <label for="color">Colores
                     <select id="color" name="color" style="width:50px;">
                         <option disabled selected value style="width:50px;">seleccionar</option>
-                        <% for (let i in colors) {  %>
-                            <option value=<%= colors[i] %> style="background-color:<%= colors[i] %>;border-radius:5px;padding:5px;width:50px;"></option>
-                        <% } %>
+                        <% colors.forEach((color) => {  %>
+                            <option value=<%= color.id %> style="background-color:<%= color.hex %>;border-radius:5px;padding:5px;width:50px;"><%= color.productsCount %></option>
+                        <% }) %>
                     </select>
                 </label>
                 <label for="price">Precio menor a:
@@ -57,9 +57,9 @@
             <span class="productos">
                 
             <section class="cards">
-                <% for (let i in productos) { %>
-                    <%- include('./card.ejs', {producto: productos[i]}) %>
-                <% } %>
+                <% productos.forEach((producto) => { %>
+                    <%- include('./card.ejs', {producto}) %>
+                <% }) %>
             </section>
         </span>
         
