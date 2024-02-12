@@ -4,6 +4,7 @@ const app = express();
 const mainRoutes = require('./routes/main.routes');
 const userRoutes = require('./routes/users.routes');
 const productRoutes = require('./routes/products.routes');
+const payments = require('./routes/payment.routes');
 const methodOverride = require('method-override');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
@@ -44,6 +45,7 @@ app.set('view engine', 'ejs');
 
 app.use(loguearRuta)
 
+app.use('/payment', payments);
 app.use('/products', productRoutes);
 app.use('/users', userRoutes);
 app.use('/', mainRoutes);

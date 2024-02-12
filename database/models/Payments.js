@@ -31,11 +31,18 @@ module.exports = (sequelize, dataTypes) => {
         deletedAt: false
     }
     
-    
-    
-    
     const Payment = sequelize.define(alias, cols, config);
-    
-    
+
+    Payment.associate = function(models) {
+        Payment.belongsTo(models.users,{
+            as: 'user',
+            foreignKey: 'user_id',
+        })
+        Payment.hasMany(models.payment_products,{
+            as: 'products',
+            foreignKey: 'payment_id',
+        })
+    }
+
     return Payment
     };

@@ -23,6 +23,7 @@ module.exports = {
                     [Sequelize.fn('count',Sequelize.col('products.id')),'productsCount']
                 ],
                 group: ['categories.name'],
+                raw:true
             })
             return response.filter(c => c.productsCount !== 0)
         } catch (error) {

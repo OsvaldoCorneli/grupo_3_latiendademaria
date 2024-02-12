@@ -13,7 +13,6 @@ module.exports = {
             const allProduct = await products.all()
             const allCategories = await categories.countAll()
             const allColors = await colors.countAll()
-            //res.status(200).json(allProduct)
             res.render(view+'products', { 
                 productos: allProduct,
                 categorias: allCategories,
@@ -24,25 +23,25 @@ module.exports = {
         }
 
     },
-    filter: function (req,res) {
-        if (Object.keys(req.query).length == 0) {
+    filter: async function (req,res) {
+        try {
             res.render(view+'products', { 
-                productos: products.all(),
-                categorias: products.categories(),
-                colors: products.colors()
+                productos: await products.filter(req.query),
+                categorias: await categories.countAll(),
+                colors: await colors.countAll()
             })
-        } else {
-            res.render(view+'products', { 
-                productos: products.filter(req.query),
-                categorias: products.categories(),
-                colors: products.colors()
-            })
+        } catch (error) {
+            res.status(500).json(error.message)
         }
     },
-    detail: function (req,res) {
-        const detalle = products.detail(req.params.id)
-        if (detalle) res.render(view+'detail',{ detalle }) // si no, renderiza el detalle de producto que recibo por params
-        else res.render('404notFound', {url: req.url}) // si no encuentra el producto, devuelve 404
+    detail: async function (req,res) {
+        try {
+            const detalle = await products.detail(req.params.id)
+            if (detalle) res.render(view+'detail',{ detalle })
+            else res.render('404notFound', {url: req.url}) // si no encuentra el producto, devuelve 404
+        } catch (error) {
+            res.status(500).json(error.message)
+        }
     },
     getCreateForm: function(req,res) {
         res.render(view+'createForm', {

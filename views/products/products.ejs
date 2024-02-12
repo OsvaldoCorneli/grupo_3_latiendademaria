@@ -6,9 +6,9 @@
     </head>
     <body>
         <%- include('../partials/navbar.ejs') %>
-        <form class="searchbar" action="/browser" method="POST">
-            <input id="inputSearchBar" type="search" name="search" placeholder="Busqueda por nombre..."/>
-            <input id="botonSearchBar" type="submit"/>
+        <form class="searchbar" action="/products/filter" method="GET">
+            <input id="inputSearchBar" type="search" name="name" placeholder="Busqueda por nombre..."/>
+            <button id="botonSearchBar" type="submit">Buscar</button>
         </form>
         <main>
             
@@ -19,7 +19,7 @@
                     <select id="categoria" name="category">
                         <option disabled selected value>- seleccionar -</option>
                         <% categorias.forEach((category) => { %>
-                            <option value=<%= category.id %>><%= category.name %>(<%= category.productsCount %>)</option>
+                            <option value=<%= category.id %>><%= category.name+'('+ category.productsCount +')' %></option>
                         <% }) %>
                     </select>
                 </label>
@@ -27,7 +27,7 @@
                     <select id="color" name="color" style="width:50px;">
                         <option disabled selected value style="width:50px;">seleccionar</option>
                         <% colors.forEach((color) => {  %>
-                            <option value=<%= color.id %> style="background-color:<%= color.hex %>;border-radius:5px;padding:5px;width:50px;"><%= color.productsCount %></option>
+                            <option value=<%= color.id %> style="background-color:<%= color.hex %>;border-radius:5px;padding:5px;width:50px;"><%= color.name + '('+color.productsCount+')' %></option>
                         <% }) %>
                     </select>
                 </label>

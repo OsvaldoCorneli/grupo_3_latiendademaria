@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const db = require('../database/models')
+const {Op, Sequelize} = require('sequelize')
 
 const productsFilePath = path.join(__dirname, '../data/productos.json');
 const Productos = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
@@ -11,7 +12,7 @@ const publicPath = path.join(__dirname+'/../public')
 module.exports = {
     all: async function () {
         try {
-            const allProduct = await db.products.findAll({
+            return await db.products.findAll({
                 include: [
                     {
                         model: db.colors,
@@ -32,66 +33,77 @@ module.exports = {
                 ],
                 attributes: {exclude: ['category_id']}
             })
-            //return Productos
-            return allProduct
         } catch (error) {
             return error
         }
     },
-    detail: function (id) {
-        return Productos.find((x) => x.id == id)
-    },
-    filter: function (body) {
-        let filteredProduct;
-        const keys = Object.keys(body)
-        function filter (condition, value, array) {
-            switch (condition) {
-                case 'price':
-                    return array.filter((x) => x.price < parseInt(value))
-                case 'category':
-                    return array.filter((x) => x.category == value)
-                case 'color':
-                    return array.filter((x) => x.color.includes(value))
-                case 'line':
-                    return array.filter((x) => x.line == value)
-                default:
-                    break
-            }
-        }
-        for (let i in keys) {
-            let value = body[keys[i]]
-            let condition = keys[i]
-            
-            if (i == 0) {
-                filteredProduct = filter(condition, value, Productos)
-            } else {
-                filteredProduct = filter(condition, value, filteredProduct)
-            }
-            if (i == keys.length-1) return filteredProduct
-        } 
-    },
-    categories: function () {
-        let Categories = []
-        for (let i in Productos) {
-            let { category } = Productos[i]
-            if (!Categories.includes(category)) {
-                Categories.push(category)
-            }
-            if (i == Productos.length-1) {
-                return Categories
-            }
+    detail: async function (id) {
+        try {
+            return await db.products.findByPk(+id,{
+                include: [
+                    {
+                        model: db.colors,
+                        as: 'colors',
+                        attributes: ['id','name','hex'],
+                        through: { attributes: [] }
+                    },
+                    {
+                        model: db.images,
+                        as: 'images',
+                        attributes: ['id','pathName'],
+                        through: { attributes: [] }
+                    },
+                    {
+                        association: 'categories',
+                        attributes: ['id','name']
+                    }
+                ],
+                attributes: {exclude: ['category_id']}
+            })
+        } catch (error) {
+            return error
         }
     },
-    colors: function () {
-        let Colors = []
-        for (let i in Productos) {
-            let {color} = Productos[i]
-            for (let x in color) {
-                if (!Colors.includes(color[x])) {
-                    Colors.push(color[x])
-                }
-            }
-            if (i == Productos.length-1) return Colors
+    filter: async function (query) {
+        try {
+            const {price, line, name, category, color} = query
+            let condition = {}
+            if (price) condition.products = {...condition.products, price: {[Op.lte]: price}};
+            if (line) condition.products = {...condition.products, line: line};
+            if (name) condition.products = {...condition.products, 
+                [Op.or]: [
+                    {name: {[Op.startsWith]: name}},
+                    {name: {[Op.like]: `%${name}`}}
+                ]};
+            if (category) condition.categories = { ...condition.categories, id: category};
+            if (color) condition.colors = {...condition.colors, id: color};
+
+            return await db.products.findAll({
+                include: [
+                    {
+                        model: db.colors,
+                        as: 'colors',
+                        attributes: ['id','name','hex'],
+                        where: condition.colors,
+                        through: { attributes: [] }
+                    },
+                    {
+                        model: db.images,
+                        as: 'images',
+                        attributes: ['id','pathName'],
+                        through: { attributes: [] }
+                    },
+                    {
+                        association: 'categories',
+                        attributes: ['id','name'],
+                        where: condition.categories
+                    }
+                ],
+                where: condition.products,
+                attributes: {exclude: ['category_id']}
+            })
+        } catch (error) {
+            return error
         }
     },
     create: function (data, images) {

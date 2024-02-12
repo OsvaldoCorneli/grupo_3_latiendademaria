@@ -33,7 +33,7 @@
         <p class="stock">Stock</p>
         <p class="action">Accion</p>
     </span>
-<% for (let i in productos) { %>
-    <%- include('./card.ejs', {producto: productos[i]}) %>
-<% } %>
+<% productos.forEach((producto) => { %>
+    <%- include('./card.ejs', {producto}) %>
+<% }) %>
 </section>

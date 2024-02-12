@@ -1,3 +1,4 @@
+<script src="\scripts\profilecommon.js"></script>
 <h2>Mis Datos</h2>
 <section class="profile">
     <% let { id, nombre, apellido, email, calle, callenumero, provincia, imagen, codigopostal, piso, departamento } = userData %>
@@ -20,6 +21,7 @@
     </span>
 </section>
 <section class="common-profile">
+    <% if (historialPagos) { %>
     <div class="historialpagos">
         <h2>Mis Compras</h2>
         <table class="productos portraitlayout">
@@ -91,6 +93,9 @@
             </table>
         </div>
         <% }) %>
+        <% } else { %>
+            <button onclick="()=> fetchPagos(userData)">historial Pagos</button>
+        <% } %>
     </section>
     </div>
     <!-- <div class="favoritos">
