@@ -11,18 +11,17 @@ module.exports = {
             errors: {}
         })
     },
-    profile: function (req,res){
+    profile: async function (req,res){
         res.render('users/profile', {
-            userData: users.detail(req.session.user?.id),
+            userData: await users.detail(req.session.user?.id),
             productos: products.all(),
             historialPagos: payments.historialPagos(req.session.user?.id)
         })
     },
-    login: function (req,res) {
+    login: async function (req,res) {
         const errores = validationResult(req)
-        // console.log("errores", errores)
         if (errores.isEmpty()) {
-            const user = users.login(req.body)
+            const user = await users.login(req.body)
             if (user.access) {
                 delete user?.password
                 req.session.user = user? user : {}

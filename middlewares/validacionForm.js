@@ -16,19 +16,30 @@ module.exports = {
                 .custom(async (value) => {
                     const usersdb = await users.index()
                     const user = usersdb.some((u) => u.userName == value || u.email == value)
-                    return user
-                }).withMessage('usuario o email no registrados'),
+                    if (!user) {
+                        return Promise.reject('usuario o email no registrados');
+                    }
+            
+                    return Promise.resolve();
+                }),
             body('password')
                 .notEmpty().withMessage('La contraseña no puede estar en blanco')
-                .custom( async (value,{req}) => {
-                    const usersdb = await users.index()
-                    const user = usersdb.find((u) => u.username == req.body.email || u.email == req.body.email)
-                    if (user) {
-                        const checkPass = bcrypt.compareSync(value, user.password)
-                        return checkPass
-                    } else throw new Error('Verificar Usuario')
-                }
-            ).withMessage('Contraseña incorrecta')
+                .custom(async (value, { req }) => {
+                    const usersdb = await users.index();
+                    const user = usersdb.find((u) => u.username == req.body.email || u.email == req.body.email);
+            
+                    if (!user) {
+                        throw new Error('Verificar Usuario');
+                    }
+            
+                    const checkPass = await bcrypt.compare(value, user.password);
+            
+                    if (!checkPass) {
+                        throw new Error('Contraseña incorrecta');
+                    }
+            
+                    return true;
+                }),
         ]
     },
     registerUser: function () {

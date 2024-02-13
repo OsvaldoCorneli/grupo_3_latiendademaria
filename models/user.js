@@ -45,9 +45,10 @@ module.exports = {
         fs.writeFileSync(usersFilePath, JSON.stringify(allUsers,0,4), 'utf-8')
         return newUser
     },
-    login: function (data) {
+    login: async function (data) {
         let { email, password } = data
-        let user = Users.find((user) => user.email == email || user.username == email)
+        const Users1 = await db.Users.findAll({raw: true})
+        let user = Users1.find((user) => user.email == email || user.userName == email)
         if (!user) return {access: false, error: 'usuario inexistente'}
         const checkPass = bcrypt.compareSync(password, user.password)
         if (checkPass) {
@@ -70,8 +71,8 @@ module.exports = {
             throw new Error('error en la edicion de usuario')
         }
     },
-    detail: function (id) {
-        const detailUser = Users.find((x) => x.id == id)
+    detail: async function (id) {
+        const detailUser = await db.Users.findOne({where:{id},raw:true})
         if (detailUser) {
             return detailUser
         } else {
