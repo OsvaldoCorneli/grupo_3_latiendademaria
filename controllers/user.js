@@ -56,6 +56,7 @@ module.exports = {
     },
     postCreateForm: function (req,res) {
         const errores = validationResult(req)
+        console.log("errores create", errores);
         if (errores.isEmpty()) {
             const newUser = users.create(req.body, req.files)
             if (newUser) {

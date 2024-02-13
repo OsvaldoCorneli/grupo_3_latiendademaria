@@ -50,8 +50,8 @@
                     <label for="birthdate">fecha de nacimiento:</label>
                     <input 
                     type="date"
-                    name="fechanacimiento"
-                    id="fechanacimiento"
+                    name="fechaNacimiento"
+                    id="fechaNacimiento"
                     value="<%= body.fechanacimiento? body.fechanacimiento : null  %>"
                     />
                     <% if (locals.errors && errors.fechanacimiento) { %>
@@ -108,7 +108,7 @@
                     name="calle"
                     id="street"
                     placeholder="calle"
-                    minlength="10"
+                    minlength="2"
                     maxlength="20"
                     value="<%= body.calle? body.calle : null %>"
                     />
@@ -153,7 +153,7 @@
                     name="piso"
                     id="buildingfloor"
                     placeholder="Piso"
-                    minlength="10"
+                    minlength="1"
                     maxlength="20"
                     value="<%= body.piso? body.piso : null %>"
                     />
@@ -168,7 +168,7 @@
                     name="departamento"
                     id="departamento"
                     placeholder="Departamento"
-                    minlength="10"
+                    minlength="1"
                     maxlength="20"
                     value="<%= body.departamento? body.departamento : null %>"
                     />
@@ -198,8 +198,8 @@
                 <input 
                     class="requiredinput"
                     type="text"
-                    name="username"
-                    id="username"
+                    name="userName"
+                    id="userName"
                     placeholder="Nombre de usuario"
                     required
                     minlength="6"

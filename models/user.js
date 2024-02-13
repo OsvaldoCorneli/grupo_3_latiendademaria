@@ -13,39 +13,51 @@ const preferencias = path.join(__dirname, '../data/users.json');
 
 module.exports = {
     index: async function () {
+        try{
         const users = await db.Users.findAll({raw: true})
         return users
-    },
-    create: function (data, image) {
-        const imagen = image.map((x) => {return x.path.split('/public')[1]})
-        const {nombre, apellido, fechanacimiento, provincia, localidad, codigopostal, calle, callenumero, piso, departamento, email, username, password} = data
-        const passEncriptada = bcrypt.hashSync(password, 10)
-        let id = 0
-        for (let i in Users) {
-            if (id < Users[i].id) id = Users[i].id
+        }catch (error) {
+            throw new Error(error.message);
         }
-        const newUser = {
-            id: id+1,
-            nombre,
-            apellido,
-            fechanacimiento,
-            provincia,
-            localidad,
-            codigopostal,
-            calle,
-            callenumero,
-            piso,
-            departamento,
-            email,
-            username,
-            password: passEncriptada,
-            imagen
-        }
-        const allUsers = [...Users, newUser ]
-        fs.writeFileSync(usersFilePath, JSON.stringify(allUsers,0,4), 'utf-8')
-        return newUser
+
     },
+    create: async function (data, image) {
+        try {
+            console.log("ingresa a MODELS USER service", data)
+            let imagen;
+            if(image){
+            imagen = image.map((x) => { return x.path.split('/public')[1] })}
+
+            else{imagen = "";}
+            const { nombre, apellido, fechaNacimiento, provincia, localidad, codigopostal, calle, callenumero, piso, departamento, email, userName, password } = data
+            const passEncriptada = bcrypt.hashSync(password, 10)
+        
+            const newUser = await db.Users.create({
+                nombre,
+                apellido,
+                provincia,
+                localidad,
+                codigopostal,
+                calle,
+                callenumero,
+                piso,
+                departamento,
+                email,
+                userName,
+                password: passEncriptada,
+                fechaNacimiento,
+                // imagen
+            });
+             console.log("nuevo usuario", newUser);
+            return newUser; 
+
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
+    ,
     login: async function (data) {
+        try{
         let { email, password } = data
         const Users1 = await db.Users.findAll({raw: true})
         let user = Users1.find((user) => user.email == email || user.userName == email)
@@ -55,6 +67,9 @@ module.exports = {
             return {...user, access: true}
         } else {
             return {access: false, error: 'contraseña incorrecta'}
+        }}
+        catch (error) {
+            throw new Error(error.message);
         }
     },
     update: function (data) {
