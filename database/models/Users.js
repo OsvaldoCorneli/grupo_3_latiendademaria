@@ -1,6 +1,6 @@
 module.exports = (sequelize, dataTypes) => {
 
-const alias = "users"
+const alias = "Users"
 
 const cols = {
    id:{
@@ -46,7 +46,7 @@ const cols = {
     type: dataTypes.STRING(10),
     allowNull: true,
    },
-   departamente:{
+   departamento:{
     type: dataTypes.STRING(10),
     allowNull: true,
    },
@@ -69,7 +69,7 @@ const cols = {
     allowNull: true,
    },
    admin:{
-    type: DataTypes.TINYINT,
+    type: dataTypes.TINYINT,
     allowNull: true,
    }
 
@@ -87,8 +87,8 @@ const config = {
 
 
 
-const User = sequelize.define(alias, cols, config);
+const Users = sequelize.define(alias, cols, config);
 
 
-return User
+return Users
 } ;

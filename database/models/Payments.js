@@ -1,6 +1,6 @@
 module.exports = (sequelize, dataTypes) => {
 
-    const alias = "payment"
+    const alias = "Payments"
     
     const cols = {
        id:{
@@ -18,7 +18,7 @@ module.exports = (sequelize, dataTypes) => {
         allowNull: false,
        },
         status:{
-            type: DataTypes.ENUM('cancelado', 'completado', 'en_proceso', 'rechazado'),
+            type: dataTypes.ENUM('cancelado', 'completado', 'en_proceso', 'rechazado'),
         allowNull: false,
     }
    
@@ -34,8 +34,8 @@ module.exports = (sequelize, dataTypes) => {
     
     
     
-    const Payment = sequelize.define(alias, cols, config);
+    const Payments = sequelize.define(alias, cols, config);
     
     
-    return Payment
+    return Payments
     };

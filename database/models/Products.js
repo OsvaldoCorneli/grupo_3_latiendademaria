@@ -1,6 +1,6 @@
 module.exports = (sequelize, dataTypes) => {
 
-    const alias = "product"
+    const alias = "Products"
     
     const cols = {
        id:{
@@ -23,7 +23,7 @@ module.exports = (sequelize, dataTypes) => {
         allowNull: true,
        },
        line:{
-        type: DataTypes.ENUM('artesanal', 'sublimada'),
+        type: dataTypes.ENUM('artesanal', 'sublimada'),
         allowNull: false,
        },
        price:{
@@ -43,8 +43,8 @@ module.exports = (sequelize, dataTypes) => {
     
     
     
-    const Product = sequelize.define(alias, cols, config);
+    const Products = sequelize.define(alias, cols, config);
     
     
-    return Product
+    return Products
     } ;

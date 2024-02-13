@@ -13,14 +13,16 @@ module.exports = {
         return [
             body('email')
                 .notEmpty().withMessage('Ingresar Usuario o email registrado')
-                .custom((value) => {
-                    const user = users.index().some((u) => u.username == value || u.email == value)
+                .custom(async (value) => {
+                    const usersdb = await users.index()
+                    const user = usersdb.some((u) => u.userName == value || u.email == value)
                     return user
                 }).withMessage('usuario o email no registrados'),
             body('password')
                 .notEmpty().withMessage('La contraseña no puede estar en blanco')
-                .custom((value,{req}) => {
-                    const user = users.index().find((u) => u.username == req.body.email || u.email == req.body.email)
+                .custom( async (value,{req}) => {
+                    const usersdb = await users.index()
+                    const user = usersdb.find((u) => u.username == req.body.email || u.email == req.body.email)
                     if (user) {
                         const checkPass = bcrypt.compareSync(value, user.password)
                         return checkPass

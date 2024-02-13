@@ -5,12 +5,20 @@ const validacionForm = require('../middlewares/validacionForm')
 const upload = require('../middlewares/multerMid');
 const {check, validationResult} = require('express-validator')
 
+const db = require("../database/models")
+
 router.route('/login')
     .get(users.index)
     .post(validacionForm.login(), users.login);
 
 router.get('/logout', users.logout)
 
+router.get('/probar', async (req , res) =>{
+    const user = await db.Users.findAll()
+
+    res.json(user)
+})
+ 
 router.route('/register')
     .get(users.getCreateForm)
     .post(upload.any(), validacionForm.registerUser(), users.postCreateForm);

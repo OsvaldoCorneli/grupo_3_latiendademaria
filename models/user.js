@@ -1,10 +1,10 @@
-
+const db = require('../database/models')
 const fs = require('fs');
 const path = require('path');
 const bcrypt = require('bcryptjs');
 
 const usersFilePath = path.join(__dirname, '../data/users.json');
-const Users = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
+// const Users = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
 
 const dataGeoFilePath = path.join(__dirname, '../data/users.json');
 const dataGeo = JSON.parse(fs.readFileSync(dataGeoFilePath, 'utf-8'));
@@ -12,8 +12,9 @@ const dataGeo = JSON.parse(fs.readFileSync(dataGeoFilePath, 'utf-8'));
 const preferencias = path.join(__dirname, '../data/users.json');
 
 module.exports = {
-    index: function () {
-        return Users
+    index: async function () {
+        const users = await db.Users.findAll({raw: true})
+        return users
     },
     create: function (data, image) {
         const imagen = image.map((x) => {return x.path.split('/public')[1]})

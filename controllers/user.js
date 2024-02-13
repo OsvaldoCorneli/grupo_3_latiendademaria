@@ -20,6 +20,7 @@ module.exports = {
     },
     login: function (req,res) {
         const errores = validationResult(req)
+        // console.log("errores", errores)
         if (errores.isEmpty()) {
             const user = users.login(req.body)
             if (user.access) {
