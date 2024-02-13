@@ -13,10 +13,10 @@ module.exports = (sequelize, dataTypes) => {
         type: dataTypes.STRING(50),
         allowNull: false
        },
-    //    category_id: {
-    //     type: dataTypes.INTEGER,
-    //     allowNull: false
-    //    },
+       category_id: {
+        type: dataTypes.INTEGER,
+        allowNull: false
+       },
        description:{
         type: dataTypes.STRING(128),
         allowNull: true,
@@ -51,16 +51,16 @@ module.exports = (sequelize, dataTypes) => {
             foreignKey: "category_id",
             timestamps: false,
         })
-        // Products.hasMany(models.product_colors, {
-        //     as: 'product_colors',
-        //     foreignKey: 'product_id'
-        // })
-        Products.belongsToMany(models.colors, {
+        Products.hasMany(models.product_colors, {
             as: 'colors',
-            through: models.product_colors,
-            foreignKey: 'product_id',
-            otherKey: 'color_id',
+            foreignKey: 'product_id'
         })
+        // Products.belongsToMany(models.colors, {
+        //     as: 'colors',
+        //     through: models.product_colors,
+        //     foreignKey: 'product_id',
+        //     otherKey: 'color_id',
+        // })
         // Products.hasMany(models.product_payments, {
         //     as: 'product_payments',
         //     foreignKey: 'product_id'

@@ -33,14 +33,14 @@
             <form class="form-detalle" action="/user/cart/<%= id %>" method="POST">
                 <h2 class="tittled"><%= name %></h2>
                 <h2 class="precio">$<%= price %></h3>
-                <h5>stock disponible: <%= stock %></h5>
+                <h5>cantidad: <%= stock %></h5>
                 <label for="cantidad">
                     <a onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</a>
                     <input id="cantidad" type="number" min="1" placeholder="cantidad" name="cantidad" value="1"/>
                     <a onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+</a>
                 </label>
                 <span class="color"> Color:
-                <% colors.forEach(color => { let background = `background-color:${color.hex};color:${color.hex};border-radius:50%; border:0.1px-solid-black;;` %>
+                <% colors.forEach(({stock, color}) => { let background = `background-color:${color.hex};color:${color.hex};border-radius:50%; border:0.1px-solid-black;;` %>
                     <label for=<%= color.name %>><i style=<%= background %>>oo</i></label>
                     <input id=<%= color.name %> type="radio" name="color" value=<%= color.id %>/>
                 <% })%>

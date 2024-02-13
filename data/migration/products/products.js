@@ -15,7 +15,7 @@ products.forEach(e => {
     })
     color.forEach(c => {
         let findcolor = colors.find(co => co.hex == c.toUpperCase())
-        fs.appendFileSync(__dirname+'/product_colors.txt',`('${id}','${findcolor.id}'),\n`,'utf-8')
+        fs.appendFileSync(__dirname+'/product_colors.txt',`('${id}','${findcolor.id}','${Math.ceil(10*Math.random())}'),\n`,'utf-8')
     })
 
 })

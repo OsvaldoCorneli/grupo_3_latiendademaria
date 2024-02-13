@@ -1,6 +1,6 @@
 module.exports = (sequelize, dataTypes) => {
 
-    const alias = "product_colors"
+    const alias = "prod_images"
     
     const cols = {
         id:{
@@ -13,29 +13,29 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.INTEGER,
             allowNull: false
         },
-        color_id: {
+        image_id: {
             type: dataTypes.INTEGER,
             allowNull: false
         }
     }
     
     const config = {
-        tableName: 'product_colors',
+        tableName: 'prod_images',
         timestamps: false,
     }
     
-    const ProductColors = sequelize.define(alias, cols, config);
+    const ProductImages = sequelize.define(alias, cols, config);
     
-    ProductColors.associate = function(models) {
-        ProductColors.belongsTo(models.products, {
+    ProductImages.associate = function(models) {
+        ProductImages.belongsTo(models.products, {
             as: "products",
             foreignKey: "product_id"
         })
-        ProductColors.belongsTo(models.colors, {
-            as: "color",
-            foreignKey: "color_id"
+        ProductImages.belongsTo(models.images, {
+            as: "images",
+            foreignKey: "image_id"
         })
     }
 
-    return ProductColors
+    return ProductImages
     };

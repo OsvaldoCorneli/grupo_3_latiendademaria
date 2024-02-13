@@ -1,12 +1,12 @@
 const fs = require('fs')
 const path = require('path')
 const db = require('../database/models')
-const {Op, Sequelize} = require('sequelize')
+const {Op, Sequelize} = require('sequelize');
+const Images = require('./images');
+const Colors = require('./colors');
 
 const productsFilePath = path.join(__dirname, '../data/productos.json');
 const Productos = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
-
-const publicPath = path.join(__dirname+'/../public')
 
 
 module.exports = {
@@ -15,10 +15,12 @@ module.exports = {
             return await db.products.findAll({
                 include: [
                     {
-                        model: db.colors,
-                        as: 'colors',
-                        attributes: ['id','name','hex'],
-                        through: { attributes: [] }
+                        association: 'colors',
+                        attributes: ['stock'],
+                        include: {
+                            association: 'color',
+                            attributes: ['id','name','hex']
+                        }
                     },
                     {
                         model: db.images,
@@ -42,10 +44,12 @@ module.exports = {
             return await db.products.findByPk(+id,{
                 include: [
                     {
-                        model: db.colors,
-                        as: 'colors',
-                        attributes: ['id','name','hex'],
-                        through: { attributes: [] }
+                        association: 'colors',
+                        attributes: ['stock'],
+                        include: {
+                            association: 'color',
+                            attributes: ['id','name','hex']
+                        }
                     },
                     {
                         model: db.images,
@@ -81,11 +85,13 @@ module.exports = {
             return await db.products.findAll({
                 include: [
                     {
-                        model: db.colors,
-                        as: 'colors',
-                        attributes: ['id','name','hex'],
-                        where: condition.colors,
-                        through: { attributes: [] }
+                        association: 'colors',
+                        attributes: ['stock'],
+                        include: {
+                            association: 'color',
+                            attributes: ['id','name','hex'],
+                            where: condition.colors,
+                        }
                     },
                     {
                         model: db.images,
@@ -129,51 +135,28 @@ module.exports = {
             throw new Error('error al crear producto')
         }
     },
-    edit: function (id) {
-        return Productos.find((product) => product.id === +id)
-    },
-    edited: function (body) {
-        const updateProduct = Productos.find((prod) => prod.id == body.id);
-        const filterProduct = Productos.filter((prod) => prod.id != body.id);
-        const images = this.editImages(body.imagen, body.imageHold, body.id)
-        delete body.imagen
-        delete body.imageHold
-        const editedProduct = {
-            ...updateProduct, 
-            ...body,
-            id: +body.id,
-            color: typeof(body.color) == 'string'? [body.color] : body.color,
-            stock: +body.stock,
-            price: +body.price,
-            image: images
-        }
-        const allProducts = [...filterProduct, editedProduct].sort((a,b) => a.id - b.id)
+    edited: async function (body) {
+        try {
+            await Images.editProductImages(body.imageHold, body.imagen, body.id)
+            await Colors.editProductColors(body.color, body.stock, body.id)
 
-        fs.writeFileSync(productsFilePath, JSON.stringify(allProducts,0,4),'utf-8')
-        
-        return editedProduct
+            await db.products.update({
+                name: body.name,
+                description: body.description,
+                category_id: +body.category,
+                line: body.line,
+                price: +body.price
+            },              
+            {
+                where: {id: body.id}
+            });
+            return await this.detail(body.id)
+        } catch (error) {
+            return error
+        }
     },
     destroy: function(id){
         Productos = Productos.filter((product) => product.id !== +id);
         return Productos;
-    },
-    editImages: function (upload, local, prodId) {
-        const updateProduct = Productos.find((prod) => prod.id == prodId);
-        let newImage = []
-        if (upload.length > 0) {
-            newImage = upload.map((img) => {return img.path.split('public')[1]});
-        }
-        let holdImage = []
-        if (local) {
-            holdImage = !typeof(local) == 'string'? local : [local];
-        }
-        updateProduct.image.forEach(img => {
-            if (!holdImage.includes(img)) {
-                if (fs.readdirSync(publicPath+'/images/uploads').includes(img.split('uploads/')[1])) {
-                    fs.rmSync(publicPath+img)
-                }
-            }
-        })
-        return [...newImage, ...holdImage]
     }
 }

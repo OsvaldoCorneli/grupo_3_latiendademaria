@@ -1,9 +1,11 @@
 const { body, validationResult } = require('express-validator');
 const users = require('../models/user');
-const Category = require('../data/category.json');
-const productos = require('../data/productos.json');
+const Category = require('../models/categories');
+const productos = require('../models/products');
+const Images = require('../models/images')
 const bcrypt = require('bcryptjs');
 const path = require('path');
+const categories = require('../models/categories');
 
 const extNames = ['.jpg', '.png', '.jpeg']
 const maxFileSize = 2048000 //bytes
@@ -131,9 +133,11 @@ module.exports = {
                     return !filesSizes.some((file) => file >= maxFileSize)
                 }).withMessage(`el tamaño maximo permitido por imagen es ${maxFileSize/1024} KB`),
             body('line')
-                .custom(value => {return value == 'artesanal' || value == 'sublimada'}).withMessage('Campo Categoria inexistente'),
+                .custom(value => {return value == 'artesanal' || value == 'sublimada'}).withMessage('Campo "Linea" inexistente'),
             body('category')
-                .custom(value => {return Category.some(c => c.name == value)}).withMessage('Campo linea inexistente'),
+            .custom(async (value) => {
+                const allCategories = await categories.all()
+                return allCategories.some(c => c.name == value)}).withMessage('Campo "Categoria" inexistente'),
             body('color.*')
                 .notEmpty()
                 .isHexColor().withMessage('Solo se admite colores con valor hexadecimal'),
@@ -148,8 +152,9 @@ module.exports = {
     formEditProducto: function () {
         return [
             body('id')
-                .custom((value,{req}) => {
-                    return productos.some(product => product.id == +value) && +req.params.id == +value
+                .custom(async (value,{req}) => {
+                    const productDetail = await productos.detail(+value)
+                    return productDetail.id === +req.params.id
                 }).withMessage('el product Id no existe'),
             body('name')
                 .notEmpty().withMessage('completar el nombre')
@@ -159,7 +164,8 @@ module.exports = {
                 .isLength({max: 256}).withMessage('Maximo 256 caracteres'),
             body('image')
                 .custom((value, {req})=>{
-                    if (!value) return true
+                    if (!value && req.body.imageHold) return true
+                    if (!value && !req.body.imageHold) throw Error('debes Subir al menos una imagen')
                     const extensionName = req.files.map((x) => {return path.extname(x.path)})
                     return extensionName.some((ext) => extNames.includes(ext))
                 }).withMessage(`solo se admiten archivos ${extNames.join(', ')}`)
@@ -169,23 +175,25 @@ module.exports = {
                     return !filesSizes.some((file) => file >= maxFileSize)
                 }).withMessage(`el tamaño maximo permitido por imagen es ${maxFileSize/1024} KB`),
             body('imageHold.*')
-                .custom((value,{req}) => {
+                .custom(async (value,{req}) => {
                     if (value) {
-                        const imageHold = products.some((prod) => prod.id == +req.body.id && prod.image.includes(value))
-                        return imageHold
+                        const productDetail = await productos.detail(+req.body.id)
+                        return productDetail.images.some((img) => img.pathName == value)
                     } else return true
                 }).withMessage('la imagen de origen local no existe o no es pertinente al producto'),
             body('line')
-                .custom(value => {return value == 'artesanal' || value == 'sublimada'}).withMessage('Campo Categoria inexistente'),
+                .custom(value => {return value == 'artesanal' || value == 'sublimada'}).withMessage('Campo "Linea" inexistente'),
             body('category')
-                .custom(value => {return Category.some(c => c.name == value)}).withMessage('Campo linea inexistente'),
+                .custom(async (value) => {
+                    const allCategories = await categories.all()
+                    return allCategories.some(c => c.name == value)}).withMessage('Campo "Categoria" inexistente'),
             body('color.*')
                 .notEmpty()
                 .isHexColor().withMessage('Solo se admite colores con valor hexadecimal'),
             body('price')
                 .notEmpty()
                 .isDecimal().withMessage('Debe ser un numero con 2 decimales maximo'),
-            body('stock')
+            body('stock.*')
                 .notEmpty()
                 .isNumeric().withMessage('Solo numeros')
         ]

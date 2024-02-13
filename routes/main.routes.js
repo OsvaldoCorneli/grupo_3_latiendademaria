@@ -19,5 +19,4 @@ router.route("/autor")
     .get(main.getAutor)
 ;
 
-
 module.exports = router

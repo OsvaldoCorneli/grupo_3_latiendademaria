@@ -66,50 +66,51 @@ module.exports = {
             })
         }
     },
+    update: async function (req, res) {
+        try {
+            let {id} = req.params
+            const errores = validationResult(req)
+            if (errores.isEmpty()) {
+                console.log(req.body)
+                const response = await products.edited({id: +id, ...req.body, imagen: req.files})
+                if (response) {
+                    res.status(200).redirect(`/products/${id}/edit?message=editado`)
+                }
+            } else {
+                let newImage = []
+                const product = await products.detail(id)
+                if (req.files) newImage = Array.isArray(req.files)? req.files.map((img) => {return img.path.split('public')[1]}) : [req.files.path.split('public')[1]];
+                //if (req.body.imageHold) holdImage = typeof(req.body.imageHold) == 'string'? [req.body.imageHold] : req.body.imageHold;
 
-    update: function (req, res) {
-        let {id} = req.params
-        const errores = validationResult(req)
-        if (errores.isEmpty()) {
-            const response = products.edited({id: +id, ...req.body, imagen: req.files})
-            if (response) {
-                res.status(200).redirect(`/products/${id}/edit?message=editado`)
+                res.render(`${view}/editForm`, {
+                    productEdit: {...req.body, image: [...newImage, ...product.images]},
+                    categorias: await categories.all(),
+                    message: null,
+                    errors: errores.mapped()
+                })
+                //res.send(errores.mapped())
             }
-        } else {
-            const newImage = Array.isArray(req.files)? req.files.map((img) => {return img.path.split('public')[1]}) : [req.files.path.split('public')[1]];
-            const holdImage = typeof(req.body.imageHold) == 'string'? [req.body.imageHold] : req.body.imageHold;
-            res.render(`${view}/editForm`, {
-                productEdit: {...req.body, image: [...newImage, ...holdImage]},
-                categorias: products.categories(),
-                colors: products.colors(),
-                message: null,
-                errors: errores.mapped()
-            })
+        } catch (error) {
+            res.status(500).json(error.message)
         }
-
     },
-
-    edit: function (req,res) {
+    edit: async function (req,res) {
         try{
-        if(req.query.message === "editado"){
-            const response = products.edit(req.params.id)
-            res.render(`${view}/editForm`, {
-                productEdit: response,
-                categorias: products.categories(),
-                colors: products.colors(),
-                message: req.query
-            }) 
-        } else {    
-            const response = products.edit(req.params.id)
-            res.render(`${view}/editForm`, {
-                productEdit: response,
-                categorias: products.categories(),
-                colors: products.colors(),
-                message: null
-            })
+            if(req.query.message === "editado"){
+                res.status(200).render(`${view}/editForm`, {
+                    productEdit: await products.detail(req.params.id),
+                    categorias: await categories.all(),
+                    message: req.query
+                }) 
+            } else {    
+                res.render(`${view}/editForm`, {
+                    productEdit: await products.detail(req.params.id),
+                    categorias: await categories.all(),
+                    message: null
+                })
             }}
         catch(error){
-            res.status(404).send(error) 
+            res.status(500).send(error.message)
         }
     }, 
     delete:  function (req,res) {
