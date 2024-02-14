@@ -136,16 +136,18 @@
             <div class="inputform button-wrap">
                 <label class=button for="imageinput">Imagen de perfil</label>
                 <input 
-                    type="file"
-                    name="imagen"
-                    id="imageinput"
-                    accept="image/jpeg, image/png, image/jpg"
-                    value="<%= body.imagen? body.imagen : null %>"
-                />
-                <% if (locals.errors && errors.imagen) { %>
-                    <p class="errors"><%= errors.imagen.msg %></p>
-                <% } %>
-            </div>
+                type="file"
+                name="imagen"
+                id="imageinput"
+                accept="image/jpeg, image/png, image/jpg"
+                value="<%= body.imagen? body.imagen : null %>"
+                onchange="mostrarIconoCheck(this)"
+            />
+            <% if (locals.errors && errors.imagen) { %>
+                <p class="errors"><%= errors.imagen.msg %></p>
+            <% } %>
+            <i id="iconoCheck" class="fas fa-check" style="color: green; font-size: 24px; display: none; position: absolute; left: 45%; bottom: 20%;"></i>
+        </div>
             <div class="inputform">
                 <label for="buildingfloor">Piso:</label>
                 <input 
@@ -255,5 +257,17 @@
     <script src="\scripts\register.js"></script>
     </main>
     <%- include('../partials/footer.ejs') %>
+    <script>
+    function mostrarIconoCheck(input) {
+        const iconoCheck = document.getElementById('iconoCheck');
+        const archivo = input.files[0];
+
+        if (archivo) {
+            iconoCheck.style.display = 'block';
+        } else {
+            iconoCheck.style.display = 'none';
+        }
+    }
+</script>
 </body>
 </html>
