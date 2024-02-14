@@ -23,12 +23,10 @@ module.exports = {
     },
     create: async function (data, image) {
         try {
-            console.log("ingresa a MODELS USER service", data)
-            let imagen;
+            let imagen = "";
             if(image){
-            imagen = image.map((x) => { return x.path.split('/public')[1] })}
-
-            else{imagen = "";}
+             imagen = image.map(element => element.path.split('public')[1]).join(', ')}
+       
             const { nombre, apellido, fechaNacimiento, provincia, localidad, codigopostal, calle, callenumero, piso, departamento, email, userName, password } = data
             const passEncriptada = bcrypt.hashSync(password, 10)
         
@@ -46,9 +44,8 @@ module.exports = {
                 userName,
                 password: passEncriptada,
                 fechaNacimiento,
-                // imagen
+                imagen
             });
-             console.log("nuevo usuario", newUser);
             return newUser; 
 
         } catch (error) {
