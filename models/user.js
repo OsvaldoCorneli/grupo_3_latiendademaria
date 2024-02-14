@@ -91,7 +91,7 @@ module.exports = {
             return {}
         }
         
-    },
+    }, 
     restore: function (id) {
         
     }

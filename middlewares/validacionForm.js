@@ -106,11 +106,17 @@ module.exports = {
         return [
             body('email')
                 .isEmail().withMessage('email invalido')
-                .custom((value,{req}) => {
-                    const anotherUserWithSameEmail = users.index().some((user) => user.id != req.params.id && user.email == value)
-                    return !anotherUserWithSameEmail
-                }).withMessage('El email ya esta en uso'),
-            body('fechanacimiento')
+                .custom(async (value,{req}) => {
+
+                    const usuario1 = await users.index()
+                    const anotherUserWithSameEmail = usuario1.some((user) => user.id != req.params.id && user.email == value)
+                    if (anotherUserWithSameEmail) {
+                        throw new Error('El email ya está en uso');
+                        }
+   
+                        return true;
+                   }),
+            body('fechaNacimiento')
                 .isISO8601().withMessage('ingresar una fecha valida'),
             body('provincia')
                 .notEmpty().withMessage('selecciona una provincia'),
@@ -124,15 +130,15 @@ module.exports = {
                 .notEmpty().withMessage('la calle no puede estar vacia'),
             body('callenumero')
                 .isNumeric({ min: 1, max: 10000 }).withMessage('ingresar el numero de calle'),
-            body('imagen')
-                .custom((value, {req})=>{
-                    const extensionName = req.files.map((x) => {return path.extname(x.path)})
-                    return extensionName.some((ext) => extNames.includes(ext))
-                }).withMessage(`solo se admiten archivos ${extNames.join(', ')}`)
-                .custom((value, {req})=>{
-                    const filesSizes = req.files.map((x) => {return x.size})
-                    return !filesSizes.some((file) => file >= maxFileSize)
-                }).withMessage(`el tamaño maximo permitido por imagen es ${maxFileSize/1024} KB`),
+            // body('imagen')
+            //     .custom((value, {req})=>{
+            //         const extensionName = req.files.map((x) => {return path.extname(x.path)})
+            //         return extensionName.some((ext) => extNames.includes(ext))
+            //     }).withMessage(`solo se admiten archivos ${extNames.join(', ')}`)
+            //     .custom((value, {req})=>{
+            //         const filesSizes = req.files.map((x) => {return x.size})
+            //         return !filesSizes.some((file) => file >= maxFileSize)
+            //     }).withMessage(`el tamaño maximo permitido por imagen es ${maxFileSize/1024} KB`),
             body('piso', 'no puede superar 10 caracteres')
                 .isLength({max:10}),
             body('departamento', 'no puede superar 10 caracteres')

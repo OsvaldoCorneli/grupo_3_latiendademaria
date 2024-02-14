@@ -81,6 +81,7 @@ module.exports = {
     },
     putUpdateForm: function (req,res) {
         const errores = validationResult(req)
+        console.log("errores del update", errores)
         if (errores.isEmpty()) {
             const updatedData = users.update({id: parseInt(id), ...req.body, imagen: req.files })
             if (updatedData) {
