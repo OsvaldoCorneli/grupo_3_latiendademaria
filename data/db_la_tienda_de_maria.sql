@@ -57,6 +57,7 @@ create table products(
     price numeric(10,2) not null,
     created_at datetime not null default current_timestamp,
     updated_at datetime default current_timestamp,
+    deleted_at datetime default null,
     foreign key(category_id) references categories(id)
 );
 
@@ -305,7 +306,7 @@ insert into payments (user_id, total, status, created_at) values ('3','205066.88
 unlock tables;
 
 lock tables products write;
-insert into products values ('1','Mates de madera',' descripcion Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+insert into products(id,name,description, category_id, line, price, created_at, updated_at) values ('1','Mates de madera',' descripcion Lorem ipsum dolor, sit amet consectetur adipisicing elit.
 Cupiditate suscipit reiciendis perspiciatis ab, deleniti 
 aliquam incidunt iste et sed libero a, nihil voluptate 
 temporibus delectus vitae magni molestiae! Doloremque, hic?','1','artesanal',6609.33,default,default),

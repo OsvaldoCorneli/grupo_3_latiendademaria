@@ -2,7 +2,11 @@ let agregarColor = document.getElementById('agregar');
 
 agregarColor.addEventListener('click', function () {
     let inputCount = document.querySelectorAll('input[type="color"]').length;
-    let input = `<div><input class="c${inputCount? inputCount : 0}" type="color" name="color" id="color"/><span id="c${inputCount? inputCount : 0}"></span></div>`;
+    let input = `<div>\n
+        <input class="c${inputCount? inputCount : 0}" type="color" name="color" id="color" required/>\n
+        <span id="c${inputCount? inputCount : 0}"></span>\n
+        <input type="number" name="stock" required value="1"/>
+    </div>`;
 
     const container = document.getElementsByClassName('container-colorinputs')[0];
     if (inputCount < 3) {

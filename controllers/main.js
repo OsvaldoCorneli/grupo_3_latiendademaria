@@ -30,12 +30,16 @@ module.exports = {
     getAutor: function (req,res) {
         res.render('autor')
     },
-    getCart: function (req,res) {
-      const cartDetail = cart.cart(req.session.user?.id)
-      if (cartDetail) {
-          res.render('cart/cart', {cartDetail})
-      } else {
-          res.render('404notfound', {url: req.url})
+    getCart: async function (req,res) {
+      try {
+        const cartDetail = await cart.cart(req.session.user?.id)
+        if (cartDetail) {
+            res.render('cart/cart', {cartDetail})
+        } else {
+            res.render('404notfound', {url: req.url})
+        }
+      } catch (error) {
+        res.status(500).json(error.message)
       }
   },
 }

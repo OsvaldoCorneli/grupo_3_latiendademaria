@@ -1,11 +1,11 @@
 const { body, validationResult } = require('express-validator');
 const users = require('../models/user');
-const Category = require('../models/categories');
 const productos = require('../models/products');
 const Images = require('../models/images')
 const bcrypt = require('bcryptjs');
 const path = require('path');
 const categories = require('../models/categories');
+const Colors = require('../models/colors');
 
 const extNames = ['.jpg', '.png', '.jpeg']
 const maxFileSize = 2048000 //bytes
@@ -137,10 +137,14 @@ module.exports = {
             body('category')
             .custom(async (value) => {
                 const allCategories = await categories.all()
-                return allCategories.some(c => c.name == value)}).withMessage('Campo "Categoria" inexistente'),
+                return allCategories.some(({id}) => id == value)}).withMessage('Campo "Categoria" inexistente'),
             body('color.*')
                 .notEmpty()
-                .isHexColor().withMessage('Solo se admite colores con valor hexadecimal'),
+                .isHexColor().withMessage('Solo se admite colores con valor hexadecimal')
+                .custom(async(value) => {
+                    const allColors = await Colors.all()
+                    return allColors.some(({hex})=> hex == value.toUpperCase())
+                }).withMessage('Campo "Color" no existe'),
             body('price')
                 .notEmpty()
                 .isDecimal().withMessage('Debe ser un numero con 2 decimales maximo'),
@@ -189,7 +193,11 @@ module.exports = {
                     return allCategories.some(c => c.name == value)}).withMessage('Campo "Categoria" inexistente'),
             body('color.*')
                 .notEmpty()
-                .isHexColor().withMessage('Solo se admite colores con valor hexadecimal'),
+                .isHexColor().withMessage('Solo se admite colores con valor hexadecimal')
+                .custom(async(value) => {
+                    const allColors = await Colors.all()
+                    return allColors.some(({hex})=> hex == value.toUpperCase())
+                }).withMessage('Campo "Color" no existe'),
             body('price')
                 .notEmpty()
                 .isDecimal().withMessage('Debe ser un numero con 2 decimales maximo'),

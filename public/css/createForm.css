@@ -143,6 +143,14 @@ input[type='color']:hover {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+    gap: 5px
+}
+.container-colorinputs > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
 }
 
 input[type="file"] {
@@ -209,6 +217,5 @@ input[type="file"] {
         width: 60%;
         max-width: 600px;
     }
-
 }
 

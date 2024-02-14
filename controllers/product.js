@@ -43,28 +43,38 @@ module.exports = {
             res.status(500).json(error.message)
         }
     },
-    getCreateForm: function(req,res) {
-        res.render(view+'createForm', {
-            productEdit: null,
-            categorias: products.categories(),
-            body: {}
-        })
-    },
-    postCreateForm: function (req,res) {
-        const errores = validationResult(req)
-        if (errores.isEmpty()) {
-            const newProduct = products.create(req.body, req.files)
-            if (newProduct) {
-                res.redirect('/users/profile')
-            }
-        } else {
+    getCreateForm: async function(req,res) {
+        try {
             res.render(view+'createForm', {
                 productEdit: null,
-                body: req.body,
-                categorias: products.categories(),
-                errors: errores.mapped() 
+                categorias: await categories.all(),
+                body: {}
             })
+        } catch (error) {
+            res.status(500).json(error.message)
         }
+
+    },
+    postCreateForm: async function (req,res) {
+        try {
+            const errores = validationResult(req)
+            if (errores.isEmpty()) {
+                const newProduct = await products.create(req.body, req.files)
+                if (newProduct) {
+                    res.redirect('/users/profile')
+                }
+            } else {
+                res.render(view+'createForm', {
+                    productEdit: null,
+                    body: req.body,
+                    categorias: await categories.all(),
+                    errors: errores.mapped() 
+                })
+            }
+        } catch (error) {
+            res.status(500).json(error.message)
+        }
+
     },
     update: async function (req, res) {
         try {
@@ -113,11 +123,15 @@ module.exports = {
             res.status(500).send(error.message)
         }
     }, 
-    delete:  function (req,res) {
-        
-        const {id} = req.params
-        const responseDelete = products.destroy(id)
-        res.status(200).redirect('/users/profile'); 
-        
+    delete: async function (req,res) {
+        try {
+            const {id} = req.params
+            const responseDelete = await products.remove(+id)
+            if (responseDelete) {
+                res.status(200).redirect('/products');
+            }
+        } catch (error) {
+            res.status(500).send(error.message)
+        }
     }
 }

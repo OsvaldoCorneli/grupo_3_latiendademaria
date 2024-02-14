@@ -76,7 +76,7 @@
                     <label for="category"><b>Categoria:</b>
                         <% categorias.forEach((category) => { %>
                                 <input id="category" type="radio" name="category" value="<%= category.id %>" 
-                                <% if (category.id == productEdit.categories.id) { %> <%= checked="checked" %> <% } %>>
+                                <% if (category.id == productEdit.categories?.id || category.id == productEdit?.category ) { %> <%= checked="checked" %> <% } %>>
                                 <%= category.name %></input>
                         <% }) %>
                     </label>

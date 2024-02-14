@@ -1,12 +1,13 @@
-const fs = require('fs')
-const path = require('path')
+// const fs = require('fs')
+// const path = require('path')
 const db = require('../database/models')
 const {Op, Sequelize} = require('sequelize');
 const Images = require('./images');
 const Colors = require('./colors');
 
-const productsFilePath = path.join(__dirname, '../data/productos.json');
-const Productos = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
+
+// const productsFilePath = path.join(__dirname, '../data/productos.json');
+// const Productos = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
 
 
 module.exports = {
@@ -33,7 +34,8 @@ module.exports = {
                         attributes: ['id','name']
                     }
                 ],
-                attributes: {exclude: ['category_id']}
+                attributes: {exclude: ['category_id']},
+                logging: false
             })
         } catch (error) {
             return error
@@ -62,7 +64,8 @@ module.exports = {
                         attributes: ['id','name']
                     }
                 ],
-                attributes: {exclude: ['category_id']}
+                attributes: {exclude: ['category_id']},
+                logging: false
             })
         } catch (error) {
             return error
@@ -106,33 +109,32 @@ module.exports = {
                     }
                 ],
                 where: condition.products,
-                attributes: {exclude: ['category_id']}
+                attributes: {exclude: ['category_id']},
+                logging: false
             })
         } catch (error) {
             return error
         }
     },
-    create: function (data, images) {
-        const { name, description, line, category, color, price, stock } = data
-        const image = images.map((x) => {return x.path.split('public')[1]})
-        let id = 0
-        for (let i in Productos) {
-            if (id < Productos[i].id) id = Productos[i].id
-        }
-        //delete data.imagen
-        const newProduct = { id: id+1, 
-            ...data,
-            color: typeof(color) == 'string'? [color] : color,
-            stock: Number(stock),
-            price: Number(price),
-            image: image
-        }
-        const allProduct = [...Productos, newProduct ]
-        fs.writeFileSync(productsFilePath, JSON.stringify(allProduct,0,4), 'utf-8')
-        if (newProduct) {
-            return newProduct
-        } else {
-            throw new Error('error al crear producto')
+    create: async function (data, images) {
+        try {
+            const { name, description, line, category, color, price, stock } = data
+            const newProduct = await db.products.create({
+                name: name,
+                description: description,
+                category_id: category,
+                line: line,
+                price: +price
+            })
+            if (newProduct) {
+                await colors.createProductColor(color, stock, newProduct.id)
+                await Images.newProductImage(images, newProduct.id)
+                return this.detail(newProduct.id)
+            } else {
+                throw new Error('error al crear producto')
+            }
+        } catch (error) {
+            return error
         }
     },
     edited: async function (body) {
@@ -141,22 +143,27 @@ module.exports = {
             await Colors.editProductColors(body.color, body.stock, body.id)
 
             await db.products.update({
-                name: body.name,
-                description: body.description,
-                category_id: +body.category,
-                line: body.line,
-                price: +body.price
-            },              
-            {
-                where: {id: body.id}
+                    name: body.name,
+                    description: body.description,
+                    category_id: +body.category,
+                    line: body.line,
+                    price: +body.price
+                },              
+                {
+                    where: {id: body.id}
             });
             return await this.detail(body.id)
         } catch (error) {
             return error
         }
     },
-    destroy: function(id){
-        Productos = Productos.filter((product) => product.id !== +id);
-        return Productos;
+    remove: async function (id){
+        try {
+            //await Images.destroyProduct(id)
+            //await Colors.destroyProduct(id)
+            return await db.products.destroy({where: {id: id}})
+        } catch (error) {
+            return error
+        }
     }
 }

@@ -15,6 +15,7 @@ module.exports = {
             const response = await db.payment.findAll({
                 where: condition,
                 attributes: {exclude: ['user_id']},
+                logging: false
             })
             if (response.length > 0) return response
             else throw Error
@@ -49,7 +50,8 @@ module.exports = {
                     }
                 ],
                 attributes: {exclude: ['user_id']},
-                where: {id}
+                where: {id},
+                logging: false
             })
         } catch (error) {
             return error
