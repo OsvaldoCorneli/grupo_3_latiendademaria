@@ -54,12 +54,12 @@
                         <% } %>
                     </div>
                     <span id="imageRender">
-                        <% productEdit.images?.forEach((img, index) => { %>
+                        <% productEdit.images?.forEach(({id, pathName}) => { %>
                             <span class="imageHold">
-                                <p><%= img.pathName.split('uploads')[1] %> ? KB</p>
-                                <img src="<%= img.pathName %>" alt="<%= productEdit.name+index %>"/>
-                                <input type="hidden" id="<%= img %>input" name="imageHold" value="<%= img.pathName %>"/>
-                                <button id="deleteImageHold" class="deleteImage" value="<%= img.pathName %>">Borrar</button>
+                                <p><%= pathName.split('uploads')[1] %> ? KB</p>
+                                <img src="<%= pathName %>" alt="<%= productEdit.name+id %>"/>
+                                <input type="hidden" id="<%= id %>input" name="imageHold" value="<%= pathName %>"/>
+                                <button id="deleteImageHold" class="deleteImage" value="<%= pathName %>">Borrar</button>
                             </span>
                         <% }) %>
                     </span>
@@ -74,10 +74,10 @@
                     <% } %>
                     
                     <label for="category"><b>Categoria:</b>
-                        <% categorias.forEach((category) => { %>
-                                <input id="category" type="radio" name="category" value="<%= category.id %>" 
-                                <% if (category.id == productEdit.categories?.id || category.id == productEdit?.category ) { %> <%= checked="checked" %> <% } %>>
-                                <%= category.name %></input>
+                        <% categorias.forEach(({id,name}) => { %>
+                                <input id="category" type="radio" name="category" value="<%= id %>" 
+                                <% if (id == productEdit.categories?.id || id == productEdit?.category ) { %> <%= checked="checked" %> <% } %>>
+                                <%= name %></input>
                         <% }) %>
                     </label>
                     <label for="color"><b>Colores:</b></label>
@@ -126,7 +126,6 @@
                 </span>
                 <button class="button" type="submit">Editar</button>
                 </form>
-            
             </div>
         <script src="\scripts\ntc.js"></script>
         <script src="\scripts\colorValidator.js"></script>
