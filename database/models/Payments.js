@@ -4,7 +4,7 @@ module.exports = (sequelize, dataTypes) => {
     
     const cols = {
        id:{
-        type: dataTypes.INTEGER(10),
+        type: dataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
@@ -18,7 +18,7 @@ module.exports = (sequelize, dataTypes) => {
         allowNull: false,
        },
         status:{
-            type: DataTypes.ENUM('cancelado', 'completado', 'en_proceso', 'rechazado'),
+            type: dataTypes.ENUM('cancelado', 'completado', 'enproceso', 'rechazado'),
         allowNull: false,
     }
    
@@ -31,11 +31,18 @@ module.exports = (sequelize, dataTypes) => {
         deletedAt: false
     }
     
-    
-    
-    
     const Payment = sequelize.define(alias, cols, config);
-    
-    
+
+    Payment.associate = function(models) {
+        Payment.belongsTo(models.users,{
+            as: 'user',
+            foreignKey: 'user_id',
+        })
+        Payment.hasMany(models.payment_products,{
+            as: 'products',
+            foreignKey: 'payment_id',
+        })
+    }
+
     return Payment
     };

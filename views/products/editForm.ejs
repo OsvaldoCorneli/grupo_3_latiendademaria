@@ -54,12 +54,12 @@
                         <% } %>
                     </div>
                     <span id="imageRender">
-                        <% productEdit.image?.forEach((img, index) => { %>
+                        <% productEdit.images?.forEach((img, index) => { %>
                             <span class="imageHold">
-                                <p><%= img.split('uploads/')[1] %> ? KB</p>
-                                <img src="<%= img %>" alt="<%= productEdit.name+index %>"/>
-                                <input type="hidden" id="<%= img %>input" name="imageHold" value="<%= img %>"/>
-                                <button id="deleteImageHold" class="deleteImage" value="<%= img %>">Borrar</button>
+                                <p><%= img.pathName.split('uploads')[1] %> ? KB</p>
+                                <img src="<%= img.pathName %>" alt="<%= productEdit.name+index %>"/>
+                                <input type="hidden" id="<%= img %>input" name="imageHold" value="<%= img.pathName %>"/>
+                                <button id="deleteImageHold" class="deleteImage" value="<%= img.pathName %>">Borrar</button>
                             </span>
                         <% }) %>
                     </span>
@@ -75,23 +75,25 @@
                     
                     <label for="category"><b>Categoria:</b>
                         <% categorias.forEach((category) => { %>
-                                <input id="category" type="radio" name="category" value="<%= category %>" 
-                                <% if (category == productEdit.category) { %> <%= checked="checked" %> <% } %>>
-                                <%= category %></input>
+                                <input id="category" type="radio" name="category" value="<%= category.id %>" 
+                                <% if (category.id == productEdit.categories?.id || category.id == productEdit?.category ) { %> <%= checked="checked" %> <% } %>>
+                                <%= category.name %></input>
                         <% }) %>
                     </label>
                     <label for="color"><b>Colores:</b></label>
                     <div class="container-colorinputs">
-                    <% if (typeof(productEdit.color) == 'string') { let background=`color:${productEdit.color};`%>
+                    <!-- <% if (typeof(productEdit.colors) == 'string') { let background=`color:${productEdit.colors.hex};`%>
                         <div>
-                            <input class="c0" type="color" name="color" id="color" value="<%= productEdit.color %>"/>
-                            <span id="c0" style=<%= background %>></span>
+                            <input class="c0" type="color" name="color" id="color" value="<%= productEdit.colors.hex %>"/>
+                            <span id="c0" style=<%= background %>><%= productEdit.colors.name %></span>
                         </div>
-                    <% } else { %>
-                    <% productEdit.color?.forEach((color,index) =>  { let background=`color:${color};`%>
+                    <% } else { %> -->
+                    <% productEdit.colors?.forEach(({stock, color},index) =>  { let background=`color:${color.hex};`%>
                         <div>
-                            <input class="c<%= index %>" type="color" name="color" id="color" value="<%= color %>"/>
-                            <span id="c<%= index %>" style=<%= background %>></span>
+                            <input class="c<%= index %>" type="color" name="color" id="color" value="<%= color.hex %>"/>
+                            <span id="c<%= index %>" style=<%= background %>><%= color.hex %></span>
+                            <label for="stock">Stock:</label>
+                            <input type="number" name="stock" value="<%= stock %>" required/>
                         </div>
                     <% })} %>
                         <span id="agregar" class="button">Agregar color</span>
@@ -110,14 +112,14 @@
                     <% if (locals.errors && errors.price) { %>
                         <p class="errors"><%= errors.price.msg %></p>
                     <% } %>
-                    <label for="stock"><b>Stock:</b></label>
+                    <!-- <label for="stock"><b>Stock:</b></label>
                     <input class="inputForm" 
                         type="number"
                         id="stock" 
                         name="stock"
                         required
                         value="<%= productEdit.stock %>" 
-                    />
+                    /> -->
                     <% if (locals.errors && errors.stock) { %>
                         <p class="errors"><%= errors.stock.msg %></p>
                     <% } %>

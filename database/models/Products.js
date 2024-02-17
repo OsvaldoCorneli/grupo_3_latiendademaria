@@ -1,29 +1,28 @@
 module.exports = (sequelize, dataTypes) => {
 
-    const alias = "product"
+    const alias = "products"
     
     const cols = {
        id:{
-        type: dataTypes.INTEGER(10),
+        type: dataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
        },
        name:{
         type: dataTypes.STRING(50),
-        allowNull: false,
-    
+        allowNull: false
+       },
+       category_id: {
+        type: dataTypes.INTEGER,
+        allowNull: false
        },
        description:{
         type: dataTypes.STRING(128),
         allowNull: true,
        },
-       category_id:{
-        type: dataTypes.INTEGER,
-        allowNull: true,
-       },
        line:{
-        type: DataTypes.ENUM('artesanal', 'sublimada'),
+        type: dataTypes.ENUM('artesanal', 'sublimada'),
         allowNull: false,
        },
        price:{
@@ -34,17 +33,46 @@ module.exports = (sequelize, dataTypes) => {
     }
     
     const config = {
+        //tableName: 'products',
         timestamps: true,
         createdAt: 'created_at',
         updatedAt: 'updated_at',
-        deletedAt: false
+        deletedAt: 'deleted_at',
+        paranoid: true
     }
     
     
     
     
-    const Product = sequelize.define(alias, cols, config);
+    const Products = sequelize.define(alias, cols, config);
     
+    Products.associate = function(models) {
+        Products.belongsTo(models.categories, {
+            as: 'categories',
+            foreignKey: "category_id",
+            timestamps: false,
+        })
+        Products.hasMany(models.product_colors, {
+            as: 'colors',
+            foreignKey: 'product_id'
+        })
+        // Products.belongsToMany(models.colors, {
+        //     as: 'colors',
+        //     through: models.product_colors,
+        //     foreignKey: 'product_id',
+        //     otherKey: 'color_id',
+        // })
+        // Products.hasMany(models.product_payments, {
+        //     as: 'product_payments',
+        //     foreignKey: 'product_id'
+        // })
+        Products.belongsToMany(models.images,{
+            as: 'images',
+            through: models.prod_images,
+            foreignKey: 'product_id',
+            otherKey: 'image_id'
+        })
+    }
     
-    return Product
+    return Products
     } ;

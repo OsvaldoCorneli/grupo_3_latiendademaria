@@ -32,9 +32,9 @@
                     <li><img src="/images/paletaPintura.png" alt="img ilustracion"/><a href="">Ilustraciones</a></li>
                 </ul>
             <section class="cards">
-                <% for (let i in sublimados) { %>
-                    <%- include('./card.ejs', {producto: sublimados[i]}) %>
-                <% } %>
+                <% sublimados.forEach((producto) => { %>
+                    <%- include('./card.ejs', {producto}) %>
+                <% }) %>
             </section>
         </section>
         <section class="lineaArtesanal">
@@ -44,9 +44,9 @@
                 <li><img src="/images/paletaPintura.png" alt="img ilustracion"/><a href="">Cuadros</a></li>
             </ul>
             <section class="cards">
-                <% for (let i in artesanales) { %>
-                    <%- include('./card.ejs', {producto: artesanales[i]}) %>
-                <% } %>
+                <% artesanales.forEach((producto) => { %>
+                    <%- include('./card.ejs', {producto}) %>
+                <% }) %>
             </section>
         </section>
         <p class="servParroquias">Servicio para parroquias</p>

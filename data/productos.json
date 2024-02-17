@@ -82,7 +82,7 @@
         "color": [
             "#ffdab9",
             "#ffdead",
-            "#d2691e"
+            "#D2B48C"
         ]
     },
     {
@@ -114,8 +114,8 @@
         ],
         "price": 8016.62,
         "color": [
-            "#fa8072",
-            "#8a2be2",
+            "#FAF0E6",
+            "#EEE8AA",
             "#fff8dc"
         ]
     },
@@ -149,7 +149,7 @@
         "price": 3030.63,
         "color": [
             "#e0ffff",
-            "#ffa500",
+            "#FFDAB9",
             "#7b68ee"
         ]
     },
@@ -200,7 +200,7 @@
         "price": 8515.71,
         "color": [
             "#fffaf0",
-            "#fa8072",
+            "#FFFACD",
             "#fafad2"
         ]
     },

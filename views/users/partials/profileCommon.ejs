@@ -1,3 +1,4 @@
+<script src="\scripts\profilecommon.js"></script>
 <h2>Mis Datos</h2>
 <section class="profile">
     <% let { id, nombre, apellido, email, calle, callenumero, provincia, imagen, codigopostal, piso, departamento } = userData %>
@@ -20,6 +21,7 @@
     </span>
 </section>
 <section class="common-profile">
+    <% if (historialPagos) { %>
     <div class="historialpagos">
         <h2>Mis Compras</h2>
         <table class="productos portraitlayout">
@@ -77,10 +79,10 @@
             <table>
                 <tbody>
                     <tr><th>Producto</th><th>Color</th><th>Cant</th><th>Precio</th><th>Subtotal</th></tr>
-                    <% products.forEach(prod => { let { id, name, image, color, cantidad, price } = prod %>
+                    <% products.forEach(prod => { let { id, name, images, color, cantidad, price } = prod %>
                     <% let background = `background-color:${color};color:${color};border-radius:50%; border:0.1px-solid-black;;` %>
                         <tr>
-                            <td><img class="product" src="<%= image %>" alt=""/>(<%= id %>) <%= name %></td>
+                            <td><img class="product" src="<%= images[0].pathName %>" alt=""/>(<%= images[0].id %>) <%= name %></td>
                             <td><i style=<%= background %>>oo</i></td>
                             <td><%= cantidad %></td>
                             <td class="number"><%= price %></td>
@@ -91,6 +93,9 @@
             </table>
         </div>
         <% }) %>
+        <% } else { %>
+            <button onclick="()=> fetchPagos(userData)">historial Pagos</button>
+        <% } %>
     </section>
     </div>
     <!-- <div class="favoritos">

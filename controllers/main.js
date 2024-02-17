@@ -3,11 +3,17 @@ const products = require('../models/products');
 const cart = require('../models/cart');
 
 module.exports = {
-	getHome: function (req, res) {
-		res.render('Home/home', {
-			sublimados: products.filter({line: 'sublimada'}).slice(0,8),
-			artesanales: products.filter({line: 'artesanal'}).slice(0,4)
-		})
+	getHome: async function (req, res) {
+    try {
+      const productSublimados = await products.filter({line: 'sublimada'})
+      const productosArtesanales = await products.filter({line: 'artesanal'})
+      res.render('Home/home', {
+        sublimados: productSublimados.slice(0,8),
+        artesanales: productosArtesanales.slice(0,4)
+      })
+    } catch (error) {
+      res.status(500).json(error.message)
+    }
 	},
     getContacto: function (req,res) {
 		res.render('contacto')
@@ -24,12 +30,16 @@ module.exports = {
     getAutor: function (req,res) {
         res.render('autor')
     },
-    getCart: function (req,res) {
-      const cartDetail = cart.cart(req.session.user?.id)
-      if (cartDetail) {
-          res.render('cart/cart', {cartDetail})
-      } else {
-          res.render('404notfound', {url: req.url})
+    getCart: async function (req,res) {
+      try {
+        const cartDetail = await cart.cart(req.session.user?.id)
+        if (cartDetail) {
+            res.render('cart/cart', {cartDetail})
+        } else {
+            res.render('404notfound', {url: req.url})
+        }
+      } catch (error) {
+        res.status(500).json(error.message)
       }
   },
 }

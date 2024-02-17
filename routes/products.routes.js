@@ -8,6 +8,7 @@ const validacionForm = require('../middlewares/validacionForm')
 router.route('/')
     .get(products.index)  // para primera vista o resetear filtro
 ;
+
 router.get('/filter', products.filter);
 
 router.route('/create') 
