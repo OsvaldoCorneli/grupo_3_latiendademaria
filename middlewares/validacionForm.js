@@ -79,18 +79,18 @@ module.exports = {
                 .isISO8601().withMessage('ingresar una fecha valida'),
             body('provincia')
                 .notEmpty().withMessage('selecciona una provincia'),
-            body('codigopostal')
+            body('codigoPostal')
                 .isNumeric({ min: 1, max: 10000 }).withMessage('solo numeros')
                 .notEmpty().withMessage('el codigo postal no puede estar vacio'),
             body('calle')
                 .isLength({min: 3, max:30}) 
                 .notEmpty().withMessage('la calle no puede estar vacia'),
-            body('callenumero')
+            body('calleNumero')
                 .isNumeric({ min: 1, max: 10000 }).withMessage('ingresar el numero de calle'),
             // body('imagen')
             //     .custom((value, {req})=>{
             //         const extensionName = req.files.map((x) => {return path.extname(x.path)})
-            //         return extensionName.some((ext) => extNames.includes(ext))
+            //         return extensionName.some((ext) => extNames.includes(ext)) 
             //     }).withMessage(`solo se admiten archivos ${extNames.join(', ')}`)
             //     .custom((value, {req})=>{
             //         const filesSizes = req.files.map((x) => {return x.size})
@@ -122,13 +122,13 @@ module.exports = {
                 .notEmpty().withMessage('selecciona una provincia'),
             body('localidad')
                 .notEmpty().withMessage('selecciona una localidad'),
-            body('codigopostal')
+            body('codigoPostal')
                 .isNumeric({ min: 1, max: 10000 }).withMessage('solo numeros')
                 .notEmpty().withMessage('el codigo postal no puede estar vacio'),
             body('calle')
                 .isLength({min: 3, max:30})
                 .notEmpty().withMessage('la calle no puede estar vacia'),
-            body('callenumero')
+            body('calleNumero')
                 .isNumeric({ min: 1, max: 10000 }).withMessage('ingresar el numero de calle'),
             // body('imagen')
             //     .custom((value, {req})=>{

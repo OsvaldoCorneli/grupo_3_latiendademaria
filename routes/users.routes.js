@@ -13,12 +13,6 @@ router.route('/login')
 
 router.get('/logout', users.logout)
 
-router.get('/probar', async (req , res) =>{
-    const user = await db.Users.findAll()
-
-    res.json(user)
-})
- 
 router.route('/register')
     .get(users.getCreateForm)
     .post(upload.any(), validacionForm.registerUser(), users.postCreateForm);

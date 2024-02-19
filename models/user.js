@@ -3,8 +3,9 @@ const fs = require('fs');
 const path = require('path');
 const bcrypt = require('bcryptjs');
 
+
 const usersFilePath = path.join(__dirname, '../data/users.json');
-// const Users = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
+const Users = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
 
 const dataGeoFilePath = path.join(__dirname, '../data/users.json');
 const dataGeo = JSON.parse(fs.readFileSync(dataGeoFilePath, 'utf-8'));
@@ -27,7 +28,7 @@ module.exports = {
             if(image){
              imagen = image.map(element => element.path.split('public')[1]).join(', ')}
        
-            const { nombre, apellido, fechaNacimiento, provincia, localidad, codigopostal, calle, callenumero, piso, departamento, email, userName, password } = data
+            const { nombre, apellido, fechaNacimiento, provincia, localidad, codigoPostal, calle, calleNumero, piso, departamento, email, userName, password } = data
             const passEncriptada = bcrypt.hashSync(password, 10)
         
             const newUser = await db.Users.create({
@@ -35,9 +36,9 @@ module.exports = {
                 apellido,
                 provincia,
                 localidad,
-                codigopostal,
+                codigoPostal,
                 calle,
-                callenumero,
+                calleNumero,
                 piso,
                 departamento,
                 email,
@@ -69,27 +70,49 @@ module.exports = {
             throw new Error(error.message);
         }
     },
-    update: function (data) {
-        let { id } = data
-        const imagenes = data.imagen.map((x) => {return x.path.split('public')[1]})
-        const unupdatedUsers = Users.filter(x => x.id !== id)
-        let updateUser = Users.find(u => u.id == id)
-        if (updateUser) {
-            updateUser = {...updateUser, ...data, imagen: imagenes}
-            const allUsers = [...unupdatedUsers, updateUser]
-            fs.writeFileSync(usersFilePath, JSON.stringify(allUsers,0,4), 'utf-8')
-            return updateUser
-        } else {
-            throw new Error('error en la edicion de usuario')
+    update: async function (data) {
+        try {
+            let { id } = data
+            if(data.imagen){
+                    data.imagen = data.imagen.map(element => element.path.split('public')[1]).join(', ')}
+                
+            let updateUser = await db.Users.findByPk(id, {raw:true})
+            if(data.imagen?.length === 0){
+                {data.imagen = updateUser.imagen }
+            }
+            
+            if(Array.isArray(data.localidad)){
+                if(data.localidad.includes(updateUser.localidad) && data.localidad.length === 2){
+                    data.localidad = data.localidad.filter(element => element !== updateUser.localidad)
+                    data.localidad = data.localidad.join("")
+                }else{
+                    if(data.localidad.length > 2){
+                        data.localidad = data.localidad[0]
+                    }
+                }
+             }  
+
+            if (updateUser) {
+                const userUpdate = await db.Users.update(data,{where:{id}})
+                if(userUpdate[0] === 1){
+                return "Actualizado correctamente"
+                } 
+            } else {
+                throw new Error('error en la edicion de usuario')
+            }
+        } catch (error) {
+            return error;
         }
+       
     },
     detail: async function (id) {
+        try{
         const detailUser = await db.Users.findOne({where:{id},raw:true})
         if (detailUser) {
             return detailUser
         } else {
             return {}
-        }
+        }}catch(error){return error}
         
     }, 
     restore: function (id) {

@@ -87,18 +87,18 @@
                     <% } %>
                 </div>
             <div class="inputform">
-                <label for="codigopostal">Codigo postal:</label>
+                <label for="codigoPostal">Codigo postal:</label>
                 <input 
                     type="text"
-                    name="codigopostal"
-                    id="codigopostal"
+                    name="codigoPostal"
+                    id="codigoPostal"
                     placeholder="Codigo Postal"
                     minlength="4"
                     maxlength="10"
-                    value="<%= body.codigopostal? body.codigopostal : null %>"
+                    value="<%= body.codigoPostal? body.codigoPostal : null %>"
                 />
-                <% if (locals.errors && errors.codigopostal) { %>
-                    <p class="errors"><%= errors.codigopostal.msg %></p>
+                <% if (locals.errors && errors.codigoPostal) { %>
+                    <p class="errors"><%= errors.codigoPostal.msg %></p>
                 <% } %>
             </div>
             <div class="inputform">
@@ -120,15 +120,15 @@
                 <label for="streetnumber">Numero:</label>
                 <input 
                     type="number"
-                    name="callenumero"
+                    name="calleNumero"
                     id="streetnumber"
                     placeholder="Numero"
                     minlength="10"
                     maxlength="20"
-                    value="<%= body.callenumero? body.callenumero : null %>"
+                    value="<%= body.calleNumero? body.calleNumero : null %>"
                     />
-                    <% if (locals.errors && errors.callenumero) { %>
-                        <p class="errors"><%= errors.callenumero.msg %></p>
+                    <% if (locals.errors && errors.calleNumero) { %>
+                        <p class="errors"><%= errors.calleNumero.msg %></p>
                     <% } %>
             </div>
         </div>

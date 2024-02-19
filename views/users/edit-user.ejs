@@ -9,7 +9,7 @@
 <body>
     <%- include('../partials/navbar.ejs') %>
     <main>
-<% let { id, nombre, apellido, fechaNacimiento, provincia, localidad, codigopostal, calle, callenumero, piso, departamento, email,userName, password, imagen } = userData %>
+<% let { id, nombre, apellido, fechaNacimiento, provincia, localidad, codigoPostal, calle, calleNumero, piso, departamento, email,userName, password, imagen } = userData %>
 <% fechaNacimiento = fechaNacimiento.slice(0,10) %>
         <h2>Modificar Datos de Usuario</h2>   
     <article class="contenedor-form">
@@ -87,19 +87,19 @@
                 <% } %>
                 </div>
             <div class="inputform">
-                <label for="codigopostal">Codigo postal:</label>
+                <label for="codigoPostal">Codigo postal:</label>
                 <input 
                     type="text"
-                    name="codigopostal"
-                    id="codigopostal"
+                    name="codigoPostal"
+                    id="codigoPostal"
                     placeholder="Codigo Postal"
                     required
                     minlength="3"
                     maxlength="20"
-                    value="<%= body.codigopostal? body.codigopostal : codigopostal %>"
+                    value="<%= body.codigoPostal? body.codigoPostal : codigoPostal %>"
                 />
-                <% if (locals.errors && errors.codigopostal) { %>
-                    <p class="errors"><%= errors.codigopostal.msg %></p>
+                <% if (locals.errors && errors.codigoPostal) { %>
+                    <p class="errors"><%= errors.codigoPostal.msg %></p>
                 <% } %>
             </div>
         </div>
@@ -112,7 +112,7 @@
                     id="street"
                     placeholder="calle"
                     required
-                    minlength="10"
+                    minlength="5"
                     maxlength="20"
                     value="<%= body.calle? body.calle : calle %>"
                 />
@@ -121,17 +121,17 @@
                 <% } %>
             </div>
             <div class="inputform">
-                <label for="callenumero">Numero:</label>
+                <label for="calleNumero">Numero:</label>
                 <input 
                     type="number"
-                    name="callenumero"
-                    id="callenumero"
+                    name="calleNumero"
+                    id="calleNumero"
                     placeholder="Numero/Altura de calle"
                     maxlength="20"
-                    value="<%= body.callenumero? body.callenumero : callenumero %>"
+                    value="<%= body.calleNumero? body.calleNumero : calleNumero %>"
                 />
-                <% if (locals.errors && errors.callenumero) { %>
-                    <p class="errors"><%= errors.callenumero.msg %></p>
+                <% if (locals.errors && errors.calleNumero) { %>
+                    <p class="errors"><%= errors.calleNumero.msg %></p>
                 <% } %>
             </div>
             <div class="inputform">
@@ -207,5 +207,6 @@
     <script src="\scripts\editUser.js"></script>
     </main>
     <%- include('../partials/footer.ejs') %>
+    
 </body>
 </html>

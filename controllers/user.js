@@ -79,22 +79,27 @@ module.exports = {
         })}
         catch(error) {throw new Error(error)}
     },
-    putUpdateForm: function (req,res) {
-        const errores = validationResult(req)
-        console.log("errores del update", errores)
-        if (errores.isEmpty()) {
-            const updatedData = users.update({id: parseInt(id), ...req.body, imagen: req.files })
-            if (updatedData) {
-                res.redirect('/users/profile')
+    putUpdateForm: async function (req,res) {
+        try {
+            const id = req.params.id
+            const errores = validationResult(req)
+            if (errores.isEmpty()) {
+                const updatedData = await users.update({id: parseInt(id), ...req.body, imagen: req.files })
+                if (updatedData) {
+                    res.redirect('/users/profile')
+                }
+            } else {
+                res.render('users/edit-user', { 
+                    userData: users.detail(id),
+                    localidades: dataGeo.localidades(),
+                    body: req.body,
+                    errors: errores.mapped()
+                })
             }
-        } else {
-            res.render('users/edit-user', { 
-                userData: users.detail(id),
-                localidades: dataGeo.localidades(),
-                body: req.body,
-                errors: errores.mapped()
-            })
+        } catch (error) {
+            throw new Error(error)
         }
+      
     },
     getRestoreUser: function (req,res) {
         res.render('users/restore')
