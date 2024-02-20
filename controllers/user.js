@@ -17,7 +17,9 @@ module.exports = {
             res.render('users/profile', {
                 userData: await users.detail(userId),
                 productos: await products.all(),
-                historialPagos: await payments.all(userId)
+                // historialPagos: await payments.all(userId)
+                historialPagos: null
+
             })
         } catch (error) {
             res.status(500).json(error.message)

@@ -17,7 +17,7 @@ module.exports = {
             })
             return {...user, carrito}
         } else {
-            return {}
+            return {...user, carrito: []}
         }
     }
 }

@@ -11,12 +11,16 @@ module.exports = {
     all: async function(query) {
         try {
             let condition = {}
-            if (query.user) condition = {user_id: query.user}
-            const response = await db.payment.findAll({
+            if (query) condition = {user_id: query}
+            const response = await db.Payments.findAll({
                 where: condition,
                 attributes: {exclude: ['user_id']},
-                logging: false
+                logging: false,
+                raw: true  
             })
+
+            
+            
             if (response.length > 0) return response
             else throw Error
         } catch (error) {
@@ -25,7 +29,7 @@ module.exports = {
     },
     detallePago: async function (id) {
         try {
-            return await db.payment.findAll({
+            return await db.Payments.findAll({
                 include: [
                     {   association: 'user',
                         attributes: ['id','nombre','apellido']
@@ -36,7 +40,7 @@ module.exports = {
                             {   association: 'product',
                                 attributes: ['id','name'],
                                 include: {
-                                    model: db.images,
+                                    model: db.Images,
                                     as: 'images',
                                     attributes: ['id','pathName'],
                                     through: { attributes: [] }
