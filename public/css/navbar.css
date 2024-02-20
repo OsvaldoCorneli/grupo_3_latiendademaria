@@ -240,6 +240,7 @@ input[type='number'] {
     body{
         position: absolute;
         left: calc((100% - 1368px) / 2);
+        right: calc((100% - 1368px) / 2);
         padding-top: 25px;
         align-content: center;
         width: 1368px;

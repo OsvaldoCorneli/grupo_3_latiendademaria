@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const users = require('../data/users.json')
 
 
 function ensureLogin (req,res, next) {
