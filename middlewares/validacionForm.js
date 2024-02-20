@@ -28,7 +28,7 @@ module.exports = {
                 .notEmpty().withMessage('La contraseña no puede estar en blanco')
                 .custom(async (value, { req }) => {
                     const usersdb = await users.index();
-                    const user = usersdb.find((u) => u.username == req.body.email || u.email == req.body.email);
+                    const user = usersdb.find((u) => u.userName == req.body.email || u.email == req.body.email);
             
                     if (!user) {
                         throw new Error('Verificar Usuario');

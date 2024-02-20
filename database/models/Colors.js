@@ -21,6 +21,7 @@ module.exports = (sequelize, dataTypes) => {
     }
     
     const config = {
+        tableName: 'colors',
         timestamps: true,
         createdAt: 'created_at',
         updatedAt: 'updated_at',
