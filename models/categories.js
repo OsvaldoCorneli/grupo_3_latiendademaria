@@ -22,7 +22,7 @@ module.exports = {
                     'name',
                     [Sequelize.fn('count',Sequelize.col('products.id')),'productsCount']
                 ],
-                group: ['categories.id', 'categories.name'],
+                group: ['Categories.id', 'Categories.name'],
                 raw:true
             })
             return response.filter(c => c.productsCount !== 0)

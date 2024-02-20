@@ -83,7 +83,7 @@ module.exports = {
                     {name: {[Op.like]: `%${name}`}}
                 ]};
             if (category) condition.categories = { ...condition.categories, id: category};
-            if (color) condition.colors = {...condition.colors, id: color};
+            if (color) condition.colors = {...condition.colors, color_id: color};
 
             return await db.Products.findAll({
                 include: [
@@ -93,8 +93,9 @@ module.exports = {
                         include: {
                             association: 'color',
                             attributes: ['id','name','hex'],
-                            where: condition.colors,
-                        }
+                            
+                        },
+                        where: condition.colors,
                     },
                     {
                         model: db.Images,
