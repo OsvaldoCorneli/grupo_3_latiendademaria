@@ -12,11 +12,16 @@ module.exports = {
         })
     },
     profile: async function (req,res){
-        res.render('users/profile', {
-            userData: await users.detail(req.session.user?.id),
-            productos: products.all(),
-            historialPagos: payments.historialPagos(req.session.user?.id)
-        })
+        try {
+            const userId = req.session.user?.id
+            res.render('users/profile', {
+                userData: await users.detail(userId),
+                productos: await products.all(),
+                historialPagos: await payments.all(userId)
+            })
+        } catch (error) {
+            res.status(500).json(error.message)
+        }
     },
     login: async function (req,res) {
         const errores = validationResult(req)

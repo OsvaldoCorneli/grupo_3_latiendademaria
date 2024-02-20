@@ -1,29 +1,60 @@
 const fs = require('fs');
 const path = require('path');
 const users = require('./user')
-const productos = require('./products')
+const products = require('./products')
+const db = require('../database/models')
 
 const pagosPath = path.join(__dirname+'/../data/payments.json')
 const pagosJson = JSON.parse(fs.readFileSync(pagosPath, 'utf-8'))
 
 module.exports = {
-    historialPagos: function (userId) {
-        const user = users.detail(userId)
-        if (user) {
-            let historial = pagosJson.filter((pago) => pago.Userid == userId)
-            if (historial) {
-                const historialProductJoin = historial.map((z) => {
-                    const products = z.products.map((p) => {
-                        let {name, image} = productos.all().find((s) => s.id == p.id)
-                        {return {...p, name, image: image[0]}}
-                    })
-                    return {...z, products}
-                })
-                return historialProductJoin
-            }
-            else return []
-        } else {
-            return []
+    all: async function(query) {
+        try {
+            let condition = {}
+            if (query.user) condition = {user_id: query.user}
+            const response = await db.payment.findAll({
+                where: condition,
+                attributes: {exclude: ['user_id']},
+                logging: false
+            })
+            if (response.length > 0) return response
+            else throw Error
+        } catch (error) {
+            return error
+        }
+    },
+    detallePago: async function (id) {
+        try {
+            return await db.payment.findAll({
+                include: [
+                    {   association: 'user',
+                        attributes: ['id','nombre','apellido']
+                    },
+                    {
+                        association: 'products',
+                        include: [
+                            {   association: 'product',
+                                attributes: ['id','name'],
+                                include: {
+                                    model: db.images,
+                                    as: 'images',
+                                    attributes: ['id','pathName'],
+                                    through: { attributes: [] }
+                                }
+                            },
+                            {   association: 'color',
+                                attributes: ['id','name','hex']
+                            }
+                        ],
+                        attributes: {exclude: ['id','product_id','payment_id','color_id']}
+                    }
+                ],
+                attributes: {exclude: ['user_id']},
+                where: {id},
+                logging: false
+            })
+        } catch (error) {
+            return error
         }
     }
 }

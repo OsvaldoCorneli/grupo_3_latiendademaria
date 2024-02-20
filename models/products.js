@@ -1,140 +1,169 @@
-const fs = require('fs')
-const path = require('path')
+// const fs = require('fs')
+// const path = require('path')
+const db = require('../database/models')
+const {Op, Sequelize} = require('sequelize');
+const Images = require('./images');
+const Colors = require('./colors');
 
-const productsFilePath = path.join(__dirname, '../data/productos.json');
-const Productos = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
 
-const publicPath = path.join(__dirname+'/../public')
+// const productsFilePath = path.join(__dirname, '../data/productos.json');
+// const Productos = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
 
 
 module.exports = {
-    all: function () {
-        return Productos
-    },
-    detail: function (id) {
-        return Productos.find((x) => x.id == id)
-    },
-    filter: function (body) {
-        let filteredProduct;
-        const keys = Object.keys(body)
-        function filter (condition, value, array) {
-            switch (condition) {
-                case 'price':
-                    return array.filter((x) => x.price < parseInt(value))
-                case 'category':
-                    return array.filter((x) => x.category == value)
-                case 'color':
-                    return array.filter((x) => x.color.includes(value))
-                case 'line':
-                    return array.filter((x) => x.line == value)
-                default:
-                    break
-            }
-        }
-        for (let i in keys) {
-            let value = body[keys[i]]
-            let condition = keys[i]
-            
-            if (i == 0) {
-                filteredProduct = filter(condition, value, Productos)
-            } else {
-                filteredProduct = filter(condition, value, filteredProduct)
-            }
-            if (i == keys.length-1) return filteredProduct
-        } 
-    },
-    categories: function () {
-        let Categories = []
-        for (let i in Productos) {
-            let { category } = Productos[i]
-            if (!Categories.includes(category)) {
-                Categories.push(category)
-            }
-            if (i == Productos.length-1) {
-                return Categories
-            }
+    all: async function () {
+        try {
+            return await db.products.findAll({
+                include: [
+                    {
+                        association: 'colors',
+                        attributes: ['stock'],
+                        include: {
+                            association: 'color',
+                            attributes: ['id','name','hex']
+                        }
+                    },
+                    {
+                        model: db.images,
+                        as: 'images',
+                        attributes: ['id','pathName'],
+                        through: { attributes: [] }
+                    },
+                    {
+                        association: 'categories',
+                        attributes: ['id','name']
+                    }
+                ],
+                attributes: {exclude: ['category_id']},
+                logging: false
+            })
+        } catch (error) {
+            return error
         }
     },
-    colors: function () {
-        let Colors = []
-        for (let i in Productos) {
-            let {color} = Productos[i]
-            for (let x in color) {
-                if (!Colors.includes(color[x])) {
-                    Colors.push(color[x])
-                }
-            }
-            if (i == Productos.length-1) return Colors
+    detail: async function (id) {
+        try {
+            return await db.products.findByPk(+id,{
+                include: [
+                    {
+                        association: 'colors',
+                        attributes: ['stock'],
+                        include: {
+                            association: 'color',
+                            attributes: ['id','name','hex']
+                        }
+                    },
+                    {
+                        model: db.images,
+                        as: 'images',
+                        attributes: ['id','pathName'],
+                        through: { attributes: [] }
+                    },
+                    {
+                        association: 'categories',
+                        attributes: ['id','name']
+                    }
+                ],
+                attributes: {exclude: ['category_id']},
+                logging: false
+            })
+        } catch (error) {
+            return error
         }
     },
-    create: function (data, images) {
-        const { name, description, line, category, color, price, stock } = data
-        const image = images.map((x) => {return x.path.split('public')[1]})
-        let id = 0
-        for (let i in Productos) {
-            if (id < Productos[i].id) id = Productos[i].id
-        }
-        //delete data.imagen
-        const newProduct = { id: id+1, 
-            ...data,
-            color: typeof(color) == 'string'? [color] : color,
-            stock: Number(stock),
-            price: Number(price),
-            image: image
-        }
-        const allProduct = [...Productos, newProduct ]
-        fs.writeFileSync(productsFilePath, JSON.stringify(allProduct,0,4), 'utf-8')
-        if (newProduct) {
-            return newProduct
-        } else {
-            throw new Error('error al crear producto')
-        }
-    },
-    edit: function (id) {
-        return Productos.find((product) => product.id === +id)
-    },
-    edited: function (body) {
-        const updateProduct = Productos.find((prod) => prod.id == body.id);
-        const filterProduct = Productos.filter((prod) => prod.id != body.id);
-        const images = this.editImages(body.imagen, body.imageHold, body.id)
-        delete body.imagen
-        delete body.imageHold
-        const editedProduct = {
-            ...updateProduct, 
-            ...body,
-            id: +body.id,
-            color: typeof(body.color) == 'string'? [body.color] : body.color,
-            stock: +body.stock,
-            price: +body.price,
-            image: images
-        }
-        const allProducts = [...filterProduct, editedProduct].sort((a,b) => a.id - b.id)
+    filter: async function (query) {
+        try {
+            const {price, line, name, category, color} = query
+            let condition = {}
+            if (price) condition.products = {...condition.products, price: {[Op.lte]: price}};
+            if (line) condition.products = {...condition.products, line: line};
+            if (name) condition.products = {...condition.products, 
+                [Op.or]: [
+                    {name: {[Op.startsWith]: name}},
+                    {name: {[Op.like]: `%${name}`}}
+                ]};
+            if (category) condition.categories = { ...condition.categories, id: category};
+            if (color) condition.colors = {...condition.colors, id: color};
 
-        fs.writeFileSync(productsFilePath, JSON.stringify(allProducts,0,4),'utf-8')
-        
-        return editedProduct
-    },
-    destroy: function(id){
-        Productos = Productos.filter((product) => product.id !== +id);
-        return Productos;
-    },
-    editImages: function (upload, local, prodId) {
-        const updateProduct = Productos.find((prod) => prod.id == prodId);
-        let newImage = []
-        if (upload.length > 0) {
-            newImage = upload.map((img) => {return img.path.split('public')[1]});
+            return await db.products.findAll({
+                include: [
+                    {
+                        association: 'colors',
+                        attributes: ['stock'],
+                        include: {
+                            association: 'color',
+                            attributes: ['id','name','hex'],
+                            where: condition.colors,
+                        }
+                    },
+                    {
+                        model: db.images,
+                        as: 'images',
+                        attributes: ['id','pathName'],
+                        through: { attributes: [] }
+                    },
+                    {
+                        association: 'categories',
+                        attributes: ['id','name'],
+                        where: condition.categories
+                    }
+                ],
+                where: condition.products,
+                attributes: {exclude: ['category_id']},
+                logging: false
+            })
+        } catch (error) {
+            return error
         }
-        let holdImage = []
-        if (local) {
-            holdImage = !typeof(local) == 'string'? local : [local];
-        }
-        updateProduct.image.forEach(img => {
-            if (!holdImage.includes(img)) {
-                if (fs.readdirSync(publicPath+'/images/uploads').includes(img.split('uploads/')[1])) {
-                    fs.rmSync(publicPath+img)
-                }
+    },
+    create: async function (data, images) {
+        try {
+            const { name, description, line, category, color, price, stock } = data
+            const newProduct = await db.products.create({
+                name: name,
+                description: description,
+                category_id: category,
+                line: line,
+                price: +price
+            })
+            if (newProduct) {
+                await colors.createProductColor(color, stock, newProduct.id)
+                await Images.newProductImage(images, newProduct.id)
+                return this.detail(newProduct.id)
+            } else {
+                throw new Error('error al crear producto')
             }
-        })
-        return [...newImage, ...holdImage]
+        } catch (error) {
+            return error
+        }
+    },
+    edited: async function (body) {
+        try {
+            await Images.editProductImages(body.imageHold, body.imagen, body.id)
+            await Colors.editProductColors(body.color, body.stock, body.id)
+
+            await db.products.update({
+                    name: body.name,
+                    description: body.description,
+                    category_id: +body.category,
+                    line: body.line,
+                    price: +body.price
+                },              
+                {
+                    where: {id: body.id}
+            });
+            return await this.detail(body.id)
+        } catch (error) {
+            return error
+        }
+    },
+    remove: async function (id){
+        try {
+            //await Images.destroyProduct(id)
+            //await Colors.destroyProduct(id)
+            return await db.products.destroy({where: {id: id}})
+        } catch (error) {
+            return error
+        }
     }
 }

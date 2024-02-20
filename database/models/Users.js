@@ -4,7 +4,7 @@ const alias = "Users"
 
 const cols = {
    id:{
-    type: dataTypes.INTEGER(10),
+    type: dataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
     allowNull: false
@@ -12,7 +12,6 @@ const cols = {
    nombre:{
     type: dataTypes.STRING(30),
     allowNull: false,
-
    },
    apellido:{
     type: dataTypes.STRING(30),
@@ -35,7 +34,7 @@ const cols = {
     allowNull: true,
    },
    calleNumero:{
-    type: dataTypes.INTEGER(),
+    type: dataTypes.INTEGER,
     allowNull: true,
    },
    imagen:{
@@ -69,12 +68,10 @@ const cols = {
     allowNull: true,
    },
    admin:{
-    type: dataTypes.TINYINT,
+    type: dataTypes.BOOLEAN,
     allowNull: true,
    }
 
-
-   
 }
 
 const config = {
@@ -83,8 +80,6 @@ const config = {
     updatedAt: 'updated_at',
     deletedAt: false
 }
-
-
 
 
 const Users = sequelize.define(alias, cols, config);
