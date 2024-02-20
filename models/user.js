@@ -108,6 +108,7 @@ module.exports = {
     detail: async function (id) {
         try{
         const detailUser = await db.Users.findOne({where:{id},raw:true})
+        console.log("detailUser", detailUser);
         if (detailUser) {
             return detailUser
         } else {

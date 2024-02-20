@@ -4,7 +4,7 @@ const {Op, Sequelize} = require('sequelize');
 module.exports = {
     all: async function(){
         try {
-            const response = await db.colors.findAll({attributes: ['id','name','hex'], logging: false})
+            const response = await db.Colors.findAll({attributes: ['id','name','hex'], logging: false})
             return response
         } catch (error) {
             return error
@@ -12,9 +12,9 @@ module.exports = {
     },
     countAll: async function(){
         try {
-            const response = await db.colors.findAll({
+            const response = await db.Colors.findAll({
                 include: {
-                    model: db.products,
+                    model: db.Products,
                     as: 'products',
                     attributes: [],
                     through: {attributes: []}
@@ -25,7 +25,7 @@ module.exports = {
                     'hex',
                     [Sequelize.fn('count',Sequelize.col('products.id')),'productsCount']
                 ],
-                group: ['colors.name'],
+                group: ['Colors.id', 'Colors.name', 'Colors.hex'],
                 raw: true,
                 logging: false
             })
@@ -40,7 +40,7 @@ module.exports = {
                 let productColors = typeof(colors) == 'string'? [colors.toUpperCase()] : colors.map(c => {return c.toUpperCase()});
                 let productStocks = typeof(stocks) == 'string'? [stocks] : stocks
                 for (let i in productColors) {
-                    const color = await db.colors.findOne({where: {hex: productColors[i]}})
+                    const color = await db.Colors.findOne({where: {hex: productColors[i]}})
                     await db.product_colors.create({
                         product_id: prodId,
                         color_id: color.id,
@@ -54,9 +54,9 @@ module.exports = {
     },
     editProductColors: async function (colors, stock, prodId) {
         try {
-            const productColors = await db.colors.findAll({
+            const productColors = await db.Colors.findAll({
                 include: {
-                    model: db.products,
+                    model: db.Products,
                     as: 'products',
                     where: {id: prodId}
                 },
@@ -72,7 +72,7 @@ module.exports = {
                 }
                 for (let x in newColors) {
                     if (!productColors.some(({hex}) => hex == newColors[x])) {
-                        const newColor = await db.colors.findOne({where: {hex: newColors[x]}})
+                        const newColor = await db.Colors.findOne({where: {hex: newColors[x]}})
                         await db.product_colors.create({
                             product_id: +prodId,
                             color_id: newColor.id,
@@ -87,9 +87,9 @@ module.exports = {
     },
     destroyProduct: async function (prodId) {
         try {
-            const productColors = await db.colors.findAll({
+            const productColors = await db.Colors.findAll({
                 include: {
-                    model: db.products,
+                    model: db.Products,
                     as: 'products',
                     where: {id: prodId}
                 },

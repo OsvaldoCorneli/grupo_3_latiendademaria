@@ -35,7 +35,7 @@ module.exports = {
                     }
                 ],
                 attributes: {exclude: ['category_id']},
-                logging: false
+                logging: false,
             })
         } catch (error) {
             return error

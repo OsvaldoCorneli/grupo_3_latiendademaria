@@ -7,7 +7,7 @@ const publicPath = path.join(__dirname+'/../public')
 module.exports = {
     all: async function(){
         try {
-            const response = await db.images.findAll({include: ['products'], logging: false})
+            const response = await db.Images.findAll({include: ['products'], logging: false})
             return response
         } catch (error) {
             return error
@@ -18,7 +18,7 @@ module.exports = {
             if (upload.length > 0) {
                 let newImages = upload.map((img) => {return img.path.split('public')[1]})
                 for (let i in newImages) {
-                    const createImage = await db.images.create({pathName: newImages[i]})
+                    const createImage = await db.Images.create({pathName: newImages[i]})
                     await db.prod_images.create({
                         product_id: +prodId,
                         image_id: createImage.id})
@@ -30,9 +30,9 @@ module.exports = {
     },
     editProductImages: async function (local, upload, prodId) {
         try {
-            const productImages = await db.images.findAll({
+            const productImages = await db.Images.findAll({
                 include: {
-                    model: db.products,
+                    model: db.Products,
                     as: 'products',
                     where: {id: prodId},
                 },
@@ -42,8 +42,8 @@ module.exports = {
             for (let i in productImages) {
                 const { id, pathName, products } = productImages[i]
                 if (!holdImage.includes(pathName)) {
-                    await db.prod_images.destroy({where: {id: products[0].prod_images.id}})
-                    await db.images.destroy({where: {id: id}})
+                    await db.Prod_images.destroy({where: {id: products[0].prod_images.id}})
+                    await db.Images.destroy({where: {id: id}})
                     //this.deleteFile(pathName)
                 }
             }
@@ -56,9 +56,9 @@ module.exports = {
     },
     destroyProduct: async function (prodId) {
         try {
-            const productImages = await db.images.findAll({
+            const productImages = await db.Images.findAll({
                 include: {
-                    model: db.products,
+                    model: db.Products,
                     as: 'products',
                     where: {id: prodId},
                 },
@@ -67,7 +67,7 @@ module.exports = {
             for (let i in productImages) {
                 const { id , pathName, products } = productImages[i]
                 await db.prod_images.destroy({where: {id: products[0].prod_images.id}})
-                await db.images.destroy({where: {id: id}})
+                await db.Images.destroy({where: {id: id}})
                 //this.deleteFile(pathName)
             }
         } catch (error) {

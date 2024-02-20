@@ -4,7 +4,7 @@ const {Op, Sequelize} = require('sequelize');
 module.exports = {
     all: async function(){
         try {
-            const response = await db.categories.findAll({attributes: ['id','name']})
+            const response = await db.Categories.findAll({attributes: ['id','name']})
             return response
         } catch (error) {
             return error
@@ -12,7 +12,7 @@ module.exports = {
     },
     countAll: async function(){
         try {
-            const response = await db.categories.findAll({
+            const response = await db.Categories.findAll({
                 include: {
                     association: 'products',
                     attributes: []
@@ -22,7 +22,7 @@ module.exports = {
                     'name',
                     [Sequelize.fn('count',Sequelize.col('products.id')),'productsCount']
                 ],
-                group: ['categories.name'],
+                group: ['categories.id', 'categories.name'],
                 raw:true
             })
             return response.filter(c => c.productsCount !== 0)

@@ -32,6 +32,7 @@ module.exports = {
     },
     getCart: async function (req,res) {
       try {
+        console.log("USUARIO", req.session.user?.id)
         const cartDetail = await cart.cart(req.session.user?.id)
         if (cartDetail) {
             res.render('cart/cart', {cartDetail})
