@@ -10,7 +10,6 @@ const pagosJson = JSON.parse(fs.readFileSync(pagosPath, 'utf-8'))
 module.exports = {
     all: async function(query) {
         try {
-            console.log(query)
             let condition = {}
             if (query) condition = {user_id: query}
             const response = await db.Payments.findAll({
@@ -19,7 +18,6 @@ module.exports = {
                 logging: false,
                 raw: true  
             })
-            console.log("response PAYMENT", response)
 
             
             
