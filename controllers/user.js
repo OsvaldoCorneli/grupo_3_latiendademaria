@@ -14,19 +14,19 @@ module.exports = {
     profile: async function (req,res){
         try {
             const userId = req.session.user?.id
-            const historialPagos = await payments.all(userId)
-            const userData = users.detail(userId)
-            const productos = await products.all()
-            //res.send(historialPagos)
-            res.render('users/profile', {userData, productos, historialPagos })
+            res.render('users/profile', {
+                userData: await users.detail(userId),
+                productos: await products.all(),
+                historialPagos: await payments.all(userId)
+            })
         } catch (error) {
             res.status(500).json(error.message)
         }
     },
-    login: function (req,res) {
+    login: async function (req,res) {
         const errores = validationResult(req)
         if (errores.isEmpty()) {
-            const user = users.login(req.body)
+            const user = await users.login(req.body)
             if (user.access) {
                 delete user?.password
                 req.session.user = user? user : {}
@@ -59,43 +59,52 @@ module.exports = {
             localidades: dataGeo.localidades()
         })
     },
-    postCreateForm: function (req,res) {
+    postCreateForm: async function (req,res) {
+      try{
         const errores = validationResult(req)
         if (errores.isEmpty()) {
-            const newUser = users.create(req.body, req.files)
+            const newUser = await users.create(req.body, req.files)
             if (newUser) {
                 res.redirect('/users/login')
             }
-        } else {
+        } else { 
             res.render('users/register', {
                 body: req.body,
                 localidades: dataGeo.localidades(),
                 errors: errores.mapped()
             })
-        }
+        }}catch(error){throw new Error(error)}
     },
-    getUpdateForm: function (req,res) {
+    getUpdateForm: async function (req,res) {
+        try{
         res.render('users/edit-user', { 
-            userData: users.detail(req.params.id),
+            userData: await users.detail(req.params.id),
             localidades: dataGeo.localidades(),
             body: {}
-        })
+        })}
+        catch(error) {throw new Error(error)}
     },
-    putUpdateForm: function (req,res) {
-        const errores = validationResult(req)
-        if (errores.isEmpty()) {
-            const updatedData = users.update({id: parseInt(id), ...req.body, imagen: req.files })
-            if (updatedData) {
-                res.redirect('/users/profile')
+    putUpdateForm: async function (req,res) {
+        try {
+            const id = req.params.id
+            const errores = validationResult(req)
+            if (errores.isEmpty()) {
+                const updatedData = await users.update({id: parseInt(id), ...req.body, imagen: req.files })
+                if (updatedData) {
+                    res.redirect('/users/profile')
+                }
+            } else {
+                res.render('users/edit-user', { 
+                    userData: users.detail(id),
+                    localidades: dataGeo.localidades(),
+                    body: req.body,
+                    errors: errores.mapped()
+                })
             }
-        } else {
-            res.render('users/edit-user', { 
-                userData: users.detail(id),
-                localidades: dataGeo.localidades(),
-                body: req.body,
-                errors: errores.mapped()
-            })
+        } catch (error) {
+            throw new Error(error)
         }
+      
     },
     getRestoreUser: function (req,res) {
         res.render('users/restore')

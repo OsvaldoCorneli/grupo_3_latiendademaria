@@ -5,6 +5,8 @@ const validacionForm = require('../middlewares/validacionForm')
 const upload = require('../middlewares/multerMid');
 const {check, validationResult} = require('express-validator')
 
+const db = require("../database/models")
+
 router.route('/login')
     .get(users.index)
     .post(validacionForm.login(), users.login);
@@ -21,5 +23,9 @@ router.get('/profile', users.profile);
 
 router.get('/:id/update', users.getUpdateForm);
 router.put('/:id/update', upload.any(), validacionForm.editUser(), users.putUpdateForm);
+
+router.delete('/:id/delete', (req , res) => {
+    
+})
 
 module.exports = router

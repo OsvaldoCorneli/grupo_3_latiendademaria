@@ -1,6 +1,6 @@
 module.exports = (sequelize, dataTypes) => {
 
-const alias = "users"
+const alias = "Users"
 
 const cols = {
    id:{
@@ -12,7 +12,6 @@ const cols = {
    nombre:{
     type: dataTypes.STRING(30),
     allowNull: false,
-
    },
    apellido:{
     type: dataTypes.STRING(30),
@@ -73,8 +72,6 @@ const cols = {
     allowNull: true,
    }
 
-
-   
 }
 
 const config = {
@@ -84,8 +81,9 @@ const config = {
     deletedAt: false
 }
 
-const User = sequelize.define(alias, cols, config);
+
+const Users = sequelize.define(alias, cols, config);
 
 
-return User
+return Users
 } ;

@@ -15,20 +15,33 @@ module.exports = {
         return [
             body('email')
                 .notEmpty().withMessage('Ingresar Usuario o email registrado')
-                .custom((value) => {
-                    const user = users.index().some((u) => u.username == value || u.email == value)
-                    return user
-                }).withMessage('usuario o email no registrados'),
+                .custom(async (value) => {
+                    const usersdb = await users.index()
+                    const user = usersdb.some((u) => u.userName == value || u.email == value)
+                    if (!user) {
+                        return Promise.reject('usuario o email no registrados');
+                    }
+            
+                    return Promise.resolve();
+                }),
             body('password')
                 .notEmpty().withMessage('La contraseña no puede estar en blanco')
-                .custom((value,{req}) => {
-                    const user = users.index().find((u) => u.username == req.body.email || u.email == req.body.email)
-                    if (user) {
-                        const checkPass = bcrypt.compareSync(value, user.password)
-                        return checkPass
-                    } else throw new Error('Verificar Usuario')
-                }
-            ).withMessage('Contraseña incorrecta')
+                .custom(async (value, { req }) => {
+                    const usersdb = await users.index();
+                    const user = usersdb.find((u) => u.username == req.body.email || u.email == req.body.email);
+            
+                    if (!user) {
+                        throw new Error('Verificar Usuario');
+                    }
+            
+                    const checkPass = await bcrypt.compare(value, user.password);
+            
+                    if (!checkPass) {
+                        throw new Error('Contraseña incorrecta');
+                    }
+            
+                    return true;
+                }),
         ]
     },
     registerUser: function () {
@@ -39,41 +52,54 @@ module.exports = {
             body('repassword').custom((value, {req}) => {
                 return value === req.body.password
             }).withMessage('las contraseñas no coinciden'),
-            body('username')
+            body('userName')
                 .notEmpty().withMessage('Debes completar el nombre')
                 .isLength({min: 4, max: 20}).withMessage('el nombre debe ser mayor a 4 caracteres y menor a 20')
-                .custom((value) => {
-                    return !users.index().some((user) => user.username == value)
-                }).withMessage('El nombre de usuario ya esta en uso'),
+                .custom(async (value) => {
+                    const users1 = await users.index();
+                    const user = users1.some((u) => u.username == value);
+            
+                    if (user) {
+                        throw new Error('El nombre de usuario ya está en uso');
+                    }
+            
+                    return true;
+                }),
             body('email')
                 .isEmail().withMessage('email no valido')
-                .custom((value,{req}) => {
-                    const anotherUserWithSameEmail = users.index().some((user) => user.email == value)
-                    return !anotherUserWithSameEmail
-                }).withMessage('El email ya esta en uso'),
-            body('fechanacimiento')
+                .custom(async (value, { req }) => {
+                 const user1 = await users.index();
+                 const anotherUserWithSameEmail = user1.some((user) => user.email == value);
+
+                  if (anotherUserWithSameEmail) {
+                     throw new Error('El email ya está en uso');
+                     }
+
+                     return true;
+                }),
+            body('fechaNacimiento')
                 .isISO8601().withMessage('ingresar una fecha valida'),
             body('provincia')
                 .notEmpty().withMessage('selecciona una provincia'),
-            body('codigopostal')
+            body('codigoPostal')
                 .isNumeric({ min: 1, max: 10000 }).withMessage('solo numeros')
                 .notEmpty().withMessage('el codigo postal no puede estar vacio'),
             body('calle')
                 .isLength({min: 3, max:30}) 
                 .notEmpty().withMessage('la calle no puede estar vacia'),
-            body('callenumero')
+            body('calleNumero')
                 .isNumeric({ min: 1, max: 10000 }).withMessage('ingresar el numero de calle'),
-            body('imagen')
-                .custom((value, {req})=>{
-                    const extensionName = req.files.map((x) => {return path.extname(x.path)})
-                    return extensionName.some((ext) => extNames.includes(ext))
-                }).withMessage(`solo se admiten archivos ${extNames.join(', ')}`)
-                .custom((value, {req})=>{
-                    const filesSizes = req.files.map((x) => {return x.size})
-                    return !filesSizes.some((file) => file >= maxFileSize)
-                }).withMessage(`el tamaño maximo permitido por imagen es ${maxFileSize/1024} KB`),
+            // body('imagen')
+            //     .custom((value, {req})=>{
+            //         const extensionName = req.files.map((x) => {return path.extname(x.path)})
+            //         return extensionName.some((ext) => extNames.includes(ext)) 
+            //     }).withMessage(`solo se admiten archivos ${extNames.join(', ')}`)
+            //     .custom((value, {req})=>{
+            //         const filesSizes = req.files.map((x) => {return x.size})
+            //         return !filesSizes.some((file) => file >= maxFileSize)
+            //     }).withMessage(`el tamaño maximo permitido por imagen es ${maxFileSize/1024} KB`),
             body('piso')
-                .isLength({max:10}),
+                .isLength({max:10}), 
             body('departamento')
                 .isLength({max:10}),
         ]
@@ -82,33 +108,39 @@ module.exports = {
         return [
             body('email')
                 .isEmail().withMessage('email invalido')
-                .custom((value,{req}) => {
-                    const anotherUserWithSameEmail = users.index().some((user) => user.id != req.params.id && user.email == value)
-                    return !anotherUserWithSameEmail
-                }).withMessage('El email ya esta en uso'),
-            body('fechanacimiento')
+                .custom(async (value,{req}) => {
+
+                    const usuario1 = await users.index()
+                    const anotherUserWithSameEmail = usuario1.some((user) => user.id != req.params.id && user.email == value)
+                    if (anotherUserWithSameEmail) {
+                        throw new Error('El email ya está en uso');
+                        }
+   
+                        return true;
+                   }),
+            body('fechaNacimiento')
                 .isISO8601().withMessage('ingresar una fecha valida'),
             body('provincia')
                 .notEmpty().withMessage('selecciona una provincia'),
             body('localidad')
                 .notEmpty().withMessage('selecciona una localidad'),
-            body('codigopostal')
+            body('codigoPostal')
                 .isNumeric({ min: 1, max: 10000 }).withMessage('solo numeros')
                 .notEmpty().withMessage('el codigo postal no puede estar vacio'),
             body('calle')
                 .isLength({min: 3, max:30})
                 .notEmpty().withMessage('la calle no puede estar vacia'),
-            body('callenumero')
+            body('calleNumero')
                 .isNumeric({ min: 1, max: 10000 }).withMessage('ingresar el numero de calle'),
-            body('imagen')
-                .custom((value, {req})=>{
-                    const extensionName = req.files.map((x) => {return path.extname(x.path)})
-                    return extensionName.some((ext) => extNames.includes(ext))
-                }).withMessage(`solo se admiten archivos ${extNames.join(', ')}`)
-                .custom((value, {req})=>{
-                    const filesSizes = req.files.map((x) => {return x.size})
-                    return !filesSizes.some((file) => file >= maxFileSize)
-                }).withMessage(`el tamaño maximo permitido por imagen es ${maxFileSize/1024} KB`),
+            // body('imagen')
+            //     .custom((value, {req})=>{
+            //         const extensionName = req.files.map((x) => {return path.extname(x.path)})
+            //         return extensionName.some((ext) => extNames.includes(ext))
+            //     }).withMessage(`solo se admiten archivos ${extNames.join(', ')}`)
+            //     .custom((value, {req})=>{
+            //         const filesSizes = req.files.map((x) => {return x.size})
+            //         return !filesSizes.some((file) => file >= maxFileSize)
+            //     }).withMessage(`el tamaño maximo permitido por imagen es ${maxFileSize/1024} KB`),
             body('piso', 'no puede superar 10 caracteres')
                 .isLength({max:10}),
             body('departamento', 'no puede superar 10 caracteres')

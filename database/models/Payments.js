@@ -1,6 +1,6 @@
 module.exports = (sequelize, dataTypes) => {
 
-    const alias = "payment"
+    const alias = "Payments"
     
     const cols = {
        id:{
@@ -31,6 +31,7 @@ module.exports = (sequelize, dataTypes) => {
         deletedAt: false
     }
     
+
     const Payment = sequelize.define(alias, cols, config);
 
     Payment.associate = function(models) {
