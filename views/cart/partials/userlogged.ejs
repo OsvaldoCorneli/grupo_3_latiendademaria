@@ -1,4 +1,4 @@
-<% let { nombre, apellido, provincia, localidad, codigopostal, calle, callenumero, piso, departamento, carrito } = cartDetail %>
+<% let { nombre, apellido, provincia, localidad, codigoPostal, calle, calleNumero, piso, departamento, carrito } = cartDetail %>
 <div class="cart-modal">
     <section class="cartdetail">
         <table>
@@ -39,8 +39,8 @@
             <p><b>Destinatario:</b> <%= `${nombre} ${apellido}`%></p>
             <p><b>Provincia:</b> <%= provincia %></p>
             <p><b>Localidad:</b> <%= localidad %></p>
-            <p><b>Codigo postal:</b> <%= codigopostal %></p>
-            <p><b>Calle:</b> <%= `${calle} ${callenumero}` %></p>
+            <p><b>Codigo postal:</b> <%= codigoPostal %></p>
+            <p><b>Calle:</b> <%= `${calle} ${calleNumero}` %></p>
        
         <span id="cartsubtotal">
             <h3>Subtotal</h3>

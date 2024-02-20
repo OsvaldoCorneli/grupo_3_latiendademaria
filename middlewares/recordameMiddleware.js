@@ -1,24 +1,25 @@
+const db = require("../database/models")
 const fs = require('fs');
 const path = require('path');
-const usersFilePath = path.join(__dirname, '../data/users.json');
+// const usersFilePath = path.join(__dirname, '../data/users.json');
 const users = require("../models/user");
-const Users = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
+// const Users = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
 
-function recordameMiddleware(req, res, next) {
-    
+async function recordameMiddleware(req, res, next) {
+try{
     if (req.cookies.recordame !== undefined && req.session.user === undefined) {
         
         const { recordame } = req.cookies;
         const email =  recordame
-        let user = Users.find((user) => user.email == email)
+        let user = await db.Users.findOne({where:{email}, raw:true})  
         if (user != undefined) {
-            
-            req.session.user = user? user : {}
+                  req.session.user = user? user : {}
             return res.status(200).redirect('/')
         }
     
 } 
     next();
+}catch(error){return error}
 }
 
 module.exports = recordameMiddleware;

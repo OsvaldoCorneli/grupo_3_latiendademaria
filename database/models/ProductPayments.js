@@ -38,15 +38,15 @@ module.exports = (sequelize, dataTypes) => {
     const ProductPayments = sequelize.define(alias, cols, config);
     
     ProductPayments.associate = function(models) {
-        ProductPayments.belongsTo(models.products, {
-            as: "product",
+        ProductPayments.belongsTo(models.Products, {
+            as: "products",
             foreignKey: "product_id"
         })
-        ProductPayments.belongsTo(models.payment, {
+        ProductPayments.belongsTo(models.Payments, {
             as: "payment",
             foreignKey: "payment_id"
         }),
-        ProductPayments.belongsTo(models.colors,{
+        ProductPayments.belongsTo(models.Colors,{
             as:'color',
             foreignKey: 'color_id'
         })

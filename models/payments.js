@@ -15,10 +15,11 @@ module.exports = {
             if (desde && hasta) condition.created_at = {[Op.between]: [new Date(desde), new Date(hasta)]};
             if (estado) condition.status = estado;
 
-            const response = await db.payment.findAll({
+            const response = await db.Payments.findAll({
                 where: condition,
                 attributes: {exclude: ['user_id']},
-                logging: false
+                logging: false,
+                raw: true  
             })
             let grafico = await this.graficoVentas(desde,hasta,estado);
             let topUser = await this.topUser(desde,hasta,estado);
@@ -75,7 +76,7 @@ module.exports = {
     },
     detallePago: async function (id) {
         try {
-            return await db.payment.findByPk(id,{
+            return await db.Payments.findByPk(id,{
                 include: [
                     {   association: 'user',
                         attributes: ['id','nombre','apellido']
@@ -86,7 +87,7 @@ module.exports = {
                             {   association: 'product',
                                 attributes: ['id','name'],
                                 include: {
-                                    model: db.images,
+                                    model: db.Images,
                                     as: 'images',
                                     attributes: ['id','pathName'],
                                     through: { attributes: [] }

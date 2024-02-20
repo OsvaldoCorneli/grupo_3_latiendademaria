@@ -81,7 +81,6 @@ module.exports = {
             let {id} = req.params
             const errores = validationResult(req)
             if (errores.isEmpty()) {
-                console.log(req.body)
                 const response = await products.edited({id: +id, ...req.body, imagen: req.files})
                 if (response) {
                     res.status(200).redirect(`/products/${id}/edit?message=editado`)
