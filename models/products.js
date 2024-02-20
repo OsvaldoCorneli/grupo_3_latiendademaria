@@ -13,7 +13,7 @@ const Colors = require('./colors');
 module.exports = {
     all: async function () {
         try {
-            return await db.products.findAll({
+            return await db.Products.findAll({
                 include: [
                     {
                         association: 'colors',
@@ -24,7 +24,7 @@ module.exports = {
                         }
                     },
                     {
-                        model: db.images,
+                        model: db.Images,
                         as: 'images',
                         attributes: ['id','pathName'],
                         through: { attributes: [] }
@@ -43,7 +43,7 @@ module.exports = {
     },
     detail: async function (id) {
         try {
-            return await db.products.findByPk(+id,{
+            return await db.Products.findByPk(+id,{
                 include: [
                     {
                         association: 'colors',
@@ -54,7 +54,7 @@ module.exports = {
                         }
                     },
                     {
-                        model: db.images,
+                        model: db.Images,
                         as: 'images',
                         attributes: ['id','pathName'],
                         through: { attributes: [] }
@@ -85,7 +85,7 @@ module.exports = {
             if (category) condition.categories = { ...condition.categories, id: category};
             if (color) condition.colors = {...condition.colors, id: color};
 
-            return await db.products.findAll({
+            return await db.Products.findAll({
                 include: [
                     {
                         association: 'colors',
@@ -97,7 +97,7 @@ module.exports = {
                         }
                     },
                     {
-                        model: db.images,
+                        model: db.Images,
                         as: 'images',
                         attributes: ['id','pathName'],
                         through: { attributes: [] }
@@ -119,7 +119,7 @@ module.exports = {
     create: async function (data, images) {
         try {
             const { name, description, line, category, color, price, stock } = data
-            const newProduct = await db.products.create({
+            const newProduct = await db.Products.create({
                 name: name,
                 description: description,
                 category_id: category,
@@ -127,7 +127,7 @@ module.exports = {
                 price: +price
             })
             if (newProduct) {
-                await colors.createProductColor(color, stock, newProduct.id)
+                await Colors.createProductColor(color, stock, newProduct.id)
                 await Images.newProductImage(images, newProduct.id)
                 return this.detail(newProduct.id)
             } else {
@@ -142,7 +142,7 @@ module.exports = {
             await Images.editProductImages(body.imageHold, body.imagen, body.id)
             await Colors.editProductColors(body.color, body.stock, body.id)
 
-            await db.products.update({
+            await db.Products.update({
                     name: body.name,
                     description: body.description,
                     category_id: +body.category,
@@ -161,7 +161,7 @@ module.exports = {
         try {
             //await Images.destroyProduct(id)
             //await Colors.destroyProduct(id)
-            return await db.products.destroy({where: {id: id}})
+            return await db.Products.destroy({where: {id: id}})
         } catch (error) {
             return error
         }
