@@ -55,8 +55,10 @@ form.addEventListener('submit', (e) => {
 
     const ultimosPagos = document.querySelector('.lastsales')
     
-    desde = new Date(2023,10,1,0,0,0).toISOString().split('T')[0]
-    hasta = new Date(2023,11,31,0,0,0).toISOString().split('T')[0]
+    desde = desde? desde : new Date(2023,10,1,0,0,0).toISOString().split('T')[0];
+    hasta = hasta? hasta : new Date(2023,11,31,0,0,0).toISOString().split('T')[0];
+    form.desde.value = desde
+    form.hasta.value = hasta
     fetch(`http://${host}/payment?desde=${desde}&hasta=${hasta}&estado=${estado}`)
         .then((response) => response.json())
         .then(({grafico, data, topUser}) => {

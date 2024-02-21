@@ -4,7 +4,7 @@
   "description": "**Nuestro cliente:** “La tienda de Maria”, es un emprendimiento que fabrica productos religiosos,cuenta con una linea estampada/sublimada, una linea artesanal pintada a mano y la venta de ilustraciones digitales.  La particularidad a destacar de este negocio es que cuenta con sus propias ilustraciones digitales, realizadas por la dueña, por lo que los productos se caracterizan por tener un estilo moderno y tierno, destacándose de los tradicionales productos con imágenes religiosas antiguas.",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon ./app.js",
+    "start": "nodemon ./src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
