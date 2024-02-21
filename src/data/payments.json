@@ -1,0 +1,518 @@
+[
+    {
+        "referencia": 1,
+        "Userid": 3,
+        "products": [
+            {
+                "id": 6,
+                "price": 3463.07,
+                "color": "purple",
+                "cantidad": 7
+            },
+            {
+                "id": 1,
+                "price": "6609.33",
+                "color": "orange",
+                "cantidad": 1
+            },
+            {
+                "id": 15,
+                "price": "10000",
+                "color": "brown",
+                "cantidad": 7
+            },
+            {
+                "id": 7,
+                "price": 8016.62,
+                "color": "green",
+                "cantidad": 3
+            },
+            {
+                "id": 7,
+                "price": 8016.62,
+                "color": "pink",
+                "cantidad": 10
+            }
+        ],
+        "total": 205066.88,
+        "fecha": "2023-11-30T03:00:00.000Z",
+        "estado_pago": "cancelado"
+    },
+    {
+        "referencia": 2,
+        "Userid": 3,
+        "products": [
+            {
+                "id": 7,
+                "price": 8016.62,
+                "color": "pink",
+                "cantidad": 4
+            },
+            {
+                "id": 6,
+                "price": 3463.07,
+                "color": "magenta",
+                "cantidad": 7
+            },
+            {
+                "id": 16,
+                "price": "8500",
+                "color": "orange",
+                "cantidad": 6
+            },
+            {
+                "id": 3,
+                "price": 825.48,
+                "color": "green",
+                "cantidad": 3
+            }
+        ],
+        "total": 109784.41,
+        "fecha": "2023-11-11T03:00:00.000Z",
+        "estado_pago": "cancelado"
+    },
+    {
+        "referencia": 3,
+        "Userid": 1,
+        "products": [
+            {
+                "id": 12,
+                "price": 8515.71,
+                "color": "red",
+                "cantidad": 2
+            },
+            {
+                "id": 9,
+                "price": 3030.63,
+                "color": "red",
+                "cantidad": 0
+            },
+            {
+                "id": 5,
+                "price": 7096.17,
+                "color": "red",
+                "cantidad": 4
+            },
+            {
+                "id": 7,
+                "price": 8016.62,
+                "color": "pink",
+                "cantidad": 8
+            },
+            {
+                "id": 2,
+                "price": 4127.83,
+                "color": "cyan",
+                "cantidad": 7
+            }
+        ],
+        "total": 138443.87,
+        "fecha": "2023-12-29T03:00:00.000Z",
+        "estado_pago": "cancelado"
+    },
+    {
+        "referencia": 4,
+        "Userid": 3,
+        "products": [
+            {
+                "id": 1,
+                "price": "6609.33",
+                "color": "orange",
+                "cantidad": 1
+            },
+            {
+                "id": 6,
+                "price": 3463.07,
+                "color": "purple",
+                "cantidad": 8
+            }
+        ],
+        "total": 34313.89,
+        "fecha": "2023-12-25T03:00:00.000Z",
+        "estado_pago": "cancelado"
+    },
+    {
+        "referencia": 5,
+        "Userid": 2,
+        "products": [
+            {
+                "id": 8,
+                "price": 2790.11,
+                "color": "green",
+                "cantidad": 1
+            },
+            {
+                "id": 10,
+                "price": 2599.27,
+                "color": "yellow",
+                "cantidad": 6
+            },
+            {
+                "id": 10,
+                "price": 2599.27,
+                "color": "pink",
+                "cantidad": 8
+            }
+        ],
+        "total": 39179.89,
+        "fecha": "2023-12-30T03:00:00.000Z",
+        "estado_pago": "completado"
+    },
+    {
+        "referencia": 6,
+        "Userid": 1,
+        "products": [
+            {
+                "id": 7,
+                "price": 8016.62,
+                "color": "black",
+                "cantidad": 6
+            },
+            {
+                "id": 7,
+                "price": 8016.62,
+                "color": "green",
+                "cantidad": 3
+            }
+        ],
+        "total": 72149.58,
+        "fecha": "2023-12-14T03:00:00.000Z",
+        "estado_pago": "cancelado"
+    },
+    {
+        "referencia": 7,
+        "Userid": 2,
+        "products": [
+            {
+                "id": 16,
+                "price": "8500",
+                "color": "orange",
+                "cantidad": 10
+            },
+            {
+                "id": 14,
+                "price": 6416.26,
+                "color": "green",
+                "cantidad": 5
+            },
+            {
+                "id": 8,
+                "price": 2790.11,
+                "color": "gray",
+                "cantidad": 6
+            },
+            {
+                "id": 4,
+                "price": 3002.72,
+                "color": "blue",
+                "cantidad": 2
+            },
+            {
+                "id": 3,
+                "price": 825.48,
+                "color": "green",
+                "cantidad": 2
+            }
+        ],
+        "total": 141478.36,
+        "fecha": "2023-11-17T03:00:00.000Z",
+        "estado_pago": "cancelado"
+    },
+    {
+        "referencia": 8,
+        "Userid": 2,
+        "products": [
+            {
+                "id": 8,
+                "price": 2790.11,
+                "color": "gray",
+                "cantidad": 4
+            },
+            {
+                "id": 8,
+                "price": 2790.11,
+                "color": "white",
+                "cantidad": 6
+            },
+            {
+                "id": 4,
+                "price": 3002.72,
+                "color": "gray",
+                "cantidad": 9
+            },
+            {
+                "id": 8,
+                "price": 2790.11,
+                "color": "green",
+                "cantidad": 7
+            }
+        ],
+        "total": 74456.35,
+        "fecha": "2023-11-23T03:00:00.000Z",
+        "estado_pago": "cancelado"
+    },
+    {
+        "referencia": 9,
+        "Userid": 1,
+        "products": [
+            {
+                "id": 15,
+                "price": "10000",
+                "color": "brown",
+                "cantidad": 4
+            },
+            {
+                "id": 6,
+                "price": 3463.07,
+                "color": "magenta",
+                "cantidad": 3
+            }
+        ],
+        "total": 50389.21,
+        "fecha": "2023-12-28T03:00:00.000Z",
+        "estado_pago": "cancelado"
+    },
+    {
+        "referencia": 10,
+        "Userid": 2,
+        "products": [
+            {
+                "id": 10,
+                "price": 2599.27,
+                "color": "pink",
+                "cantidad": 7
+            }
+        ],
+        "total": 18194.89,
+        "fecha": "2023-12-29T03:00:00.000Z",
+        "estado_pago": "cancelado"
+    },
+    {
+        "referencia": 11,
+        "Userid": 2,
+        "products": [
+            {
+                "id": 3,
+                "price": 825.48,
+                "color": "white",
+                "cantidad": 3
+            },
+            {
+                "id": 12,
+                "price": 8515.71,
+                "color": "orange",
+                "cantidad": 6
+            },
+            {
+                "id": 14,
+                "price": 6416.26,
+                "color": "green",
+                "cantidad": 3
+            },
+            {
+                "id": 6,
+                "price": 3463.07,
+                "color": "magenta",
+                "cantidad": 1
+            },
+            {
+                "id": 4,
+                "price": 3002.72,
+                "color": "white",
+                "cantidad": 1
+            }
+        ],
+        "total": 79285.27,
+        "fecha": "2024-01-29T03:00:00.000Z",
+        "estado_pago": "completado"
+    },
+    {
+        "referencia": 12,
+        "Userid": 1,
+        "products": [
+            {
+                "id": 5,
+                "price": 7096.17,
+                "color": "red",
+                "cantidad": 5
+            },
+            {
+                "id": 12,
+                "price": 8515.71,
+                "color": "orange",
+                "cantidad": 10
+            },
+            {
+                "id": 10,
+                "price": 2599.27,
+                "color": "blue",
+                "cantidad": 2
+            }
+        ],
+        "total": 125836.48999999998,
+        "fecha": "2023-12-28T03:00:00.000Z",
+        "estado_pago": "cancelado"
+    },
+    {
+        "referencia": 13,
+        "Userid": 1,
+        "products": [
+            {
+                "id": 11,
+                "price": 7467.81,
+                "color": "red",
+                "cantidad": 0
+            },
+            {
+                "id": 16,
+                "price": "8500",
+                "color": "orange",
+                "cantidad": 10
+            }
+        ],
+        "total": 85000,
+        "fecha": "2023-11-03T03:00:00.000Z",
+        "estado_pago": "cancelado"
+    },
+    {
+        "referencia": 14,
+        "Userid": 2,
+        "products": [
+            {
+                "id": 12,
+                "price": 8515.71,
+                "color": "turquoise",
+                "cantidad": 9
+            }
+        ],
+        "total": 76641.38999999998,
+        "fecha": "2023-12-06T03:00:00.000Z",
+        "estado_pago": "cancelado"
+    },
+    {
+        "referencia": 15,
+        "Userid": 3,
+        "products": [
+            {
+                "id": 16,
+                "price": "8500",
+                "color": "orange",
+                "cantidad": 1
+            },
+            {
+                "id": 2,
+                "price": 4127.83,
+                "color": "blue",
+                "cantidad": 2
+            }
+        ],
+        "total": 16755.66,
+        "fecha": "2023-12-02T03:00:00.000Z",
+        "estado_pago": "completado"
+    },
+    {
+        "referencia": 16,
+        "Userid": 2,
+        "products": [
+            {
+                "id": 6,
+                "price": 3463.07,
+                "color": "magenta",
+                "cantidad": 7
+            },
+            {
+                "id": 8,
+                "price": 2790.11,
+                "color": "gray",
+                "cantidad": 9
+            }
+        ],
+        "total": 49352.48,
+        "fecha": "2023-12-12T03:00:00.000Z",
+        "estado_pago": "enproceso"
+    },
+    {
+        "referencia": 17,
+        "Userid": 1,
+        "products": [
+            {
+                "id": 14,
+                "price": 6416.26,
+                "color": "green",
+                "cantidad": 0
+            },
+            {
+                "id": 7,
+                "price": 8016.62,
+                "color": "green",
+                "cantidad": 9
+            },
+            {
+                "id": 4,
+                "price": 3002.72,
+                "color": "white",
+                "cantidad": 8
+            },
+            {
+                "id": 15,
+                "price": "10000",
+                "color": "brown",
+                "cantidad": 3
+            }
+        ],
+        "total": 126171.34,
+        "fecha": "2023-11-11T03:00:00.000Z",
+        "estado_pago": "enproceso"
+    },
+    {
+        "referencia": 18,
+        "Userid": 3,
+        "products": [
+            {
+                "id": 1,
+                "price": "6609.33",
+                "color": "brown",
+                "cantidad": 7
+            }
+        ],
+        "total": 46265.31,
+        "fecha": "2023-11-10T03:00:00.000Z",
+        "estado_pago": "cancelado"
+    },
+    {
+        "referencia": 19,
+        "Userid": 3,
+        "products": [
+            {
+                "id": 8,
+                "price": 2790.11,
+                "color": "white",
+                "cantidad": 5
+            },
+            {
+                "id": 13,
+                "price": 4737.37,
+                "color": "red",
+                "cantidad": 4
+            }
+        ],
+        "total": 32900.03,
+        "fecha": "2023-12-11T03:00:00.000Z",
+        "estado_pago": "completado"
+    },
+    {
+        "referencia": 20,
+        "Userid": 1,
+        "products": [
+            {
+                "id": 5,
+                "price": 7096.17,
+                "color": "yellow",
+                "cantidad": 9
+            }
+        ],
+        "total": 63865.53,
+        "fecha": "2023-12-01T03:00:00.000Z",
+        "estado_pago": "cancelado"
+    }
+]

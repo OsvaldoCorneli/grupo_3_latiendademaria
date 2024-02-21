@@ -1,0 +1,124 @@
+<html lang="es">
+    <head>
+        <%- include('../partials/head.ejs') %>
+        <link href="\css\createForm.css" rel="stylesheet"/>
+    </head>
+<body>
+    <%- include('../partials/navbar.ejs') %>
+    <main class="containerForm">
+        <span class="tituloCreate">
+            <p>Creacion de Producto</p>
+        </span>
+        <form class="form-producto" action="/products/create" method="POST" enctype="multipart/form-data">
+            <label for="name">Nombre:</label>
+                <input class="inputForm" 
+                id="name" 
+                type="text" 
+                name="name" 
+                placeholder="Ingresar Nombre"
+                value="<%= body.name && body.name %>"
+                required
+                />
+            <% if (locals.errors && errors.name) { %>
+                <p class="errors"><%= errors.name.msg %></p>
+            <% } %>
+            <label for="description">Descripcion:</label>
+            <textarea 
+                id="description" 
+                name="description"
+                placeholder="Ingresar descripcion..."><%= body.description && body.description %></textarea>
+            <% if (locals.errors && errors.description) { %>
+                <p class="errors"><%= errors.description.msg %></p>
+            <% } %>
+            <div class="inputform button-wrap">
+                <label class="button" for="imageinput">Subir imagen</label>
+                <input 
+                    class="uploadFile"
+                    type="file"
+                    name="image"
+                    id="imageinput"
+                    accept="image/jpeg, image/png, image/jpg"
+                    multiple
+                />
+            </div>
+            <span id="imageRender">
+                
+            </span>
+            <% if (locals.errors && errors.image) { %>
+                <p class="errors"><%= errors.image.msg %></p>
+            <% } %>
+            <% if (body.image && body.image.length > 0) { %>
+                <% body.image.forEach(el => { %>
+                    <img src="<%= body.image %>" alt="">
+                <% }) %>
+            <% } %>
+            <label for="line">Linea:</label>
+            <select id="line" name="line" required>
+                <option value="sublimada">Sublimada</option>
+                <option value="artesanal">Artesanal</option>
+            </select>
+            <% if (locals.errors && errors.line) { %>
+                <p class="errors"><%= errors.line.msg %></p>
+            <% } %>
+            <label for="category">Categoria:
+                <% categorias.forEach(({id,name}) => { %>
+                    <label>
+                        <input type="radio" name="category" value="<%= id %>" <%= body.category == id && "checked" %> required/>
+                    <%= name %>
+                    </label>
+                <% }) %>
+            </label>
+            <% if (locals.errors && errors.category) { %>
+                <p class="errors"><%= errors.category.msg %></p>
+            <% } %>
+            
+            <label for="color">Colores: </label>
+            <div class="container-colorinputs"> 
+            <% if (body.color) { %> 
+                <% if (typeof(body.color) == 'string') { %>
+                    <div>
+                        <input class="c0" type="color" name="color" id="color" value="<%= body.color %>"/>
+                        <span id="c0" style=<%= body.color %>></span>
+                        <label for="stock">Stock:</label>
+                        <input type="number" name="stock" value="<%= body.stock? body.stock : 1 %>" required/>
+                    </div>
+                <% } else { %>
+                    <% body.color.forEach((color,index) => { let background=`color:${color};` %>
+                        <div>
+                            <input class="c<%= index %>" type="color" name="color" id="color" value="<%= color %>"/>
+                            <span id="c<%= index %>" style=<%= background %>></span>
+                            <% if (locals.errors && errors.color) { %>
+                                <p class="errors"><%= errors.color.msg %></p>
+                            <% } %>
+                            <label for="stock">Stock:</label>
+                            <input type="number" name="stock" value="<%= stock[index] %>" required/>
+                            <% if (locals.errors && errors.stock) { %>
+                                <p class="errors"><%= errors.stock.msg %></p>
+                            <% } %>
+                        </div>
+            <% })}} %>
+                <span id="agregar" class="button">Agregar color</span>
+            </div>
+
+            <label for="price">Precio:</label>
+            <input class="inputForm" 
+                type="number"
+                id="price" 
+                name="price"
+                step=".01"
+                value="<%= body.price && body.price %>"
+                required
+            />
+            <% if (locals.errors && errors.price) { %>
+                <p class="errors"><%= errors.price.msg %></p>
+            <% } %>
+            
+            <button class="button" type="submit">Enviar</button>
+        </form>
+        <script src="\scripts\ntc.js"></script>
+        <script src="\scripts\colorValidator.js"></script>
+        <script src="\scripts\imageUpload.js"></script>
+    </main> 
+    <%- include('../partials/footer.ejs') %>
+</body>
+</html>
