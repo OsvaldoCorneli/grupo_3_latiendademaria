@@ -19,7 +19,7 @@ module.exports = {
                 where: condition,
                 attributes: {exclude: ['user_id']},
                 logging: false,
-                raw: true  
+                raw: true
             })
             let grafico = await this.graficoVentas(desde,hasta,estado);
             let topUser = await this.topUser(desde,hasta,estado);
@@ -105,6 +105,28 @@ module.exports = {
                 logging: false
             })
             return detail
+        } catch (error) {
+            return error
+        }
+    },
+    userDetail: async function (id,perPage,page) {
+        try {
+            const response = await db.Payments.findAll({
+                where: {user_id: +id},
+                attributes: {exclude: ['user_id']},
+                order: [['created_at', 'DESC']],
+                offset: ((page-1)*perPage),
+                limit: perPage,
+                logging: false,
+                raw:true
+            })
+            const maxPage = await db.Payments.findAll({where: {user_id: id}})
+            return {
+                data: response,
+                page: page,
+                perPage: perPage,
+                maxPage: Math.ceil(maxPage.length/perPage)
+            }
         } catch (error) {
             return error
         }

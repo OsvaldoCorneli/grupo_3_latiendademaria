@@ -125,7 +125,11 @@ form.addEventListener('submit', (e) => {
                 })
             })
         })
-    .catch(error => {console.log(error); alert(error)})
+    .catch(error => {
+        console.log(error);
+        
+        alert(error)
+    })
 })
 
 function detallePayment(id) {
