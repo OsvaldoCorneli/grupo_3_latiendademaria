@@ -45,7 +45,7 @@
                     <input id=<%= color.name %> type="radio" name="color" value=<%= color.id %>/>
                 <% })%>
                 </span>
-                <button type="submit">Agregar a carrito</button>
+                <button id="botonCarrito" class="presionado" type="submit">Agregar a carrito</button>
             </form>
             
         </article>
@@ -57,5 +57,27 @@
     </main>
         
             <%- include('../partials/footer.ejs') %>
+            <script>
+                const boton = document.querySelector("#botonCarrito")
+                
+                boton.addEventListener("click", (e)=>{
+                    const pathnameString = location.pathname.toString()
+                    const id = pathnameString[pathnameString.length -1]
+                    e.preventDefault()
+                    agregarCarrito(id)
+
+                    
+                })
+                async function agregarCarrito(id){
+                try{
+                    const response = await fetch(`http://localhost:3001/cart/${id}`, {
+                    method: 'POST'
+                })
+                console.log("response", response)
+            }
+                catch(error) { console.error('Error al agregar al carrito:', error)};}
+
+                
+            </script>
 </body>
 </html>
