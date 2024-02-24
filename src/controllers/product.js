@@ -36,8 +36,16 @@ module.exports = {
     },
     detail: async function (req,res) {
         try {
+            console.log(req.session)
             const detalle = await products.detail(req.params.id)
-            if (detalle) res.render(view+'detail',{ detalle })
+            
+            if (detalle){
+                if(req.session.user){ res.render(view+'detail',{ 
+                detalle: detalle , user: true})}
+             else{
+                res.render(view+'detail',{ 
+                    detalle: detalle , user: false})
+             }}   
             else res.render('404notFound', {url: req.url}) // si no encuentra el producto, devuelve 404
         } catch (error) {
             res.status(500).json(error.message)

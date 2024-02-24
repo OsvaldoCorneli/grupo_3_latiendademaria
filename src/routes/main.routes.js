@@ -20,6 +20,4 @@ router.route("/autor")
     .get(main.getAutor)
 ;
 
-router.route("/cart/:id")
-    .post(main.addCart);
 module.exports = router

@@ -45,7 +45,11 @@
                     <input id=<%= color.name %> type="radio" name="color" value=<%= color.id %>/>
                 <% })%>
                 </span>
-                <button id="botonCarrito" class="presionado" type="submit">Agregar a carrito</button>
+                <% if (user) { %>
+                    <button id="botonCarrito" class="presionado" type="submit">Agregar a carrito</button>
+                <% } else { %>
+                    <button id="botonCarrito" class="presionado"  onclick="event.preventDefault(); redireccionarAlogin()" >Agregar a carritos</button>
+                <% } %>
             </form>
             
         </article>
@@ -57,27 +61,13 @@
     </main>
         
             <%- include('../partials/footer.ejs') %>
-            <script>
-                const boton = document.querySelector("#botonCarrito")
-                
-                boton.addEventListener("click", (e)=>{
-                    const pathnameString = location.pathname.toString()
-                    const id = pathnameString[pathnameString.length -1]
-                    e.preventDefault()
-                    agregarCarrito(id)
-
-                    
-                })
-                async function agregarCarrito(id){
-                try{
-                    const response = await fetch(`http://localhost:3001/cart/${id}`, {
-                    method: 'POST'
-                })
-                console.log("response", response)
+     <script>
+        function redireccionarAlogin(){
+            const response = confirm("Debe iniciar sesion para agregar el producto al carrito")
+            if(response){
+               window.location.href = "/users/login"
             }
-                catch(error) { console.error('Error al agregar al carrito:', error)};}
-
-                
-            </script>
+        }
+     </script>       
 </body>
 </html>

@@ -43,13 +43,5 @@ module.exports = {
         res.status(500).json(error.message)
       }
   },
-  addCart: async function (req, res){
-    try {
-      const carrito = await db.Products.findByPk(req.params.id, {raw: true})
-      console.log(carrito)
-
-    } catch (error) {
-      return error
-    }
-  }
+  
 }
