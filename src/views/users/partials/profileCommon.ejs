@@ -26,11 +26,10 @@
             <section class="pagination">
                 <span><a class="arrow-prev1 arrow-cards"></a></span>
                 <% for (let p = 1; p <= maxPage; p++) { %>
-                    <span class=<%= p == page? 'currentPage' : "" %>><a><%= p %></a></span>
+                    <span class=<%= p == page? 'currentPage' : "" %>><a id="page"><%= p %></a></span>
                 <% } %>
                 <span><a class="arrow-next1 arrow-cards"></a></span>
             </section>
-            <p>pagina <%= page %> de <%= maxPage %> mostrando <%= perPage %> elementos por pagina</p>
             <span class="header">
                 <b>Referencia</b>
                 <b>Total</b>
@@ -40,13 +39,18 @@
             </span>
             <% data.forEach(({id,total,status,created_at, updated_at}) => { %>
             <article class="rows">
-                <a href="/payment/<%= id %>"><%= id %></a>
+                <button id="detail" class="button"><%= id %></button>
                 <p class="number"><%= total %></p>
-                <p><i class="<%= status %>"><%= status %></i></p>
-                <p><%= created_at.toISOString().replace('T',' ').slice(0,16) %></p>
-                <p><%= updated_at.toISOString().replace('T',' ').slice(0,16) %></p>
+                <p class="<%= status %>"><%= status %></p>
+                <span><%= created_at.toISOString().split('T')[0] %>
+                    <small><%= created_at.toISOString().split('T')[1].slice(0,5) %></small>
+                </span>
+                <span><%= updated_at.toISOString().replace('T',' ').slice(0,10) %>
+                    <small><%= updated_at.toISOString().split('T')[1].slice(0,5) %></small>
+                </span>
             </article>
             <% }) %>
+            <small id="paginado">pagina <b id="currentPage"><%= page %></b> de <b><%= maxPage %></b> mostrando <%= perPage %> elementos por pagina</small>
     <!-- <div class="favoritos">
         <h2>Mis Favoritos</h2>
         <section class="favoritos">

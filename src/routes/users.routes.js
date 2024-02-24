@@ -3,7 +3,7 @@ const router = express.Router();
 const users = require('../controllers/user');
 const validacionForm = require('../middlewares/validacionForm') 
 const upload = require('../middlewares/multerMid');
-const {check, validationResult} = require('express-validator')
+const payment = require('../controllers/payment');
 
 const db = require("../database/models")
 
@@ -27,5 +27,6 @@ router.put('/:id/update', upload.any(), validacionForm.editUser(), users.putUpda
 router.delete('/:id/delete', (req , res) => {
     
 })
+router.get('/payment', payment.userPayment)
 
 module.exports = router

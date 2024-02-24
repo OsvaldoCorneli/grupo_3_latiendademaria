@@ -18,4 +18,14 @@ module.exports = {
             res.status(500).json(error.message)
         }
     },
+    userPayment: async function (req,res) {
+        try {
+            const id = req.session.user.id
+            const {perPage, page} = req.query
+            const response = await payments.userDetail(id,+perPage,+page)
+            res.status(200).json(response)
+        } catch (error) {
+            res.status(500).json(error.message)
+        }
+    }
 }

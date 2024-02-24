@@ -120,7 +120,7 @@ module.exports = {
                 logging: false,
                 raw:true
             })
-            const maxPage = await db.Payments.findAll({where: {user_id: id}})
+            const maxPage = await db.Payments.findAll({where: {user_id: id}, logging: false})
             return {
                 data: response,
                 page: page,
