@@ -108,7 +108,7 @@ module.exports = {
     },
     detail: async function (id) {
         try{
-        const detailUser = await db.Users.findByPk(id,{logging: false})
+        const detailUser = await db.Users.findByPk(id,{logging: false, raw: true})
         if (detailUser) {
             return detailUser
         } else {
@@ -128,7 +128,7 @@ module.exports = {
             const cart = {
                 id: +data.body.id,
                 cantidad: +data.body.cantidad,
-                color: data.body.color
+                color: data.body.color || null
             }
             if(!user) throw new Error ("Usuario no encontrado")
 
