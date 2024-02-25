@@ -6,7 +6,9 @@
 body {
     margin-bottom: 4.5vh;
 }
-
+h3 {
+    margin: 10px 0px 10px 0px;
+}
 main {
     display: flex;
     flex-direction: column;
@@ -19,9 +21,7 @@ main {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    margin: 15px 0 0px 0 ;
-
-
+    margin: 0px;
 }
 
 .pagination span {
@@ -59,24 +59,37 @@ main {
 section.profile {
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     gap: 10px;
-    text-wrap: balance;
 }
 section.profile img {
     width: 150px;
     border-radius: 50%;
     border: solid 1px black;
 }
-section.productos {
+section.profile > .userData {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-evenly;
+}
+section.profile > .userData > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+section.payments {
     width: 100%;
     display: flex;
     flex-direction: column;
+    text-align: center;
     gap: 10px;
 }
 
-section.productos > .header{
+section.payments > .header{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -88,7 +101,7 @@ section.productos > .header{
     text-wrap: nowrap;
 }
 
-section.productos > article{
+section.payments > article{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -98,40 +111,40 @@ section.productos > article{
     margin: 3px;
 }
 
-section.productos > article > img{
+section.payments > article > img{
     width: 50px;
     border-radius: 5px;
 }
 
-section.productos > article > ul{
+section.payments > article > ul{
     display: none;
 }
-section.productos > article > .category{
+section.payments > article > .category{
     display: none;
 }
-section.productos > .header > .color{
+section.payments > .header > .color{
     display: none;
 }
-section.productos > .header > .category{
+section.payments > .header > .category{
     display: none;
 }
-section.productos > .header > .name{
+section.payments > .header > .name{
     flex: 0 0 125px;
     text-align: center;
 }
 
-section.productos > article a.titulocard {
+section.payments > article a.titulocard {
     flex: 0 0 125px;
 }
-section.productos > article > .price {
+section.payments > article > .price {
     flex: 0 0 50px;
     text-align: center;
 }
-section.productos > article > .stock {
+section.payments > article > .stock {
     flex: 0 0 25px;
     text-align: center;
 }
-section.productos > article > span.actions {
+section.payments > article > span.actions {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -409,10 +422,10 @@ tr.article > td {
 }
 
 @media (min-width: 760px) {
-    section.productos {
+    section.payments {
         width: 90%;
     }
-    section.productos > article > ul{
+    section.payments > article > ul{
         display: inline-block;
         list-style: none;
         display: flex;
@@ -425,41 +438,41 @@ tr.article > td {
         margin: 0px;
         padding: 0px;
     }
-    section.productos > .header > .name{
+    section.payments > .header > .name{
         display: inline-block;
         flex: 0 0 100px;
         text-align: center;
     }
-    section.productos > .header > .category{
+    section.payments > .header > .category{
         display: inline-block;
         flex: 0 0 50px;
         text-align: center;
     }
-    section.productos > article > .category{
+    section.payments > article > .category{
         display: inline-block;
         flex: 0 0 50px;
     }
-    section.productos > .header > .price {
+    section.payments > .header > .price {
         display: inline-block;
         flex: 0 0 50px;
         text-align: center;
     }
-    section.productos > article > ul > li{
+    section.payments > article > ul > li{
         border: solid 1px black;
         border-radius: 50%;
     }
-    section.productos > .header > .color{
+    section.payments > .header > .color{
         display: inline-block;
         flex: 0 0 50px;
     }
-    section.productos > a.titulocard {
+    section.payments > a.titulocard {
         flex: 0 0 150px;
     }
-    section.productos .price {
+    section.payments .price {
         flex: 0 0 100px;
         text-align: center;
     }
-    section.productos .actions {
+    section.payments .actions {
         flex: 0 0 70px;
     }
     .desktoplayout {

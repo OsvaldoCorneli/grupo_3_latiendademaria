@@ -1,28 +1,35 @@
 <script src="\scripts\profilecommon.js"></script>
-<h2>Mis Datos</h2>
+<h3>Mis Datos</h3>
 <section class="profile">
     <% let { id, nombre, apellido, email, calle, calleNumero, provincia, imagen, codigoPostal, piso, departamento } = userData %>
     <span>
         <img class="perfil" src="<%= imagen %>" alt="<%= nombre.slice(0,1).toUpperCase()+apellido.slice(0,1).toUpperCase() %>"/>
     </span>
-    <span>
-        <p>Nombre: <%= nombre %>, <%= apellido %></p>
-        <p>email: <%= email %></p>
-        <p>Provincia: <%= provincia %></p>
-        <p>Domicilio: <%= calle %> <%= calleNumero %> </p>
+    <span class="userData">
+        <div>
+            <b>Nombre:</b> 
+            <t><%= nombre %>, <%= apellido %></t>
+        </div>
+        <div>
+            <b>email:</b>
+            <t><%= email %></t>
+        </div>
+        <div><b>Provincia:</b> <%= provincia %></div>
+        <div><b>Domicilio:</b> <%= calle %> <%= calleNumero %> </div>
         <% if (piso) { %>
-            <p>Piso: <%= piso %></p>
+            <div><b>Piso:</b> <%= piso %></div>
         <% } %>
         <% if (departamento) { %>
-            <p>Departamento: <%= departamento %> </p>
+            <div><b>Departamento:</b> <%= departamento %></div>
         <% } %>
-        <p>Codigo Postal: <%= codigoPostal %></p>
-        <a href="/users/<%= id %>/update"><button class="edit">Editar</button></a>
-        <a href="/users/<%= id %>/delete"><button class="delete">Eliminar Cuenta</button></a>
+        <div><b>Codigo Postal:</b> <%= codigoPostal %></div>
+        <div><a href="/users/<%= id %>/update"><button class="edit">Editar</button></a>
+        <a href="/users/<%= id %>/delete"><button class="delete">Eliminar Cuenta</button></a></div>
     </span>
 </section>
-<section class="productos">
+<section class="payments">
     <% let {data, maxPage, perPage, page} = historialPagos %>
+    <h3>Mis Compras</h3>
             <section class="pagination">
                 <span><a class="arrow-prev1 arrow-cards"></a></span>
                 <% for (let p = 1; p <= maxPage; p++) { %>

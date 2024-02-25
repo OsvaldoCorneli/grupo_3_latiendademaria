@@ -1,7 +1,7 @@
 const host = window.location.host
 window.onload = () => {
     const anchors = Array.from(document.querySelectorAll('a#page'));
-    let currentPage = document.querySelector('.currentPage')
+    let currentPage = document.querySelector('.currentPage');
 
     anchors.forEach((a) => {
         a.addEventListener('click', (async (event) => {
@@ -21,7 +21,6 @@ window.onload = () => {
                     let newButton = referencia.cloneNode(true) 
                     referencia.parentNode.replaceChild(newButton, referencia)
                     element.style.display = 'none'
-
                 } else {
                     const {id, status, total, created_at,updated_at} = data[i]
                     element.style.display = 'flex'
@@ -37,7 +36,6 @@ window.onload = () => {
                     estado.className = status;
                     creacion.innerHTML = `${created_at.split('T')[0]} <small>${created_at.split('T')[1].slice(0,5)}</small>`;
                     actualizado.innerHTML = `${updated_at.split('T')[0]} <small>${updated_at.split('T')[1].slice(0,5)}</small>`;
-                    console.log(element.childNodes)
                 }
             })
         } catch (error) {
@@ -45,10 +43,7 @@ window.onload = () => {
         }
         }))
     })
-}
-
-let historialPagos = []
-
+};
 
 async function fetchData(endpoint, body) {
     try {
@@ -63,9 +58,9 @@ async function fetchData(endpoint, body) {
         const data = await response.json();
         return data
     } catch (error) {
-        console.log(error)
+        alert(error.message)
     }
-}
+};
 
 async function detallePayment(paymentId) {
     try {
@@ -121,7 +116,7 @@ async function detallePayment(paymentId) {
     } catch (error) {
         alert(error.message)
     }
-}
+};
 
 let buttonDetail = Array.from(document.querySelectorAll('button#detail'));
 buttonDetail.forEach(button => {
@@ -129,4 +124,4 @@ buttonDetail.forEach(button => {
         e.preventDefault();
         detallePayment(+e.target.innerText)
     });
-})
+});

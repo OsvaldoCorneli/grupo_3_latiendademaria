@@ -11,7 +11,6 @@ module.exports = {
     },
     detail: async function (req,res) {
         try {
-            console.log(req.params.id)
             const response = await payments.detallePago(req.params.id)
             res.status(200).json(response)
         } catch (error) {
