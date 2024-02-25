@@ -5,7 +5,7 @@ const Colors = require('./colors');
 
 
 module.exports = {
-    all: async function (perPage = null, page = null) {
+    all: async function () {
         try {
             const response = await db.Products.findAll({
                 include: [
@@ -29,8 +29,6 @@ module.exports = {
                     }
                 ],
                 attributes: {exclude: ['category_id']},
-                limit: perPage,
-                offset: ((page-1)*perPage),
                 logging: false,
             })
             return response
@@ -68,9 +66,9 @@ module.exports = {
             return error
         }
     },
-    filter: async function (query, perPage = null, page = null) {
+    filter: async function (query) {
         try {
-            const {price, line, name, category, color} = query
+            const {price, line, name, category, color, page, perPage} = query
             let condition = {}
             if (price) condition.products = {...condition.products, price: {[Op.lte]: price}};
             if (line) condition.products = {...condition.products, line: line};
@@ -81,6 +79,8 @@ module.exports = {
                 ]};
             if (category) condition.categories = { ...condition.categories, id: category};
             if (color) condition.colors = {...condition.colors, color_id: color};
+            let pagination = {}
+            if (page && perPage) pagination = {limit: +perPage, offset: ((+page-1)*+perPage)};
 
             return await db.Products.findAll({
                 include: [
@@ -108,8 +108,7 @@ module.exports = {
                 ],
                 where: condition.products,
                 attributes: {exclude: ['category_id']},
-                limit: perPage,
-                offset: ((page-1)*perPage),
+                ...pagination,
                 logging: false
             })
         } catch (error) {

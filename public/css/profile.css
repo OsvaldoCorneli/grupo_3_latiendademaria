@@ -74,12 +74,14 @@ section.profile > .userData {
     flex-direction: column;
     align-items: start;
     justify-content: space-evenly;
+    gap: 5px;
 }
 section.profile > .userData > div {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
+    gap: 5px;
 }
 section.payments {
     width: 100%;

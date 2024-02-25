@@ -56,12 +56,12 @@
                 <section class="pagination">
                     <a class="arrow-prev1"><span class="arrow-cards"></span></a>
                     <% for (let p = 1; p <= Math.ceil(productos.length/10); p++ ) { %>
-                        <a><%= p %></a>
+                        <a id="page"><%= p %></a>
                     <% } %>
                     <a class="arrow-next1"><span class="arrow-cards"></span></a>
                 </section>
                 <section class="cards">
-                    <% productos.forEach((producto) => { %>
+                    <% productos.slice(0,12).forEach((producto) => { %>
                         <%- include('./card.ejs', {producto}) %>
                     <% }) %>
                 </section>

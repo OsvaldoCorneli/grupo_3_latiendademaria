@@ -23,12 +23,7 @@ module.exports = {
             })
             let grafico = await this.graficoVentas(desde,hasta,estado);
             let topUser = await this.topUser(desde,hasta,estado);
-            if (response.length > 0) {
-                return {grafico, data: response, topUser}
-            }
-            else {
-                throw Error
-            }
+            return {grafico, data: response, topUser}
         } catch (error) {
             return error
         }
@@ -51,11 +46,19 @@ module.exports = {
                 GROUP BY DATE_FORMAT(created_at, '%Y-%m-%d');`, {logging: false});
                 if (results.length == 0) {
                     sales.push({total: 0, fecha: dates[i]})
-                    if (i == dates.length-1) return sales
+                    if (i == dates.length-1) {
+                        if (sales.reduce((acum, {total}) => acum + Number(total),0) > 0) {
+                            return sales
+                        } else return []
+                    }
                     else continue
                 }
                 sales.push(results[0])
-                if (i == dates.length-1) return sales
+                if (i == dates.length-1) {
+                    if (sales.reduce((acum, {total}) => acum + Number(total),0) > 0) {
+                        return sales
+                    } else return []
+                }
             }
         } catch (error) {
             return error

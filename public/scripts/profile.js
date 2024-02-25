@@ -12,13 +12,13 @@ window.onload = () => {
             const page = +event.target.innerText
             document.querySelector('b#currentPage').innerText = page
             const perPage = 5
-            const response = await fetchData(`/users/payment?page=${page}&perPage=${perPage}`)
+            const response = await fetchData(`/api/payment/user?page=${page}&perPage=${perPage}`)
             const {data} = response
             const articles = Array.from(document.querySelectorAll('article.rows'))
             articles.forEach((element, i) => {
                 let [t0, referencia, t1, Total, t2, estado, t3, creacion, t4, actualizado] = element.childNodes
                 if (data.length <= i) {
-                    let newButton = referencia.cloneNode(true) 
+                    let newButton = referencia.cloneNode(true)
                     referencia.parentNode.replaceChild(newButton, referencia)
                     element.style.display = 'none'
                 } else {
@@ -64,7 +64,7 @@ async function fetchData(endpoint, body) {
 
 async function detallePayment(paymentId) {
     try {
-        const response = await fetchData(`/payment/${paymentId}`)
+        const response = await fetchData(`/api/payment/${paymentId}`)
         const {id,total,status,created_at,user,products} = response
         const fecha = new Date(created_at)
         const container = document.createElement('div')

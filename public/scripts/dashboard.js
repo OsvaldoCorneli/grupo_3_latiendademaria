@@ -62,7 +62,7 @@ form.addEventListener('submit', (e) => {
     fetch(`http://${host}/payment?desde=${desde}&hasta=${hasta}&estado=${estado}`)
         .then((response) => response.json())
         .then(({grafico, data, topUser}) => {
-            if (data.length == 0) throw Error
+            if (data.length == 0) throw alert('No Hay Registros para la consulta')
             new Chart("paymentChart", {
                 type: "line",
                 data: {
@@ -127,8 +127,6 @@ form.addEventListener('submit', (e) => {
         })
     .catch(error => {
         console.log(error);
-        
-        alert(error)
     })
 })
 
