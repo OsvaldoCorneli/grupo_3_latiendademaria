@@ -2,6 +2,7 @@ const db = require('../database/models')
 const fs = require('fs');
 const path = require('path');
 const bcrypt = require('bcryptjs');
+const { Console } = require('console');
 
 
 const usersFilePath = path.join(__dirname, '../data/users.json');
@@ -117,5 +118,36 @@ module.exports = {
     }, 
     restore: function (id) {
         
+    },
+    cartAdd: async function(data){
+         
+        try {
+            console.log("data",data)
+            const user = await db.Users.findByPk(data.id,{raw: true})
+            console.log("usuario",user)
+            const cart = {
+                id: +data.body.id,
+                cantidad: +data.body.cantidad,
+                color: data.body.color
+            }
+            if(!user) throw new Error ("Usuario no encontrado")
+
+            console.log("carrito", user.carrito)
+
+            if(user.carrito == null){
+                console.log("ingreso null")
+                user.carrito = [cart]
+            }
+            else{
+                user.carrito.push(cart);
+                console.log("carrito else",user.carrito)
+            }
+
+            const userUpdate = await db.Users.update(user,{where:{id:data.id}})
+            console.log("userup", userUpdate)
+        
+        } catch (error) {
+            return error
+        }
     }
 }

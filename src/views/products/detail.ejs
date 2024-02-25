@@ -30,7 +30,8 @@
                     </div>
                 <% }) %>
             </section>
-            <form class="form-detalle" action="/user/cart/<%= id %>" method="POST">
+            <form class="form-detalle" action="/users/cart/<%= id %>" method="POST">
+                <input type="hidden" name="id" value="<%= detalle.id %>">
                 <h2 class="tittled"><%= name %></h2>
                 <h2 class="precio">$<%= price %></h3>
                 <h5>cantidad: <%= stock %></h5>

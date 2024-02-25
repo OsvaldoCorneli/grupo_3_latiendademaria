@@ -36,7 +36,6 @@ module.exports = {
     },
     detail: async function (req,res) {
         try {
-            console.log(req.session)
             const detalle = await products.detail(req.params.id)
             
             if (detalle){
