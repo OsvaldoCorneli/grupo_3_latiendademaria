@@ -5,9 +5,9 @@ const Colors = require('./colors');
 
 
 module.exports = {
-    all: async function () {
+    all: async function (perPage = null, page = null) {
         try {
-            return await db.Products.findAll({
+            const response = await db.Products.findAll({
                 include: [
                     {
                         association: 'colors',
@@ -29,8 +29,11 @@ module.exports = {
                     }
                 ],
                 attributes: {exclude: ['category_id']},
+                limit: perPage,
+                offset: ((page-1)*perPage),
                 logging: false,
             })
+            return response
         } catch (error) {
             return error
         }
@@ -65,7 +68,7 @@ module.exports = {
             return error
         }
     },
-    filter: async function (query) {
+    filter: async function (query, perPage = null, page = null) {
         try {
             const {price, line, name, category, color} = query
             let condition = {}
@@ -105,6 +108,8 @@ module.exports = {
                 ],
                 where: condition.products,
                 attributes: {exclude: ['category_id']},
+                limit: perPage,
+                offset: ((page-1)*perPage),
                 logging: false
             })
         } catch (error) {
