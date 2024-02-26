@@ -1,4 +1,5 @@
 const payments = require('../models/payments');
+const db = require('../database/models')
 const dataGeo = require('../models/dataGeo');
 const products = require('../models/products');
 const users = require('../models/user');
@@ -111,5 +112,35 @@ module.exports = {
     },
     postRestoreUser: function (req,res) {
         res.render('404notfound',{url: req.url})
+    },
+    addCart: async function(req,res){
+        try {
+            const response = await users.cartAdd({body: req.body, id: req.session?.user.id})
+    
+          if(response){
+            res.status(200).json({ success: true, message: 'Producto agregado al carrito correctamente' });
+          }
+          else{
+            res.status(409).json({ success: false, message: 'El producto con ese color ya fue agregado al carrito, seleccione otro color' });
+          }
+        } catch (error) {
+            res.status(500).json({ success: false, message: error });
+        }
+       
+
+       
+    },
+    deleteCart: async function(req, res){
+        try {
+            const response = await users.cartDelete({idUser: req.session?.user.id, idProduct: req.params.id, color: req.body.color});
+    
+            if(response.success){
+                res.status(201).send("producto eliminado del carrito")
+            } 
+        } catch (error) {
+            console.error("Error al eliminar producto del carrito:", error);
+            res.redirect("/error"); r
+        }
     }
+    
 }

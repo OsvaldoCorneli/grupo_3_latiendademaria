@@ -6,7 +6,8 @@ router.route('/')
     .get(main.getHome);
 
 router.route('/cart')
-    .get(main.getCart);
+    .get(main.getCart)
+    
 
 router.route("/contacto")
     .get(main.getContacto)

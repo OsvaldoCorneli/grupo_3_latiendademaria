@@ -3,21 +3,32 @@ const path = require('path');
 
 const products = require('./products')
 const users = require('./user')
-
+let idcont = 0
 
 module.exports = {
-    cart: function (userId) {
-        const user = users.detail(userId)
-        if (user?.carrito) {
-            const carrito = user.carrito.map((prod) => {
-                return {
-                        ...products.detail(prod.id),
-                        cantidad: prod.cantidad
-                    }
-            })
-            return {...user, carrito}
-        } else {
-            return {...user, carrito: []}
+    cart: async function (userId) {
+        try {
+            const user = await users.detail(userId);
+
+    
+            if (user.carrito?.length != null) {
+                const cartDetails = await Promise.all(user.carrito.map(async (prod) => {
+                    const producto = await products.detail(prod.id);
+                    return {
+                        ...producto.dataValues,
+                        cantidad: prod.cantidad,
+                        colorSelected: prod.color
+                    };
+                }));
+    
+                user.carrito = cartDetails;
+                
+                 return user;
+            } else {
+                user.carrito = []
+                return user
+                
+        } }catch (error) {
+            return error;
         }
-    }
-}
+    }}
