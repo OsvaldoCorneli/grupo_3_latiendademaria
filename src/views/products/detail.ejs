@@ -8,6 +8,7 @@
     <%- include('../partials/navbar.ejs') %>
     <main>
         <% let { id, name, images, price ,stock, description, colors, categories } = detalle; %>
+        
         <article>
             <div class="imagenes">
                 <% images.forEach((img) => { %>
@@ -30,7 +31,8 @@
                     </div>
                 <% }) %>
             </section>
-            <form class="form-detalle" action="/user/cart/<%= id %>" method="POST">
+            <form class="form-detalle" action="/users/cart/<%= id %>" method="POST">
+                <input type="hidden" name="id" value="<%= detalle.id %>">
                 <h2 class="tittled"><%= name %></h2>
                 <h2 class="precio">$<%= price %></h3>
                 <h5>cantidad: <%= stock %></h5>
@@ -40,12 +42,16 @@
                     <a onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+</a>
                 </label>
                 <span class="color"> Color:
-                <% colors.forEach(({stock, color}) => { let background = `background-color:${color.hex};color:${color.hex};border-radius:50%; border:0.1px-solid-black;;` %>
+                <% colors.forEach(({stock, color},index) => { let background = `background-color:${color.hex};color:${color.hex};border-radius:50%; border:0.1px-solid-black;;` %>
                     <label for=<%= color.name %>><i style=<%= background %>>oo</i></label>
-                    <input id=<%= color.name %> type="radio" name="color" value=<%= color.id %>/>
+                    <input id="<%= color.name %>" type="radio" name="color" value="<%= color.id %>" <%= index === 0 ? 'checked' : '' %> />
                 <% })%>
                 </span>
-                <button type="submit">Agregar a carrito</button>
+                <% if (user) { %>
+                    <button id="botonCarrito1" class="presionado" onclick="event.preventDefault(); addCart('<%=id%>')">Agregar a carrito</button>
+                <% } else { %>
+                    <button id="botonCarrito" class="presionado"  onclick="event.preventDefault(); redireccionarAlogin()" >Agregar a carritos</button>
+                <% } %>
             </form>
             
         </article>
@@ -57,5 +63,64 @@
     </main>
         
             <%- include('../partials/footer.ejs') %>
+     <script>
+        function redireccionarAlogin(){
+            const response = confirm("Debe iniciar sesion para agregar el producto al carrito")
+            if(response){
+               window.location.href = "/users/login"
+            } 
+        }
+
+        function addCart(id) {
+    const colorInput = document.querySelector(".color input:checked");
+    const cantidadInput = document.querySelector("#cantidad");
+
+    if (!colorInput || !cantidadInput) {
+        console.error('No se encontraron elementos de entrada de color o cantidad');
+        return;
+    }
+    const color = colorInput.value;
+    const cantidad = cantidadInput.value;
+
+        fetch(`/users/cart/${id}`, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: id,
+                cantidad: cantidad,
+                color: color
+            })
+        })
+        .then(response => {
+            if (response.status === 500) {
+                throw new Error(`Error al agregar el producto: ${response.status}`);
+            }else{
+           return response.json()
+        }})
+        .then(respuesta => {
+
+            if(respuesta.success){
+              if(confirm(`${respuesta.message}, ¿Le gustaría ir al carrito?`)){
+                  window.location.href = "/cart"
+              }
+
+            }
+            else{
+                alert(respuesta.message)
+            }
+        })
+        .catch(error => {
+            console.error('Error al agregar el producto:', error);
+        });
+    }
+
+
+         
+        
+        
+
+     </script>       
 </body>
 </html>

@@ -11,22 +11,22 @@
                     <th>Subtotal</th>
                 </tr>
             <% carrito.forEach(el => { %>
-                <tr>
-                    <td id="X">X</td>
-                    <td ><img src="<%= el.image[0] %>" alt="<%= el.name %>"/></td>
+                <tr id="product-<%= el.id %>-<%= el.colorSelected %>">
+                    <td id="X" onclick="eliminarProducto('<%= el.id %>', '<%= el.colorSelected %>')">X</td>
+                    <td ><img src="<%= el.images[0] %>" alt="<%= el.name %>"/></td>
                     <td id="product"><%= el.name %></td>
-                    <td class="number"><%= el.price %></td>
-                    <td>
-                        <a onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</a>
+                    <td id="precio" class="number"><%= el.price %></td>
+                    <td class="sumarRestar">
+                        <button id="restar" onclick="this.parentNode.querySelector('input[type=number]').stepDown(); restarCantidad('<%= el.id %>', '<%= el.colorSelected %>')">-</button>
                         <input id="cantidad" type="number" min="1" placeholder="cantidad" name="cantidad" value="<%= el.cantidad %>"/>
-                        <a onclick="this.parentNode.querySelector('input[type=number]').stepUp();this.querySelector('.total').innerText=3000">+</a>
+                        <button id="sumar" onclick="this.parentNode.querySelector('input[type=number]').stepUp(); sumarCantidad('<%= el.id %>', '<%= el.colorSelected %>')">+</button>
                     </td>
-                    <td class="total number"><%= (el.price*el.cantidad).toFixed(2) %></td>
+                    <td id="subtotalproduct" class="total number"><%= (el.price*el.cantidad).toFixed(2) %></td>
                 </tr>
             <% }); %>
-                <tr>
+                <tr id="totales">
                     <td colspan="4">Totales:</td>
-                    <td><%= carrito.reduce((acum, el) => acum + el.cantidad, 0) %></td>
+                    <td id="cantidadTotal"><%= carrito.reduce((acum, el) => acum + el.cantidad, 0) %></td>
                     <td class="number"><b class="number"><%= carrito.reduce((acum, el) => acum + (el.cantidad*el.price), 0).toFixed(2) %></b></td>
                 </tr>
             </tbody>

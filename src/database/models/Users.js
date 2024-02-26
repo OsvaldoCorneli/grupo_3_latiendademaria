@@ -70,7 +70,12 @@ const cols = {
    admin:{
     type: dataTypes.BOOLEAN,
     allowNull: true,
-   }
+   },
+   carrito: {
+    type: dataTypes.JSON,
+    allowNull: true,
+    defaultValue: [] 
+}
 
 }
 
