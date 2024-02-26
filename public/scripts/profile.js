@@ -129,10 +129,11 @@ buttonDetail.forEach(button => {
 const btnFormCategory = document.querySelector('button#category')
 btnFormCategory.addEventListener('click', (e) => {
     e.preventDefault();
+    btnFormCategory.disabled = true
     const container = document.createElement('div')
     //container.classList.add('detail', 'category')
     let formulario = `<button id="closeCategory" class="delete">X</button>
-        <b>Crear Categoria</b>
+        <b>Nueva Categoria</b>
         <form id="newCategory" method="POST" action="/api/categories">
             <label for="name">Nombre:</label>
             <input type="text" id="name" name="name" required/>
@@ -159,7 +160,8 @@ btnFormCategory.addEventListener('click', (e) => {
     })
     const closeButton = document.querySelector('button#closeCategory')
     closeButton.addEventListener('click', () => {
-        closeButton.parentNode.remove()
+        closeButton.parentNode.remove();
+        btnFormCategory.disabled = false
     })
     window.onkeyup = (e) => {
         if (e.key == "Escape") {

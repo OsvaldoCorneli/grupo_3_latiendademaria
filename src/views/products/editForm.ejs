@@ -64,21 +64,33 @@
                         <% }) %>
                     </span>
 
-                    <label for="line"><b>Linea:</b></label>
-                    <select id="line" name="line">
-                        <option value="sublimada" <%= productEdit.line === "sublimada" ? "selected" : null %>>Sublimada</option>
-                        <option value="artesanal" <%= productEdit.line === "artesanal" ? "selected" : null %>>Artesanal</option>
-                    </select>
+                    <label for="line"><b>Linea:</b>
+                        <input type="radio" id="line" name="line" value="sublimada" <% if (productEdit.line == 'sublimada') { %>
+                            <%= checked="checked" %>
+                            <% } %>>Sublimada
+                        </input>
+                        <input type="radio" id="line" name="line" value="artesanal" <% if (productEdit.line == 'artesanal') { %>
+                            <%= checked="checked" %>
+                            <% } %>>Artesanal
+                        </input>
+                    </label>
                     <% if (locals.errors && errors.line) { %>
                         <p class="errors"><%= errors.line.msg %></p>
                     <% } %>
                     
                     <label for="category"><b>Categoria:</b>
-                        <% categorias.forEach(({id,name}) => { %>
+                        <select id="category" name="category">
+                            <% categorias.forEach(({id,name}) => { %>
+                                <option value="<%= id %>" 
+                                <% if (id == productEdit.categories?.id || id == productEdit?.category ) { %> <%= "selected" %> <% } %>>
+                                <%= name %></option>
+                        <% }) %>
+                        </select>
+                        <!-- <% categorias.forEach(({id,name}) => { %>
                                 <input id="category" type="radio" name="category" value="<%= id %>" 
                                 <% if (id == productEdit.categories?.id || id == productEdit?.category ) { %> <%= checked="checked" %> <% } %>>
                                 <%= name %></input>
-                        <% }) %>
+                        <% }) %> -->
                     </label>
                     <label for="color"><b>Colores:</b></label>
                     <div class="container-colorinputs">
