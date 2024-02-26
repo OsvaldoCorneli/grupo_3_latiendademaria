@@ -56,7 +56,7 @@
                 <section class="pagination">
                     <a class="arrow-prev1"><span class="arrow-cards"></span></a>
                     <% for (let p = 1; p <= Math.ceil(productos.length/10); p++ ) { %>
-                        <a id="page"><%= p %></a>
+                        <a id="page" class=<%= p == 1? "currentPage" : "" %>><%= p %></a>
                     <% } %>
                     <a class="arrow-next1"><span class="arrow-cards"></span></a>
                 </section>

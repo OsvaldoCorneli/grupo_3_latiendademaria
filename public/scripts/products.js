@@ -8,30 +8,37 @@ window.onload = () => {
         anchor.addEventListener('click', async (e) => {
             e.preventDefault();
             let page = e.target.innerText;
+            document.querySelector('.currentPage').classList.toggle('currentPage')
+            e.target.classList.toggle('currentPage')
             let perPage = 12;
             let query = location.search.includes('?')? location.search : '?';
             const data = await fetchData(`/api/products${query}&page=${page}&perPage=${perPage}`);
-            console.log(data)
             articles.forEach((element,i) => {
                 let [t0,titulo,t1,anchorImagen,t2,precio,t3,colores,t4 ] = element.childNodes;
                 if (+i >= data.length) {
                     element.style.display = 'none'
                 } else {
-                    let {categories, colors, created_at, id, images, line, name, price, updated_at} = data[i]
+                    const {categories, colors, created_at, id, images, line, name, price, updated_at} = data[i]
                     element.style.display = 'flex'
                     titulo.innerHTML = name;
                     anchorImagen.href = `/products/${id}`
                     anchorImagen.firstChild.src = images[0].pathName
-                    precio.innerHTML = price;
-                    Array.from(colores).forEach((element,i) => {
-                        
+                    precio.innerHTML = `$ ${price}`;
+                    Array.from(colores.childNodes).forEach((color,c) => {
+                        if (c % 2 != 0) {
+                            if (colors[Math.floor(c/2)]) {
+                                color.style.display = 'flex'
+                                color.style.backgroundColor = colors[Math.floor(c/2)].color.hex
+                                color.style.color = colors[Math.floor(c/2)].color.hex
+                            } else {
+                                color.style.display = 'none'
+                            }
+                        }
                     })
                 }
             })
         })
     })
-    //const data = await fetchData()
-
 };
 
 async function fetchData(endpoint, body) {

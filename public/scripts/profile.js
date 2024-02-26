@@ -125,3 +125,47 @@ buttonDetail.forEach(button => {
         detallePayment(+e.target.innerText)
     });
 });
+
+const btnFormCategory = document.querySelector('button#category')
+btnFormCategory.addEventListener('click', (e) => {
+    e.preventDefault();
+    const container = document.createElement('div')
+    //container.classList.add('detail', 'category')
+    let formulario = `<button id="closeCategory" class="delete">X</button>
+        <b>Crear Categoria</b>
+        <form id="newCategory" method="POST" action="/api/categories">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name" required/>
+            <button id="postCategory" class="button">Crear</button>
+        </form>`;
+    container.insertAdjacentHTML('afterbegin', formulario)
+    btnFormCategory.parentNode.appendChild(container)
+    const form = document.querySelector('form#newCategory')
+    form.addEventListener('submit', async (e) => {
+        try {
+            e.preventDefault();
+            const body = {
+                name: form.name.value
+            }
+            const data = await fetchData(`/api/categories`, body)
+            if (data) {
+                alert('Categoria creada')
+                const closeButton = document.querySelector('button#closeCategory')
+                closeButton.click()
+            }
+        } catch (error) {
+            alert(error.message)
+        }
+    })
+    const closeButton = document.querySelector('button#closeCategory')
+    closeButton.addEventListener('click', () => {
+        closeButton.parentNode.remove()
+    })
+    window.onkeyup = (e) => {
+        if (e.key == "Escape") {
+            closeButton.click()
+        }
+    }
+})
+
+
