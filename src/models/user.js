@@ -122,32 +122,58 @@ module.exports = {
     cartAdd: async function(data){
          
         try {
-            console.log("data",data)
             const user = await db.Users.findByPk(data.id,{raw: true})
-            console.log("usuario",user)
+            
             const cart = {
                 id: +data.body.id,
                 cantidad: +data.body.cantidad,
                 color: data.body.color || null
             }
+            
             if(!user) throw new Error ("Usuario no encontrado")
-
-            console.log("carrito", user.carrito)
-
-            if(user.carrito == null){
-                console.log("ingreso null")
+            if(user.carrito == null){ 
                 user.carrito = [cart]
             }
             else{
-                user.carrito.push(cart);
-                console.log("carrito else",user.carrito)
+                for(let i=0; i<user.carrito.length; i++) {
+                    console.log(user.carrito[i].id == data.body.id && user.carrito[i].color == data.body.color)
+                    if(user.carrito[i].id == data.body.id && user.carrito[i].color === data.body.color){
+                         return false
+                    }
+                } user.carrito.push(cart);
             }
 
             const userUpdate = await db.Users.update(user,{where:{id:data.id}})
-            console.log("userup", userUpdate)
+            if(userUpdate){
+                return user
+            }
+            else{
+                throw new Error ("No se agrego correctamente")
+            }
+
         
         } catch (error) {
             return error
         }
+    },
+    cartDelete: async function(data){
+        try {
+            const user = await db.Users.findByPk(data.idUser);
+    
+            if (!user) {
+                throw new Error("Usuario no encontrado");
+            }
+    
+            const newCart = user.carrito.filter(element => element.id !== data.idProduct && element.color !== data.color);
+            
+            await user.update({ carrito: newCart });
+    
+            return { success: true, message: "Producto eliminado del carrito correctamente" };
+
+        } catch (error) {
+
+            return { success: false, message: error };
+        }
     }
+    
 }

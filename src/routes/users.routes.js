@@ -22,7 +22,8 @@ router.get('/restore', users.getRestoreUser);
 router.get('/profile', users.profile);
 
 router.route('/cart/:id') 
-   .post(users.addCart);
+   .post(users.addCart)
+   .delete(users.deleteCart);
 
 router.get('/:id/update', users.getUpdateForm);
 router.put('/:id/update', upload.any(), validacionForm.editUser(), users.putUpdateForm);

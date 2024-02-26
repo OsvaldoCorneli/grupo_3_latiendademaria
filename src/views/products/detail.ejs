@@ -8,6 +8,11 @@
     <%- include('../partials/navbar.ejs') %>
     <main>
         <% let { id, name, images, price ,stock, description, colors, categories } = detalle; %>
+        <div class="pop" style="display: none">
+             <h3>Agrego con exito <%= name %> al carrito </h3>
+             <button>ir al carrito</button>
+             <button> seguir comprando</button>
+        </div>
         <article>
             <div class="imagenes">
                 <% images.forEach((img) => { %>
@@ -41,9 +46,9 @@
                     <a onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+</a>
                 </label>
                 <span class="color"> Color:
-                <% colors.forEach(({stock, color}) => { let background = `background-color:${color.hex};color:${color.hex};border-radius:50%; border:0.1px-solid-black;;` %>
+                <% colors.forEach(({stock, color},index) => { let background = `background-color:${color.hex};color:${color.hex};border-radius:50%; border:0.1px-solid-black;;` %>
                     <label for=<%= color.name %>><i style=<%= background %>>oo</i></label>
-                    <input id=<%= color.name %> type="radio" name="color" value=<%= color.id %>/>
+                    <input id="<%= color.name %>" type="radio" name="color" value="<%= color.id %>" <%= index === 0 ? 'checked' : '' %> />
                 <% })%>
                 </span>
                 <% if (user) { %>

@@ -117,7 +117,33 @@ module.exports = {
         res.render('404notfound',{url: req.url})
     },
     addCart: async function(req,res){
-       const response = await users.cartAdd({body: req.body, id: req.session?.user.id})
+        try {
+            console.log("en addCart",req.body)
+            const response = await users.cartAdd({body: req.body, id: req.session?.user.id})
+          if(response){
+            res.status(200).send("Producto agregado correctamente")
+          }
+          else{
+            res.status(201).send("el producto ya existe en el carrito")
+          }
+        } catch (error) {
+            return error
+        }
        
+
+       
+    },
+    deleteCart: async function(req, res){
+        try {
+            const response = await users.cartDelete({idUser: req.session?.user.id, idProduct: req.params.id, color: req.body.color});
+    
+            if(response.success){
+                res.status(201).send("producto eliminado del carrito")
+            } 
+        } catch (error) {
+            console.error("Error al eliminar producto del carrito:", error);
+            res.redirect("/error"); r
+        }
     }
+    
 }

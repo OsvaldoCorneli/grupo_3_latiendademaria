@@ -12,7 +12,7 @@
                 </tr>
             <% carrito.forEach(el => { %>
                 <tr>
-                    <td id="X">X</td>
+                    <td id="X" onclick="eliminarProducto('<%= el.id %>', '<%= el.colorSelected %>')">X</td>
                     <td ><img src="<%= el.images[0] %>" alt="<%= el.name %>"/></td>
                     <td id="product"><%= el.name %></td>
                     <td class="number"><%= el.price %></td>

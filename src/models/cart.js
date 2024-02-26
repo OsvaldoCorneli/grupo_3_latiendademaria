@@ -3,7 +3,7 @@ const path = require('path');
 
 const products = require('./products')
 const users = require('./user')
-
+let idcont = 0
 
 module.exports = {
     cart: async function (userId) {
@@ -16,11 +16,13 @@ module.exports = {
                     const producto = await products.detail(prod.id);
                     return {
                         ...producto.dataValues,
-                        cantidad: prod.cantidad
+                        cantidad: prod.cantidad,
+                        colorSelected: prod.color
                     };
                 }));
     
                 user.carrito = cartDetails;
+                
                  return user;
             } else {
                 user.carrito = []

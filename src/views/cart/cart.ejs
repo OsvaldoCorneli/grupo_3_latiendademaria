@@ -15,5 +15,36 @@
         <script src="\scripts\cart.js"></script>
     </main>
     <%- include('../partials/footer.ejs') %>
+    
+<script>
+    function eliminarProducto(id, color) {
+     console.log(id)
+     console.log(color)
+     if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
+         fetch(`/users/cart/${id}`, {
+             method: 'delete',
+             headers: {
+                 'Content-Type': 'application/json'
+             },
+             body: JSON.stringify({
+                 color: color
+             })
+         })
+         .then(response => {
+             if (!response.ok) {
+                 throw new Error(`Error al eliminar el producto: ${response.status}`);
+             }
+             if(response.status === 201){
+                window.location.href = "/cart"
+             }
+         })
+         .catch(error => {
+             console.error('Error al eliminar el producto:', error);
+         });
+     }
+ }
+ 
+ </script>
 </body>
+
 </html>

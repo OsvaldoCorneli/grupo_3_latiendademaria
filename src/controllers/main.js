@@ -37,7 +37,7 @@ module.exports = {
           res.redirect("/")}
         else{  
         const cartDetail = await cart.cart(req.session.user?.id)
-        console.log("CARRITO", cartDetail)
+      
         if (cartDetail) { 
             res.render('cart/cart', {cartDetail: cartDetail})
         } else {
