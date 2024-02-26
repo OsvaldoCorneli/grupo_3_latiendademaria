@@ -59,10 +59,10 @@ form.addEventListener('submit', (e) => {
     hasta = hasta? hasta : new Date(2023,11,31,0,0,0).toISOString().split('T')[0];
     form.desde.value = desde
     form.hasta.value = hasta
-    fetch(`http://${host}/payment?desde=${desde}&hasta=${hasta}&estado=${estado}`)
+    fetch(`http://${host}/api/payment?desde=${desde}&hasta=${hasta}&estado=${estado}`)
         .then((response) => response.json())
         .then(({grafico, data, topUser}) => {
-            if (data.length == 0) throw Error
+            if (data.length == 0) throw alert('No Hay Registros para la consulta')
             new Chart("paymentChart", {
                 type: "line",
                 data: {
@@ -125,11 +125,13 @@ form.addEventListener('submit', (e) => {
                 })
             })
         })
-    .catch(error => {console.log(error); alert(error)})
+    .catch(error => {
+        console.log(error);
+    })
 })
 
 function detallePayment(id) {
-    fetch(`http://${host}/payment/${id}`)
+    fetch(`http://${host}/api/payment/${id}`)
     .then((response) => response.json())
     .then(({id,total,status,created_at,user,products}) => {
         const fecha = new Date(created_at)

@@ -3,7 +3,6 @@ const router = express.Router();
 const users = require('../controllers/user');
 const validacionForm = require('../middlewares/validacionForm') 
 const upload = require('../middlewares/multerMid');
-const {check, validationResult} = require('express-validator')
 
 const db = require("../database/models")
 

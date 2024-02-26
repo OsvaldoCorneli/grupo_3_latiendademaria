@@ -1,3 +1,4 @@
+<script src="\scripts\profileAdmin.js"></script>
 <h2>Mis Datos</h2>
 <section class="profile">
     <% let { id, nombre, apellido, email, calle, calleNumero, provincia, imagen, codigoPostal, piso, departamento } = userData %>
@@ -22,8 +23,18 @@
 </section>
 <h2>Mis Productos</h2>
 
-<section class="productos">
-    <button class="create"><a href="/products/create">Crear Producto</a></button>
+<section class="payments">
+    <span>
+        <button class="create"><a href="/products/create">Crear Producto</a></button>
+        <button id="category" class="create">Crear Categoria</button>
+    </span>
+    <section class="pagination">
+        <span><a class="arrow-prev1 arrow-cards"></a></span>
+        <% for (let p = 1; p <= Math.ceil(productos.length/10); p++ ) { %>
+            <span class="<%= p == 1? "currentPage" : "" %>"><a id="page"><%= p %></a></span>
+        <% } %>
+        <span><a class="arrow-next1 arrow-cards"></a></span>
+    </section>
     <span class="header">
         <p>imagen</p>
         <p class="name">Nombre</p>
@@ -33,7 +44,8 @@
         <p class="stock">Stock</p>
         <p class="action">Accion</p>
     </span>
-<% productos.forEach((producto) => { %>
+<% productos.slice(0,10).forEach((producto) => { %>
     <%- include('./card.ejs', {producto}) %>
 <% }) %>
+<small id="paginado">pagina <b id="currentPage">1</b> de <b><%= Math.ceil(productos.length/10) %></b> mostrando 10 elementos por pagina</small>
 </section>

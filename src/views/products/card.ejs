@@ -4,8 +4,8 @@
     <a href="/products/<%= id %>"><img src=<%= images[0].pathName %> alt=<%= name %>/></a>
     <p class="number" style="text-align:center">$<%= price %></p>
     <ul class="color">Colores:
-        <% colors.forEach(({stock, color}) => { let background = `background-color:${color.hex};color:${color.hex};border-radius:50%; border:0.1px-solid-black;;` %>
-            <li><i style=<%= background %>>oo</i></li>
+        <% colors.forEach(({stock, color}) => { let background = `background-color:${color.hex};color:${color.hex};border-radius:50%;` %>
+            <li style=<%= background %>>oo</li>
         <% }) %>
     </ul>
 </article>

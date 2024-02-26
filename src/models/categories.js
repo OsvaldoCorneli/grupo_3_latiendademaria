@@ -29,5 +29,20 @@ module.exports = {
         } catch (error) {
             return error
         }
+    },
+    detail: async function (id) {
+        try {
+            return await db.Categories.findByPk(+id)
+        } catch (error) {
+            return error
+        }
+    },
+    create: async function(body) {
+        try {
+            const newCat = await db.Categories.create({...body})
+            return newCat
+        } catch (error) {
+            return error
+        }
     }
 }
