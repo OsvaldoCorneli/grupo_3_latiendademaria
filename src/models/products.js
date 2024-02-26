@@ -108,8 +108,8 @@ module.exports = {
                 ],
                 where: condition.products,
                 attributes: {exclude: ['category_id']},
-                ...pagination,
-                logging: false
+                logging: false,
+                ...pagination
             })
         } catch (error) {
             return error
