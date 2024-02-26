@@ -8,11 +8,7 @@
     <%- include('../partials/navbar.ejs') %>
     <main>
         <% let { id, name, images, price ,stock, description, colors, categories } = detalle; %>
-        <div class="pop" style="display: none">
-             <h3>Agrego con exito <%= name %> al carrito </h3>
-             <button>ir al carrito</button>
-             <button> seguir comprando</button>
-        </div>
+        
         <article>
             <div class="imagenes">
                 <% images.forEach((img) => { %>
@@ -52,7 +48,7 @@
                 <% })%>
                 </span>
                 <% if (user) { %>
-                    <button id="botonCarrito" class="presionado" type="submit">Agregar a carrito</button>
+                    <button id="botonCarrito1" class="presionado" onclick="event.preventDefault(); addCart('<%=id%>')">Agregar a carrito</button>
                 <% } else { %>
                     <button id="botonCarrito" class="presionado"  onclick="event.preventDefault(); redireccionarAlogin()" >Agregar a carritos</button>
                 <% } %>
@@ -72,8 +68,59 @@
             const response = confirm("Debe iniciar sesion para agregar el producto al carrito")
             if(response){
                window.location.href = "/users/login"
-            }
+            } 
         }
+
+        function addCart(id) {
+    const colorInput = document.querySelector(".color input:checked");
+    const cantidadInput = document.querySelector("#cantidad");
+
+    if (!colorInput || !cantidadInput) {
+        console.error('No se encontraron elementos de entrada de color o cantidad');
+        return;
+    }
+    const color = colorInput.value;
+    const cantidad = cantidadInput.value;
+
+        fetch(`/users/cart/${id}`, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: id,
+                cantidad: cantidad,
+                color: color
+            })
+        })
+        .then(response => {
+            if (response.status === 500) {
+                throw new Error(`Error al agregar el producto: ${response.status}`);
+            }else{
+           return response.json()
+        }})
+        .then(respuesta => {
+
+            if(respuesta.success){
+              if(confirm(`${respuesta.message}, ¿Le gustaría ir al carrito?`)){
+                  window.location.href = "/cart"
+              }
+
+            }
+            else{
+                alert(respuesta.message)
+            }
+        })
+        .catch(error => {
+            console.error('Error al agregar el producto:', error);
+        });
+    }
+
+
+         
+        
+        
+
      </script>       
 </body>
 </html>

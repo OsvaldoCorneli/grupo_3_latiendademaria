@@ -144,7 +144,7 @@ module.exports = {
 
             const userUpdate = await db.Users.update(user,{where:{id:data.id}})
             if(userUpdate){
-                return user
+                return true
             }
             else{
                 throw new Error ("No se agrego correctamente")

@@ -119,14 +119,15 @@ module.exports = {
     addCart: async function(req,res){
         try {
             const response = await users.cartAdd({body: req.body, id: req.session?.user.id})
+    
           if(response){
-            res.status(200).send("Producto agregado correctamente")
+            res.status(200).json({ success: true, message: 'Producto agregado al carrito correctamente' });
           }
           else{
-            res.status(201).send("el producto ya existe en el carrito")
+            res.status(409).json({ success: false, message: 'El producto con ese color ya fue agregado al carrito, seleccione otro color' });
           }
         } catch (error) {
-            return error
+            res.status(500).json({ success: false, message: error });
         }
        
 
