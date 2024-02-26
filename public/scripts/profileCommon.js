@@ -43,6 +43,13 @@ window.onload = () => {
         }
         }))
     })
+    let buttonDetail = Array.from(document.querySelectorAll('button#detail'));
+    buttonDetail.forEach(button => {
+    button.addEventListener('click', (e) => {
+        e.preventDefault();
+        detallePayment(+e.target.innerText)
+    });
+});
 };
 
 async function fetchData(endpoint, body) {
@@ -81,7 +88,7 @@ async function detallePayment(paymentId) {
                 <b>Total:</b><p class="number">${total}</p>\n
             </span>\n
             <span>\n
-                <b>Estado de pago:</b><i class="${status}">${status}</i>\n
+                <b>Estado de pago:</b><p class="${status}">${status}</p>\n
             </span>\n
             <span>\n
                 <b>Usuario:</b>(${user.id})${user.apellido}, ${user.nombre}</i>\n
@@ -117,12 +124,4 @@ async function detallePayment(paymentId) {
         alert(error.message)
     }
 };
-
-let buttonDetail = Array.from(document.querySelectorAll('button#detail'));
-buttonDetail.forEach(button => {
-    button.addEventListener('click', (e) => {
-        e.preventDefault();
-        detallePayment(+e.target.innerText)
-    });
-});
 
