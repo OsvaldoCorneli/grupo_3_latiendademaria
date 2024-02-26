@@ -136,7 +136,6 @@ module.exports = {
             }
             else{
                 for(let i=0; i<user.carrito.length; i++) {
-                    console.log(user.carrito[i].id == data.body.id && user.carrito[i].color == data.body.color)
                     if(user.carrito[i].id == data.body.id && user.carrito[i].color === data.body.color){
                          return false
                     }

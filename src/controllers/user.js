@@ -118,7 +118,6 @@ module.exports = {
     },
     addCart: async function(req,res){
         try {
-            console.log("en addCart",req.body)
             const response = await users.cartAdd({body: req.body, id: req.session?.user.id})
           if(response){
             res.status(200).send("Producto agregado correctamente")
