@@ -17,6 +17,7 @@
     <%- include('../partials/footer.ejs') %>
     
 <script>
+
     function eliminarProducto(id, color) {
      if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
          fetch(`/users/cart/${id}`, {
@@ -54,6 +55,50 @@
          });
      }
  }
+   
+   
+ function restarCantidad(id, color){
+    const cantidad = document.querySelector(`#product-${id}-${color} #cantidad`).value
+
+    if(parseInt(cantidad) >= 1){
+        
+        const precio = document.querySelector(`#product-${id}-${color} #precio`).innerHTML
+        let subTotal = document.querySelector(`#product-${id}-${color} #subtotalproduct`)
+        const total = document.querySelector("#totales b")
+        const cantidadTotal = document.querySelector("#cantidadTotal")
+        cantidadTotal.innerHTML = parseInt(cantidadTotal.innerHTML) - 1
+        subtotal = parseFloat(precio)*parseInt(cantidad)
+        subTotal.innerHTML = subtotal
+        const newTotal = parseFloat(total.innerHTML) - parseFloat(precio)
+        console.log(newTotal)
+        total.innerHTML = newTotal.toFixed(2);
+
+    }
+        
+
+ }
+
+ function sumarCantidad(id, color){
+    const cantidad = document.querySelector(`#product-${id}-${color} #cantidad`).value
+    if(parseInt(cantidad) >= 1){
+        
+          
+        const precio = document.querySelector(`#product-${id}-${color} #precio`).innerHTML
+        let subTotal = document.querySelector(`#product-${id}-${color} #subtotalproduct`)
+        const total = document.querySelector("#totales b")
+        const cantidadTotal = document.querySelector("#cantidadTotal")
+        cantidadTotal.innerHTML = parseInt(cantidadTotal.innerHTML) + 1
+        subtotal = parseFloat(precio)*parseInt(cantidad)
+        subTotal.innerHTML = subtotal.toFixed(2)
+        const newTotal = parseFloat(total.innerHTML) + parseFloat(precio)
+        console.log(newTotal)
+        total.innerHTML = newTotal.toFixed(2);
+
+    }}
+        
+ 
+   
+   
  
  </script>
 </body>
