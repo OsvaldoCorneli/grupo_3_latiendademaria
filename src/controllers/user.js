@@ -48,7 +48,7 @@ module.exports = {
                 body: req.body,
                 errors: errores.mapped()
             })
-        }
+        } 
     },
     logout: function (req,res) {
         delete req.session.user
@@ -141,6 +141,22 @@ module.exports = {
             console.error("Error al eliminar producto del carrito:", error);
             res.redirect("/error"); r
         }
+    },
+    
+    deleteUsers: async function(req,res){
+        try {
+            const response = await users.deleteUser(req.session?.user.id, req.body.password)
+            if(response.success){
+               res.status(201).json(response);
+            }
+            else{
+                res.status(402).json(response);
+            }
+    
+        } catch (error) {
+            res.status(500).json({error: error});
+        }
+     
     }
     
 }

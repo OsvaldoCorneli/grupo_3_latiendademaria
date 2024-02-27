@@ -173,6 +173,22 @@ module.exports = {
 
             return { success: false, message: error };
         }
-    }
+    },
+    deleteUser: async function(id,password){
+        try {
+            const user = await db.Users.findByPk(id,{raw:true})
+            const checkPass = bcrypt.compareSync(password, user.password)
+            if(checkPass){
+                const deleted = await db.Users.destroy({where:{id}})
+                if(deleted == 1){
+                    return {success: true, message: "Eliminado correctamente"}
+                }
+                else{ return {success: false, message: "No se pudo eliminar"}}
+            }else{return {success: false, message: "La contraseña es incorrecta"}}
+        } catch (error) {
+             return error
+        }
+       
+      }
     
 }
