@@ -11,7 +11,6 @@
             <button id="botonSearchBar" type="submit">Buscar</button>
         </form>
         <main>
-            
             <section class="filter">
                 <p>Filtros</p>
                 <form action="/products/filter" method="GET">
@@ -53,27 +52,22 @@
                 </div>
             </form>
             </section>
-            
             <span class="productos">
-                
-            <section class="cards">
-                <% productos.forEach((producto) => { %>
-                    <%- include('./card.ejs', {producto}) %>
-                <% }) %>
-            </section>
+                <section class="pagination">
+                    <a class="arrow-prev1"><span class="arrow-cards"></span></a>
+                    <% for (let p = 1; p <= Math.ceil(productos.length/10); p++ ) { %>
+                        <a id="page" class=<%= p == 1? "currentPage" : "" %>><%= p %></a>
+                    <% } %>
+                    <a class="arrow-next1"><span class="arrow-cards"></span></a>
+                </section>
+                <section class="cards">
+                    <% productos.slice(0,12).forEach((producto) => { %>
+                        <%- include('./card.ejs', {producto}) %>
+                    <% }) %>
+                </section>
         </span>
-        
         </main>
-
-        <section class="pagination">
-            <span><a class="arrow-prev1 arrow-cards"></a></span>
-            <span><a>1</a></span>
-            <span><a>2</a></span>
-            <span><a>3</a></span>
-            <span><a>4</a></span>
-            <span><a>5</a></span>
-            <span><a class="arrow-next1 arrow-cards"></a></span>
-        </section>
         <%- include('../partials/footer.ejs') %>
+        <script src="\scripts\products.js"></script>
     </body>
 </html>

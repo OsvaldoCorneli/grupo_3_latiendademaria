@@ -10,7 +10,7 @@
             <p>Creacion de Producto</p>
         </span>
         <form class="form-producto" action="/products/create" method="POST" enctype="multipart/form-data">
-            <label for="name">Nombre:</label>
+            <label for="name"><b>Nombre:</b></label>
                 <input class="inputForm" 
                 id="name" 
                 type="text" 
@@ -22,7 +22,7 @@
             <% if (locals.errors && errors.name) { %>
                 <p class="errors"><%= errors.name.msg %></p>
             <% } %>
-            <label for="description">Descripcion:</label>
+            <label for="description"><b>Descripcion:</b></label>
             <textarea 
                 id="description" 
                 name="description"
@@ -52,27 +52,33 @@
                     <img src="<%= body.image %>" alt="">
                 <% }) %>
             <% } %>
-            <label for="line">Linea:</label>
-            <select id="line" name="line" required>
-                <option value="sublimada">Sublimada</option>
-                <option value="artesanal">Artesanal</option>
-            </select>
+            <label for="line"><b>Linea:</b>
+                <label><input id="line" name="line" type="radio" value="sublimada" <%= body.line == "sublimada" && "checked" %>>Sublimada</input></label>
+                <label><input id="line" name="line" type="radio" value="artesanal" <%= body.line == "artesanal" && "checked" %>>Artesanal</input></label>
+            </label>
             <% if (locals.errors && errors.line) { %>
                 <p class="errors"><%= errors.line.msg %></p>
             <% } %>
-            <label for="category">Categoria:
-                <% categorias.forEach(({id,name}) => { %>
+            <label for="category"><b>Categoria:</b>
+                <select id="category" name="category" required>
+                    <% categorias.forEach(({id,name}) => { %>
+                        <option value="<%= id %>" <%= body.category == id && "checked" %>>
+                        <%= name %>
+                        </option>
+                    <% }) %>
+                </select>
+                <!-- <% categorias.forEach(({id,name}) => { %>
                     <label>
                         <input type="radio" name="category" value="<%= id %>" <%= body.category == id && "checked" %> required/>
                     <%= name %>
                     </label>
-                <% }) %>
+                <% }) %> -->
             </label>
             <% if (locals.errors && errors.category) { %>
                 <p class="errors"><%= errors.category.msg %></p>
             <% } %>
             
-            <label for="color">Colores: </label>
+            <label for="color"><b>Colores:</b> </label>
             <div class="container-colorinputs"> 
             <% if (body.color) { %> 
                 <% if (typeof(body.color) == 'string') { %>

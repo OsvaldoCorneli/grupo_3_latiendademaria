@@ -6,9 +6,9 @@ let storage = multer.diskStorage({
 		let pathImagen;
 		console.log(req.url)
 		if (req.url == '/register' || req.url.includes('/update?_method=PUT') ) {
-			pathImagen = path.join(__dirname,`../public/images/users`)
+			pathImagen = path.join(__dirname,`../../public/images/users`)
 		} else {
-			pathImagen = path.join(__dirname,`../public/images/uploads`)
+			pathImagen = path.join(__dirname,`../../public/images/uploads`)
 		}
 		cb(null, pathImagen)
 	},

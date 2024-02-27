@@ -134,7 +134,7 @@ module.exports = {
             const {id} = req.params
             const responseDelete = await products.remove(+id)
             if (responseDelete) {
-                res.status(200).redirect('/products');
+                res.status(200).redirect('/users/profile');
             }
         } catch (error) {
             res.status(500).send(error.message)

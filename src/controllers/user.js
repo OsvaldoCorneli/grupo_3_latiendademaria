@@ -18,9 +18,7 @@ module.exports = {
             res.render('users/profile', {
                 userData: await users.detail(userId),
                 productos: await products.all(),
-                // historialPagos: await payments.all(userId)
-                historialPagos: null
-
+                historialPagos: await payments.userDetail(userId, 5, 1)
             })
         } catch (error) {
             res.status(500).json(error.message)
@@ -108,7 +106,6 @@ module.exports = {
         } catch (error) {
             throw new Error(error)
         }
-      
     },
     getRestoreUser: function (req,res) {
         res.render('users/restore')

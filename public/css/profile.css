@@ -6,35 +6,92 @@
 body {
     margin-bottom: 4.5vh;
 }
-
+h3 {
+    margin: 10px 0px 10px 0px;
+}
 main {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
+.pagination {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 0px;
+}
 
+.pagination span {
+    border: solid 1px black;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.pagination span:hover {
+    box-shadow: 0px 5px black;
+}
+
+.pagination .currentPage {
+    border: solid 3px black;
+}
+
+.arrow-cards {
+    border: solid #32A97F;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 4px;
+}
+
+.arrow-prev1 {
+    margin-top: 10px;
+    margin-left: 5px;
+    transform: translateY(-50%) rotate(135deg);
+}
+
+.arrow-next1 {
+    margin-top: 10px;
+    margin-right: 5px;
+    transform: translateY(-50%) rotate(-45deg);
+}
 section.profile {
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     gap: 10px;
-    text-wrap: balance;
 }
 section.profile img {
     width: 150px;
     border-radius: 50%;
     border: solid 1px black;
 }
-section.productos {
+section.profile > .userData {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-evenly;
+    gap: 5px;
+}
+section.profile > .userData > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 5px;
+}
+section.payments {
     width: 100%;
     display: flex;
     flex-direction: column;
+    text-align: center;
     gap: 10px;
 }
 
-section.productos > .header{
+section.payments > .header{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -46,7 +103,7 @@ section.productos > .header{
     text-wrap: nowrap;
 }
 
-section.productos > article{
+section.payments > article{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -56,40 +113,40 @@ section.productos > article{
     margin: 3px;
 }
 
-section.productos > article > img{
+section.payments > article > img{
     width: 50px;
     border-radius: 5px;
 }
 
-section.productos > article > ul{
+section.payments > article > ul{
     display: none;
 }
-section.productos > article > .category{
+section.payments > article > .category{
     display: none;
 }
-section.productos > .header > .color{
+section.payments > .header > .color{
     display: none;
 }
-section.productos > .header > .category{
+section.payments > .header > .category{
     display: none;
 }
-section.productos > .header > .name{
+section.payments > .header > .name{
     flex: 0 0 125px;
     text-align: center;
 }
 
-section.productos > article a.titulocard {
+section.payments > article a.titulocard {
     flex: 0 0 125px;
 }
-section.productos > article > .price {
+section.payments > article > .price {
     flex: 0 0 50px;
     text-align: center;
 }
-section.productos > article > .stock {
+section.payments > article > .stock {
     flex: 0 0 25px;
     text-align: center;
 }
-section.productos > article > span.actions {
+section.payments > article > span.actions {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -200,28 +257,28 @@ tr.article > td {
     font-size: 12px;
 }
 
-i.cancelado {
+p.cancelado {
     background-color: orangered;
     border-radius: 5px;
     padding: 5px;
     color: white;
     font-weight: bold;
 }
-i.rechazado {
+p.rechazado {
     background-color: red;
     border-radius: 5px;
     padding: 5px;
     color: white;
     font-weight: bold;
 }
-i.completado {
+p.completado {
     background-color: green;
     border-radius: 5px;
     padding: 5px;
     color: white;
     font-weight: bold;
 }
-i.enproceso {
+p.enproceso {
     background-color: orange;
     border-radius: 5px;
     padding: 5px;
@@ -272,6 +329,91 @@ td > img.product {
     font-size: 12px;
 }
 
+.button {
+    border-radius: 5px;
+    border: hidden;
+    padding: 5px;
+    background-color: #1259c3;
+    color: white;
+    width: fit-content;
+    transition: 500ms;
+}
+.button:hover {
+    background-color: #5394b0;
+}
+
+canvas {
+    min-width: 350px;
+}
+
+.detail {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(1,1,1,0.5);
+    backdrop-filter: blur(10px);
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    top: 1%;
+    z-index: 15;
+}
+
+.detail > div {
+    background-color: #efefef;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    gap: 5px;
+    padding: 5px;
+    flex-wrap: wrap;
+}
+.detail > div > span {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: space-around;
+    gap: 5px;
+}
+table > tbody tr th {
+    font-weight: bold;
+    background-color: #32A97F;
+    padding: 5px;
+    border-radius: 5px;
+    text-wrap: nowrap;
+}
+table > tbody > tr.subtitle td {
+    background-color: #32A97F;
+    padding: 5px;
+    border-radius: 5px;
+    text-wrap: nowrap;
+    text-align: center;
+}
+td {
+    border-bottom: solid 1px black;
+}
+
+tr:nth-child(odd) {
+    background-color: #efefef;
+    padding: 5px;
+    border-radius: 5px;
+}
+/* .hidethis {
+    display: none;
+} */
+
+tr.article {
+    padding: 5px;
+}
+
+tr.article > td {
+    font-size: 12px;
+}
+
+
 @media (min-width: 540px) {
     .portraitlayout {
         display: block;
@@ -282,10 +424,10 @@ td > img.product {
 }
 
 @media (min-width: 760px) {
-    section.productos {
+    section.payments {
         width: 90%;
     }
-    section.productos > article > ul{
+    section.payments > article > ul{
         display: inline-block;
         list-style: none;
         display: flex;
@@ -298,41 +440,41 @@ td > img.product {
         margin: 0px;
         padding: 0px;
     }
-    section.productos > .header > .name{
+    section.payments > .header > .name{
         display: inline-block;
         flex: 0 0 100px;
         text-align: center;
     }
-    section.productos > .header > .category{
+    section.payments > .header > .category{
         display: inline-block;
         flex: 0 0 50px;
         text-align: center;
     }
-    section.productos > article > .category{
+    section.payments > article > .category{
         display: inline-block;
         flex: 0 0 50px;
     }
-    section.productos > .header > .price {
+    section.payments > .header > .price {
         display: inline-block;
         flex: 0 0 50px;
         text-align: center;
     }
-    section.productos > article > ul > li{
+    section.payments > article > ul > li{
         border: solid 1px black;
         border-radius: 50%;
     }
-    section.productos > .header > .color{
+    section.payments > .header > .color{
         display: inline-block;
         flex: 0 0 50px;
     }
-    section.productos > a.titulocard {
+    section.payments > a.titulocard {
         flex: 0 0 150px;
     }
-    section.productos .price {
+    section.payments .price {
         flex: 0 0 100px;
         text-align: center;
     }
-    section.productos .actions {
+    section.payments .actions {
         flex: 0 0 70px;
     }
     .desktoplayout {

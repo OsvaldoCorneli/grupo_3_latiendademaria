@@ -19,16 +19,11 @@ module.exports = {
                 where: condition,
                 attributes: {exclude: ['user_id']},
                 logging: false,
-                raw: true  
+                raw: true
             })
             let grafico = await this.graficoVentas(desde,hasta,estado);
             let topUser = await this.topUser(desde,hasta,estado);
-            if (response.length > 0) {
-                return {grafico, data: response, topUser}
-            }
-            else {
-                throw Error
-            }
+            return {grafico, data: response, topUser}
         } catch (error) {
             return error
         }
@@ -51,11 +46,19 @@ module.exports = {
                 GROUP BY DATE_FORMAT(created_at, '%Y-%m-%d');`, {logging: false});
                 if (results.length == 0) {
                     sales.push({total: 0, fecha: dates[i]})
-                    if (i == dates.length-1) return sales
+                    if (i == dates.length-1) {
+                        if (sales.reduce((acum, {total}) => acum + Number(total),0) > 0) {
+                            return sales
+                        } else return []
+                    }
                     else continue
                 }
                 sales.push(results[0])
-                if (i == dates.length-1) return sales
+                if (i == dates.length-1) {
+                    if (sales.reduce((acum, {total}) => acum + Number(total),0) > 0) {
+                        return sales
+                    } else return []
+                }
             }
         } catch (error) {
             return error
@@ -105,6 +108,28 @@ module.exports = {
                 logging: false
             })
             return detail
+        } catch (error) {
+            return error
+        }
+    },
+    userDetail: async function (id,perPage,page) {
+        try {
+            const response = await db.Payments.findAll({
+                where: {user_id: +id},
+                attributes: {exclude: ['user_id']},
+                order: [['created_at', 'DESC']],
+                offset: ((page-1)*perPage),
+                limit: perPage,
+                logging: false,
+                raw:true
+            })
+            const maxPage = await db.Payments.findAll({where: {user_id: id}, logging: false})
+            return {
+                data: response,
+                page: page,
+                perPage: perPage,
+                maxPage: Math.ceil(maxPage.length/perPage)
+            }
         } catch (error) {
             return error
         }
