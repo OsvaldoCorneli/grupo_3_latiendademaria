@@ -1,0 +1,275 @@
+[
+    {
+        "id": 1,
+        "name": "Mates de madera",
+        "description": " descripcion Lorem ipsum dolor, sit amet consectetur adipisicing elit.\r\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \r\naliquam incidunt iste et sed libero a, nihil voluptate \r\ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Mates",
+        "line": "artesanal",
+        "stock": "10",
+        "image": [
+            "/images/uploads/image-1703994594448.jpeg",
+            "/images/uploads/image-1703994594449.jpg"
+        ],
+        "price": "6609.33",
+        "color": [
+            "#b22222",
+            "#663399",
+            "#00ffff"
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Mates de calabaza y cuero",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Mates",
+        "line": "artesanal",
+        "stock": 18,
+        "image": [
+            "https://http2.mlstatic.com/D_NQ_NP_2X_814598-MLA43768156184_102020-F.webp"
+        ],
+        "price": 4127.83,
+        "color": [
+            "#fffacd",
+            "#faebd7",
+            "#00ff7f"
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Estatuillas",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\r\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \r\naliquam incidunt iste et sed libero a, nihil voluptate \r\ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Estatuillas",
+        "line": "artesanal",
+        "stock": 3,
+        "image": [
+            "https://http2.mlstatic.com/D_NQ_NP_2X_611445-MLA49153801786_022022-F.webp"
+        ],
+        "price": 825.48,
+        "color": [
+            "#808080",
+            "#00ffff",
+            "#e0ffff"
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Cuadros",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Cuadros",
+        "line": "artesanal",
+        "stock": 15,
+        "image": [
+            "https://canvasbynumbers.es/cdn/shop/products/ezgif.com-gif-maker_40_9b05be40-d052-4411-871d-f3d9f2f378f7.jpg?crop=center&height=600&v=1668950492&width=600"
+        ],
+        "price": 3002.72,
+        "color": [
+            "#b22222",
+            "#ff1493",
+            "#00ffff"
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Tazas de cerámica",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Tazas",
+        "line": "sublimada",
+        "stock": 30,
+        "image": [
+            "https://d22fxaf9t8d39k.cloudfront.net/0e97fce301e0e550163ccdfb905f890410d5d4d7a0daa77d2f1c8879edf24c5281650.jpeg"
+        ],
+        "price": 7096.17,
+        "color": [
+            "#ffdab9",
+            "#ffdead",
+            "#D2B48C"
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Tazas de polimero",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Tazas",
+        "line": "sublimada",
+        "stock": 45,
+        "image": [
+            "https://sublitextil.com.ar/wp-content/uploads/2019/01/Taza-de-Polimero-Para-sublimar-Sublitex.jpg"
+        ],
+        "price": 3463.07,
+        "color": [
+            "#cd853f",
+            "#a9a9a9",
+            "#f5f5f5"
+        ]
+    },
+    {
+        "id": 7,
+        "name": "Botellas hoppy",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Botellas",
+        "line": "sublimada",
+        "stock": 6,
+        "image": [
+            "https://http2.mlstatic.com/D_NQ_NP_2X_802274-MLA54782633883_032023-F.webp"
+        ],
+        "price": 8016.62,
+        "color": [
+            "#FAF0E6",
+            "#EEE8AA",
+            "#fff8dc"
+        ]
+    },
+    {
+        "id": 8,
+        "name": "Botellas de aluminio",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Botellas",
+        "line": "sublimada",
+        "stock": 12,
+        "image": [
+            "https://cdn.elementi.com.ar/wp-content/uploads/2022/01/29191508/03-botella-aluminio-plata-sin-impresion.jpg"
+        ],
+        "price": 2790.11,
+        "color": [
+            "#b0e0e6",
+            "#cd5c5c",
+            "#32cd32"
+        ]
+    },
+    {
+        "id": 9,
+        "name": "Jarrón térmico",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Jarrón",
+        "line": "sublimada",
+        "stock": 11,
+        "image": [
+            "https://http2.mlstatic.com/D_NQ_NP_2X_890499-MLA72064176158_102023-F.webp"
+        ],
+        "price": 3030.63,
+        "color": [
+            "#e0ffff",
+            "#FFDAB9",
+            "#7b68ee"
+        ]
+    },
+    {
+        "id": 10,
+        "name": "Sublimate",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Mates",
+        "line": "sublimada",
+        "stock": 22,
+        "image": [
+            "https://i.etsystatic.com/28158696/r/il/22661c/3980682768/il_794xN.3980682768_ko98.jpg"
+        ],
+        "price": 2599.27,
+        "color": [
+            "#32cd32",
+            "#b0c4de",
+            "#ff4500"
+        ]
+    },
+    {
+        "id": 11,
+        "name": "Cuaderno tapa dura a5",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Cuaderno",
+        "line": "sublimada",
+        "stock": 20,
+        "image": [
+            "https://santeria.santuariodelujan.org.ar/wp-content/uploads/2023/07/Cuaderno-A5-1.jpg"
+        ],
+        "price": 7467.81,
+        "color": [
+            "#696969",
+            "#cd853f",
+            "#ffa07a"
+        ]
+    },
+    {
+        "id": 12,
+        "name": "Cuaderno tapa blanda a5",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Cuaderno",
+        "line": "sublimada",
+        "stock": 5,
+        "image": [
+            "https://http2.mlstatic.com/D_NQ_NP_2X_987102-MLA51617498795_092022-F.webp"
+        ],
+        "price": 8515.71,
+        "color": [
+            "#fffaf0",
+            "#FFFACD",
+            "#fafad2"
+        ]
+    },
+    {
+        "id": 13,
+        "name": "Libreta tapa dura a6",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Libreta",
+        "line": "sublimada",
+        "stock": 28,
+        "image": [
+            "https://i0.wp.com/papeleracontemporanea.com/wp-content/uploads/2019/12/Cuaderno-Kraft-A6.jpg?fit=800%2C800&ssl=1"
+        ],
+        "price": 4737.37,
+        "color": [
+            "#ff0000",
+            "#7cfc00",
+            "#f08080"
+        ]
+    },
+    {
+        "id": 14,
+        "name": "Agenda perpetua",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.\nCupiditate suscipit reiciendis perspiciatis ab, deleniti \naliquam incidunt iste et sed libero a, nihil voluptate \ntemporibus delectus vitae magni molestiae! Doloremque, hic?",
+        "category": "Agenda",
+        "line": "sublimada",
+        "stock": 1,
+        "image": [
+            "https://http2.mlstatic.com/D_NQ_NP_2X_813248-MLA72092373311_102023-F.webp"
+        ],
+        "price": 6416.26,
+        "color": [
+            "#ff8c00",
+            "#00fa9a",
+            "#ff0000"
+        ]
+    },
+    {
+        "id": 15,
+        "name": "mate pokebola",
+        "description": "mate impreso en 3D con motivo Pokemon, Pokebola",
+        "line": "sublimada",
+        "category": "Mates",
+        "color": [
+            "#8b0000",
+            "#ffdead",
+            "#6b8e23"
+        ],
+        "price": "10000",
+        "stock": 1,
+        "image": [
+            "/images/uploads/image-1702699424547.jpg"
+        ]
+    },
+    {
+        "id": 16,
+        "name": "Mate 3D Pokemon charmander",
+        "description": "Mate impreso en 3D con PLA/ABS con motivo de Pokemon nombre Charmander",
+        "line": "artesanal",
+        "category": "Mates",
+        "color": [
+            "#f8f8ff",
+            "#ffdab9",
+            "#a9a9a9"
+        ],
+        "price": "8500",
+        "stock": 1,
+        "image": [
+            "/images/uploads/image-1702744640465.jpg"
+        ]
+    }
+]

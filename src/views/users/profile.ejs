@@ -1,0 +1,68 @@
+<html lang="es">
+    <head>
+        <%- include('../partials/head.ejs') %>
+        <link href="\css\profile.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <%- include('../partials/navbar.ejs') %>
+    <main>
+        <% if (locals.login && userData.admin) { %>
+            <%- include('./partials/profileAdmin.ejs', {userData}) %>
+        <% } else if (locals.login) { %>
+            <%- include('./partials/profileCommon.ejs', {userData, historialPagos}) %>
+        <% } else { %>
+            <caption>Esta seccion es solo para usuarios registrados...</caption>
+            <a href="/users/register">Registrate</a> o <a href="/users/login">ingresá</a> si ya tienes cuenta
+        <% } %>
+    </main>
+    <%- include('../partials/footer.ejs') %>
+    <script>
+function eliminarUsuario(id) {
+    if (confirm("¿Está seguro/a de que desea eliminar su usuario?")) {
+        const password = document.querySelector("#inputPassword").value;
+        console.log(password)
+        if (password) { 
+            fetch(`/users/${id}/delete`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    password: password,
+                }),
+            })
+            .then(response => {
+                if(response.status == 500){
+                    throw new Error(response)
+                }
+                else{
+                    return response.json()
+                }
+            }).then(respuesta =>{
+                
+                if(respuesta.success){
+                    const enlaceCerrarSesion = document.getElementById('cerrarsesion');
+                    if (enlaceCerrarSesion) {
+                        enlaceCerrarSesion.click();
+                        alert(respuesta.message);
+                    }
+                    
+                }
+                else if(respuesta.message == "La contraseña es incorrecta"){
+                    alert(respuesta.message);
+                } else {
+                    alert(respuesta.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error al eliminar el usuario:', error.message);
+            });
+        } else {
+            console.error('Contraseña no proporcionada');
+        }
+    }
+}
+
+    </script>
+</body>
+</html>

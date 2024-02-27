@@ -7,7 +7,7 @@ body {
     margin-bottom: 4.5vh;
 }
 
-main{
+main {
     margin: 15px 0 0 0;
     display: flex;
     flex-direction: column;
@@ -17,8 +17,8 @@ main{
     font-family: 'Gidole';
     font-size: 1.2rem;
     border: hidden;
-
 }
+
 .login-modal {
     display: flex;
     flex-direction: column;
@@ -26,7 +26,6 @@ main{
     justify-content: center;
     gap: 10px;
     width: 100%;
-    
 }
 
 .login-modal form {
@@ -41,19 +40,18 @@ main{
     border-radius: 5px;
     margin: 0 0 10px 0;
     max-width: 500px;
-    
-    
 }
 
 .login-modal form label{
     margin: 10px 0 0 0;
 }
+
 .login-modal input {
     padding: 5px;
     border-radius: 5px;
     width: 85%;
-
 }
+
 .login-modal button {
     border-radius: 5px;
     padding: 10px;
