@@ -15,8 +15,23 @@ module.exports = {
     },
     newProductImage: async function (upload, prodId) {
         try {
+            function replaceAll(string) {
+                let replaced = ''
+                for (let i in string) {
+                    if (string[i] == '\\') {
+                        replaced += '/'
+                    } else {
+                        replaced += string[i]
+                    }
+                    if (+i == string.length-1) {
+                        return replaced
+                    }
+                };
+            }
             if (upload.length > 0) {
-                let newImages = upload.map((img) => {return img.path.split('public')[1]})
+                let newImages = upload.map((img) => {
+                    return replaceAll(img.path.split('public')[1])
+                })
                 for (let i in newImages) {
                     const createImage = await db.Images.create({pathName: newImages[i]})
                     await db.prod_images.create({
