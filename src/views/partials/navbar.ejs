@@ -12,11 +12,12 @@
             <% } %>
             <button>
                 <% if (locals.login) { %>
-                    <a href="/users/logout">Cerrar Sesion</a>
+                    <a id="cerrarsesion" href="/users/logout">Cerrar Sesión</a>
                 <% } else { %>
                     <a href="/users/login">Ingresá</a>
                 <% } %>
             </button>
+            
         </span>
     </span>
     <div class="site">
