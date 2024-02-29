@@ -133,5 +133,39 @@ module.exports = {
         } catch (error) {
             return error
         }
+    },
+    create: async function(body) {
+        try {
+            const {userId, status, products } = body
+            const newPay = await db.Payments.create({
+                user_id: +userId,
+                total: products.reduce((acum,{precio, cantidad}) => acum+(Number(precio)*Number(cantidad)),0),
+                status: status? status : 'enproceso',
+            },{logging: false})
+            for (let i in products) {
+                const {product_id, color_id, cantidad, precio} = products[i]
+                await db.payment_products.create({
+                    payment_id: newPay.id,
+                    product_id: +product_id,
+                    color_id: +color_id,
+                    cantidad: Number(cantidad),
+                    precio: Number(precio)
+                },{logging: false})
+                if (i == products.length-1) {
+                    return this.detallePago(newPay.id)
+                }
+            }
+        } catch (error) {
+            return error
+        }
+    },
+    updateStatus: async function (body) {
+        try {
+            const { status, id } = body
+            const response = await db.Payments.update({status: status}, {where: {id: +id}})
+            return response
+        } catch (error) {
+            return error
+        }
     }
 }
