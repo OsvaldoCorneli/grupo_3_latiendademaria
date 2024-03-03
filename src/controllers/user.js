@@ -3,6 +3,7 @@ const db = require('../database/models')
 const dataGeo = require('../models/dataGeo');
 const products = require('../models/products');
 const users = require('../models/user');
+const favoritos = require('../models/favorites');
 const { check, validationResult } = require('express-validator');
 
 module.exports = {
@@ -18,7 +19,8 @@ module.exports = {
             res.render('users/profile', {
                 userData: await users.detail(userId),
                 productos: await products.all(),
-                historialPagos: await payments.userDetail(userId, 5, 1)
+                historialPagos: await payments.userDetail(userId, 5, 1),
+                favoritos: await favoritos.userFav(userId)
             })
         } catch (error) {
             res.status(500).json(error.message)

@@ -90,6 +90,15 @@ const config = {
 
 const Users = sequelize.define(alias, cols, config);
 
+Users.associate = function(models) {
+    Users.belongsToMany(models.Products,{
+        as: 'favorites',
+        through: models.Favorites,
+        foreignKey: 'user_id',
+        otherKey: 'product_id'
+    })
+}
+
 
 return Users
 } ;

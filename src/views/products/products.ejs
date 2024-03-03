@@ -46,6 +46,11 @@
                         </label>
                     </span>
                 </label>
+                <!-- <% if (locals.login) { %>
+                <label for="favorites">Favoritos
+                    <input type="radio" name="favorites" value="<% locals.user.id %>"/>
+                </label>
+                <% } %> -->
                 <div class="botonFilter">
                     <input  type="submit" value="ENVIAR"/>
                     <input  formaction="/products" formmethod="GET" type="submit" value="Reset"/>
@@ -62,7 +67,7 @@
                 </section>
                 <section class="cards">
                     <% productos.slice(0,12).forEach((producto) => { %>
-                        <%- include('./card.ejs', {producto}) %>
+                        <%- include('./card.ejs', {producto, favoritos}) %>
                     <% }) %>
                 </section>
         </span>

@@ -84,7 +84,6 @@ section.profile > .userData > div {
     gap: 5px;
 }
 section.payments {
-    width: 100%;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -94,13 +93,13 @@ section.payments {
 section.payments > .header{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     font-weight: bold;
     background-color: #32A97F;
     padding: 5px;
     border-radius: 5px;
-    text-wrap: nowrap;
+    text-wrap: wrap;
 }
 
 section.payments > article{
@@ -413,7 +412,65 @@ tr.article > td {
     font-size: 12px;
 }
 
-
+section.userData{
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: space-around;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+section.favoritos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    max-width: 45%;
+    gap: 10px;
+}
+section.favoritos .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    font-weight: bold;
+    background-color: #32A97F;
+    padding: 5px;
+    border-radius: 5px;
+    text-wrap: wrap;
+}
+section.favoritos img {
+    width: 50px;
+}
+section.favoritos article {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #efefef;
+    border-radius: 5px;
+    margin: 3px;
+    padding: 5px;
+}
+.heart {
+    display: inline-block;
+    width: 26px;
+    aspect-ratio: 1;
+    border-image: radial-gradient(red 69%, #0000 70%) 84.5%/50%;
+    clip-path: polygon(-41% 0, 50% 91%, 141% 0);
+}
+.heart:hover {
+    cursor: 'pointer';
+    box-shadow: 0px 0px 10px rgb(100, 100, 100);
+}
+.unheart {
+    display: inline-block;
+    width: 22px;
+    aspect-ratio: 1;
+    margin: 2px 0px 0px 2px;
+    border-image: radial-gradient(white 69%, #0000 70%) 84.5%/50%;
+    clip-path: polygon(-41% 0, 50% 91%, 141% 0);
+}
 @media (min-width: 540px) {
     .portraitlayout {
         display: block;
@@ -424,9 +481,6 @@ tr.article > td {
 }
 
 @media (min-width: 760px) {
-    section.payments {
-        width: 90%;
-    }
     section.payments > article > ul{
         display: inline-block;
         list-style: none;

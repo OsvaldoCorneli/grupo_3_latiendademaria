@@ -36,9 +36,9 @@ module.exports = {
             return error
         }
     },
-    detail: async function (id) {
+    detail: async function (id, userId) {
         try {
-            return await db.Products.findByPk(+id,{
+            const response = await db.Products.findByPk(+id,{
                 include: [
                     {
                         association: 'colors',
@@ -60,14 +60,60 @@ module.exports = {
                     }
                 ],
                 attributes: {exclude: ['category_id']},
-                logging: false
+                logging: false,
             })
+            return response
         } catch (error) {
             return error
         }
     },
     filter: async function (query) {
         try {
+            // const {favorites, price, line, name, category, color, page, perPage} = query
+            // let condition = {}
+            // if (price) condition.products = {...condition.products, price: {[Op.lte]: price}};
+            // if (line) condition.products = {...condition.products, line: line};
+            // if (name) condition.products = {...condition.products, 
+            //     [Op.or]: [
+            //         {name: {[Op.startsWith]: name}},
+            //         {name: {[Op.like]: `%${name}`}}
+            //     ]};
+            // if (category) condition.categories = { id: +category};
+            // if (color) condition.colors = { color_id: +color};
+            // let pagination = {limit: 0, offset: 0}
+            // if (page && perPage) pagination = {limit: +perPage, offset: ((+page-1)*+perPage)};
+            // if (favorites) condition.favorites = {id: +favorites};
+            
+            // const response = await db.Products.findAll({
+            //     include: [
+            //         {
+            //             association: 'colors', 
+            //             attributes: ['stock'],
+            //             include: {
+            //                 association: 'color',
+            //                 attributes: ['id','name','hex'],
+            //             },
+            //             where: condition.colors,
+            //         },
+            //         { 
+            //             model: db.Images,
+            //             as: 'images',
+            //             attributes: ['id','pathName'],
+            //             through: {attributes: []}},
+            //         {   
+            //             association: 'categories',
+            //             attributes: ['id','name'],
+            //             where: condition.categories
+            //         }
+            //         //{association: 'favorites'}
+            //     ],
+            //     where: condition.products,
+            //     attributes: {exclude: ['category_id']},
+            //     logging: false,
+            //     limit: pagination.limit,
+            //     offset: pagination.offset
+            // })
+            // return response
             const {price, line, name, category, color, page, perPage} = query
             let condition = {}
             if (price) condition.products = {...condition.products, price: {[Op.lte]: price}};
@@ -81,8 +127,7 @@ module.exports = {
             if (color) condition.colors = {...condition.colors, color_id: color};
             let pagination = {}
             if (page && perPage) pagination = {limit: +perPage, offset: ((+page-1)*+perPage)};
-
-            return await db.Products.findAll({
+            const filter = await db.Products.findAll({
                 include: [
                     {
                         association: 'colors',
@@ -104,14 +149,18 @@ module.exports = {
                         association: 'categories',
                         attributes: ['id','name'],
                         where: condition.categories
-                    }
+                    },
+                    {association: 'favorites'}
                 ],
                 where: condition.products,
                 attributes: {exclude: ['category_id']},
                 logging: false,
-                ...pagination
+                limit: pagination.limit,
+                offset: pagination.offset
             })
+            return filter
         } catch (error) {
+            console.log(error)
             return error
         }
     },
@@ -147,7 +196,7 @@ module.exports = {
                     category_id: +body.category,
                     line: body.line,
                     price: +body.price
-                },              
+                },
                 {
                     where: {id: body.id}
             });
