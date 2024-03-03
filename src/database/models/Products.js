@@ -41,9 +41,6 @@ module.exports = (sequelize, dataTypes) => {
         paranoid: true
     }
     
-    
-    
-    
     const Products = sequelize.define(alias, cols, config);
     
     Products.associate = function(models) {
@@ -72,7 +69,15 @@ module.exports = (sequelize, dataTypes) => {
             foreignKey: 'product_id',
             otherKey: 'image_id'
         })
+        Products.belongsToMany(models.Users,{
+            as: 'favorites',
+            through: models.Favorites,
+            foreignKey: 'product_id',
+            otherKey: 'user_id'
+        })
     }
+
+
     
     return Products
     } ;

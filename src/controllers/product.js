@@ -3,6 +3,7 @@ const users = require('../models/user');
 const products = require('../models/products');
 const categories = require('../models/categories');
 const colors = require('../models/colors');
+const favorites = require('../models/favorites');
 const {validationResult} = require('express-validator');
 
 const view = path.join(__dirname,'../views/products/');
@@ -13,10 +14,13 @@ module.exports = {
             const allProduct = await products.all()
             const allCategories = await categories.countAll()
             const allColors = await colors.countAll()
+            let Favs = []
+            if (req.session.user) Favs = await favorites.userFav(req.session.user.id)
             res.render(view+'products', { 
                 productos: allProduct,
                 categorias: allCategories,
-                colors: allColors
+                colors: allColors,
+                favoritos: Favs
             })
         } catch (error) {
             res.status(500).json(error.message)
@@ -25,10 +29,16 @@ module.exports = {
     },
     filter: async function (req,res) {
         try {
+            let Favs = []
+            if (req.session.user) {
+                Favs = await favorites.userFav(+req.session.user.id);
+                if (req.query.favorites) req.query.favorites = +req.session.user.id;
+            }
             res.render(view+'products', { 
                 productos: await products.filter(req.query),
                 categorias: await categories.countAll(),
-                colors: await colors.countAll()
+                colors: await colors.countAll(),
+                favoritos: Favs
             })
         } catch (error) {
             res.status(500).json(error.message)
@@ -37,14 +47,15 @@ module.exports = {
     detail: async function (req,res) {
         try {
             const detalle = await products.detail(req.params.id)
-            
-            if (detalle){
-                if(req.session.user){ res.render(view+'detail',{ 
-                detalle: detalle , user: true})}
-             else{
-                res.render(view+'detail',{ 
-                    detalle: detalle , user: false})
-             }}   
+            if (detalle) {
+                if(req.session.user) {
+                    res.render(view+'detail',{ 
+                        detalle: detalle, user: true, 
+                        favorites: await favorites.userFav(req.session.user.id) })
+                } else {
+                    res.render(view+'detail',{ detalle: detalle , user: false, favorites: [] })
+                }
+            }
             else res.render('404notFound', {url: req.url}) // si no encuentra el producto, devuelve 404
         } catch (error) {
             res.status(500).json(error.message)

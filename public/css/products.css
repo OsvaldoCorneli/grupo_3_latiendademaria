@@ -164,7 +164,25 @@ ul > li {
     font-size: 1rem;
 }
 
-
+.heart {
+    display: inline-block;
+    width: 20px;
+    aspect-ratio: 1;
+    border-image: radial-gradient(red 69%, #0000 70%) 84.5%/50%;
+    clip-path: polygon(-41% 0, 50% 91%, 141% 0);
+}
+.heart:hover {
+    cursor: 'pointer';
+    box-shadow: 0px 0px 10px rgb(100, 100, 100);
+}
+.unheart {
+    display: inline-block;
+    width: 16px;
+    aspect-ratio: 1;
+    margin: 2px 0px 0px 1px;
+    border-image: radial-gradient(white 69%, #0000 70%) 84.5%/50%;
+    clip-path: polygon(-41% 0, 50% 91%, 141% 0);
+}
 @media (min-width: 760px) {
 
     #categoria , #color{

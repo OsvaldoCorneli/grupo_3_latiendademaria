@@ -33,7 +33,19 @@
             </section>
             <form class="form-detalle" action="/users/cart/<%= id %>" method="POST">
                 <input type="hidden" name="id" value="<%= detalle.id %>">
-                <h2 class="tittled"><%= name %></h2>
+                <h2 class="tittled"><%= name %>
+                    <span class="containerheart">
+                        <div id="heart" class="heart">
+                        <% if (locals.login) { %>
+                            <% if (favorites.some(prod => prod.id == id)) { %> 
+                                <div class=""></div>
+                            <% } else { %> 
+                                <div class="unheart"></div>
+                            <% } %>
+                        <% } %>
+                        </div>
+                    </span>
+                </h2>
                 <h2 class="precio">$<%= price %></h3>
                 <h5>cantidad: <%= stock %></h5>
                 <label for="cantidad">
@@ -115,12 +127,7 @@
             console.error('Error al agregar el producto:', error);
         });
     }
-
-
-         
-        
-        
-
-     </script>       
+    </script>
+    <script src="\scripts\productDetail.js"></script>
 </body>
 </html>
