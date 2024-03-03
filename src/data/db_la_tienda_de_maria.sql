@@ -62,6 +62,12 @@ create table products(
     foreign key(category_id) references categories(id)
 );
 
+create table favorites(
+	product_id int not null,
+    user_id int not null,
+    foreign key(product_id) references products(id),
+    foreign key(user_id) references users(id)
+);
 
 create table payment_products(
 	id int primary key auto_increment,
