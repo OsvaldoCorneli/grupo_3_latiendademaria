@@ -11,7 +11,7 @@ router.put('/payment', isLogged, api.payments.update);
 router.get('/payment/user', isLogged, api.payments.userPayment);
 router.get('/payment/:id', isLogged, api.payments.detail);
 router.post('/categories', isLogged, api.categories.new);
-//router.get('/user/favorites/:user', api.favorites.user);
+router.get('/user/favorites', api.favorites.user);
 router.post('/user/favorites', api.favorites.add);
 // router.get('/products', api.products.list);
 // router.get('/products/:id', api.products.detail);

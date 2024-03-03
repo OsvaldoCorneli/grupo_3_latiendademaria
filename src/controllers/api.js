@@ -79,7 +79,7 @@ module.exports = {
     favorites: {
         user: async function (req,res) {
             try {
-                const userId = req.params.user? req.params.user : req.session.user.id;
+                const userId = req.session.user.id;
                 const response = await favorites.userFav(userId)
                 res.status(200).json(response)
             } catch (error) {

@@ -14,6 +14,7 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
 }
 .pagination {
     display: flex;
@@ -88,6 +89,7 @@ section.payments {
     flex-direction: column;
     text-align: center;
     gap: 10px;
+    min-width: 50%;
 }
 
 section.payments > .header{
@@ -419,14 +421,17 @@ section.userData{
     justify-content: space-around;
     gap: 10px;
     flex-wrap: wrap;
+    width: 100%;
 }
 section.favoritos {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    max-width: 45%;
+    justify-content: start;
+    min-width: 45%;
     gap: 10px;
+    height: 400px;
+    overflow-y: auto;
 }
 section.favoritos .header {
     display: flex;
@@ -451,6 +456,9 @@ section.favoritos article {
     border-radius: 5px;
     margin: 3px;
     padding: 5px;
+}
+.productsAdmin {
+    width: 100%;
 }
 .heart {
     display: inline-block;
@@ -493,6 +501,7 @@ section.favoritos article {
         list-style: none;
         margin: 0px;
         padding: 0px;
+
     }
     section.payments > .header > .name{
         display: inline-block;
@@ -539,5 +548,8 @@ section.favoritos article {
     }
     .mobilelayout {
         display: none
+    }
+    .productsAdmin {
+        width: 90%;
     }
 }
