@@ -18,5 +18,3 @@ router.post('/user/favorites', api.favorites.add);
 
 
 module.exports = router
-
-

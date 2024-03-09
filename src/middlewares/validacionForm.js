@@ -46,6 +46,9 @@ module.exports = {
     },
     registerUser: function () {
         return [
+            body('name', 'apellido')
+                .notEmpty().withMessage('El nombre no puede estar en blanco')
+                .isLength({min: 2}).withMessage('el nombre debe ser mayor a 2 digitos'),
             body('password')
                 .notEmpty().withMessage('La contraseña no puede estar en blanco')
                 .isLength({min: 6}).withMessage('la contraseña debe ser mayor a 6 caracteres'),
@@ -54,7 +57,7 @@ module.exports = {
             }).withMessage('las contraseñas no coinciden'),
             body('userName')
                 .notEmpty().withMessage('Debes completar el nombre')
-                .isLength({min: 4, max: 20}).withMessage('el nombre debe ser mayor a 4 caracteres y menor a 20')
+                .isLength({min: 2, max: 20}).withMessage('el nombre debe ser mayor a 4 caracteres y menor a 20')
                 .custom(async (value) => {
                     const users1 = await users.index();
                     const user = users1.some((u) => u.username == value);
@@ -68,14 +71,14 @@ module.exports = {
             body('email')
                 .isEmail().withMessage('email no valido')
                 .custom(async (value, { req }) => {
-                 const user1 = await users.index();
-                 const anotherUserWithSameEmail = user1.some((user) => user.email == value);
+                    const user1 = await users.index();
+                    const anotherUserWithSameEmail = user1.some((user) => user.email == value);
 
-                  if (anotherUserWithSameEmail) {
-                     throw new Error('El email ya está en uso');
-                     }
+                    if (anotherUserWithSameEmail) {
+                        throw new Error('El email ya está en uso');
+                    }
 
-                     return true;
+                    return true;
                 }),
             body('fechaNacimiento')
                 .isISO8601().withMessage('ingresar una fecha valida'),

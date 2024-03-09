@@ -3,7 +3,6 @@ const imageInput = document.getElementById("imageinput")
 imageInput.onchange = function() {
     for (let i = 0; i < this.files.length; i++) { //por cada archivo subido, hacer todo lo que sigue -->
         const containerImage = document.getElementById("imageRender");
-        
         //img tag
         const img = document.createElement('img')
         img.src = URL.createObjectURL(imageInput.files[i])
@@ -11,7 +10,7 @@ imageInput.onchange = function() {
         //img info
         const imageInfo = document.createElement('span');
         imageInfo.id = imageInput.files[i].name;
-        imageInfo.innerHTML = `<p>${imageInput.files[i].name}, ${(imageInput.files[i].size/1024).toFixed(2)}KB</p>`;
+        imageInfo.innerHTML = `<small>${imageInput.files[i].name}, ${(imageInput.files[i].size/1024).toFixed(2)}KB</small>`;
         
         //agrego button para borrar imagen subida
         const deleteButton = document.createElement('button');
@@ -32,6 +31,7 @@ imageInput.onchange = function() {
 
 let updateFileList = function (fileField, index) {
     let fileBuffer = Array.from(fileField.files);
+    console.log('updatelist function:',fileBuffer)
     fileBuffer.splice(index, 1);
 
     /** Code from: https://stackoverflow.com/a/47172409/8145428 */
@@ -40,4 +40,28 @@ let updateFileList = function (fileField, index) {
 
     for (let file of fileBuffer) { dT.items.add(file); }
     fileField.files = dT.files;
+}
+
+function imgToInput(img) {
+
+}
+
+// const imgInValidation = document.querySelectorAll('img#inValidation')
+// imgInValidation.forEach((img,i) => {
+    
+//})
+
+window.onload = ()=> {
+
+    let fileBuffer = Array.from(imageInput.files)
+    console.log('onload function:',fileBuffer)
+    // const deleteImage = document.querySelectorAll("deleteImage")
+
+    // deleteImage.forEach((img,i) => {
+    //     img.addEventListener('click',(e) => {
+    //         e.preventDefault();
+    //         updateFileList(imageInput,i)
+    //         deleteImage.parentNode.remove()
+    //     })
+    // })
 }

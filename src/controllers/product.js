@@ -82,9 +82,12 @@ module.exports = {
                     res.redirect('/users/profile')
                 }
             } else {
+                // console.log('body:',req.body)
+                // console.log('files:',req.files)
+                console.log({...req.body, image: req.files})
                 res.render(view+'createForm', {
                     productEdit: null,
-                    body: req.body,
+                    body: {...req.body, image: req.files},
                     categorias: await categories.all(),
                     errors: errores.mapped() 
                 })
