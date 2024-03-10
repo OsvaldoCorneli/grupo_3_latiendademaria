@@ -156,8 +156,10 @@ input[type="file"] {
 
 }
 #errorUserName{
+    display: none;
     color: red;
     font-size: 75%;
+    margin: 0 0 5px 0;
 }
 #errorPassword{
     color: red;

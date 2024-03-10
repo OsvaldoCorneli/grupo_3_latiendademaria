@@ -25,6 +25,7 @@ window.addEventListener("load", async function(){
     const errorNombre = document.querySelector("#errorNombre")
     const errorApellido = document.querySelector("#errorApellido")
     const errorEmail = document.querySelector("#errorEmail")
+    const errorUserName = document.querySelector("#errorUserName")
 
 
     nombre.addEventListener("input", function(e){
@@ -93,6 +94,30 @@ window.addEventListener("load", async function(){
         else{
             email.style.border = '2px solid green'
             errorEmail.style.display = 'none'
+        }
+    })
+
+    userName.addEventListener("input", function(e){
+        
+        if(e.target.value === ""){
+            userName.style.border = '2px solid red'
+            errorUserName.textContent = "Este campo no puede estar vacio"
+            errorUserName.style.display = 'block'
+        }else if(e.target.value.length < 6){
+            userName.style.border = '2px solid red'
+            errorUserName.textContent = "El nombre de usuario debe tener al menos 6 caracteres"
+            errorUserName.style.display = 'block'
+
+        }
+
+        else if(usuarios.some(element => element.userName === e.target.value)){
+            userName.style.border = '2px solid red'
+            errorUserName.textContent = "Este nombre de usuario ya existe"
+            errorUserName.style.display = 'block'
+        }
+        else{
+            userName.style.border = '2px solid green'
+            errorUserName.style.display = 'none'
         }
     })
 
