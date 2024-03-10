@@ -128,10 +128,45 @@ input[type="file"] {
     color: red
 }
 .error-contraseña {
-    display: none;
     color: red;
     font-weight: bold;
 }
+
+#errorNombre{
+    display: none;
+    color: red;
+    font-size: 75%;
+    margin: 0 0 5px 0;
+}
+#errorApellido{
+    display: none;
+    color: red;
+    font-size: 75%;
+    margin: 0 0 5px 0;
+}
+#errorImagen{
+    color: red;
+    font-size: 75%;
+}
+#errorEmail{
+    color: red;
+    font-size: 75%;
+}
+#errorUserName{
+    color: red;
+    font-size: 75%;
+}
+#errorPassword{
+    color: red;
+    font-size: 75%;
+}
+#errorRepetirPassword{
+    color: red;
+    font-size: 75%;
+}
+
+
+
 
 @media (min-width: 760px){
 

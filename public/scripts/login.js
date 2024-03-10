@@ -1,5 +1,5 @@
 window.addEventListener("load", function(){
-    var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const email = document.querySelector("#email")
     const password = document.querySelector("#password")
     const boton = document.querySelector("#loginboton")

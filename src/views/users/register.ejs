@@ -16,6 +16,7 @@
             <div class="contenedor1">
                 <div class="inputform">
                     <label for="nombre">Nombre/s:</label>
+                    <span id="errorNombre">Mensaje de error</span>
                     <input 
                         class="requiredinput"
                         type="text"
@@ -32,12 +33,15 @@
                 </div>
                 <div class="inputform">
                     <label for="apellido">Apellido/s:</label>
+                    <span id="errorApellido">Mensaje de error</span>
                     <input
+                        class="requiredinput"
                         id="apellido"
                         name="apellido"
                         type="text"
                         placeholder="Ingresar apellido"
-                        minlength="6"
+                        required
+                        minlength="2"
                         value="<%= body.apellido? body.apellido : null  %>"
                     />
                     <% if (locals.errors && errors.apellido) { %>
@@ -134,6 +138,7 @@
         <div class="contenedor2">
             <div class="inputform button-wrap">
                 <label class=button for="imageinput">Imagen de perfil</label>
+                <span id="errorImagen">Mensaje de error</span>
                 <input 
                 type="file"
                 name="imagen"
@@ -179,6 +184,7 @@
             </div>
             <div class="inputform">
                 <label for="email">Email:</label>
+                <span id="errorEmail">Mensaje de error</span>
                 <input 
                     class="requiredinput"
                     type="email"
@@ -196,6 +202,7 @@
             </div>
             <div class="inputform">
                 <label for="username">Nombre de usuario:</label>
+                <span id="errorUserName">Mensaje de error</span>
                 <input 
                     class="requiredinput"
                     type="text"
@@ -214,6 +221,7 @@
 
             <div class="inputform">
                 <label for="password">contraseña:</label>
+                <span id="errorPassword">Mensaje de error</span>
                 <input 
                     class="requiredinput"
                     type="password"
@@ -221,8 +229,7 @@
                     id="password"
                     placeholder="contraseña"
                     required
-                    minlength="6"
-                    maxlength="20"
+                    minlength="8"
                     value="<%= body.password? body.password : null %>"
                     />
                     <% if (locals.errors && errors.password) { %>
@@ -231,6 +238,7 @@
             </div>
             <div class="inputform">
                 <label for="repassword">repetir contraseña:</label>
+                <span id="errorRepetirPassword">Mensaje de error</span>
                 <input 
                     class="requiredinput"
                     type="password"
@@ -238,11 +246,9 @@
                     id="repassword"
                     placeholder="repetir contraseña"
                     required
-                    minlength="6"
-                    maxlength="20"
+                    minlength="8"
                     value="<%= body.repassword? body.repassword : null %>"
                 />
-                <p class="error-contraseña">la contraseña no coincide</p>
                 <% if (locals.errors && errors.repassword) { %>
                     <p class="errors"><%= errors.repassword.msg %></p>
                 <% } %>
