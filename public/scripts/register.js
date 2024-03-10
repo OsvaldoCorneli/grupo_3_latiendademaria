@@ -24,6 +24,8 @@ window.addEventListener("load", async function(){
     let showError = document.querySelector('p[class="error-contraseña"]')
     const errorNombre = document.querySelector("#errorNombre")
     const errorApellido = document.querySelector("#errorApellido")
+    const errorEmail = document.querySelector("#errorEmail")
+
 
     nombre.addEventListener("input", function(e){
          
@@ -74,20 +76,23 @@ window.addEventListener("load", async function(){
         
         if(e.target.value === ""){
             email.style.border = '2px solid red'
-            console.log("campoo vacio")
+            errorEmail.textContent = "Este campo no puede estar vacio"
+            errorEmail.style.display = 'block'
             
         }
         else if(!regex.test(e.target.value)){
             email.style.border = '2px solid red'
-            console.log("email no valido")
+            errorEmail.textContent = "Debe ingresar un Email valido"
+            errorEmail.style.display = 'block'
         }
         else if(usuarios.some(element => element.email === e.target.value)){
-            console.log("el email existe")
+            email.style.border = '2px solid red'
+            errorEmail.textContent = "Este email ya esta registrado"
+            errorEmail.style.display = 'block'
         }
         else{
             email.style.border = '2px solid green'
-            console.log("email confirmado")
-           
+            errorEmail.style.display = 'none'
         }
     })
 

@@ -149,8 +149,11 @@ input[type="file"] {
     font-size: 75%;
 }
 #errorEmail{
+    display: none;
     color: red;
     font-size: 75%;
+    margin: 0 0 5px 0;
+
 }
 #errorUserName{
     color: red;
