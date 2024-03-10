@@ -162,12 +162,17 @@ input[type="file"] {
     margin: 0 0 5px 0;
 }
 #errorPassword{
+    display: none;
     color: red;
     font-size: 75%;
+    margin: 0 0 5px 0;
 }
 #errorRepetirPassword{
+    display: none;
     color: red;
     font-size: 75%;
+    margin: 0 0 5px 0;
+
 }
 
 

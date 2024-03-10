@@ -3,6 +3,7 @@ window.addEventListener("load", async function(){
     .then(response => response.json())
     .then(data => data)
     let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     let provincias = document.querySelector('select[name="provincia"]');
     let previous;
     let submitButton = document.querySelector('input[type="submit"]')
@@ -19,15 +20,14 @@ window.addEventListener("load", async function(){
         previous.style = "display:block;"
     })
     
-    let password = document.querySelector('input[name="password"]')
-    let repassword = document.querySelector('input[name="repassword"]')
-    let showError = document.querySelector('p[class="error-contraseña"]')
+    let password = document.querySelector('#password')
+    let repassword = document.querySelector('#repassword')
     const errorNombre = document.querySelector("#errorNombre")
     const errorApellido = document.querySelector("#errorApellido")
     const errorEmail = document.querySelector("#errorEmail")
     const errorUserName = document.querySelector("#errorUserName")
-
-
+    const errorPassword = document.querySelector("#errorPassword")
+    const errorRepetirPassword = document.querySelector("#errorRepetirPassword")
     nombre.addEventListener("input", function(e){
          
         if(e.target.value === ""){
@@ -119,6 +119,60 @@ window.addEventListener("load", async function(){
             userName.style.border = '2px solid green'
             errorUserName.style.display = 'none'
         }
+    })
+
+    password.addEventListener("input", function(e){
+      if(e.target.value === ""){
+          password.style.border = '2px solid red'
+          errorPassword.textContent = "Este campo no puede estar vacio"
+          errorPassword.style.display = "block"
+
+      }
+      else if(e.target.value.length < 7){
+        password.style.border = '2px solid red'
+          errorPassword.textContent = "La contraseña debe tener al menos 8 caracteres, letras mayúsculas, minúsculas, un número y un carácter especial."
+          errorPassword.style.display = "block"
+
+      }
+      else if(!regexPassword.test(e.target.value)){
+        password.style.border = '2px solid red'
+          errorPassword.textContent = "La contraseña debe contener letras mayúsculas, minúsculas, un número y un carácter especial."
+          errorPassword.style.display = "block"
+      }
+      else{
+        password.style.border = '2px solid green'
+          errorPassword.style.display = "none"
+      }
+
+    })
+
+    repassword.addEventListener("input", function(e){
+
+
+      if(e.target.value === ""){
+        this.style.border = '2px solid red'
+        errorRepetirPassword.textContent = "Este campo no puede estar vacio"
+        errorRepetirPassword.style.display = "block"
+
+      }
+        else if(password.style.border != '2px solid green'){
+         this.style.border = '2px solid red'
+         errorRepetirPassword.textContent = "Ingrese una contraseña correcta"
+         errorRepetirPassword.style.display = "block"
+      }
+        else if(password.value != e.target.value){
+         this.style.border = '2px solid red'
+         errorRepetirPassword.textContent = "Las contraseñas no coinciden"
+         errorRepetirPassword.style.display = "block"
+      }
+
+      else{
+        this.style.border = '2px solid green';
+        errorRepetirPassword.style.display = "none";
+
+      }
+
+
     })
 
 
