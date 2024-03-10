@@ -145,7 +145,6 @@
                 id="imageinput"
                 accept="image/jpeg, image/png, image/jpg"
                 value="<%= body.imagen? body.imagen : null %>"
-                onchange="mostrarIconoCheck(this)"
             />
             <% if (locals.errors && errors.imagen) { %>
                 <p class="errors"><%= errors.imagen.msg %></p>

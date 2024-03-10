@@ -11,6 +11,8 @@ window.addEventListener("load", async function(){
     let userName = document.querySelector("#userName")
     let nombre = document.querySelector("#nombre")
     let apellido = document.querySelector("#apellido")
+    let inputImagen = document.querySelector("#imageinput")
+    const iconoCheck = document.getElementById('iconoCheck');
 
     provincias.addEventListener('change', function() {
         previous? previous.style = "display:none;" : null;
@@ -28,6 +30,7 @@ window.addEventListener("load", async function(){
     const errorUserName = document.querySelector("#errorUserName")
     const errorPassword = document.querySelector("#errorPassword")
     const errorRepetirPassword = document.querySelector("#errorRepetirPassword")
+    const errorImagen = document.querySelector("#errorImagen")
     nombre.addEventListener("input", function(e){
          
         if(e.target.value === ""){
@@ -176,19 +179,20 @@ window.addEventListener("load", async function(){
     })
 
 
+     inputImagen.addEventListener("change", function (e){
+   
+     if(e.target.files[0].type === "image/jpeg" || e.target.files[0].type === "image/png"|| e.target.files[0].type === "image/jpg"){
+        errorImagen.style.display = "none";
+        iconoCheck.style.display = 'block';
+     }else{
+        errorImagen.textContent = "La imagen tiene que ser formato .jpeg, .png, .jpg"
+        errorImagen.style.display = "block"
+        iconoCheck.style.display = 'none';
+     }
+
+     })
     
-    function mostrarIconoCheck(input) {
-        const iconoCheck = document.getElementById('iconoCheck');
-        const archivo = input.files[0];
-        console.log(archivo);
-        
-        if (archivo) {
-            iconoCheck.style.display = 'block';
-        } else {
-            iconoCheck.style.display = 'none';
-        }
-    }
-    
+  
     
 
 
