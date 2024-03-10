@@ -2,6 +2,8 @@ const products = require('../models/products');
 const payments = require('../models/payments');
 const categories = require('../models/categories.js');
 const favorites = require('../models/favorites');
+const user = require('../models/user')
+
 
 module.exports = {
     products: {
@@ -17,7 +19,7 @@ module.exports = {
             try {
                 const response = await products.detail(+req.params.id)
                 res.status(200).json(response)
-            } catch (error) {
+            } catch (error) {s
                 res.status(500).json(error.message)
             }
         }
@@ -96,5 +98,20 @@ module.exports = {
                 res.status(500).json(error.message)
             }
         }
+    },
+    users: {
+        all: async function(req, res){
+         try {
+            const users = await user.index()
+            if(!users) throw new Error ("no hay usuario")
+            res.status(200).json(users)
+
+         } catch (error) {
+            res.status(500).json(error.message)
+         }
+            
+
+        }
     }
+
 }

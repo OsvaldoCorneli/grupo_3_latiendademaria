@@ -2,6 +2,11 @@ let provincias = document.querySelector('select[name="provincia"]');
 let previous;
 let submitButton = document.querySelector('input[type="submit"]')
 
+fetch("")
+
+
+
+
 provincias.addEventListener('change', function() {
     previous? previous.style = "display:none;" : null;
     let prov = provincias.selectedOptions[0].innerText
@@ -32,6 +37,18 @@ repassword.addEventListener('change', function() {
         showError.style = "display:none"
     }
 })
+
+function mostrarIconoCheck(input) {
+    const iconoCheck = document.getElementById('iconoCheck');
+    const archivo = input.files[0];
+    console.log(archivo);
+    
+    if (archivo) {
+        iconoCheck.style.display = 'block';
+    } else {
+        iconoCheck.style.display = 'none';
+    }
+}
 
 // let formRegistro = document.querySelector('form');
 

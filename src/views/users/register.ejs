@@ -23,8 +23,7 @@
                         id="nombre"
                         placeholder="ingrese su nombre"
                         required
-                        minlength="3"
-                        maxlength="20"
+                        minlength="2"
                         value="<%= body.nombre? body.nombre : null  %>"
                     />
                     <% if (locals.errors && errors.nombre) { %>
@@ -253,21 +252,11 @@
             </div>
         </div>
         </form>
-    </article>
-    <script src="\scripts\register.js"></script>
-    </main>
-    <%- include('../partials/footer.ejs') %>
-    <script>
-    function mostrarIconoCheck(input) {
-        const iconoCheck = document.getElementById('iconoCheck');
-        const archivo = input.files[0];
+    </article >
+</main>
+<%- include('../partials/footer.ejs') %>
 
-        if (archivo) {
-            iconoCheck.style.display = 'block';
-        } else {
-            iconoCheck.style.display = 'none';
-        }
-    }
-</script>
+    <script src="\scripts\register.js"></script>
+
 </body>
 </html>

@@ -4,7 +4,7 @@ const api = require('../controllers/api.js');
 const isLogged = require('../middlewares/isLogged.js')
 
 router.get('/products', api.products.list);
-
+router.get('/users', api.users.all);
 router.get('/payment', isLogged, api.payments.all);
 router.post('/payment', isLogged, api.payments.new);
 router.put('/payment', isLogged, api.payments.update);
