@@ -47,6 +47,7 @@
                     <% body.image.forEach((el) => { %>
                         <span>
                             <small><%= `${el.originalname}, ${(el.size/1024).toFixed(2)}KB` %></small>
+                            <input type="image" src="data:<%= el.mimetype %>;base64,<%= Buffer.from(el.buffer).toString('base64') %>" alt="<%= el.originalname %>"/>
                             <img id="inValidation" src="data:<%= el.mimetype %>;base64,<%= Buffer.from(el.buffer).toString('base64') %>" alt="<%= el.originalname %>">
                             <button id="deleteImage" class="deleteImage">Borrar</button>
                         </span>
@@ -129,6 +130,7 @@
         <script src="\scripts\ntc.js"></script>
         <script src="\scripts\colorValidator.js"></script>
         <script src="\scripts\imageUpload.js"></script>
+        <script src="\scripts\validacionProducto.js"></script>
     </main> 
     <%- include('../partials/footer.ejs') %>
 </body>

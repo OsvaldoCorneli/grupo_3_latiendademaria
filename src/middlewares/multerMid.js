@@ -20,12 +20,22 @@ let storage = multer.diskStorage({
 
 let upload = multer({
 	fileFilter: function (req,file,cb) {
-		const types = ['image/jpeg', 'image/png', 'image/jpg']
-		cb(null, types.includes(file.mimetype))
+		const validTypes = ['image/jpeg', 'image/png', 'image/jpg'].includes(file.mimetype)
+		const fileSize = file.size < 2048000;
+		const files = req.files.length <= 5;
+		if (validTypes && fileSize && files){
+			cb(null, true)
+		} else if (!validTypes && fileSize && files) {
+			cb(new Error("los formatos de imagen permitidos son .jpeg, .jpg y .png"))
+		} else if (validTypes && !fileSize && files) {
+			cb(new Error("las imagenes deben pesar menos de 2MB"))
+		} else if (validTypes && fileSize && !files) {
+			cb(new Error("limite maximo de 5 imagenes en total"))
+		} else {
+			cb(null,false)
+		}
 	},
-	fileSize: 2048000,
-	files: 10,
-	//storage: storage,
+	storage: storage,
 })
 
 module.exports = upload

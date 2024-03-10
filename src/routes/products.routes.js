@@ -1,8 +1,10 @@
-const express = require('express')
-const router = express.Router()
-const products = require('../controllers/product')
-const upload = require('../middlewares/multerMid')
-const validacionForm = require('../middlewares/validacionForm') 
+const express = require('express');
+const router = express.Router();
+const multer = require('multer')
+const products = require('../controllers/product');
+const upload = require('../middlewares/multerMid');
+const validacionForm = require('../middlewares/validacionForm');
+const validacionProducts = require('../middlewares/validacionProducts');
 
 
 router.route('/')
@@ -13,8 +15,17 @@ router.get('/filter', products.filter);
 
 router.route('/create') 
     .get(products.getCreateForm)
-    .post(upload.any(),
-        validacionForm.formProducto(),
+    .post(function(req,res,next) {
+        upload.any()(req,res,function(err){
+            if(err instanceof multer.MulterError) {
+                console.log(err)
+            } else if (err) {
+                console.log(err)
+            }
+            next()
+        })
+    },
+        validacionProducts.formProducto(),
         products.postCreateForm
     )
 ;
@@ -22,7 +33,7 @@ router.route('/create')
 router.route('/:id/edit')
     .get(products.edit) // para renderizar al front el form edit de producto
     .put(upload.any(),
-        validacionForm.formEditProducto(),
+        validacionProducts.formEditProducto(),
         products.update
     )
 ; 

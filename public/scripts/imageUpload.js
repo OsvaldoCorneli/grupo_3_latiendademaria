@@ -4,8 +4,8 @@ imageInput.onchange = function() {
     for (let i = 0; i < this.files.length; i++) { //por cada archivo subido, hacer todo lo que sigue -->
         const containerImage = document.getElementById("imageRender");
         //img tag
-        const img = document.createElement('img')
-        img.src = URL.createObjectURL(imageInput.files[i])
+        const input = document.createElement('input')
+        input.src = URL.createObjectURL(imageInput.files[i])
         
         //img info
         const imageInfo = document.createElement('span');
@@ -42,26 +42,4 @@ let updateFileList = function (fileField, index) {
     fileField.files = dT.files;
 }
 
-function imgToInput(img) {
 
-}
-
-// const imgInValidation = document.querySelectorAll('img#inValidation')
-// imgInValidation.forEach((img,i) => {
-    
-//})
-
-window.onload = ()=> {
-
-    let fileBuffer = Array.from(imageInput.files)
-    console.log('onload function:',fileBuffer)
-    // const deleteImage = document.querySelectorAll("deleteImage")
-
-    // deleteImage.forEach((img,i) => {
-    //     img.addEventListener('click',(e) => {
-    //         e.preventDefault();
-    //         updateFileList(imageInput,i)
-    //         deleteImage.parentNode.remove()
-    //     })
-    // })
-}
