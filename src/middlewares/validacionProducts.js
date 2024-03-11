@@ -5,7 +5,7 @@ const path = require('path');
 const categories = require('../models/categories');
 const Colors = require('../models/colors');
 
-const extNames = ['.jpg', '.png', '.jpeg']
+const extNames = ['image/jpeg', 'image/png', 'image/jpg']
 const maxFileSize = 2048000 //bytes
 
 module.exports = {
@@ -18,14 +18,21 @@ module.exports = {
                 .notEmpty().withMessage('no puede estar vacio')
                 .isLength({min: 20, max: 256}).withMessage('Maximo 256 caracteres'),
             body('image')
-                //.notEmpty().withMessage("subir al menos una imagen"),
                 .custom((value, {req})=>{
-                    const extensionName = req.files.map((x) => {return path.extname(x.path)})
-                    return extensionName.some((ext) => extNames.includes(ext))
+                    //console.log(req.body)
+                    if (!req.files.length > 0 && req.body.imageHold) return true
+                    if (!req.files.length > 0 && !req.body.imageHold) throw Error('debes subir al menos una imagen')
+                    return true
+                })
+                .custom((value, {req})=> {
+                    if (!req.files.length > 0 && req.body.imageHold) return true
+                    if (req.files.length > 0) return req.files.some((file) => extNames.includes(file.mimetype))
+                    return true
                 }).withMessage(`solo se admiten archivos ${extNames.join(', ')}`)
                 .custom((value, {req})=>{
-                    const filesSizes = req.files.map((x) => {return x.size})
-                    return !filesSizes.some((file) => file >= maxFileSize)
+                    if (!req.files.length > 0 && req.body.imageHold) return true
+                    if (req.files.length > 0) return req.files.some((file) => file.size <= maxFileSize)
+                    return true                    
                 }).withMessage(`el tamaño maximo permitido por imagen es ${maxFileSize/1024} KB`),
             body('line')
                 .notEmpty().withMessage("seleccionar una linea de producto")

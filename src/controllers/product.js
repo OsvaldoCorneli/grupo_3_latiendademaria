@@ -88,6 +88,7 @@ module.exports = {
                 if (req.files) {
                     req.files = images.parsePath(req.files)
                 }
+                console.log({...req.body, files: req.files})
                 res.render(view+'createForm', {
                     productEdit: null,
                     body: {...req.body, files: req.files},

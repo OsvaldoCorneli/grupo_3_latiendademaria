@@ -4,9 +4,9 @@ imageInput.onchange = function() {
     for (let i = 0; i < this.files.length; i++) { //por cada archivo subido, hacer todo lo que sigue -->
         const containerImage = document.getElementById("imageRender");
         //img tag
-        const input = document.createElement("input")
-        input.type = "image"
-        input.src = URL.createObjectURL(imageInput.files[i])
+        const img = document.createElement("img")
+        img.type = "image"
+        img.src = URL.createObjectURL(imageInput.files[i])
         
         //img info
         const imageInfo = document.createElement('span');
@@ -25,7 +25,7 @@ imageInput.onchange = function() {
         })
         //inserto los tags al HTML
         containerImage.appendChild(imageInfo);
-        imageInfo.appendChild(input);
+        imageInfo.appendChild(img);
         imageInfo.appendChild(deleteButton);
     }; //fin de la presente iteracion, continuar con el siguiente archivo, si es que hay mas.
 };

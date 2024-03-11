@@ -64,7 +64,7 @@
     justify-content: center;
     gap: 5px;
 }
-#imageRender > span > input {
+#imageRender > span > img {
     width: 150px;
     border-radius: 5px;
     border: solid 1px black;
