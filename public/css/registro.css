@@ -134,47 +134,54 @@ input[type="file"] {
 
 #errorNombre{
     display: none;
-    color: red;
+    color: rgb(187, 0, 0);
     font-size: 75%;
     margin: 0 0 5px 0;
 }
 #errorApellido{
     display: none;
-    color: red;
+    color: rgb(187, 0, 0);
     font-size: 75%;
     margin: 0 0 5px 0;
 }
 #errorImagen{
     display: none;
-    color: red;
+    color: rgb(187, 0, 0);
     font-size: 75%;
     
 }
 #errorEmail{
     display: none;
-    color: red;
+    color: rgb(187, 0, 0);
     font-size: 75%;
     margin: 0 0 5px 0;
 
 }
 #errorUserName{
     display: none;
-    color: red;
+    color: rgb(187, 0, 0);
     font-size: 75%;
     margin: 0 0 5px 0;
 }
 #errorPassword{
     display: none;
-    color: red;
+    color: rgb(187, 0, 0);
     font-size: 75%;
     margin: 0 0 5px 0;
 }
 #errorRepetirPassword{
     display: none;
-    color: red;
+    color: rgb(187, 0, 0);
     font-size: 75%;
     margin: 0 0 5px 0;
 
+}
+
+#errorFechaNacimiento{
+    display: none;
+    color: rgb(187, 0, 0);
+    font-size: 75%;
+    margin: 0 0 5px 0;
 }
 
 

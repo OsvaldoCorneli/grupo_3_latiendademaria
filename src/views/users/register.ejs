@@ -51,14 +51,17 @@
                 <div class="inputform">
 
                     <label for="birthdate">fecha de nacimiento:</label>
+                    <span id="errorFechaNacimiento">Mensaje de error</span>
                     <input 
+                    class="requiredinput"
                     type="date"
                     name="fechaNacimiento"
                     id="fechaNacimiento"
-                    value="<%= body.fechanacimiento? body.fechanacimiento : null  %>"
+                    required
+                    value="<%= body.fechaNacimiento? body.fechaNacimiento : null  %>"
                     />
-                    <% if (locals.errors && errors.fechanacimiento) { %>
-                        <p class="errors"><%= errors.fechanacimiento.msg %></p>
+                    <% if (locals.errors && errors.fechaNacimiento) { %>
+                        <p class="errors"><%= errors.fechaNacimiento.msg %></p>
                     <% } %>
                 </div>
 
@@ -92,13 +95,13 @@
             <div class="inputform">
                 <label for="codigoPostal">Codigo postal:</label>
                 <input 
-                    type="text"
+                    type="number"
                     name="codigoPostal"
                     id="codigoPostal"
                     placeholder="Codigo Postal"
                     minlength="4"
                     maxlength="10"
-                    value="<%= body.codigoPostal? body.codigoPostal : null %>"
+                    value="<%= body.codigoPostal? body.codigoPostal :  parseInt(0) %>"
                 />
                 <% if (locals.errors && errors.codigoPostal) { %>
                     <p class="errors"><%= errors.codigoPostal.msg %></p>
@@ -128,7 +131,7 @@
                     placeholder="Numero"
                     minlength="10"
                     maxlength="20"
-                    value="<%= body.calleNumero? body.calleNumero : null %>"
+                    value="<%= body.calleNumero ? body.calleNumero : parseInt(0) %>"
                     />
                     <% if (locals.errors && errors.calleNumero) { %>
                         <p class="errors"><%= errors.calleNumero.msg %></p>
@@ -144,7 +147,6 @@
                 name="imagen"
                 id="imageinput"
                 accept="image/jpeg, image/png, image/jpg"
-                value="<%= body.imagen? body.imagen : null %>"
             />
             <% if (locals.errors && errors.imagen) { %>
                 <p class="errors"><%= errors.imagen.msg %></p>
@@ -210,7 +212,7 @@
                     placeholder="Nombre de usuario"
                     required
                     minlength="6"
-                    value="<%= body.username? body.username : null %>"
+                    value="<%= body.userName? body.userName : null %>"
                 />
                 <% if (locals.errors && errors.username) { %>
                     <p class="errors"><%= errors.username.msg %></p>

@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 const path = require('path');
 const categories = require('../models/categories');
 const Colors = require('../models/colors');
+const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
 const extNames = ['.jpg', '.png', '.jpeg']
 const maxFileSize = 2048000 //bytes
@@ -48,13 +49,14 @@ module.exports = {
         return [
             body('password')
                 .notEmpty().withMessage('La contraseña no puede estar en blanco')
-                .isLength({min: 6}).withMessage('la contraseña debe ser mayor a 6 caracteres'),
+                .isLength({min: 8}).withMessage('la contraseña debe ser mayor a 8 caracteres')
+                .custom(value => regexPassword.test(value)).withMessage('La contraseña debe contener letras mayúsculas, minúsculas, un número y un carácter especial.'),
             body('repassword').custom((value, {req}) => {
                 return value === req.body.password
             }).withMessage('las contraseñas no coinciden'),
             body('userName')
                 .notEmpty().withMessage('Debes completar el nombre')
-                .isLength({min: 4, max: 20}).withMessage('el nombre debe ser mayor a 4 caracteres y menor a 20')
+                .isLength({min: 6}).withMessage('el nombre debe ser mayor a 6 caracteres')
                 .custom(async (value) => {
                     const users1 = await users.index();
                     const user = users1.some((u) => u.username == value);
@@ -72,36 +74,36 @@ module.exports = {
                  const anotherUserWithSameEmail = user1.some((user) => user.email == value);
 
                   if (anotherUserWithSameEmail) {
-                     throw new Error('El email ya está en uso');
+                     throw new Error('Este email ya esta registrado');
                      }
 
                      return true;
                 }),
             body('fechaNacimiento')
                 .isISO8601().withMessage('ingresar una fecha valida'),
-            body('provincia')
-                .notEmpty().withMessage('selecciona una provincia'),
-            body('codigoPostal')
-                .isNumeric({ min: 1, max: 10000 }).withMessage('solo numeros')
-                .notEmpty().withMessage('el codigo postal no puede estar vacio'),
-            body('calle')
-                .isLength({min: 3, max:30}) 
-                .notEmpty().withMessage('la calle no puede estar vacia'),
-            body('calleNumero')
-                .isNumeric({ min: 1, max: 10000 }).withMessage('ingresar el numero de calle'),
-            // body('imagen')
-            //     .custom((value, {req})=>{
-            //         const extensionName = req.files.map((x) => {return path.extname(x.path)})
-            //         return extensionName.some((ext) => extNames.includes(ext)) 
-            //     }).withMessage(`solo se admiten archivos ${extNames.join(', ')}`)
-            //     .custom((value, {req})=>{
-            //         const filesSizes = req.files.map((x) => {return x.size})
-            //         return !filesSizes.some((file) => file >= maxFileSize)
-            //     }).withMessage(`el tamaño maximo permitido por imagen es ${maxFileSize/1024} KB`),
-            body('piso')
-                .isLength({max:10}), 
-            body('departamento')
-                .isLength({max:10}),
+            // body('provincia')
+            //     .notEmpty().withMessage('selecciona una provincia'),
+            // body('codigoPostal')
+            //     .isNumeric({ min: 1, max: 10000 }).withMessage('solo numeros')
+            //     .notEmpty().withMessage('el codigo postal no puede estar vacio'),
+            // body('calle')
+            //     .isLength({min: 3, max:30}) 
+            //     .notEmpty().withMessage('la calle no puede estar vacia'),
+            // body('calleNumero')
+            //     .isNumeric({ min: 1, max: 10000 }).withMessage('ingresar el numero de calle'),
+            body('imagen')
+                .custom((value, {req})=>{
+                    const extensionName = req.files.map((x) => {return path.extname(x.path)})
+                    return extensionName.some((ext) => extNames.includes(ext)) 
+                }).withMessage(`solo se admiten archivos ${extNames.join(', ')}`)
+                .custom((value, {req})=>{
+                    const filesSizes = req.files.map((x) => {return x.size})
+                    return !filesSizes.some((file) => file >= maxFileSize)
+                }).withMessage(`el tamaño maximo permitido por imagen es ${maxFileSize/1024} KB`),
+            // body('piso')
+            //     .isLength({max:10}), 
+            // body('departamento')
+            //     .isLength({max:10}),
         ]
     },
     editUser: function () {
@@ -120,31 +122,31 @@ module.exports = {
                    }),
             body('fechaNacimiento')
                 .isISO8601().withMessage('ingresar una fecha valida'),
-            body('provincia')
-                .notEmpty().withMessage('selecciona una provincia'),
-            body('localidad')
-                .notEmpty().withMessage('selecciona una localidad'),
-            body('codigoPostal')
-                .isNumeric({ min: 1, max: 10000 }).withMessage('solo numeros')
-                .notEmpty().withMessage('el codigo postal no puede estar vacio'),
-            body('calle')
-                .isLength({min: 3, max:30})
-                .notEmpty().withMessage('la calle no puede estar vacia'),
-            body('calleNumero')
-                .isNumeric({ min: 1, max: 10000 }).withMessage('ingresar el numero de calle'),
-            // body('imagen')
-            //     .custom((value, {req})=>{
-            //         const extensionName = req.files.map((x) => {return path.extname(x.path)})
-            //         return extensionName.some((ext) => extNames.includes(ext))
-            //     }).withMessage(`solo se admiten archivos ${extNames.join(', ')}`)
-            //     .custom((value, {req})=>{
-            //         const filesSizes = req.files.map((x) => {return x.size})
-            //         return !filesSizes.some((file) => file >= maxFileSize)
-            //     }).withMessage(`el tamaño maximo permitido por imagen es ${maxFileSize/1024} KB`),
-            body('piso', 'no puede superar 10 caracteres')
-                .isLength({max:10}),
-            body('departamento', 'no puede superar 10 caracteres')
-                .isLength({max:10}) 
+            // body('provincia')
+            //     .notEmpty().withMessage('selecciona una provincia'),
+            // body('localidad')
+            //     .notEmpty().withMessage('selecciona una localidad'),
+            // body('codigoPostal')
+            //     .isNumeric({ min: 1, max: 10000 }).withMessage('solo numeros')
+            //     .notEmpty().withMessage('el codigo postal no puede estar vacio'),
+            // body('calle')
+            //     .isLength({min: 3, max:30})
+            //     .notEmpty().withMessage('la calle no puede estar vacia'),
+            // body('calleNumero')
+            //     .isNumeric({ min: 1, max: 10000 }).withMessage('ingresar el numero de calle'),
+            body('imagen')
+                .custom((value, {req})=>{
+                    const extensionName = req.files.map((x) => {return path.extname(x.path)})
+                    return extensionName.some((ext) => extNames.includes(ext))
+                }).withMessage(`solo se admiten archivos ${extNames.join(', ')}`)
+                .custom((value, {req})=>{
+                    const filesSizes = req.files.map((x) => {return x.size})
+                    return !filesSizes.some((file) => file >= maxFileSize)
+                }).withMessage(`el tamaño maximo permitido por imagen es ${maxFileSize/1024} KB`),
+            // body('piso', 'no puede superar 10 caracteres')
+            //     .isLength({max:10}),
+            // body('departamento', 'no puede superar 10 caracteres')
+            //     .isLength({max:10}) 
         ]
     },
     formProducto: function () {

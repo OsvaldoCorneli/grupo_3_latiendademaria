@@ -1,7 +1,9 @@
 window.addEventListener("load", async function(){
-    let usuarios = await fetch("http://localhost:3001/api/users")
+
+    let usuarios = await fetch("http://localhost:3001/api/users?key=allUsers")
     .then(response => response.json())
     .then(data => data)
+    const day = currentDay()
     let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     let regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     let provincias = document.querySelector('select[name="provincia"]');
@@ -13,15 +15,7 @@ window.addEventListener("load", async function(){
     let apellido = document.querySelector("#apellido")
     let inputImagen = document.querySelector("#imageinput")
     const iconoCheck = document.getElementById('iconoCheck');
-
-    provincias.addEventListener('change', function() {
-        previous? previous.style = "display:none;" : null;
-        let prov = provincias.selectedOptions[0].innerText
-        let selected = 'label#'+prov.split(" ").join("")
-        previous = document.querySelector(selected)
-        previous.style = "display:block;"
-    })
-    
+    const fechaNacimiento = document.getElementById('fechaNacimiento')
     let password = document.querySelector('#password')
     let repassword = document.querySelector('#repassword')
     const errorNombre = document.querySelector("#errorNombre")
@@ -31,6 +25,17 @@ window.addEventListener("load", async function(){
     const errorPassword = document.querySelector("#errorPassword")
     const errorRepetirPassword = document.querySelector("#errorRepetirPassword")
     const errorImagen = document.querySelector("#errorImagen")
+    const errorFechaNacimiento = document.querySelector("#errorFechaNacimiento")
+
+    provincias.addEventListener('change', function() {
+        previous? previous.style = "display:none;" : null;
+        let prov = provincias.selectedOptions[0].innerText
+        let selected = 'label#'+prov.split(" ").join("")
+        previous = document.querySelector(selected)
+        previous.style = "display:block;"
+    })
+    
+    
     nombre.addEventListener("input", function(e){
          
         if(e.target.value === ""){
@@ -115,7 +120,7 @@ window.addEventListener("load", async function(){
 
         else if(usuarios.some(element => element.userName === e.target.value)){
             userName.style.border = '2px solid red'
-            errorUserName.textContent = "Este nombre de usuario ya existe"
+            errorUserName.textContent = "El nombre de usuario ya está en uso"
             errorUserName.style.display = 'block'
         }
         else{
@@ -191,11 +196,120 @@ window.addEventListener("load", async function(){
      }
 
      })
+     
+
+     submitButton.addEventListener("click", function(e){
+       
+        if(nombre.style.border == '2px solid red' || apellido.style.border == '2px solid red' || email.style.border == '2px solid red' 
+        || userName.style.border == '2px solid red' || password.style.border == '2px solid red' || repassword.style.border == '2px solid red' || !inputImagen.value 
+        || errorImagen.style.display === "block" || fechaNacimiento.style.border == '2px solid red' ){
+            e.preventDefault() 
+           if(!inputImagen.value){
+            errorImagen.textContent = "Debe cargar una imagen de perfil, formatos:.jpeg, .png, .jpg"
+            errorImagen.style.display = "block"
+            iconoCheck.style.display = 'none'; 
+           }
+        }
+
+
+
+     })
+
+
+     fechaNacimiento.addEventListener("change", function(e){
+        if(e.target.value === ""){
+            fechaNacimiento.style.border = '2px solid red'
+            errorFechaNacimiento.textContent = 'Debe completar este campo'
+            errorFechaNacimiento.style.display = 'block'
+           
+        }
+        else if(fechaFutura(day,e.target.value)){
+            fechaNacimiento.style.border = '2px solid red'
+            errorFechaNacimiento.textContent = 'No puede seleccionar una fecha en el futuro'
+            errorFechaNacimiento.style.display = 'block'
+        }
+        else if(mayorEdad(day,e.target.value)){
+            fechaNacimiento.style.border = '2px solid red'
+            errorFechaNacimiento.textContent = 'Debes tener o ser mayor de 16 años'
+            errorFechaNacimiento.style.display = 'block'
+        }
+        else{
+            fechaNacimiento.style.border = '2px solid green'
+            errorFechaNacimiento.style.display = 'none'
+        }
+
+     })
+
+
     
   
     
 
+     function currentDay(){
 
+      const date = new Date()
+      const year = date.getFullYear();
+      let mes = date.getMonth() + 1; 
+      let dia = date.getDate();
+      
+      return `${year}-${mes}-${dia}`
+
+     }
+
+     function fechaFutura(hoy, value){
+        let interruptor = 0
+        const hoySplit = hoy.split("-") 
+        const valueSplit = value.split("-") 
+        
+        if(parseInt(hoySplit[0]) < parseInt(valueSplit[0])){
+            interruptor = 1
+            
+        } 
+        else if(parseInt(hoySplit[1]) < parseInt(valueSplit[1]) && parseInt(hoySplit[0]) === parseInt(valueSplit[0])){
+            interruptor = 1
+            }
+        else if(parseInt(hoySplit[1]) === parseInt(valueSplit[1]) && parseInt(hoySplit[2]) < parseInt(valueSplit[2]) && parseInt(hoySplit[0]) <= parseInt(valueSplit[0])){
+            interruptor = 1
+        }
+
+        if(interruptor === 0){
+            return false
+           }
+        else{ 
+            return true
+        }
+            
+        }
+
+        function mayorEdad(hoy, value){
+        let interruptor = 0;
+        const hoySplit = hoy.split("-") //[ "2024", "3", "11" ]
+        const valueSplit = value.split("-") //[ "2024", "12", "10" ]
+
+        if(parseInt(hoySplit[0]) - parseInt(valueSplit[0]) < 16){
+            interruptor = 1
+            
+        }
+        else if(parseInt(hoySplit[0]) - parseInt(valueSplit[0]) == 16 && parseInt(hoySplit[1]) < parseInt(valueSplit[1]) ){
+            interruptor = 1
+            
+        }
+        else if(parseInt(hoySplit[1]) === parseInt(valueSplit[1]) && parseInt(hoySplit[2]) < parseInt(valueSplit[2])){
+            interruptor = 1
+            
+        }
+        
+        if(interruptor === 0){
+            return false
+           }
+        else{ 
+            return true
+        }
+                
+        }
+
+
+     
 
 
     // let formRegistro = document.querySelector('form');

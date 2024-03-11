@@ -65,9 +65,13 @@ module.exports = {
     },
     postCreateForm: async function (req,res) {
       try{
+        console.log("req", req.body)
+        console.log("file", req.files)
         const errores = validationResult(req)
+        console.log("ERRORES", errores)
         if (errores.isEmpty()) {
             const newUser = await users.create(req.body, req.files)
+            console.log("newusers", newUser)
             if (newUser) {
                 res.redirect('/users/login')
             }

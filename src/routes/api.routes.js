@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const api = require('../controllers/api.js');
 const isLogged = require('../middlewares/isLogged.js')
+const forRegister = require('../middlewares/forRegister.js')
 
 router.get('/products', api.products.list);
-router.get('/users', api.users.all);
+router.get('/users', forRegister, api.users.all);
 router.get('/payment', isLogged, api.payments.all);
 router.post('/payment', isLogged, api.payments.new);
 router.put('/payment', isLogged, api.payments.update);

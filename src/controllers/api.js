@@ -91,7 +91,7 @@ module.exports = {
         add: async function (req,res) {
             try {
                 let { product } = req.body
-                user = req.session.user.id
+                const user = req.session.user.id
                 const addFav = await favorites.add(user, product)
                 res.status(200).json(addFav)
             } catch (error) {
