@@ -1,31 +1,34 @@
-const { body, validationResult } = require('express-validator');
+const { body, checkSchema, validationResult } = require('express-validator');
 const productos = require('../models/products');
 const Images = require('../models/images')
 const path = require('path');
 const categories = require('../models/categories');
 const Colors = require('../models/colors');
-const upload = require('./multerMid')
 
+const extNames = ['.jpg', '.png', '.jpeg']
+const maxFileSize = 2048000 //bytes
 
 module.exports = {
     formProducto: function () {
         return [
             body('name')
                 .notEmpty().withMessage('completar el nombre')
-                .isLength({min: 4, max:50}).withMessage('el nombre debe ser entre 4 a 50 caracteres'),
+                .isLength({min: 5, max:50}).withMessage('el nombre debe ser entre 4 a 50 caracteres'),
             body('description')
                 .notEmpty().withMessage('no puede estar vacio')
-                .isLength({max: 256}).withMessage('Maximo 256 caracteres'),
-            // body('image')
-            //  .custom((value, {req})=>{
-            //         const extensionName = req.files.map((x) => {return path.extname(x.path)})
-            //         return extensionName.some((ext) => extNames.includes(ext))
-            //     }).withMessage(`solo se admiten archivos ${extNames.join(', ')}`)
-            //     .custom((value, {req})=>{
-            //         const filesSizes = req.files.map((x) => {return x.size})
-            //         return !filesSizes.some((file) => file >= maxFileSize)
-            //     }).withMessage(`el tamaño maximo permitido por imagen es ${maxFileSize/1024} KB`),
+                .isLength({min: 20, max: 256}).withMessage('Maximo 256 caracteres'),
+            body('image')
+                //.notEmpty().withMessage("subir al menos una imagen"),
+                .custom((value, {req})=>{
+                    const extensionName = req.files.map((x) => {return path.extname(x.path)})
+                    return extensionName.some((ext) => extNames.includes(ext))
+                }).withMessage(`solo se admiten archivos ${extNames.join(', ')}`)
+                .custom((value, {req})=>{
+                    const filesSizes = req.files.map((x) => {return x.size})
+                    return !filesSizes.some((file) => file >= maxFileSize)
+                }).withMessage(`el tamaño maximo permitido por imagen es ${maxFileSize/1024} KB`),
             body('line')
+                .notEmpty().withMessage("seleccionar una linea de producto")
                 .custom(value => {return value == 'artesanal' || value == 'sublimada'}).withMessage('Campo "Linea" inexistente'),
             body('category')
             .custom(async (value) => {
@@ -39,13 +42,14 @@ module.exports = {
                     return allColors.some(({hex})=> hex == value.toUpperCase())
                 }).withMessage('Campo "Color" no existe'),
             body('price')
-                .notEmpty()
+                .notEmpty().withMessage("el precio no puede estar vacio")
                 .isDecimal().withMessage('Debe ser un numero con 2 decimales maximo'),
             body('stock')
                 .notEmpty()
                 .isNumeric().withMessage('Solo numeros')
         ]
     },
+
     formEditProducto: function () {
         return [
             body('id')
@@ -86,7 +90,7 @@ module.exports = {
                 }).withMessage('Campo "Color" no existe'),
             body('price')
                 .notEmpty()
-                .isDecimal().withMessage('Debe ser un numero con 2 decimales maximo'),
+                .isNumeric().withMessage('Debe ser un numero'),
             body('stock.*')
                 .notEmpty()
                 .isNumeric().withMessage('Solo numeros')

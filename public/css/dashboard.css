@@ -149,3 +149,14 @@ button.delete:hover {
     max-height: 500px;
     overflow-y: scroll;
 }
+
+.requiredinput:valid {
+    border: 2px solid green;
+}
+.requiredinput:invalid {
+    border: 2px solid red;
+}
+.errors {
+    font-weight: 400;
+    color: red
+}

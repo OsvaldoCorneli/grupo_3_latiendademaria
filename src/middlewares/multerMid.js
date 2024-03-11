@@ -17,25 +17,34 @@ let storage = multer.diskStorage({
 	}
 })
 
+function extNames(req,file,cb) {
+	const validTypes = ['image/jpeg', 'image/png', 'image/jpg'].includes(file.mimetype)
+	if (!validTypes) {
+		cb(null, false)
+	} else {
+		cb(null,true)
+	}
+}
 
 let upload = multer({
-	fileFilter: function (req,file,cb) {
-		const validTypes = ['image/jpeg', 'image/png', 'image/jpg'].includes(file.mimetype)
-		const fileSize = file.size < 2048000;
-		const files = req.files.length <= 5;
-		if (validTypes && fileSize && files){
-			cb(null, true)
-		} else if (!validTypes && fileSize && files) {
-			cb(new Error("los formatos de imagen permitidos son .jpeg, .jpg y .png"))
-		} else if (validTypes && !fileSize && files) {
-			cb(new Error("las imagenes deben pesar menos de 2MB"))
-		} else if (validTypes && fileSize && !files) {
-			cb(new Error("limite maximo de 5 imagenes en total"))
-		} else {
-			cb(null,false)
-		}
-	},
+	// fileFilter: extNames,
+	// limits: {
+	// 	fileSize: 1 * 1024 * 1024,  // 1 MB
+	// 	files: 4,
+	// },
 	storage: storage,
 })
+
+function uploadImages (req,res,next) {
+	upload.any()(req, res, function (err) {
+		if (err instanceof multer.MulterError) {
+			// A Multer error occurred when uploading.
+			console.log(err)
+		} else if (err) {
+		  // An unknown error occurred when uploading.
+		}
+		// Everything went fine.
+		next()
+	})}
 
 module.exports = upload

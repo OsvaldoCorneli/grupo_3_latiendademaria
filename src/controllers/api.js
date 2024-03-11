@@ -2,6 +2,7 @@ const products = require('../models/products');
 const payments = require('../models/payments');
 const categories = require('../models/categories.js');
 const favorites = require('../models/favorites');
+const colors = require('../models/colors.js'); 
 
 module.exports = {
     products: {
@@ -92,6 +93,16 @@ module.exports = {
                 user = req.session.user.id
                 const addFav = await favorites.add(user, product)
                 res.status(200).json(addFav)
+            } catch (error) {
+                res.status(500).json(error.message)
+            }
+        }
+    },
+    colors: {
+        list: async function (req,res) {
+            try {
+                const allColors = await colors.all()
+                res.status(200).json(allColors)
             } catch (error) {
                 res.status(500).json(error.message)
             }

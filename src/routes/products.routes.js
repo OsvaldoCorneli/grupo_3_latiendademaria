@@ -1,11 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const multer = require('multer')
 const products = require('../controllers/product');
 const upload = require('../middlewares/multerMid');
-const validacionForm = require('../middlewares/validacionForm');
 const validacionProducts = require('../middlewares/validacionProducts');
-
 
 router.route('/')
     .get(products.index)  // para primera vista o resetear filtro
@@ -15,16 +12,7 @@ router.get('/filter', products.filter);
 
 router.route('/create') 
     .get(products.getCreateForm)
-    .post(function(req,res,next) {
-        upload.any()(req,res,function(err){
-            if(err instanceof multer.MulterError) {
-                console.log(err)
-            } else if (err) {
-                console.log(err)
-            }
-            next()
-        })
-    },
+    .post(upload.any(),
         validacionProducts.formProducto(),
         products.postCreateForm
     )

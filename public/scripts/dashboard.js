@@ -1,134 +1,143 @@
 const form = document.querySelector('form#payment')
 const host = window.location.host
 
-new Chart("paymentChart", {
-    type: "line",
-    data: {
-        labels: [],
-        datasets: [{
-            data: [],
-            borderColor: "red",
-            fill: false
-        }],
-    },
-    options: {
-    legend: {display: false}
+let errores = {}
+function validateForm(input){
+    switch (input) {
+        case 'desde':
+            if (form.desde.value.length != 10) errores.desde = "formato de fecha invalido"
+            else if (Date.parse(form.desde.value) > Date.parse(form.hasta.value)) errores.desde = "la fecha desde no puede ser mayor a fecha hasta"
+            break
+        case 'hasta':
+            if (form.hasta.value.length != 10) errores.hasta = "formato de fecha invalido"
+            else if (Date.parse(form.desde.value) > Date.parse(form.hasta.value)) errores.hasta = "la fecha hasta no puede ser menor a fecha desde"
+            break
+        case 'estado':
+            if (form.estado.value.length == 0) errores.estado = "seleccionar un estado"
+            break
+        default:
+            break
     }
-});
-new Chart("userChart", {
-    type: "doughnut",
-    data: {
-        labels: [],
-        datasets: [{
-        backgroundColor: [
-                "rgba(0,0,255,1.0)",
-                "rgba(0,0,255,0.8)",
-                "rgba(0,0,255,0.6)"
-            ],
-            data: []
-        }]
-    },
-    options: {
-        title: {
-            display: true,
-            text: "Top 3 Usuarios con mas volumen"
+}
+
+Array.from(form).forEach((key,i) => {
+    key.onchange= () => {
+        if (document.querySelector(`small#${key.name}`)) document.querySelector(`small#${key.name}`).remove()
+        if (errores.hasOwnProperty(key.name)) delete errores[key.name]
+        validateForm(key.name)
+        if (errores[key.name]) {
+            let htmlError = `<small id="${key.name}" class="errors">${errores[key.name]}</small>`
+            key.insertAdjacentHTML('beforebegin',htmlError)
         }
     }
-});
-
-form.addEventListener('submit', (e) => {
-    e.preventDefault()
-    const fData = new FormData(form)
-    let desde = fData.get('desde')
-    let hasta = fData.get('hasta')
-    let estado = fData.get('estado')
-    const main = document.querySelector('div#container')
-    if (document.querySelector('#paymentChart')) {
-        let chart = document.querySelector('#paymentChart').parentNode
-        chart.remove()
+    key.onfocus = () => {
+        if (document.querySelector(`small#${key.name}`)) document.querySelector(`small#${key.name}`).remove()
+        if (errores.hasOwnProperty(key.name)) delete errores[key.name]
+        validateForm(key.name)
+        if (errores[key.name]) {
+            let htmlError = `<small id="${key.name}" class="errors">${errores[key.name]}</small>`
+            key.insertAdjacentHTML('beforebegin',htmlError)
+        }
     }
-    const chart = `<div> \n
-            <h3>Grafico Pagos</h3>\n
-            <canvas id="paymentChart" style="width:100%;max-width:700px"></canvas>\n
-        </div>`
-    main.insertAdjacentHTML("afterbegin", chart)
+})
 
-    const ultimosPagos = document.querySelector('.lastsales')
-    
-    desde = desde? desde : new Date(2023,10,1,0,0,0).toISOString().split('T')[0];
-    hasta = hasta? hasta : new Date(2023,11,31,0,0,0).toISOString().split('T')[0];
-    form.desde.value = desde
-    form.hasta.value = hasta
-    fetch(`http://${host}/api/payment?desde=${desde}&hasta=${hasta}&estado=${estado}`)
-        .then((response) => response.json())
-        .then(({grafico, data, topUser}) => {
-            if (data.length == 0) throw alert('No Hay Registros para la consulta')
-            new Chart("paymentChart", {
-                type: "line",
-                data: {
-                    labels: grafico.map(({fecha}) => {return fecha}),
-                    datasets: [{
-                        data: grafico.map(({total}) => {return total}),
-                        borderColor: "red",
-                        fill: false
-                    }]
-                },
-                options: {
-                legend: {display: false}
-                }
-            });
-            new Chart("userChart", {
-                type: "doughnut",
-                data: {
-                    labels: topUser.map(u => {return u.nombre}),
-                    datasets: [{
-                    backgroundColor: [
-                            "green",
-                            "red",
-                            "blue"
-                        ],
-                        data: topUser.map(u => {return u.totalSales})
-                    }]
-                },
-                options: {
-                    title: {
-                        display: true,
-                        text: "Top 3 Usuarios con mas volumen"
+form.onsubmit = (e) => {
+    if(Object.keys(errores).length > 0) {
+        e.preventDefault()
+        alert('corregir los errores del formulario')
+    } else {
+        e.preventDefault()
+        const charts = document.querySelectorAll('#paymentChart,#userChart')
+        if (charts) {
+            charts.forEach(c => c.parentNode.remove())
+            // document.querySelector('#paymentChart').parentNode
+            // chart.remove()
+        }
+        const main = document.querySelector('div#container')
+        const chart = `<div class="saleschart"> \n
+                <h3>Grafico Pagos</h3>\n
+                <canvas id="paymentChart" style="width:100%;max-width:700px"></canvas>\n
+            </div>`
+        main.insertAdjacentHTML("afterbegin", chart)
+        const topUserContainer = document.querySelector('div#topuser')
+        const topUserChart = `<div class="topuser">
+                <canvas id="userChart" style="width:100%;max-width:700px"></canvas>
+            </div>`
+        topUserContainer.insertAdjacentHTML("afterbegin",topUserChart)
+
+        const ultimosPagos = document.querySelector('.lastsales')
+        
+        fetch(`http://${host}/api/payment?desde=${form.desde.value}&hasta=${form.hasta.value}&estado=${form.estado.value}`)
+            .then((response) => response.json())
+            .then(({grafico, data, topUser}) => {
+                if (data.length == 0) throw alert('No Hay Registros para la consulta')
+                new Chart("paymentChart", {
+                    type: "line",
+                    data: {
+                        labels: grafico.map(({fecha}) => {return fecha}),
+                        datasets: [{
+                            data: grafico.map(({total}) => {return total}),
+                            borderColor: "red",
+                            fill: false
+                        }]
+                    },
+                    options: {
+                    legend: {display: false}
                     }
-                }
-            });
-            let rows = ""
-            data.sort((a,b) => Date.parse(b.created_at) - Date.parse(a.created_at))
-            data.forEach(({id, total, status, created_at, updated_at}) => {
-                const fecha = new Date(created_at)
-                rows += `<tr>\n
-                    <td><input type="submit" value=${id} name="detalle" class="button"/></td>\n
-                    <td class="number">${total}</td><td><i class="${status}">${status}</i></td>\n
-                    <td>${fecha.toLocaleString()}</td>\n
-                </tr>`
-            })
-            document.querySelector('#emptyRow').parentNode.parentNode.remove()
-            const tablaVacia = `<table>\n
-            <caption>Ultimos Pagos</caption>\n
-            <tbody>\n
-                <tr><th>Detalle</th><th>Total</th><th>Estado</th><th>Fecha</th></tr>\n
-                <tr id="emptyRow"></tr>\n
-            </tbody>\n
-            </table>`
-            ultimosPagos.insertAdjacentHTML('afterbegin', tablaVacia)
-            document.querySelector('#emptyRow').insertAdjacentHTML('beforebegin', rows)
-            let detalleInput = document.querySelectorAll('input[type="submit"]')
-            detalleInput.forEach(input => {
-                input.addEventListener('click', (event) => {
-                    event.preventDefault()
-                    detallePayment(event.target.value)
+                });
+                new Chart("userChart", {
+                    type: "doughnut",
+                    data: {
+                        labels: topUser.map(u => {return u.nombre}),
+                        datasets: [{
+                        backgroundColor: [
+                                "green",
+                                "red",
+                                "blue"
+                            ],
+                            data: topUser.map(u => {return u.totalSales})
+                        }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: "Top 3 Usuarios con mas volumen"
+                        }
+                    }
+                });
+                let rows = ""
+                data.sort((a,b) => Date.parse(b.created_at) - Date.parse(a.created_at))
+                data.forEach(({id, total, status, created_at, updated_at}) => {
+                    const fecha = new Date(created_at)
+                    rows += `<tr>\n
+                        <td><input type="submit" value=${id} name="detalle" class="button"/></td>\n
+                        <td class="number">${total}</td><td><i class="${status}">${status}</i></td>\n
+                        <td>${fecha.toLocaleString()}</td>\n
+                    </tr>`
+                })
+                document.querySelector('#emptyRow').parentNode.parentNode.remove()
+                const tablaVacia = `<table>\n
+                <caption>Ultimos Pagos</caption>\n
+                <tbody>\n
+                    <tr><th>Detalle</th><th>Total</th><th>Estado</th><th>Fecha</th></tr>\n
+                    <tr id="emptyRow"></tr>\n
+                </tbody>\n
+                </table>`
+                ultimosPagos.insertAdjacentHTML('afterbegin', tablaVacia)
+                document.querySelector('#emptyRow').insertAdjacentHTML('beforebegin', rows)
+                let detalleInput = document.querySelectorAll('input[type="submit"]')
+                detalleInput.forEach(input => {
+                    input.addEventListener('click', (event) => {
+                        event.preventDefault()
+                        detallePayment(event.target.value)
+                    })
                 })
             })
+        .catch(error => {
+            console.log(error);
         })
-    .catch(error => {
-        console.log(error);
-    })
-})
+    }
+};
 
 function detallePayment(id) {
     fetch(`http://${host}/api/payment/${id}`)

@@ -93,5 +93,27 @@ module.exports = {
         if (fs.readdirSync(publicPath+'/images/uploads').includes(path.split('uploads/')[1])) {
             fs.rmSync(publicPath+path)
         }
+    },
+    parsePath: function (images) {
+        function replaceAll(string) {
+            let replaced = ''
+            for (let i in string) {
+                if (string[i] == '\\') {
+                    replaced += '/'
+                } else {
+                    replaced += string[i]
+                }
+                if (+i == string.length-1) {
+                    return replaced
+                }
+            };
+        }
+        let imageUploaded = Array.isArray(images)? images : [images];
+        let parsedPaths = []
+        imageUploaded.forEach((file) => {
+            file.path = replaceAll(file.path).split('public')[1]
+            parsedPaths.push(file)
+        })
+        return parsedPaths
     }
 }

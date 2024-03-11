@@ -3,13 +3,13 @@
 const form = document.querySelector('form')
 let errores = {}
 function validateForm(inputs) {
-    const {name, description, image, line, category, price } = form
+    const {name, description, image, line, category, price, stock, color } = document.querySelector('form')
     switch (inputs) {
         case 'name':
-            if (name.value.length <= 2 || name.value.length > 30) errores.name = "el nombre debe tener entre 2 a 30 caracteres";
+            if (name.value.length <= 5 || name.value.length > 30) errores.name = "el nombre debe ser mayor a 5 caracteres";
             break
         case 'description':
-            if (description.value.length <= 10 || description.value.length > 140) errores.description = "la descripcion debe tener entre 10 a 140 caracteres"
+            if (description.value.length <= 20 || description.value.length > 140) errores.description = "la descripcion debe ser mayor a 20 caracteres"
             break
         case 'line':
             if (!line.value) errores.line = "seleccionar una linea de producto"
@@ -20,6 +20,24 @@ function validateForm(inputs) {
         case 'price':
             if (!price.value) errores.price = "ingresar un precio"
             if (price.value <= 0) errores.price = "el precio debe ser mayor a 0"
+            break
+        case 'image':
+            let allowedExtension = ['image/jpeg', 'image/jpg', 'image/png'];
+            Array.from(image.files).forEach((file,i) => {
+                if (!allowedExtension.includes(file.type)) errores.image = `solo se permiten archivos ${allowedExtension.join(',')}`
+            })
+            break
+        case 'stock':
+            let stocks = Array.from(stock).length > 0? Array.from(stock) : [stock];
+            stocks.forEach((el) => {
+                if (el.value <= 0) errores.stock = "la cantidad debe ser mayor a 0"
+            })
+            break
+        case 'color':
+            let colors = Array.from(color).length > 0? Array.from(color) : [color];
+            colors.forEach((el,i) => {
+                if (colors.some((color,z) => color.value == el.value && z != i )) errores.color = "no puede haber 2 colores iguales"
+            })
             break
         default:
             break
