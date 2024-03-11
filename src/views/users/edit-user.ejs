@@ -19,7 +19,9 @@
             <form action="/users/<%= id %>/update?_method=PUT" method="POST" enctype="multipart/form-data">
                 <div class="inputform">
                     <label for="nombre">Nombre/s:</label>
+                    <span id="errorNombre">Mensaje de error</span>
                     <input 
+                        class="requiredinput"
                         type="text"
                         name="nombre"
                         id="nombre"
@@ -34,8 +36,10 @@
                 </div>
                 <div class="inputform">
                     <label for="apellido">Apellido/s:</label>
+                    <span id="errorApellido">Mensaje de error</span>
                     <input
                         id="apellido"
+                        class="requiredinput"
                         name="apellido"
                         type="text"
                         placeholder="Ingresar apellido"
@@ -47,8 +51,10 @@
                     <% } %>
                 </div>
                 <div class="inputform">
-                    <label for="fechaNacimiento">fecha de nacimiento:</label>
+                    <label for="birthdate">fecha de nacimiento:</label>
+                    <span id="errorFechaNacimiento">Mensaje de error</span>
                     <input 
+                    class="requiredinput"
                     type="date"
                     name="fechaNacimiento"
                     id="fechaNacimiento"
@@ -111,7 +117,6 @@
                     name="calle"
                     id="street"
                     placeholder="calle"
-                    required
                     minlength="5"
                     maxlength="20"
                     value="<%= body.calle? body.calle : calle %>"
@@ -164,7 +169,9 @@
             </div>
             <div class="inputform">
                 <label for="email">Email:</label>
+                <span id="errorEmail">Mensaje de error</span>
                 <input 
+                    class="requiredinput"
                     type="email"
                     name="email"
                     id="email"

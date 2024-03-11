@@ -116,6 +116,41 @@ input[type="file"] {
     color: red;
     font-weight: bold;
 }
+
+#errorNombre{
+    display: none;
+    color: rgb(187, 0, 0);
+    font-size: 75%;
+    margin: 0 0 5px 0;
+}
+#errorApellido{
+    display: none;
+    color: rgb(187, 0, 0);
+    font-size: 75%;
+    margin: 0 0 5px 0;
+}
+#errorImagen{
+    display: none;
+    color: rgb(187, 0, 0);
+    font-size: 75%;
+    
+}
+#errorEmail{
+    display: none;
+    color: rgb(187, 0, 0);
+    font-size: 75%;
+    margin: 0 0 5px 0;
+
+}
+
+#errorFechaNacimiento{
+    display: none;
+    color: rgb(187, 0, 0);
+    font-size: 75%;
+    margin: 0 0 5px 0;
+}
+
+
 @media (min-width: 760px){
 
     .contenedor-form{
