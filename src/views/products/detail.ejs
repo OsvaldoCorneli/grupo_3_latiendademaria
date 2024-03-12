@@ -33,7 +33,19 @@
             </section>
             <form class="form-detalle" action="/users/cart/<%= id %>" method="POST">
                 <input type="hidden" name="id" value="<%= detalle.id %>">
-                <h2 class="tittled"><%= name %></h2>
+                <h2 class="tittled"><%= name %>
+                    <span class="containerheart">
+                        <div id="heart" class="heart">
+                        <% if (locals.login) { %>
+                            <% if (favorites.some(prod => prod.id == id)) { %> 
+                                <div class=""></div>
+                            <% } else { %> 
+                                <div class="unheart"></div>
+                            <% } %>
+                        <% } %>
+                        </div>
+                    </span>
+                </h2>
                 <h2 class="precio">$<%= price %></h3>
                 <h5>cantidad: <%= stock %></h5>
                 <label for="cantidad">
@@ -63,64 +75,7 @@
     </main>
         
             <%- include('../partials/footer.ejs') %>
-     <script>
-        function redireccionarAlogin(){
-            const response = confirm("Debe iniciar sesion para agregar el producto al carrito")
-            if(response){
-               window.location.href = "/users/login"
-            } 
-        }
-
-        function addCart(id) {
-    const colorInput = document.querySelector(".color input:checked");
-    const cantidadInput = document.querySelector("#cantidad");
-
-    if (!colorInput || !cantidadInput) {
-        console.error('No se encontraron elementos de entrada de color o cantidad');
-        return;
-    }
-    const color = colorInput.value;
-    const cantidad = cantidadInput.value;
-
-        fetch(`/users/cart/${id}`, {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                id: id,
-                cantidad: cantidad,
-                color: color
-            })
-        })
-        .then(response => {
-            if (response.status === 500) {
-                throw new Error(`Error al agregar el producto: ${response.status}`);
-            }else{
-           return response.json()
-        }})
-        .then(respuesta => {
-
-            if(respuesta.success){
-              if(confirm(`${respuesta.message}, ¿Le gustaría ir al carrito?`)){
-                  window.location.href = "/cart"
-              }
-
-            }
-            else{
-                alert(respuesta.message)
-            }
-        })
-        .catch(error => {
-            console.error('Error al agregar el producto:', error);
-        });
-    }
-
-
-         
-        
-        
-
-     </script>       
+ 
+    <script src="\scripts\productDetail.js"></script>
 </body>
 </html>

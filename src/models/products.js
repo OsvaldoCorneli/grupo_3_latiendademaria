@@ -36,9 +36,9 @@ module.exports = {
             return error
         }
     },
-    detail: async function (id) {
+    detail: async function (id, userId) {
         try {
-            return await db.Products.findByPk(+id,{
+            const response = await db.Products.findByPk(+id,{
                 include: [
                     {
                         association: 'colors',
@@ -60,8 +60,9 @@ module.exports = {
                     }
                 ],
                 attributes: {exclude: ['category_id']},
-                logging: false
+                logging: false,
             })
+            return response
         } catch (error) {
             return error
         }
@@ -81,8 +82,7 @@ module.exports = {
             if (color) condition.colors = {...condition.colors, color_id: color};
             let pagination = {}
             if (page && perPage) pagination = {limit: +perPage, offset: ((+page-1)*+perPage)};
-
-            return await db.Products.findAll({
+            const filter = await db.Products.findAll({
                 include: [
                     {
                         association: 'colors',
@@ -104,20 +104,24 @@ module.exports = {
                         association: 'categories',
                         attributes: ['id','name'],
                         where: condition.categories
-                    }
+                    },
+                    {association: 'favorites'}
                 ],
                 where: condition.products,
                 attributes: {exclude: ['category_id']},
                 logging: false,
-                ...pagination
+                limit: pagination.limit,
+                offset: pagination.offset
             })
+            return filter
         } catch (error) {
+            console.log(error)
             return error
         }
     },
     create: async function (data, images) {
         try {
-            const { name, description, line, category, color, price, stock } = data
+            const { name, description, line, category, color, price, stock, imageHold } = data
             const newProduct = await db.Products.create({
                 name: name,
                 description: description,
@@ -126,8 +130,8 @@ module.exports = {
                 price: +price
             })
             if (newProduct) {
-                await Colors.createProductColor(color, stock, newProduct.id)
-                await Images.newProductImage(images, newProduct.id)
+                await Colors.createProductColor(color, stock, newProduct.id);
+                await Images.newProductImage(imageHold, images, newProduct.id)
                 return this.detail(newProduct.id)
             } else {
                 throw new Error('error al crear producto')
@@ -136,18 +140,19 @@ module.exports = {
             return error
         }
     },
-    edited: async function (body) {
+    edited: async function (body, files) {
         try {
-            await Images.editProductImages(body.imageHold, body.imagen, body.id)
-            await Colors.editProductColors(body.color, body.stock, body.id)
+            const { id, name, description, line, category, color, price, stock, imageHold } = body
+            await Images.editProductImages(imageHold, files, id)
+            await Colors.editProductColors(color, stock, id)
 
             await db.Products.update({
-                    name: body.name,
-                    description: body.description,
-                    category_id: +body.category,
-                    line: body.line,
-                    price: +body.price
-                },              
+                    name: name,
+                    description: description,
+                    category_id: +category,
+                    line: line,
+                    price: +price
+                },
                 {
                     where: {id: body.id}
             });
@@ -164,5 +169,8 @@ module.exports = {
         } catch (error) {
             return error
         }
+    },
+    deleteImages: function (images) {
+
     }
 }
