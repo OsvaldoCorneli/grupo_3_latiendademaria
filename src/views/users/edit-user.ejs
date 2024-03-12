@@ -94,14 +94,15 @@
                 </div>
             <div class="inputform">
                 <label for="codigoPostal">Codigo postal:</label>
+                <span id="errorCodigoPostal">Mensaje de error</span>
                 <input 
                     type="text"
                     name="codigoPostal"
                     id="codigoPostal"
                     placeholder="Codigo Postal"
                     required
-                    minlength="3"
-                    maxlength="20"
+                    minlength="2"
+                    maxlength="10"
                     value="<%= body.codigoPostal? body.codigoPostal : codigoPostal %>"
                 />
                 <% if (locals.errors && errors.codigoPostal) { %>
@@ -127,8 +128,9 @@
             </div>
             <div class="inputform">
                 <label for="calleNumero">Numero:</label>
+                <span id="errorNumero">Mensaje de error</span>
                 <input 
-                    type="number"
+                    type="text"
                     name="calleNumero"
                     id="calleNumero"
                     placeholder="Numero/Altura de calle"

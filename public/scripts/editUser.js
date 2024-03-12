@@ -15,17 +15,44 @@ let apellido = document.querySelector("#apellido")
 let inputImagen = document.querySelector("#imageinput")
 const iconoCheck = document.getElementById('iconoCheck');
 const fechaNacimiento = document.querySelector('#fechaNacimiento')
+let streetnumber = document.querySelector("#calleNumero")
+let codigoPostal = document.querySelector("#codigoPostal")
 const errorNombre = document.querySelector("#errorNombre")
 const errorApellido = document.querySelector("#errorApellido")
 const errorEmail = document.querySelector("#errorEmail")
 const errorImagen = document.querySelector("#errorImagen")
 const errorFechaNacimiento = document.querySelector("#errorFechaNacimiento")
+const errorCodigoPostal = document.querySelector("#errorCodigoPostal")
+const errorStreetNumber = document.querySelector("#errorNumero")
 
 console.log(fechaNacimiento)
 
+codigoPostal.addEventListener("input", function (e) {
+    if (isNaN(parseInt(e.target.value))) {
+        codigoPostal.style.border = '2px solid red';
+        errorCodigoPostal.textContent = 'Tiene que ingresar solo números';
+        errorCodigoPostal.style.display = 'block';
+    } else {
+        codigoPostal.value = e.target.value === "" ? 0 : parseInt(e.target.value);
+        codigoPostal.style.border = '2px solid green';
+        errorCodigoPostal.style.display = 'none';
+    }
+});
+
+
+streetnumber.addEventListener("input", function (e) {
+    if (isNaN(parseInt(e.target.value))) {
+        streetnumber.style.border = '2px solid red';
+        errorStreetNumber.textContent = 'Tiene que ingresar solo números';
+        errorStreetNumber.style.display = 'block';
+    } else {
+        streetnumber.value = e.target.value === "" ? 0 : parseInt(e.target.value);
+        streetnumber.style.border = '2px solid green';
+        errorStreetNumber.style.display = 'none';
+    }
+});
 
 fechaNacimiento.addEventListener("change", function(e){
-    console.log("INGRESA")
      if(e.target.value === ""){
             fechaNacimiento.style.border = '2px solid red'
             errorFechaNacimiento.textContent = 'Debe completar este campo'
@@ -145,6 +172,8 @@ submitButton.addEventListener("click", function(e){
 
 
      })
+
+   
 
      function currentDay(){
 

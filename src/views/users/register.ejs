@@ -94,12 +94,13 @@
                 </div>
             <div class="inputform">
                 <label for="codigoPostal">Codigo postal:</label>
+                <span id="errorCodigoPostal">Mensaje de error</span>
                 <input 
-                    type="number"
+                    type="text"
                     name="codigoPostal"
                     id="codigoPostal"
                     placeholder="Codigo Postal"
-                    minlength="4"
+                    minlength="2"
                     maxlength="10"
                     value="<%= body.codigoPostal? body.codigoPostal :  parseInt(0) %>"
                 />
@@ -124,8 +125,9 @@
             </div>
             <div class="inputform">
                 <label for="streetnumber">Numero:</label>
+                <span id="errorNumero">Mensaje de error</span>
                 <input 
-                    type="number"
+                    type="text"
                     name="calleNumero"
                     id="streetnumber"
                     placeholder="Numero"

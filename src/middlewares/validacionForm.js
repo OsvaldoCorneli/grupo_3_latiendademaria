@@ -47,6 +47,12 @@ module.exports = {
     },
     registerUser: function () {
         return [
+            body('nombre')
+            .notEmpty().withMessage('Debe ingresar un nombre')
+            .isLength({min: 2}).withMessage('debe tener al menos 2 caracteres'),
+            body('apellido')
+            .notEmpty().withMessage('Debe ingresar un apellido')
+            .isLength({min: 2}).withMessage('debe tener al menos 2 caracteres'),
             body('password')
                 .notEmpty().withMessage('La contraseña no puede estar en blanco')
                 .isLength({min: 8}).withMessage('la contraseña debe ser mayor a 8 caracteres')
@@ -83,14 +89,14 @@ module.exports = {
                 .isISO8601().withMessage('ingresar una fecha valida'),
             // body('provincia')
             //     .notEmpty().withMessage('selecciona una provincia'),
-            // body('codigoPostal')
-            //     .isNumeric({ min: 1, max: 10000 }).withMessage('solo numeros')
-            //     .notEmpty().withMessage('el codigo postal no puede estar vacio'),
+            body('codigoPostal')
+                .isNumeric({ min: 1, max: 10000 }).withMessage('solo numeros')
+                .notEmpty().withMessage('el codigo postal no puede estar vacio'),
             // body('calle')
             //     .isLength({min: 3, max:30}) 
             //     .notEmpty().withMessage('la calle no puede estar vacia'),
-            // body('calleNumero')
-            //     .isNumeric({ min: 1, max: 10000 }).withMessage('ingresar el numero de calle'),
+            body('calleNumero')
+                .isNumeric({ min: 1, max: 10000 }).withMessage('ingresar el numero de calle'),
             body('imagen')
                 .custom((value, {req})=>{
                     const extensionName = req.files.map((x) => {return path.extname(x.path)})
@@ -108,6 +114,12 @@ module.exports = {
     },
     editUser: function () {
         return [
+            body('nombre')
+            .notEmpty().withMessage('Debe ingresar un nombre')
+            .isLength({min: 2}).withMessage('debe tener al menos 2 caracteres'),
+            body('apellido')
+            .notEmpty().withMessage('Debe ingresar un apellido')
+            .isLength({min: 2}).withMessage('debe tener al menos 2 caracteres'),
             body('email')
                 .isEmail().withMessage('email invalido')
                 .custom(async (value,{req}) => {
@@ -126,14 +138,14 @@ module.exports = {
             //     .notEmpty().withMessage('selecciona una provincia'),
             // body('localidad')
             //     .notEmpty().withMessage('selecciona una localidad'),
-            // body('codigoPostal')
-            //     .isNumeric({ min: 1, max: 10000 }).withMessage('solo numeros')
-            //     .notEmpty().withMessage('el codigo postal no puede estar vacio'),
+            body('codigoPostal')
+                .isNumeric({ min: 1, max: 10000 }).withMessage('solo numeros')
+                .notEmpty().withMessage('el codigo postal no puede estar vacio'),
             // body('calle')
             //     .isLength({min: 3, max:30})
             //     .notEmpty().withMessage('la calle no puede estar vacia'),
-            // body('calleNumero')
-            //     .isNumeric({ min: 1, max: 10000 }).withMessage('ingresar el numero de calle'),
+            body('calleNumero')
+                .isNumeric({ min: 1, max: 10000 }).withMessage('ingresar el numero de calle'),
             body('imagen')
                 .custom((value, {req})=>{
                     const extensionName = req.files.map((x) => {return path.extname(x.path)})

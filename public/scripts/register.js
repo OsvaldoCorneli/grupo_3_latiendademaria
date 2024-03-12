@@ -14,10 +14,12 @@ window.addEventListener("load", async function(){
     let nombre = document.querySelector("#nombre")
     let apellido = document.querySelector("#apellido")
     let inputImagen = document.querySelector("#imageinput")
+    let streetnumber = document.querySelector("#streetnumber")
     const iconoCheck = document.getElementById('iconoCheck');
     const fechaNacimiento = document.getElementById('fechaNacimiento')
     let password = document.querySelector('#password')
     let repassword = document.querySelector('#repassword')
+    let codigoPostal = document.querySelector("#codigoPostal")
     const errorNombre = document.querySelector("#errorNombre")
     const errorApellido = document.querySelector("#errorApellido")
     const errorEmail = document.querySelector("#errorEmail")
@@ -26,6 +28,8 @@ window.addEventListener("load", async function(){
     const errorRepetirPassword = document.querySelector("#errorRepetirPassword")
     const errorImagen = document.querySelector("#errorImagen")
     const errorFechaNacimiento = document.querySelector("#errorFechaNacimiento")
+    const errorCodigoPostal = document.querySelector("#errorCodigoPostal")
+    const errorStreetNumber = document.querySelector("#errorNumero")
 
     provincias.addEventListener('change', function() {
         previous? previous.style = "display:none;" : null;
@@ -239,8 +243,31 @@ window.addEventListener("load", async function(){
         }
 
      })
+     codigoPostal.addEventListener("input", function (e) {
+        if (isNaN(parseInt(e.target.value))) {
+            codigoPostal.style.border = '2px solid red';
+            errorCodigoPostal.textContent = 'Tiene que ingresar solo números';
+            errorCodigoPostal.style.display = 'block';
+        } else {
+            codigoPostal.value = e.target.value === "" ? 0 : parseInt(e.target.value);
+            codigoPostal.style.border = '2px solid green';
+            errorCodigoPostal.style.display = 'none';
+        }
+    });
 
 
+    streetnumber.addEventListener("input", function (e) {
+        if (isNaN(parseInt(e.target.value))) {
+            streetnumber.style.border = '2px solid red';
+            errorStreetNumber.textContent = 'Tiene que ingresar solo números';
+            errorStreetNumber.style.display = 'block';
+        } else {
+            streetnumber.value = e.target.value === "" ? 0 : parseInt(e.target.value);
+            streetnumber.style.border = '2px solid green';
+            errorStreetNumber.style.display = 'none';
+        }
+    });
+    
     
   
     
