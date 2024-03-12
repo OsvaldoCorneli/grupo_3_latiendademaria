@@ -75,7 +75,7 @@
                                 <small id="color" class="errors"><%= errors.color.msg %></small>
                             <% } %>
                             <label for="stock">Stock:</label>
-                            <input type="number" name="stock" value="<%= stock[index] %>" class="number" required/>
+                            <input type="number" name="stock" value="<%= body.stock[index]? body.stock[index] : 0 %>" class="number" required/>
                             <% if (locals.errors && errors.stock) { %>
                                 <small id="stock" class="errors"><%= errors.stock.msg %></small>
                             <% } %>
@@ -127,7 +127,6 @@
         </form>
         <script src="\scripts\ntc.js"></script>
         <script src="\scripts\validacionProducto.js"></script>
-        <script src="\scripts\imageUpload.js"></script>
         <script src="\scripts\colorValidator.js"></script>
     </main> 
     <%- include('../partials/footer.ejs') %>

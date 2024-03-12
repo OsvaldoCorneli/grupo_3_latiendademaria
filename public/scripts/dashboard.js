@@ -2,18 +2,21 @@ const form = document.querySelector('form#payment')
 const host = window.location.host
 
 let errores = {}
-function validateForm(input){
+function handleErrors(input, formulario){
+    const {desde, hasta, estado} = formulario
     switch (input) {
         case 'desde':
-            if (form.desde.value.length != 10) errores.desde = "formato de fecha invalido"
-            else if (Date.parse(form.desde.value) > Date.parse(form.hasta.value)) errores.desde = "la fecha desde no puede ser mayor a fecha hasta"
+            if (desde.valueAsDate == null) errores.desde = "ingresar una fecha"
+            if (desde.value.length != 10) errores.desde = "formato de fecha invalido"
+            else if (desde.valueAsDate > hasta.valueAsDate) errores.desde = "la fecha desde no puede ser mayor a fecha hasta"
             break
         case 'hasta':
-            if (form.hasta.value.length != 10) errores.hasta = "formato de fecha invalido"
-            else if (Date.parse(form.desde.value) > Date.parse(form.hasta.value)) errores.hasta = "la fecha hasta no puede ser menor a fecha desde"
+            if (desde.valueAsDate == null) errores.desde = "ingresar una fecha"
+            if (desde.value.length != 10) errores.hasta = "formato de fecha invalido"
+            else if (desde.valueAsDate > hasta.valueAsDate) errores.hasta = "la fecha hasta no puede ser menor a fecha desde"
             break
         case 'estado':
-            if (form.estado.value.length == 0) errores.estado = "seleccionar un estado"
+            if (estado.value.length == 0) errores.estado = "seleccionar un estado"
             break
         default:
             break
@@ -24,7 +27,7 @@ Array.from(form).forEach((key,i) => {
     key.onchange= () => {
         if (document.querySelector(`small#${key.name}`)) document.querySelector(`small#${key.name}`).remove()
         if (errores.hasOwnProperty(key.name)) delete errores[key.name]
-        validateForm(key.name)
+        handleErrors(key.name, form)
         if (errores[key.name]) {
             let htmlError = `<small id="${key.name}" class="errors">${errores[key.name]}</small>`
             key.insertAdjacentHTML('beforebegin',htmlError)
@@ -33,7 +36,7 @@ Array.from(form).forEach((key,i) => {
     key.onfocus = () => {
         if (document.querySelector(`small#${key.name}`)) document.querySelector(`small#${key.name}`).remove()
         if (errores.hasOwnProperty(key.name)) delete errores[key.name]
-        validateForm(key.name)
+        handleErrors(key.name, form)
         if (errores[key.name]) {
             let htmlError = `<small id="${key.name}" class="errors">${errores[key.name]}</small>`
             key.insertAdjacentHTML('beforebegin',htmlError)
@@ -41,7 +44,9 @@ Array.from(form).forEach((key,i) => {
     }
 })
 
+
 form.onsubmit = (e) => {
+    Array.from(form).forEach((key) => {handleErrors(key.name,form)})
     if(Object.keys(errores).length > 0) {
         e.preventDefault()
         alert('corregir los errores del formulario')

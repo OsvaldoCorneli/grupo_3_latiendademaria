@@ -7,11 +7,11 @@
     <%- include('../partials/navbar.ejs') %>
     <main class="createForm">
         <% if(message !== null){ %>
-        <script>
-            window.onload = function() {
-                alert("Producto editado con exito");
-            };
-        </script>
+            <script>
+                window.onload = function() {
+                    alert("Producto editado con exito");
+                };
+            </script>
         <%}%>
             <span class="titulo">
                 <h1>Editar Producto</h1>
@@ -123,7 +123,7 @@
                             <p><%= pathName.split('uploads')[1] %> ? KB</p>
                             <img src="<%= pathName %>" alt="<%= productEdit.name+id %>"/>
                             <input type="hidden" id="<%= id %>input" name="imageHold" value="<%= pathName %>"/>
-                            <button id="deleteImageHold" class="deleteImage" value="<%= pathName %>">Borrar</button>
+                            <button id="deleteImage" class="deleteImage" value="<%= pathName %>">Borrar</button>
                         </span>
                     <% }) %>
                 </span>
@@ -132,9 +132,8 @@
             </div>
         <script src="\scripts\ntc.js"></script>
         <script src="\scripts\colorValidator.js"></script>
-        <script src="\scripts\productEdit.js"></script>
-        <script src="\scripts\imageUpload.js"></script>
-        <script src="\scripts\validacionEdicionProducto.js"></script>
+        <!-- <script src="\scripts\imageUpload.js"></script> -->
+        <script src="\scripts\validacionProducto.js"></script>
     </main>
     <%- include('../partials/footer.ejs') %>
 </body>

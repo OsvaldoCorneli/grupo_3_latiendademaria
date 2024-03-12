@@ -2,6 +2,7 @@ const db = require('../database/models');
 const {Op, Sequelize} = require('sequelize');
 const fs = require('fs');
 const path = require('path');
+const { parseArgs } = require('util');
 const publicPath = path.join(__dirname+'/../public')
 
 module.exports = {
@@ -16,9 +17,8 @@ module.exports = {
     newProductImage: async function (local, upload, prodId) {
         try {
             let newImages = []
-            if (local) Array.isArray(local)? local.forEach(x => newImages.push({path: local})) : newImages.push({path: local}); 
-            if (upload.length>0) newImages.push(this.parsePath(upload));
-            console.log(newImages)
+            if (local) Array.isArray(local)? local.forEach(x => newImages.push({path: x})) : newImages.push({path: local}); 
+            if (upload.length>0) newImages = [...newImages, ...this.parsePath(upload)];
             for (let i in newImages) {
                 const createImage = await db.Images.create({pathName: newImages[i].path})
                 await db.prod_images.create({
@@ -46,7 +46,6 @@ module.exports = {
                 if (!holdImage.includes(pathName)) {
                     await db.Prod_images.destroy({where: {id: products[0].prod_images.id}})
                     await db.Images.destroy({where: {id: id}})
-                    //this.deleteFile(pathName)
                 }
             }
             if (upload) {
@@ -95,12 +94,15 @@ module.exports = {
                 }
             };
         }
-        let imageUploaded = Array.isArray(images)? images : [images];
         let parsedPaths = []
-        imageUploaded.forEach((file) => {
-            file.path = replaceAll(file.path).split('public')[1]
-            parsedPaths.push(file)
-        })
-        return parsedPaths
+        if (images.length > 0) {
+            images.forEach((file) => {
+                file.path = replaceAll(file.path).split('public')[1]
+                parsedPaths.push(file)
+            })
+            return parsedPaths
+        } else {
+            throw new Error("error en parametro de entrada images")
+        } 
     }
 }

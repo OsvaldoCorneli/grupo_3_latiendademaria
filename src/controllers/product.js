@@ -82,13 +82,12 @@ module.exports = {
             if (errores.isEmpty()) {
                 const newProduct = await products.create(req.body, req.files)
                 if (newProduct) {
-                    res.redirect('/users/profile')
+                    res.status(200).redirect(`/products/${id}/edit?message=editado`)
                 }
             } else {
                 if (req.files) {
                     req.files = images.parsePath(req.files)
                 }
-                console.log({...req.body, files: req.files})
                 res.render(view+'createForm', {
                     productEdit: null,
                     body: {...req.body, files: req.files},
@@ -106,9 +105,9 @@ module.exports = {
             let {id} = req.params
             const errores = validationResult(req)
             if (errores.isEmpty()) {
-                const response = await products.edited({id: +id, ...req.body, imagen: req.files})
+                const response = await products.edited({id: +id, ...req.body},req.files)
                 if (response) {
-                    res.status(200).redirect(`/products/${id}/edit?message=editado`)
+                    res.status(200).redirect(`/users/profile`)
                 }
             } else {
                 let newImage = []

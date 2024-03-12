@@ -130,7 +130,7 @@ module.exports = {
                 price: +price
             })
             if (newProduct) {
-                await Colors.createProductColor(color, stock, newProduct.id)
+                await Colors.createProductColor(color, stock, newProduct.id);
                 await Images.newProductImage(imageHold, images, newProduct.id)
                 return this.detail(newProduct.id)
             } else {
@@ -140,17 +140,18 @@ module.exports = {
             return error
         }
     },
-    edited: async function (body) {
+    edited: async function (body, files) {
         try {
-            await Images.editProductImages(body.imageHold, body.imagen, body.id)
-            await Colors.editProductColors(body.color, body.stock, body.id)
+            const { id, name, description, line, category, color, price, stock, imageHold } = body
+            await Images.editProductImages(imageHold, files, id)
+            await Colors.editProductColors(color, stock, id)
 
             await db.Products.update({
-                    name: body.name,
-                    description: body.description,
-                    category_id: +body.category,
-                    line: body.line,
-                    price: +body.price
+                    name: name,
+                    description: description,
+                    category_id: +category,
+                    line: line,
+                    price: +price
                 },
                 {
                     where: {id: body.id}
