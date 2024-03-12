@@ -20,7 +20,7 @@
                 required
                 />
             <% if (locals.errors && errors.name) { %>
-                <p class="errors"><%= errors.name.msg %></p>
+                <small id="name" class="errors"><%= errors.name.msg %></small>
             <% } %>
             <label for="description"><b>Descripcion:</b></label>
             <textarea 
@@ -28,36 +28,14 @@
                 name="description"
                 placeholder="Ingresar descripcion..."><%= body.description && body.description %></textarea>
             <% if (locals.errors && errors.description) { %>
-                <p class="errors"><%= errors.description.msg %></p>
-            <% } %>
-            <div class="inputform button-wrap">
-                <label class="button" for="imageinput">Subir imagen</label>
-                <input 
-                    class="uploadFile"
-                    type="file"
-                    name="image"
-                    id="imageinput"
-                    accept="image/jpeg, image/png, image/jpg"
-                    multiple
-                />
-            </div>
-            <span id="imageRender">
-                
-            </span>
-            <% if (locals.errors && errors.image) { %>
-                <p class="errors"><%= errors.image.msg %></p>
-            <% } %>
-            <% if (body.image && body.image.length > 0) { %>
-                <% body.image.forEach(el => { %>
-                    <img src="<%= body.image %>" alt="">
-                <% }) %>
+                <small id="description" class="errors"><%= errors.description.msg %></small>
             <% } %>
             <label for="line"><b>Linea:</b>
-                <label><input id="line" name="line" type="radio" value="sublimada" <%= body.line == "sublimada" && "checked" %>>Sublimada</input></label>
-                <label><input id="line" name="line" type="radio" value="artesanal" <%= body.line == "artesanal" && "checked" %>>Artesanal</input></label>
+                <label><input id="line" name="line" type="radio" value="sublimada" <%= body.line == "sublimada" && "checked" %> >Sublimada</input></label>
+                <label><input id="line" name="line" type="radio" value="artesanal" <%= body.line == "artesanal" && "checked" %> >Artesanal</input></label>
             </label>
             <% if (locals.errors && errors.line) { %>
-                <p class="errors"><%= errors.line.msg %></p>
+                <small id="line" class="errors"><%= errors.line.msg %></small>
             <% } %>
             <label for="category"><b>Categoria:</b>
                 <select id="category" name="category" required>
@@ -75,7 +53,7 @@
                 <% }) %> -->
             </label>
             <% if (locals.errors && errors.category) { %>
-                <p class="errors"><%= errors.category.msg %></p>
+                <small id="category" class="errors"><%= errors.category.msg %></small>
             <% } %>
             
             <label for="color"><b>Colores:</b> </label>
@@ -94,12 +72,12 @@
                             <input class="c<%= index %>" type="color" name="color" id="color" value="<%= color %>"/>
                             <span id="c<%= index %>" style=<%= background %>></span>
                             <% if (locals.errors && errors.color) { %>
-                                <p class="errors"><%= errors.color.msg %></p>
+                                <small id="color" class="errors"><%= errors.color.msg %></small>
                             <% } %>
                             <label for="stock">Stock:</label>
-                            <input type="number" name="stock" value="<%= stock[index] %>" required/>
+                            <input type="number" name="stock" value="<%= body.stock[index]? body.stock[index] : 0 %>" class="number" required/>
                             <% if (locals.errors && errors.stock) { %>
-                                <p class="errors"><%= errors.stock.msg %></p>
+                                <small id="stock" class="errors"><%= errors.stock.msg %></small>
                             <% } %>
                         </div>
             <% })}} %>
@@ -107,23 +85,49 @@
             </div>
 
             <label for="price">Precio:</label>
-            <input class="inputForm" 
+            <input class="inputForm number" 
                 type="number"
                 id="price" 
                 name="price"
-                step=".01"
+                step=".10"
                 value="<%= body.price && body.price %>"
                 required
             />
             <% if (locals.errors && errors.price) { %>
-                <p class="errors"><%= errors.price.msg %></p>
+                <small id="price" class="errors"><%= errors.price.msg %></small>
             <% } %>
-            
+            <div class="inputform button-wrap">
+                <label class="button" for="imageinput">Subir imagen</label>
+                <input 
+                    class="uploadFile"
+                    type="file"
+                    name="image"
+                    id="imageinput"
+                    accept="image/jpeg, image/png, image/jpg"
+                    files="<%= body.image %>"
+                    multiple
+                />
+            </div>
+            <span id="imageRender">
+                <% if (body.files && body.files.length > 0) { %>
+                    <% body.files.forEach((el) => { %>
+                        <span>
+                            <small><%= `${el.originalname}, ${(el.size/1024).toFixed(2)}KB` %></small>
+                            <input name="imageHold" type="hidden" value="<%= el.path %>"/>
+                            <img id="inValidation" src="<%= el.path %>" alt="<%= el.originalname %>">
+                            <button id="deleteImage" class="deleteImage">Borrar</button>
+                        </span>
+                    <% }) %>
+                <% } %>
+            </span>
+            <% if (locals.errors && errors.image) { %>
+                <small id="image" class="errors"><%= errors.image.msg %></small>
+            <% } %>
             <button class="button" type="submit">Enviar</button>
         </form>
         <script src="\scripts\ntc.js"></script>
+        <script src="\scripts\validacionProducto.js"></script>
         <script src="\scripts\colorValidator.js"></script>
-        <script src="\scripts\imageUpload.js"></script>
     </main> 
     <%- include('../partials/footer.ejs') %>
 </body>

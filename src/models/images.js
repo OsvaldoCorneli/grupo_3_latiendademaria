@@ -2,6 +2,7 @@ const db = require('../database/models');
 const {Op, Sequelize} = require('sequelize');
 const fs = require('fs');
 const path = require('path');
+const { parseArgs } = require('util');
 const publicPath = path.join(__dirname+'/../public')
 
 module.exports = {
@@ -13,31 +14,17 @@ module.exports = {
             return error
         }
     },
-    newProductImage: async function (upload, prodId) {
+    newProductImage: async function (local, upload, prodId) {
         try {
-            function replaceAll(string) {
-                let replaced = ''
-                for (let i in string) {
-                    if (string[i] == '\\') {
-                        replaced += '/'
-                    } else {
-                        replaced += string[i]
-                    }
-                    if (+i == string.length-1) {
-                        return replaced
-                    }
-                };
-            }
-            if (upload.length > 0) {
-                let newImages = upload.map((img) => {
-                    return replaceAll(img.path.split('public')[1])
+            let newImages = []
+            if (local) Array.isArray(local)? local.forEach(x => newImages.push({path: x})) : newImages.push({path: local}); 
+            if (upload.length>0) newImages = [...newImages, ...this.parsePath(upload)];
+            for (let i in newImages) {
+                const createImage = await db.Images.create({pathName: newImages[i].path})
+                await db.prod_images.create({
+                    product_id: +prodId,
+                    image_id: createImage.id
                 })
-                for (let i in newImages) {
-                    const createImage = await db.Images.create({pathName: newImages[i]})
-                    await db.prod_images.create({
-                        product_id: +prodId,
-                        image_id: createImage.id})
-                }
             }
         } catch (error) {
             return error
@@ -59,7 +46,6 @@ module.exports = {
                 if (!holdImage.includes(pathName)) {
                     await db.Prod_images.destroy({where: {id: products[0].prod_images.id}})
                     await db.Images.destroy({where: {id: id}})
-                    //this.deleteFile(pathName)
                 }
             }
             if (upload) {
@@ -93,5 +79,30 @@ module.exports = {
         if (fs.readdirSync(publicPath+'/images/uploads').includes(path.split('uploads/')[1])) {
             fs.rmSync(publicPath+path)
         }
+    },
+    parsePath: function (images) {
+        function replaceAll(string) {
+            let replaced = ''
+            for (let i in string) {
+                if (string[i] == '\\') {
+                    replaced += '/'
+                } else {
+                    replaced += string[i]
+                }
+                if (+i == string.length-1) {
+                    return replaced
+                }
+            };
+        }
+        let parsedPaths = []
+        if (images.length > 0) {
+            images.forEach((file) => {
+                file.path = replaceAll(file.path).split('public')[1]
+                parsedPaths.push(file)
+            })
+            return parsedPaths
+        } else {
+            throw new Error("error en parametro de entrada images")
+        } 
     }
 }

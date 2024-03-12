@@ -2,6 +2,7 @@ const products = require('../models/products');
 const payments = require('../models/payments');
 const categories = require('../models/categories.js');
 const favorites = require('../models/favorites');
+const colors = require('../models/colors.js'); 
 const user = require('../models/user')
 
 

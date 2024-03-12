@@ -4,7 +4,10 @@ const products = require('../models/products');
 const categories = require('../models/categories');
 const colors = require('../models/colors');
 const favorites = require('../models/favorites');
+const images = require('../models/images')
+const fs = require('fs');
 const {validationResult} = require('express-validator');
+const { start } = require('repl');
 
 const view = path.join(__dirname,'../views/products/');
 
@@ -79,12 +82,15 @@ module.exports = {
             if (errores.isEmpty()) {
                 const newProduct = await products.create(req.body, req.files)
                 if (newProduct) {
-                    res.redirect('/users/profile')
+                    res.status(200).redirect(`/products/${id}/edit?message=editado`)
                 }
             } else {
+                if (req.files) {
+                    req.files = images.parsePath(req.files)
+                }
                 res.render(view+'createForm', {
                     productEdit: null,
-                    body: req.body,
+                    body: {...req.body, files: req.files},
                     categorias: await categories.all(),
                     errors: errores.mapped() 
                 })
@@ -99,15 +105,14 @@ module.exports = {
             let {id} = req.params
             const errores = validationResult(req)
             if (errores.isEmpty()) {
-                const response = await products.edited({id: +id, ...req.body, imagen: req.files})
+                const response = await products.edited({id: +id, ...req.body},req.files)
                 if (response) {
-                    res.status(200).redirect(`/products/${id}/edit?message=editado`)
+                    res.status(200).redirect(`/users/profile`)
                 }
             } else {
                 let newImage = []
                 const product = await products.detail(id)
                 if (req.files) newImage = Array.isArray(req.files)? req.files.map((img) => {return img.path.split('public')[1]}) : [req.files.path.split('public')[1]];
-                //if (req.body.imageHold) holdImage = typeof(req.body.imageHold) == 'string'? [req.body.imageHold] : req.body.imageHold;
 
                 res.render(`${view}/editForm`, {
                     productEdit: {...req.body, image: [...newImage, ...product.images]},
@@ -115,7 +120,6 @@ module.exports = {
                     message: null,
                     errors: errores.mapped()
                 })
-                //res.send(errores.mapped())
             }
         } catch (error) {
             res.status(500).json(error.message)
