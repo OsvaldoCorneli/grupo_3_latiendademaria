@@ -19,7 +19,9 @@
             <form action="/users/<%= id %>/update?_method=PUT" method="POST" enctype="multipart/form-data">
                 <div class="inputform">
                     <label for="nombre">Nombre/s:</label>
+                    <span id="errorNombre">Mensaje de error</span>
                     <input 
+                        class="requiredinput"
                         type="text"
                         name="nombre"
                         id="nombre"
@@ -34,8 +36,10 @@
                 </div>
                 <div class="inputform">
                     <label for="apellido">Apellido/s:</label>
+                    <span id="errorApellido">Mensaje de error</span>
                     <input
                         id="apellido"
+                        class="requiredinput"
                         name="apellido"
                         type="text"
                         placeholder="Ingresar apellido"
@@ -47,8 +51,10 @@
                     <% } %>
                 </div>
                 <div class="inputform">
-                    <label for="fechaNacimiento">fecha de nacimiento:</label>
+                    <label for="birthdate">fecha de nacimiento:</label>
+                    <span id="errorFechaNacimiento">Mensaje de error</span>
                     <input 
+                    class="requiredinput"
                     type="date"
                     name="fechaNacimiento"
                     id="fechaNacimiento"
@@ -88,14 +94,15 @@
                 </div>
             <div class="inputform">
                 <label for="codigoPostal">Codigo postal:</label>
+                <span id="errorCodigoPostal">Mensaje de error</span>
                 <input 
                     type="text"
                     name="codigoPostal"
                     id="codigoPostal"
                     placeholder="Codigo Postal"
                     required
-                    minlength="3"
-                    maxlength="20"
+                    minlength="2"
+                    maxlength="10"
                     value="<%= body.codigoPostal? body.codigoPostal : codigoPostal %>"
                 />
                 <% if (locals.errors && errors.codigoPostal) { %>
@@ -111,7 +118,6 @@
                     name="calle"
                     id="street"
                     placeholder="calle"
-                    required
                     minlength="5"
                     maxlength="20"
                     value="<%= body.calle? body.calle : calle %>"
@@ -122,8 +128,9 @@
             </div>
             <div class="inputform">
                 <label for="calleNumero">Numero:</label>
+                <span id="errorNumero">Mensaje de error</span>
                 <input 
-                    type="number"
+                    type="text"
                     name="calleNumero"
                     id="calleNumero"
                     placeholder="Numero/Altura de calle"
@@ -164,7 +171,9 @@
             </div>
             <div class="inputform">
                 <label for="email">Email:</label>
+                <span id="errorEmail">Mensaje de error</span>
                 <input 
+                    class="requiredinput"
                     type="email"
                     name="email"
                     id="email"
@@ -180,10 +189,11 @@
             </div>
         </div>
         <div class="contenedor3">
-            <img class="perfil" src="<%= imagen.length>0? imagen[0] : "" %>" alt="<%= nombre.slice(0,1).toUpperCase()+apellido.slice(0,1).toUpperCase() %>"/>
+            <img id="imagenPerfil" class="perfil" src="<%= imagen.length>0 ? imagen[0] : "" %>" alt="<%= nombre.slice(0,1).toUpperCase()+apellido.slice(0,1).toUpperCase() %>"/>
             <div class="inputform">
                 <div class="inputform button-wrap">
                     <label class="button" for="imagen">Subir imagen</label>
+                    <span id="errorImagen">Mensaje de error</span>
                     <input 
                         class="uploadFile"
                         type="file"
@@ -196,6 +206,7 @@
                     <% if (locals.errors && errors.imagen) { %>
                         <p class="errors"><%= errors.imagen.msg %></p>
                     <% } %>
+                    <i id="iconoCheck" class="fas fa-check" style="color: green; font-size: 24px; display: none; position: absolute; left: 115%; bottom: 20%;"></i>
                 </div>
             </div>
         </div>
