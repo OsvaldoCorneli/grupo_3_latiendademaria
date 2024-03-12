@@ -1,6 +1,7 @@
 ## Comenzar a hacer.
 
-* 
+* El menu hamburguesa!
+* validaciones de las apis en el front y back!!
 * Darle mas estilos.
 * Distribuir los tiempos para llegar a tiempo a la entrega de los sprint y otro no tenga que hacer todo para llegar al objetivo.
 * Descripciones de los productos: borrar los lorem ipsum y reemplazar por una descrpcion que sean pertienentes al producto!!
@@ -18,10 +19,11 @@
 * Clean Code!
 * daylis por lo menos 2 veces a la semana.
 
+
 ## Hacer menos.
 
-* 
+* funcionalidades/features que no hagan al tema del proyecto o que lo compliquen mas!!
 
 ## Dejar de hacer.
 
-* Deejas las cosas a ultimo momento de la entrega del sprint
+* Dejas las cosas a ultimo momento de la entrega del sprint
