@@ -50,7 +50,6 @@ function restarCantidad(id, color){
        subtotal = parseFloat(precio)*parseInt(cantidad)
        subTotal.innerHTML = subtotal
        const newTotal = parseFloat(total.innerHTML) - parseFloat(precio)
-       console.log(newTotal)
        total.innerHTML = newTotal.toFixed(2);
 
    }
@@ -71,7 +70,6 @@ function sumarCantidad(id, color){
        subtotal = parseFloat(precio)*parseInt(cantidad)
        subTotal.innerHTML = subtotal.toFixed(2)
        const newTotal = parseFloat(total.innerHTML) + parseFloat(precio)
-       console.log(newTotal)
        total.innerHTML = newTotal.toFixed(2);
 
    }}

@@ -3,14 +3,12 @@ window.addEventListener("load", function(){
     const email = document.querySelector("#email")
     const password = document.querySelector("#password")
     const boton = document.querySelector("#loginboton")
-    console.log(password)
     const errorPassword = document.querySelector("#mensajePassword")
     const errorEmail = document.querySelector("#mensajeEmail")
 
     email.addEventListener("input", function(e){
         const valid = document.querySelector(".validacionusername")
         if(e.target.value === ""){
-            console.log(errorEmail)
             email.style.border = '2px solid red'
             errorEmail.textContent = "Este campo no puede estar vacio"
             errorEmail.style.display = "block"

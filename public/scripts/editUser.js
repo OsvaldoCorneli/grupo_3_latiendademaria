@@ -12,7 +12,7 @@ let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 let email = document.querySelector("#email")
 let nombre = document.querySelector("#nombre")
 let apellido = document.querySelector("#apellido")
-let inputImagen = document.querySelector("#imageinput")
+let inputImagen = document.querySelector("#imagen")
 const iconoCheck = document.getElementById('iconoCheck');
 const fechaNacimiento = document.querySelector('#fechaNacimiento')
 let streetnumber = document.querySelector("#calleNumero")
@@ -24,8 +24,12 @@ const errorImagen = document.querySelector("#errorImagen")
 const errorFechaNacimiento = document.querySelector("#errorFechaNacimiento")
 const errorCodigoPostal = document.querySelector("#errorCodigoPostal")
 const errorStreetNumber = document.querySelector("#errorNumero")
+const imagenPerfil = document.getElementById("imagenPerfil")
+let submitButton = document.querySelector('input[type="submit"]')
 
-console.log(fechaNacimiento)
+if(imagenPerfil && (imagenPerfil.src != undefined || imagenPerfil != "")){
+    iconoCheck.style.display = "block"
+}
 
 codigoPostal.addEventListener("input", function (e) {
     if (isNaN(parseInt(e.target.value))) {
@@ -145,8 +149,12 @@ nombre.addEventListener("input", function(e){
 inputImagen.addEventListener("change", function (e){
    
     if(e.target.files[0].type === "image/jpeg" || e.target.files[0].type === "image/png"|| e.target.files[0].type === "image/jpg"){
-       errorImagen.style.display = "none";
        iconoCheck.style.display = 'block';
+       errorImagen.textContent = "Imagen cambiada";
+       errorImagen.style.display = "block"
+       errorImagen.style.color = "green"
+       errorImagen.style.fontSize = "15px"
+
     }else{
        errorImagen.textContent = "La imagen tiene que ser formato .jpeg, .png, .jpg"
        errorImagen.style.display = "block"
@@ -156,11 +164,11 @@ inputImagen.addEventListener("change", function (e){
     })
 
 
-submitButton.addEventListener("click", function(e){
+    submitButton.addEventListener("click", function(e){
        
         if(nombre.style.border == '2px solid red' || apellido.style.border == '2px solid red' || email.style.border == '2px solid red' 
-        || userName.style.border == '2px solid red' || password.style.border == '2px solid red' || repassword.style.border == '2px solid red' || !inputImagen.value 
-        || errorImagen.style.display === "block" || fechaNacimiento.style.border == '2px solid red' ){
+        || iconoCheck.style.display == 'none' || fechaNacimiento.style.border == '2px solid red' || streetnumber.style.border == '2px solid red'
+         || codigoPostal.style.border == '2px solid red'){
             e.preventDefault() 
            if(!inputImagen.value){
             errorImagen.textContent = "Debe cargar una imagen de perfil, formatos:.jpeg, .png, .jpg"

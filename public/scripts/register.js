@@ -206,7 +206,8 @@ window.addEventListener("load", async function(){
        
         if(nombre.style.border == '2px solid red' || apellido.style.border == '2px solid red' || email.style.border == '2px solid red' 
         || userName.style.border == '2px solid red' || password.style.border == '2px solid red' || repassword.style.border == '2px solid red' || !inputImagen.value 
-        || errorImagen.style.display === "block" || fechaNacimiento.style.border == '2px solid red' ){
+        || errorImagen.style.display === "block" || fechaNacimiento.style.border == '2px solid red' || streetnumber.style.border == '2px solid red'
+        || codigoPostal.style.border == '2px solid red' ){
             e.preventDefault() 
            if(!inputImagen.value){
             errorImagen.textContent = "Debe cargar una imagen de perfil, formatos:.jpeg, .png, .jpg"

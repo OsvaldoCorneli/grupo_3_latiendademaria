@@ -189,10 +189,11 @@
             </div>
         </div>
         <div class="contenedor3">
-            <img class="perfil" src="<%= imagen.length>0? imagen[0] : "" %>" alt="<%= nombre.slice(0,1).toUpperCase()+apellido.slice(0,1).toUpperCase() %>"/>
+            <img id="imagenPerfil" class="perfil" src="<%= imagen.length>0 ? imagen[0] : "" %>" alt="<%= nombre.slice(0,1).toUpperCase()+apellido.slice(0,1).toUpperCase() %>"/>
             <div class="inputform">
                 <div class="inputform button-wrap">
                     <label class="button" for="imagen">Subir imagen</label>
+                    <span id="errorImagen">Mensaje de error</span>
                     <input 
                         class="uploadFile"
                         type="file"
@@ -205,6 +206,7 @@
                     <% if (locals.errors && errors.imagen) { %>
                         <p class="errors"><%= errors.imagen.msg %></p>
                     <% } %>
+                    <i id="iconoCheck" class="fas fa-check" style="color: green; font-size: 24px; display: none; position: absolute; left: 115%; bottom: 20%;"></i>
                 </div>
             </div>
         </div>

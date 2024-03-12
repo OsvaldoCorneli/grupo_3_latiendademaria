@@ -55,7 +55,6 @@ const FavoriteIcon = document.querySelectorAll('#heart')
 FavoriteIcon.forEach((fav) => {
     fav.addEventListener('click', async (e) => {
         const id = e.target.firstChild.nextSibling.id
-        console.log(id)
         const data = await fetchData(`/api/user/favorites`, {product: id})
         if (data.success) {
             e.target.parentNode.parentNode.remove()
