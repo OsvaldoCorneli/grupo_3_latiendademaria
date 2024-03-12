@@ -100,6 +100,19 @@ main {
     color: red
 }
 
+#mensajePassword{
+    display: none;
+    color: red;
+    font-size: 75%;
+    margin: 0 0 5px 0;
+}
+#mensajeEmail{
+    display: none;
+    color: red;
+    font-size: 75%;
+    margin: 0 0 5px 0;
+}
+
 @media (min-width: 760px){
     .login-modal img {
         max-width: 170px
