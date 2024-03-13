@@ -1,5 +1,7 @@
 // const { name } = require("ejs");
 
+// const { format } = require("mysql2");
+
 window.addEventListener("load", async function(){
 
     let usuarios = await fetch("http://localhost:3001/api/users?key=allUsers")
@@ -32,9 +34,11 @@ window.addEventListener("load", async function(){
     const errorFechaNacimiento = document.querySelector("#errorFechaNacimiento")
     const errorCodigoPostal = document.querySelector("#errorCodigoPostal")
     const errorStreetNumber = document.querySelector("#errorNumero")
+    const requiredinput = document.querySelectorAll(".requiredinput")
+    const formulario = document.querySelector("#formulario")
     const mensaje = 'Este campo debe estar completo'
 
-    console.log(inputImagen.value.length)
+
 
     provincias.addEventListener('change', function() {
         previous? previous.style = "display:none;" : null;
@@ -43,8 +47,6 @@ window.addEventListener("load", async function(){
         previous = document.querySelector(selected)
         previous.style = "display:block;"
     })
-    
-    console.log(fechaNacimiento.value.length)
 
     submitButton.addEventListener("click", function(e){
         let errors = {}
@@ -124,6 +126,13 @@ window.addEventListener("load", async function(){
                      }     
                  }
               }
+        else{
+               
+               if(validacionCompleta()){
+                formulario.submit()
+               }
+               
+        }
 
           })
     
@@ -265,92 +274,70 @@ window.addEventListener("load", async function(){
     })
 
 
-    //  inputImagen.addEventListener("change", function (e){
+     inputImagen.addEventListener("change", function (e){
    
-    //  if(e.target.files[0].type === "image/jpeg" || e.target.files[0].type === "image/png"|| e.target.files[0].type === "image/jpg"){
-    //     errorImagen.style.display = "none";
-    //     iconoCheck.style.display = 'block';
-    //  }else{
-    //     errorImagen.textContent = "La imagen tiene que ser formato .jpeg, .png, .jpg"
-    //     errorImagen.style.display = "block"
-    //     iconoCheck.style.display = 'none';
-    //  }
+     if(e.target.files[0].type === "image/jpeg" || e.target.files[0].type === "image/png"|| e.target.files[0].type === "image/jpg"){
+        errorImagen.style.display = "none";
+        iconoCheck.style.display = 'block';
+     }else{
+        errorImagen.textContent = "La imagen tiene que ser formato .jpeg, .png, .jpg"
+        errorImagen.style.display = "block"
+        iconoCheck.style.display = 'none';
+     }
 
-    //  })
+     })
      
-
-    //  submitButton.addEventListener("click", function(e){
-       
-    //     if(nombre.style.border == '2px solid red' || apellido.style.border == '2px solid red' || email.style.border == '2px solid red' 
-    //     || userName.style.border == '2px solid red' || password.style.border == '2px solid red' || repassword.style.border == '2px solid red' || !inputImagen.value 
-    //     || errorImagen.style.display === "block" || fechaNacimiento.style.border == '2px solid red' || streetnumber.style.border == '2px solid red'
-    //     || codigoPostal.style.border == '2px solid red' ){
-    //         e.preventDefault() 
-    //        if(!inputImagen.value){
-    //         errorImagen.textContent = "Debe cargar una imagen de perfil, formatos:.jpeg, .png, .jpg"
-    //         errorImagen.style.display = "block"
-    //         iconoCheck.style.display = 'none'; 
-    //        }
-    //     }
-
-
-
-    //  })
-
-
-    //  fechaNacimiento.addEventListener("change", function(e){
-    //     if(e.target.value === ""){
-    //         fechaNacimiento.style.border = '2px solid red'
-    //         errorFechaNacimiento.textContent = 'Debe completar este campo'
-    //         errorFechaNacimiento.style.display = 'block'
+     fechaNacimiento.addEventListener("change", function(e){
+        if(e.target.value === ""){
+            fechaNacimiento.style.border = '2px solid red'
+            errorFechaNacimiento.textContent = mensaje;
+            errorFechaNacimiento.style.display = 'block'
            
-    //     }
-    //     else if(fechaFutura(day,e.target.value)){
-    //         fechaNacimiento.style.border = '2px solid red'
-    //         errorFechaNacimiento.textContent = 'No puede seleccionar una fecha en el futuro'
-    //         errorFechaNacimiento.style.display = 'block'
-    //     }
-    //     else if(mayorEdad(day,e.target.value)){
-    //         fechaNacimiento.style.border = '2px solid red'
-    //         errorFechaNacimiento.textContent = 'Debes tener o ser mayor de 16 años'
-    //         errorFechaNacimiento.style.display = 'block'
-    //     }
-    //     else{
-    //         fechaNacimiento.style.border = '2px solid green'
-    //         errorFechaNacimiento.style.display = 'none'
-    //     }
+        }
+        else if(fechaFutura(day,e.target.value)){
+            fechaNacimiento.style.border = '2px solid red'
+            errorFechaNacimiento.textContent = 'No puede seleccionar una fecha en el futuro'
+            errorFechaNacimiento.style.display = 'block'
+        }
+        else if(mayorEdad(day,e.target.value)){
+            fechaNacimiento.style.border = '2px solid red'
+            errorFechaNacimiento.textContent = 'Debes tener o ser mayor de 16 años'
+            errorFechaNacimiento.style.display = 'block'
+        }
+        else{
+            fechaNacimiento.style.border = '2px solid green'
+            errorFechaNacimiento.style.display = 'none'
+        }
 
-    //  })
-    //  codigoPostal.addEventListener("input", function (e) {
-    //     if (isNaN(parseInt(e.target.value))) {
-    //         codigoPostal.style.border = '2px solid red';
-    //         errorCodigoPostal.textContent = 'Tiene que ingresar solo números';
-    //         errorCodigoPostal.style.display = 'block';
-    //     } else {
-    //         codigoPostal.value = e.target.value === "" ? 0 : parseInt(e.target.value);
-    //         codigoPostal.style.border = '2px solid green';
-    //         errorCodigoPostal.style.display = 'none';
-    //     }
-    // });
+     })
 
 
-    // streetnumber.addEventListener("input", function (e) {
-    //     if (isNaN(parseInt(e.target.value))) {
-    //         streetnumber.style.border = '2px solid red';
-    //         errorStreetNumber.textContent = 'Tiene que ingresar solo números';
-    //         errorStreetNumber.style.display = 'block';
-    //     } else {
-    //         streetnumber.value = e.target.value === "" ? 0 : parseInt(e.target.value);
-    //         streetnumber.style.border = '2px solid green';
-    //         errorStreetNumber.style.display = 'none';
-    //     }
-    // });
+     codigoPostal.addEventListener("input", function (e) {
+        if (isNaN(parseInt(e.target.value))) {
+            codigoPostal.style.border = '2px solid red';
+            errorCodigoPostal.textContent = 'Tiene que ingresar solo números';
+            errorCodigoPostal.style.display = 'block';
+        } else {
+            codigoPostal.value = e.target.value === "" ? 0 : parseInt(e.target.value);
+            codigoPostal.style.border = '2px solid green';
+            errorCodigoPostal.style.display = 'none';
+        }
+    });
+
+    streetnumber.addEventListener("input", function (e) {
+        if (isNaN(parseInt(e.target.value))) {
+            streetnumber.style.border = '2px solid red';
+            errorStreetNumber.textContent = 'Tiene que ingresar solo números';
+            errorStreetNumber.style.display = 'block';
+        } else {
+            streetnumber.value = e.target.value === "" ? 0 : parseInt(e.target.value);
+            streetnumber.style.border = '2px solid green';
+            errorStreetNumber.style.display = 'none';
+        }
+    });
     
     
-  
-    
-
-     function currentDay(){
+    function currentDay(){
 
       const date = new Date()
       const year = date.getFullYear();
@@ -359,9 +346,9 @@ window.addEventListener("load", async function(){
       
       return `${year}-${mes}-${dia}`
 
-     }
+    }
 
-     function fechaFutura(hoy, value){
+    function fechaFutura(hoy, value){
         let interruptor = 0
         const hoySplit = hoy.split("-") 
         const valueSplit = value.split("-") 
@@ -384,9 +371,9 @@ window.addEventListener("load", async function(){
             return true
         }
             
-        }
+    }
 
-        function mayorEdad(hoy, value){
+    function mayorEdad(hoy, value){
         let interruptor = 0;
         const hoySplit = hoy.split("-") //[ "2024", "3", "11" ]
         const valueSplit = value.split("-") //[ "2024", "12", "10" ]
@@ -411,10 +398,33 @@ window.addEventListener("load", async function(){
             return true
         }
                 
-        }
+    }
+
+    function validacionCompleta(){
+        let validaciones = true
+
+        requiredinput.forEach(element => {
+            let elemento = element.id 
+
+            elemento = document.querySelector(`#${elemento}`)
+
+            if(!elemento.checkValidity()){
+                validaciones = false
+            }
+        })
+            
+    
+          if(validaciones && (codigoPostal.style.border != '2px solid red' && streetnumber.style.border != '2px solid red')){
+            return true
+          }
+          else{
+            return false
+          }  
+         
 
 
-     
+    }
+
 
 
     // let formRegistro = document.querySelector('form');
