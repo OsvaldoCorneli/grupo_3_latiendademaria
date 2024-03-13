@@ -34,6 +34,8 @@ window.addEventListener("load", async function(){
     const errorStreetNumber = document.querySelector("#errorNumero")
     const mensaje = 'Este campo debe estar completo'
 
+    console.log(inputImagen.value.length)
+
     provincias.addEventListener('change', function() {
         previous? previous.style = "display:none;" : null;
         let prov = provincias.selectedOptions[0].innerText
@@ -46,8 +48,9 @@ window.addEventListener("load", async function(){
 
     submitButton.addEventListener("click", function(e){
         let errors = {}
-        console.log(errors)
+
         e.preventDefault()
+
         if(nombre.value.length < 1){
             errors.nombre = mensaje
         }
@@ -56,6 +59,9 @@ window.addEventListener("load", async function(){
         }
         if(fechaNacimiento.value.length < 1){
             errors.fechaNacimiento = mensaje
+        }
+        if(inputImagen.value.length < 1){
+            errors.inputImagen = mensaje
         }
         if(email.value.length < 1){
             errors.email = mensaje
@@ -89,6 +95,10 @@ window.addEventListener("load", async function(){
                 fechaNacimiento.style.border = '2px solid red'
                 errorFechaNacimiento.textContent = errors[objeto]
                 errorFechaNacimiento.style.display = 'block'
+                break
+            case "inputImagen":
+                errorImagen.textContent = "Debe seleccionar una imagen de perfil"
+                errorImagen.style.display = 'block'
                 break
             case "email":
                 email.style.border = '2px solid red'
@@ -199,66 +209,60 @@ window.addEventListener("load", async function(){
             errorUserName.textContent = "El nombre de usuario ya está en uso"
             errorUserName.style.display = 'block'
         }
-        
+
         else{
             userName.style.border = '2px solid green'
             errorUserName.style.display = 'none'
         }
     })
 
-    // password.addEventListener("input", function(e){
-    //   if(e.target.value === ""){
-    //       password.style.border = '2px solid red'
-    //       errorPassword.textContent = "Este campo no puede estar vacio"
-    //       errorPassword.style.display = "block"
+    password.addEventListener("input", function(e){
+      if(e.target.value === ""){
+          password.style.border = '2px solid red'
+          errorPassword.textContent = mensaje;
+          errorPassword.style.display = "block"
 
-    //   }
-    //   else if(e.target.value.length < 7){
-    //     password.style.border = '2px solid red'
-    //       errorPassword.textContent = "La contraseña debe tener al menos 8 caracteres, letras mayúsculas, minúsculas, un número y un carácter especial."
-    //       errorPassword.style.display = "block"
+      }
+      else if(e.target.value.length < 7){
+        password.style.border = '2px solid red'
+          errorPassword.textContent = "La contraseña debe tener al menos 8 caracteres, letras mayúsculas, minúsculas, un número y un carácter especial."
+          errorPassword.style.display = "block"
 
-    //   }
-    //   else if(!regexPassword.test(e.target.value)){
-    //     password.style.border = '2px solid red'
-    //       errorPassword.textContent = "La contraseña debe contener letras mayúsculas, minúsculas, un número y un carácter especial."
-    //       errorPassword.style.display = "block"
-    //   }
-    //   else{
-    //     password.style.border = '2px solid green'
-    //       errorPassword.style.display = "none"
-    //   }
+      }
+      else if(!regexPassword.test(e.target.value)){
+        password.style.border = '2px solid red'
+          errorPassword.textContent = "La contraseña debe contener letras mayúsculas, minúsculas, un número y un carácter especial."
+          errorPassword.style.display = "block"
+      }
+      else{
+        password.style.border = '2px solid green'
+          errorPassword.style.display = "none"
+      }
 
-    // })
+    })
 
-    // repassword.addEventListener("input", function(e){
+    repassword.addEventListener("input", function(e){
 
-
-    //   if(e.target.value === ""){
-    //     this.style.border = '2px solid red'
-    //     errorRepetirPassword.textContent = "Este campo no puede estar vacio"
-    //     errorRepetirPassword.style.display = "block"
-
-    //   }
-    //     else if(password.style.border != '2px solid green'){
-    //      this.style.border = '2px solid red'
-    //      errorRepetirPassword.textContent = "Ingrese una contraseña correcta"
-    //      errorRepetirPassword.style.display = "block"
-    //   }
-    //     else if(password.value != e.target.value){
-    //      this.style.border = '2px solid red'
-    //      errorRepetirPassword.textContent = "Las contraseñas no coinciden"
-    //      errorRepetirPassword.style.display = "block"
-    //   }
-
-    //   else{
-    //     this.style.border = '2px solid green';
-    //     errorRepetirPassword.style.display = "none";
-
-    //   }
-
-
-    // })
+      if(e.target.value === ""){
+        this.style.border = '2px solid red'
+        errorRepetirPassword.textContent = mensaje
+        errorRepetirPassword.style.display = "block"
+      }
+        else if(password.style.border != '2px solid green'){
+         this.style.border = '2px solid red'
+         errorRepetirPassword.textContent = "Ingrese una contraseña correcta"
+         errorRepetirPassword.style.display = "block"
+      }
+        else if(password.value != e.target.value){
+         this.style.border = '2px solid red'
+         errorRepetirPassword.textContent = "Las contraseñas no coinciden"
+         errorRepetirPassword.style.display = "block"
+      }
+       else{
+        this.style.border = '2px solid green';
+        errorRepetirPassword.style.display = "none";
+        }
+    })
 
 
     //  inputImagen.addEventListener("change", function (e){
