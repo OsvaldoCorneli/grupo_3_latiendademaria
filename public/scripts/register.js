@@ -1,3 +1,5 @@
+// const { name } = require("ejs");
+
 window.addEventListener("load", async function(){
 
     let usuarios = await fetch("http://localhost:3001/api/users?key=allUsers")
@@ -30,6 +32,7 @@ window.addEventListener("load", async function(){
     const errorFechaNacimiento = document.querySelector("#errorFechaNacimiento")
     const errorCodigoPostal = document.querySelector("#errorCodigoPostal")
     const errorStreetNumber = document.querySelector("#errorNumero")
+    const mensaje = 'Este campo debe estar completo'
 
     provincias.addEventListener('change', function() {
         previous? previous.style = "display:none;" : null;
@@ -39,12 +42,86 @@ window.addEventListener("load", async function(){
         previous.style = "display:block;"
     })
     
+    console.log(fechaNacimiento.value.length)
+
+    submitButton.addEventListener("click", function(e){
+        let errors = {}
+        console.log(errors)
+        e.preventDefault()
+        if(nombre.value.length < 1){
+            errors.nombre = mensaje
+        }
+        if(apellido.value.length < 1){
+            errors.apellido = mensaje
+        }
+        if(fechaNacimiento.value.length < 1){
+            errors.fechaNacimiento = mensaje
+        }
+        if(email.value.length < 1){
+            errors.email = mensaje
+        }
+        if(userName.value.length < 1){
+            errors.userName = mensaje
+        }
+        if(password.value.length < 1){
+            errors.password = mensaje
+        }
+        if(repassword.value.length < 1){
+            errors.repassword = mensaje
+        }
+        
+        if(Object.keys(errors).length > 0){
+         
+            for(objeto in errors){
+
+           switch(objeto) {
+            case "nombre":
+                nombre.style.border = '2px solid red'
+                errorNombre.textContent = errors[objeto]
+                errorNombre.style.display = 'block'
+                break
+            case "apellido":
+                apellido.style.border = '2px solid red'
+                errorApellido.textContent = errors[objeto]
+                errorApellido.style.display = 'block'
+                break
+            case "fechaNacimiento":
+                fechaNacimiento.style.border = '2px solid red'
+                errorFechaNacimiento.textContent = errors[objeto]
+                errorFechaNacimiento.style.display = 'block'
+                break
+            case "email":
+                email.style.border = '2px solid red'
+                errorEmail.textContent = errors[objeto]
+                errorEmail.style.display = 'block'
+                break
+            case "userName":
+                userName.style.border = '2px solid red'
+                errorUserName.textContent = errors[objeto]
+                errorUserName.style.display = 'block'
+                break
+            case "password":
+                password.style.border = '2px solid red'
+                errorPassword.textContent = errors[objeto]
+                errorPassword.style.display = "block"
+            break
+            case "repassword":
+                repassword.style.border = '2px solid red'
+                errorRepetirPassword.textContent = errors[objeto]
+                errorRepetirPassword.style.display = "block"
+            break
+
+                     }     
+                 }
+              }
+
+          })
     
     nombre.addEventListener("input", function(e){
          
         if(e.target.value === ""){
          nombre.style.border = '2px solid red'
-         errorNombre.textContent = "Este campo no puede estar vacio"
+         errorNombre.textContent = mensaje
          errorNombre.style.display = 'block'
         }
         else if(e.target.value.length === 1){
@@ -55,17 +132,14 @@ window.addEventListener("load", async function(){
         }else{
             nombre.style.border = '2px solid green'
             errorNombre.style.display = 'none'
-
         }
- 
- 
-     })
+    })
      
      apellido.addEventListener("input", function(e){
          
         if(e.target.value === ""){
             apellido.style.border = '2px solid red'
-         errorApellido.textContent = "Este campo no puede estar vacio"
+         errorApellido.textContent = mensaje
          errorApellido.style.display = 'block'
         }
         else if(e.target.value.length === 1){
@@ -82,14 +156,11 @@ window.addEventListener("load", async function(){
  
      })
 
-
-
-
     email.addEventListener("input", function(e){
         
         if(e.target.value === ""){
             email.style.border = '2px solid red'
-            errorEmail.textContent = "Este campo no puede estar vacio"
+            errorEmail.textContent = mensaje
             errorEmail.style.display = 'block'
             
         }
@@ -113,13 +184,14 @@ window.addEventListener("load", async function(){
         
         if(e.target.value === ""){
             userName.style.border = '2px solid red'
-            errorUserName.textContent = "Este campo no puede estar vacio"
+            errorUserName.textContent = mensaje
             errorUserName.style.display = 'block'
-        }else if(e.target.value.length < 6){
+        }
+
+        else if(e.target.value.length < 6){
             userName.style.border = '2px solid red'
             errorUserName.textContent = "El nombre de usuario debe tener al menos 6 caracteres"
             errorUserName.style.display = 'block'
-
         }
 
         else if(usuarios.some(element => element.userName === e.target.value)){
@@ -127,147 +199,148 @@ window.addEventListener("load", async function(){
             errorUserName.textContent = "El nombre de usuario ya está en uso"
             errorUserName.style.display = 'block'
         }
+        
         else{
             userName.style.border = '2px solid green'
             errorUserName.style.display = 'none'
         }
     })
 
-    password.addEventListener("input", function(e){
-      if(e.target.value === ""){
-          password.style.border = '2px solid red'
-          errorPassword.textContent = "Este campo no puede estar vacio"
-          errorPassword.style.display = "block"
+    // password.addEventListener("input", function(e){
+    //   if(e.target.value === ""){
+    //       password.style.border = '2px solid red'
+    //       errorPassword.textContent = "Este campo no puede estar vacio"
+    //       errorPassword.style.display = "block"
 
-      }
-      else if(e.target.value.length < 7){
-        password.style.border = '2px solid red'
-          errorPassword.textContent = "La contraseña debe tener al menos 8 caracteres, letras mayúsculas, minúsculas, un número y un carácter especial."
-          errorPassword.style.display = "block"
+    //   }
+    //   else if(e.target.value.length < 7){
+    //     password.style.border = '2px solid red'
+    //       errorPassword.textContent = "La contraseña debe tener al menos 8 caracteres, letras mayúsculas, minúsculas, un número y un carácter especial."
+    //       errorPassword.style.display = "block"
 
-      }
-      else if(!regexPassword.test(e.target.value)){
-        password.style.border = '2px solid red'
-          errorPassword.textContent = "La contraseña debe contener letras mayúsculas, minúsculas, un número y un carácter especial."
-          errorPassword.style.display = "block"
-      }
-      else{
-        password.style.border = '2px solid green'
-          errorPassword.style.display = "none"
-      }
+    //   }
+    //   else if(!regexPassword.test(e.target.value)){
+    //     password.style.border = '2px solid red'
+    //       errorPassword.textContent = "La contraseña debe contener letras mayúsculas, minúsculas, un número y un carácter especial."
+    //       errorPassword.style.display = "block"
+    //   }
+    //   else{
+    //     password.style.border = '2px solid green'
+    //       errorPassword.style.display = "none"
+    //   }
 
-    })
+    // })
 
-    repassword.addEventListener("input", function(e){
-
-
-      if(e.target.value === ""){
-        this.style.border = '2px solid red'
-        errorRepetirPassword.textContent = "Este campo no puede estar vacio"
-        errorRepetirPassword.style.display = "block"
-
-      }
-        else if(password.style.border != '2px solid green'){
-         this.style.border = '2px solid red'
-         errorRepetirPassword.textContent = "Ingrese una contraseña correcta"
-         errorRepetirPassword.style.display = "block"
-      }
-        else if(password.value != e.target.value){
-         this.style.border = '2px solid red'
-         errorRepetirPassword.textContent = "Las contraseñas no coinciden"
-         errorRepetirPassword.style.display = "block"
-      }
-
-      else{
-        this.style.border = '2px solid green';
-        errorRepetirPassword.style.display = "none";
-
-      }
+    // repassword.addEventListener("input", function(e){
 
 
-    })
+    //   if(e.target.value === ""){
+    //     this.style.border = '2px solid red'
+    //     errorRepetirPassword.textContent = "Este campo no puede estar vacio"
+    //     errorRepetirPassword.style.display = "block"
+
+    //   }
+    //     else if(password.style.border != '2px solid green'){
+    //      this.style.border = '2px solid red'
+    //      errorRepetirPassword.textContent = "Ingrese una contraseña correcta"
+    //      errorRepetirPassword.style.display = "block"
+    //   }
+    //     else if(password.value != e.target.value){
+    //      this.style.border = '2px solid red'
+    //      errorRepetirPassword.textContent = "Las contraseñas no coinciden"
+    //      errorRepetirPassword.style.display = "block"
+    //   }
+
+    //   else{
+    //     this.style.border = '2px solid green';
+    //     errorRepetirPassword.style.display = "none";
+
+    //   }
 
 
-     inputImagen.addEventListener("change", function (e){
+    // })
+
+
+    //  inputImagen.addEventListener("change", function (e){
    
-     if(e.target.files[0].type === "image/jpeg" || e.target.files[0].type === "image/png"|| e.target.files[0].type === "image/jpg"){
-        errorImagen.style.display = "none";
-        iconoCheck.style.display = 'block';
-     }else{
-        errorImagen.textContent = "La imagen tiene que ser formato .jpeg, .png, .jpg"
-        errorImagen.style.display = "block"
-        iconoCheck.style.display = 'none';
-     }
+    //  if(e.target.files[0].type === "image/jpeg" || e.target.files[0].type === "image/png"|| e.target.files[0].type === "image/jpg"){
+    //     errorImagen.style.display = "none";
+    //     iconoCheck.style.display = 'block';
+    //  }else{
+    //     errorImagen.textContent = "La imagen tiene que ser formato .jpeg, .png, .jpg"
+    //     errorImagen.style.display = "block"
+    //     iconoCheck.style.display = 'none';
+    //  }
 
-     })
+    //  })
      
 
-     submitButton.addEventListener("click", function(e){
+    //  submitButton.addEventListener("click", function(e){
        
-        if(nombre.style.border == '2px solid red' || apellido.style.border == '2px solid red' || email.style.border == '2px solid red' 
-        || userName.style.border == '2px solid red' || password.style.border == '2px solid red' || repassword.style.border == '2px solid red' || !inputImagen.value 
-        || errorImagen.style.display === "block" || fechaNacimiento.style.border == '2px solid red' || streetnumber.style.border == '2px solid red'
-        || codigoPostal.style.border == '2px solid red' ){
-            e.preventDefault() 
-           if(!inputImagen.value){
-            errorImagen.textContent = "Debe cargar una imagen de perfil, formatos:.jpeg, .png, .jpg"
-            errorImagen.style.display = "block"
-            iconoCheck.style.display = 'none'; 
-           }
-        }
+    //     if(nombre.style.border == '2px solid red' || apellido.style.border == '2px solid red' || email.style.border == '2px solid red' 
+    //     || userName.style.border == '2px solid red' || password.style.border == '2px solid red' || repassword.style.border == '2px solid red' || !inputImagen.value 
+    //     || errorImagen.style.display === "block" || fechaNacimiento.style.border == '2px solid red' || streetnumber.style.border == '2px solid red'
+    //     || codigoPostal.style.border == '2px solid red' ){
+    //         e.preventDefault() 
+    //        if(!inputImagen.value){
+    //         errorImagen.textContent = "Debe cargar una imagen de perfil, formatos:.jpeg, .png, .jpg"
+    //         errorImagen.style.display = "block"
+    //         iconoCheck.style.display = 'none'; 
+    //        }
+    //     }
 
 
 
-     })
+    //  })
 
 
-     fechaNacimiento.addEventListener("change", function(e){
-        if(e.target.value === ""){
-            fechaNacimiento.style.border = '2px solid red'
-            errorFechaNacimiento.textContent = 'Debe completar este campo'
-            errorFechaNacimiento.style.display = 'block'
+    //  fechaNacimiento.addEventListener("change", function(e){
+    //     if(e.target.value === ""){
+    //         fechaNacimiento.style.border = '2px solid red'
+    //         errorFechaNacimiento.textContent = 'Debe completar este campo'
+    //         errorFechaNacimiento.style.display = 'block'
            
-        }
-        else if(fechaFutura(day,e.target.value)){
-            fechaNacimiento.style.border = '2px solid red'
-            errorFechaNacimiento.textContent = 'No puede seleccionar una fecha en el futuro'
-            errorFechaNacimiento.style.display = 'block'
-        }
-        else if(mayorEdad(day,e.target.value)){
-            fechaNacimiento.style.border = '2px solid red'
-            errorFechaNacimiento.textContent = 'Debes tener o ser mayor de 16 años'
-            errorFechaNacimiento.style.display = 'block'
-        }
-        else{
-            fechaNacimiento.style.border = '2px solid green'
-            errorFechaNacimiento.style.display = 'none'
-        }
+    //     }
+    //     else if(fechaFutura(day,e.target.value)){
+    //         fechaNacimiento.style.border = '2px solid red'
+    //         errorFechaNacimiento.textContent = 'No puede seleccionar una fecha en el futuro'
+    //         errorFechaNacimiento.style.display = 'block'
+    //     }
+    //     else if(mayorEdad(day,e.target.value)){
+    //         fechaNacimiento.style.border = '2px solid red'
+    //         errorFechaNacimiento.textContent = 'Debes tener o ser mayor de 16 años'
+    //         errorFechaNacimiento.style.display = 'block'
+    //     }
+    //     else{
+    //         fechaNacimiento.style.border = '2px solid green'
+    //         errorFechaNacimiento.style.display = 'none'
+    //     }
 
-     })
-     codigoPostal.addEventListener("input", function (e) {
-        if (isNaN(parseInt(e.target.value))) {
-            codigoPostal.style.border = '2px solid red';
-            errorCodigoPostal.textContent = 'Tiene que ingresar solo números';
-            errorCodigoPostal.style.display = 'block';
-        } else {
-            codigoPostal.value = e.target.value === "" ? 0 : parseInt(e.target.value);
-            codigoPostal.style.border = '2px solid green';
-            errorCodigoPostal.style.display = 'none';
-        }
-    });
+    //  })
+    //  codigoPostal.addEventListener("input", function (e) {
+    //     if (isNaN(parseInt(e.target.value))) {
+    //         codigoPostal.style.border = '2px solid red';
+    //         errorCodigoPostal.textContent = 'Tiene que ingresar solo números';
+    //         errorCodigoPostal.style.display = 'block';
+    //     } else {
+    //         codigoPostal.value = e.target.value === "" ? 0 : parseInt(e.target.value);
+    //         codigoPostal.style.border = '2px solid green';
+    //         errorCodigoPostal.style.display = 'none';
+    //     }
+    // });
 
 
-    streetnumber.addEventListener("input", function (e) {
-        if (isNaN(parseInt(e.target.value))) {
-            streetnumber.style.border = '2px solid red';
-            errorStreetNumber.textContent = 'Tiene que ingresar solo números';
-            errorStreetNumber.style.display = 'block';
-        } else {
-            streetnumber.value = e.target.value === "" ? 0 : parseInt(e.target.value);
-            streetnumber.style.border = '2px solid green';
-            errorStreetNumber.style.display = 'none';
-        }
-    });
+    // streetnumber.addEventListener("input", function (e) {
+    //     if (isNaN(parseInt(e.target.value))) {
+    //         streetnumber.style.border = '2px solid red';
+    //         errorStreetNumber.textContent = 'Tiene que ingresar solo números';
+    //         errorStreetNumber.style.display = 'block';
+    //     } else {
+    //         streetnumber.value = e.target.value === "" ? 0 : parseInt(e.target.value);
+    //         streetnumber.style.border = '2px solid green';
+    //         errorStreetNumber.style.display = 'none';
+    //     }
+    // });
     
     
   
