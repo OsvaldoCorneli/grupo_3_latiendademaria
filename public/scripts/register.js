@@ -48,93 +48,93 @@ window.addEventListener("load", async function(){
         previous.style = "display:block;"
     })
 
-    // submitButton.addEventListener("click", function(e){
-    //     let errors = {}
+    submitButton.addEventListener("click", function(e){
+        let errors = {}
 
-    //     e.preventDefault()
+        e.preventDefault()
 
-    //     if(nombre.value.length < 1){
-    //         errors.nombre = mensaje
-    //     }
-    //     if(apellido.value.length < 1){
-    //         errors.apellido = mensaje
-    //     }
-    //     if(fechaNacimiento.value.length < 1){
-    //         errors.fechaNacimiento = mensaje
-    //     }
-    //     if(inputImagen.value.length < 1){
-    //         errors.inputImagen = mensaje
-    //     }
-    //     if(email.value.length < 1){
-    //         errors.email = mensaje
-    //     }
-    //     if(userName.value.length < 1){
-    //         errors.userName = mensaje
-    //     }
-    //     if(password.value.length < 1){
-    //         errors.password = mensaje
-    //     }
-    //     if(repassword.value.length < 1){
-    //         errors.repassword = mensaje
-    //     }
+        if(nombre.value.length < 1){
+            errors.nombre = mensaje
+        }
+        if(apellido.value.length < 1){
+            errors.apellido = mensaje
+        }
+        if(fechaNacimiento.value.length < 1){
+            errors.fechaNacimiento = mensaje
+        }
+        if(inputImagen.value.length < 1){
+            errors.inputImagen = mensaje
+        }
+        if(email.value.length < 1){
+            errors.email = mensaje
+        }
+        if(userName.value.length < 1){
+            errors.userName = mensaje
+        }
+        if(password.value.length < 1){
+            errors.password = mensaje
+        }
+        if(repassword.value.length < 1){
+            errors.repassword = mensaje
+        }
         
-    //     if(Object.keys(errors).length > 0){
+        if(Object.keys(errors).length > 0){
          
-    //         for(objeto in errors){
+            for(objeto in errors){
 
-    //        switch(objeto) {
-    //         case "nombre":
-    //             nombre.style.border = '2px solid red'
-    //             errorNombre.textContent = errors[objeto]
-    //             errorNombre.style.display = 'block'
-    //             break
-    //         case "apellido":
-    //             apellido.style.border = '2px solid red'
-    //             errorApellido.textContent = errors[objeto]
-    //             errorApellido.style.display = 'block'
-    //             break
-    //         case "fechaNacimiento":
-    //             fechaNacimiento.style.border = '2px solid red'
-    //             errorFechaNacimiento.textContent = errors[objeto]
-    //             errorFechaNacimiento.style.display = 'block'
-    //             break
-    //         case "inputImagen":
-    //             errorImagen.textContent = "Debe seleccionar una imagen de perfil"
-    //             errorImagen.style.display = 'block'
-    //             break
-    //         case "email":
-    //             email.style.border = '2px solid red'
-    //             errorEmail.textContent = errors[objeto]
-    //             errorEmail.style.display = 'block'
-    //             break
-    //         case "userName":
-    //             userName.style.border = '2px solid red'
-    //             errorUserName.textContent = errors[objeto]
-    //             errorUserName.style.display = 'block'
-    //             break
-    //         case "password":
-    //             password.style.border = '2px solid red'
-    //             errorPassword.textContent = errors[objeto]
-    //             errorPassword.style.display = "block"
-    //         break
-    //         case "repassword":
-    //             repassword.style.border = '2px solid red'
-    //             errorRepetirPassword.textContent = errors[objeto]
-    //             errorRepetirPassword.style.display = "block"
-    //         break
+           switch(objeto) {
+            case "nombre":
+                nombre.style.border = '2px solid red'
+                errorNombre.textContent = errors[objeto]
+                errorNombre.style.display = 'block'
+                break
+            case "apellido":
+                apellido.style.border = '2px solid red'
+                errorApellido.textContent = errors[objeto]
+                errorApellido.style.display = 'block'
+                break
+            case "fechaNacimiento":
+                fechaNacimiento.style.border = '2px solid red'
+                errorFechaNacimiento.textContent = errors[objeto]
+                errorFechaNacimiento.style.display = 'block'
+                break
+            case "inputImagen":
+                errorImagen.textContent = "Debe seleccionar una imagen de perfil"
+                errorImagen.style.display = 'block'
+                break
+            case "email":
+                email.style.border = '2px solid red'
+                errorEmail.textContent = errors[objeto]
+                errorEmail.style.display = 'block'
+                break
+            case "userName":
+                userName.style.border = '2px solid red'
+                errorUserName.textContent = errors[objeto]
+                errorUserName.style.display = 'block'
+                break
+            case "password":
+                password.style.border = '2px solid red'
+                errorPassword.textContent = errors[objeto]
+                errorPassword.style.display = "block"
+            break
+            case "repassword":
+                repassword.style.border = '2px solid red'
+                errorRepetirPassword.textContent = errors[objeto]
+                errorRepetirPassword.style.display = "block"
+            break
 
-    //                  }     
-    //              }
-    //           }
-    //     else{
+                     }     
+                 }
+              }
+        else{
                
-    //            if(validacionCompleta()){
-    //             formulario.submit()
-    //            }
+               if(validacionCompleta()){
+                formulario.submit()
+               }
                
-    //     }
+        }
 
-        //   })
+          })
     
     nombre.addEventListener("input", function(e){
          
@@ -304,6 +304,11 @@ window.addEventListener("load", async function(){
             errorFechaNacimiento.textContent = 'Debes tener o ser mayor de 16 años'
             errorFechaNacimiento.style.display = 'block'
         }
+        else if(aniospasado(day, e.target.value)){
+            fechaNacimiento.style.border = '2px solid red'
+            errorFechaNacimiento.textContent = 'No puede seleccionar un año tan en el pasado'
+            errorFechaNacimiento.style.display = 'block'
+        }
         else{
             fechaNacimiento.style.border = '2px solid green'
             errorFechaNacimiento.style.display = 'none'
@@ -398,6 +403,24 @@ window.addEventListener("load", async function(){
             return true
         }
                 
+    }
+
+    function aniospasado(hoy, value){
+        let interruptor = 0
+        console.log("ingresa")
+        const hoySplit = hoy.split("-") 
+        const valueSplit = value.split("-") 
+        
+        if((parseInt(hoySplit[0]) - parseInt(valueSplit[0])) > 110){
+            interruptor = 1
+        } 
+        if(interruptor === 0){
+            return false
+           }
+        else{ 
+            return true
+        }
+            
     }
 
     function validacionCompleta(){
