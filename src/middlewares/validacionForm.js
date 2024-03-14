@@ -96,7 +96,7 @@ module.exports = {
             //     .isLength({min: 3, max:30}) 
             //     .notEmpty().withMessage('la calle no puede estar vacia'),
             body('calleNumero')
-                .isNumeric({ min: 1, max: 10000 }).withMessage('ingresar el numero de calle'),
+                .isNumeric({ min: 1, max: 10000 }).withMessage('ingresar el numero de calle/solo numeros'),
             body('imagen')
                 .custom((value, {req})=>{
                     const extensionName = req.files.map((x) => {return path.extname(x.path)})
