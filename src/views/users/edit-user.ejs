@@ -189,10 +189,10 @@
             </div>
         </div>
         <div class="contenedor3">
-            <img id="imagenPerfil" class="perfil" src="<%= imagen.length>0 ? imagen[0] : "" %>" alt="<%= nombre.slice(0,1).toUpperCase()+apellido.slice(0,1).toUpperCase() %>"/>
-            <div class="inputform">
+            <img id="imagenPerfil" class="perfil" src="<%= imagen ? imagen : "" %>" alt="<%= nombre.slice(0,1).toUpperCase()+apellido.slice(0,1).toUpperCase() %>"/>
+            <div class="inputform1">
                 <div class="inputform button-wrap">
-                    <label class="button" for="imagen">Subir imagen</label>
+                    <label class="button" for="imagen">Cambiar foto</label>
                     <span id="errorImagen">Mensaje de error</span>
                     <input 
                         class="uploadFile"
@@ -211,7 +211,10 @@
             </div>
         </div>
     </div>
-        <input type="submit" class="button" value="Modificar"/>
+        <div class="botones">
+        <input id="botonModificar" type="submit"  value="Modificar"/>
+        <button  id="backButton">Cancelar</button>
+    </div>
         </form>
         </article>
     </div>
