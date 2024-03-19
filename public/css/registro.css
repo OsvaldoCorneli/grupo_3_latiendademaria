@@ -197,7 +197,18 @@ input[type="file"] {
     font-size: 75%;
     margin: 0 0 5px 0;
 }
-
+#errorProvincia{
+    display: none;
+    color: rgb(187, 0, 0);
+    font-size: 75%;
+    margin: 0 0 5px 0;
+}
+#errorLocalidad{
+    display: none;
+    color: rgb(187, 0, 0);
+    font-size: 75%;
+    margin: 0 0 5px 0;
+}
 
 
 @media (min-width: 760px){

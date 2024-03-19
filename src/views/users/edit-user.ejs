@@ -79,6 +79,7 @@
                 </div>
                 <div class="inputform">
                     <% localidades.forEach((el) => { %>
+                        <span id="errorLocalidad">Mensaje de error</span>
                         <label id="<%= el.provincia.split(" ").join("") %>" for="<%= el.provincia %>" style=<%= provincia == el.provincia? "display:block;" : "display:none;" %>>Localidad:
                         <select id="<%= el.provincia %>" name="localidad">
                             <option disabled selected value>- seleccionar -</option>
@@ -201,7 +202,6 @@
                         id="imagen"
                         accept="image/jpeg, image/png, image/jpg"
                         placeholder="subir una imagen"
-                        value="<%= imagen %>"
                     />
                     <% if (locals.errors && errors.imagen) { %>
                         <p class="errors"><%= errors.imagen.msg %></p>

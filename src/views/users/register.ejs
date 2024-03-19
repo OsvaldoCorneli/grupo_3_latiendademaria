@@ -70,6 +70,7 @@
                         <span class="errors"><%= errors.provincia.msg %></span>
                     <% } %>
                     <label for="provincia">Provincia:</label>
+                    <span id="errorProvincia">Mensaje de error</span>
                     <select id='provincia' name="provincia">
                         <option disabled selected value>- seleccionar -</option>
                         <% localidades.forEach((el) => { %>
@@ -82,8 +83,9 @@
                             <% if (locals.errors && errors.localidades) { %>
                                 <span class="errors"><%= errors.localidades.msg %></span>
                             <% } %>
-                            <label id="<%= el.provincia.split(" ").join("") %>" for="<%= el.provincia %>" style="display:none;">Localidad:
-                            <select id="<%= el.provincia %>" name="localidad">
+                            <span id="errorLocalidad">Mensaje de error</span>
+                            <label id="<%= el.provincia.split(" ").join("") %>" for="<%= el.provincia %>" style="display:none;">Localidad: 
+                                <select id="<%= el.provincia %>" name="localidad">
                                 <option disabled selected value>- seleccionar -</option>
                                 <% el.localidades.forEach((loc) => { %>
                                     <option value="<%= loc %>" <%= body.localidad == loc? "selected" : null %>><%= loc %></option>

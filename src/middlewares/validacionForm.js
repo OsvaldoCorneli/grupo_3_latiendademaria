@@ -87,8 +87,10 @@ module.exports = {
                 }),
             body('fechaNacimiento')
                 .isISO8601().withMessage('ingresar una fecha valida'),
-            // body('provincia')
-            //     .notEmpty().withMessage('selecciona una provincia'),
+            body('provincia')
+                .notEmpty().withMessage('selecciona una provincia'),
+            body('localidad')
+                .notEmpty().withMessage('selecciona una localidad'),    
             body('codigoPostal')
                 .isNumeric({ min: 1, max: 10000 }).withMessage('solo numeros')
                 .notEmpty().withMessage('el codigo postal no puede estar vacio'),
@@ -134,10 +136,10 @@ module.exports = {
                    }),
             body('fechaNacimiento')
                 .isISO8601().withMessage('ingresar una fecha valida'),
-            // body('provincia')
-            //     .notEmpty().withMessage('selecciona una provincia'),
-            // body('localidad')
-            //     .notEmpty().withMessage('selecciona una localidad'),
+            body('provincia')
+                .notEmpty().withMessage('selecciona una provincia'),
+            body('localidad')
+                .notEmpty().withMessage('selecciona una localidad'),
             body('codigoPostal')
                 .isNumeric({ min: 1, max: 10000 }).withMessage('solo numeros')
                 .notEmpty().withMessage('el codigo postal no puede estar vacio'),
@@ -148,10 +150,12 @@ module.exports = {
                 .isNumeric({ min: 1, max: 10000 }).withMessage('ingresar el numero de calle'),
             body('imagen')
                 .custom((value, {req})=>{
+                    if(req.files.length === 0){return true}
                     const extensionName = req.files.map((x) => {return path.extname(x.path)})
                     return extensionName.some((ext) => extNames.includes(ext))
                 }).withMessage(`solo se admiten archivos ${extNames.join(', ')}`)
                 .custom((value, {req})=>{
+                    if(req.files.length === 0){return true}
                     const filesSizes = req.files.map((x) => {return x.size})
                     return !filesSizes.some((file) => file >= maxFileSize)
                 }).withMessage(`el tamaño maximo permitido por imagen es ${maxFileSize/1024} KB`),

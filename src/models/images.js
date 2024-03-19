@@ -40,7 +40,7 @@ module.exports = {
                 },
                 logging: false
             })
-            let holdImage = Array.isArray(local)? local : [local];
+            let holdImage = Array.isArray(local) ? local : [local];
             for (let i in productImages) {
                 const { id, pathName, products } = productImages[i]
                 if (!holdImage.includes(pathName)) {

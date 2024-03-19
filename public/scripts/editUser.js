@@ -7,14 +7,19 @@ const URL = window.location.href
 const idUser = obtenerIdDesdeUrl(URL)
 const day = currentDay()
 
-
-
 let switchInput = {
 nombre: false,
 apellido: false,
 fechaNacimiento: false,
 provincias: false,
-localidad: false
+localidad: false,
+codigoPostal: false,
+streetnumber: false,
+calle: false,
+piso: false,
+departamento: false,
+email: false,
+imagen: false
 
 };
 
@@ -22,6 +27,7 @@ localidad: false
 let provincias = document.querySelector('select[name="provincia"]');
 let selectedLocalidad = provincias.selectedOptions[0].innerText
 let previous = document.querySelector('label#'+selectedLocalidad.split(" ").join(""))
+const currentlocalidad = document.querySelector(`select[id="${selectedLocalidad}"]`);
 let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 let email = document.querySelector("#email")
 let nombre = document.querySelector("#nombre")
@@ -32,7 +38,9 @@ const fechaNacimiento = document.querySelector('#fechaNacimiento')
 let streetnumber = document.querySelector("#calleNumero")
 let codigoPostal = document.querySelector("#codigoPostal")
 let localidad;
-let valorSeleccionado;
+const street = document.querySelector("#street")
+const piso = document.querySelector("#buildingfloor")
+const departamento = document.querySelector("#departamento")
 //ERRORES
 const errorNombre = document.querySelector("#errorNombre")
 const errorApellido = document.querySelector("#errorApellido")
@@ -44,6 +52,9 @@ const errorStreetNumber = document.querySelector("#errorNumero")
 const imagenPerfil = document.getElementById("imagen")
 let submitButton = document.querySelector('input[type="submit"]')
 const formulario = document.querySelector("form")
+let fotoPerfil = document.querySelector("#imagenPerfil")
+
+
 
 //ENCONTRAR USUARIO
 let usuarioFind = findUser(usuarios, idUser);
@@ -52,61 +63,56 @@ for( elemento in usuarioFind){
         usuarioFind[elemento] = "";
     }
 }
+
 // SI TIENE IMAGEN
 if(imagenPerfil && (imagenPerfil.value != undefined || imagenPerfil != "")){
     iconoCheck.style.display = "block"
 }
 
-
-if(provincias.value.length > 0){
-    localidad = document.querySelector(`#${provincias.value}`)
-}
-
-if( selectedLocalidad != "- seleccionar -"){
-    console.log("ingreso no hay provincias")
-    localidad = document.querySelector(`select[id="${selectedLocalidad}"]`);
-    const localidadOption = localidad.selectedOptions[0];
-    valorSeleccionado = localidadOption.value;
-}
-
-console.log("localidad", localidad)
-console.log(selectedLocalidad)
-
 //EVENTOS
-
-
 
 submitButton.addEventListener('click', function(e) {
     e.preventDefault()
+    let cambio = false;
+    for(let elemento in switchInput){
+        if(switchInput[elemento] == true){
+            cambio = true
+        }
+    }
+        if(cambio == false){
+        window.history.back()}
+        else{
+            formulario.submit()
+        }
     
-    console.log("selectdLocalidad", selectedLocalidad)
-    
-
-  console.log(localidad.value)
-
- 
-  
-  // Obtiene el valor de la opción seleccionada
-  
-  console.log("Valor seleccionado:", valorSeleccionado);
-  
 });
 
-
 inputImagen.addEventListener("change", function (e){
-   
-    if(e.target.files[0].type === "image/jpeg" || e.target.files[0].type === "image/png"|| e.target.files[0].type === "image/jpg"){
-        iconoCheck.style.display = 'block';
-        errorImagen.textContent = "Imagen cambiada";
-       errorImagen.style.display = "block"
-       errorImagen.style.color = "green"
-       errorImagen.style.fontSize = "15px"
+        
+        let file = e.target.files[0]
+        if (file) {
+          const reader = new FileReader();
+            reader.onload = function(event) {
+            fotoPerfil.src = event.target.result;
+            }
+                reader.readAsDataURL(file);
+        } 
+      
+if(e.target.files[0].type === "image/jpeg" || e.target.files[0].type === "image/png"|| e.target.files[0].type === "image/jpg"){
+    iconoCheck.style.display = 'block';
+    errorImagen.textContent = "Imagen cambiada";
+    errorImagen.style.display = "block"
+    errorImagen.style.color = "green"
+    errorImagen.style.fontSize = "15px"
+    switchInput.imagen = true;
 
     }else{
        errorImagen.textContent = "La imagen tiene que ser formato .jpeg, .png, .jpg"
        errorImagen.style.display = "block"
        iconoCheck.style.display = 'none';
     }
+
+    
     
 });
 
@@ -198,52 +204,59 @@ fechaNacimiento.addEventListener("change", function(e){
 });
 
 provincias.addEventListener('change', function(e) {
-    
     previous? previous.style = "display:none;" : null;
     let prov = provincias.selectedOptions[0].innerText
     let selected = 'label#'+prov.split(" ").join("")
     previous = document.querySelector(selected)
     previous.style = "display:block;"
-
-    //Cambio de localidad
-    console.log(selected)
-    console.log(prov)
-    localidad = document.querySelector(`select[id="${prov}"]`);
-    const localidadOption = localidad.selectedOptions[0];
-    console.log("localidadOption", localidadOption)
-    valorSeleccionado = localidadOption.value;
-    console.log(valorSeleccionado, "valor")
-
-    console.log(localidad, "ss")
-
-    if(usuarioFind.provincia == e.target.value){
+    
+    if(e.target.value == usuarioFind.provincia){
         switchInput.provincias = false
+    }else{
+        switchInput.provincias = true;
     }
-    else{
-        switchInput.provincias = true
+
+    localidad = document.querySelector(`select[id="${e.target.value}"]`);
+    localidadOption = localidad.selectedOptions[0].textContent;
+    errorLocalidad = document.querySelector("#errorLocalidad")
+
+    if(localidadOption == "- seleccionar -"){
+        localidad.style.border = '2px solid red'
+        errorLocalidad.style.display = "block"
+        errorLocalidad.textContent = "Seleccione una localidad"
     }
 
-});
+        localidad.addEventListener("change", function(e){
 
+            if(usuarioFind.localidad == e.target.value){
+                switchInput.localidad = false
+            }else{
+                 switchInput.localidad = true;
+            }
+            
+            if(e.target.value == "- seleccionar -"){
+                localidad.style.border = '2px solid red' 
+                errorLocalidad.style.display = "block"
+            }else{  
+                localidad.style.border = '2px solid green' 
+                errorLocalidad.style.display = "none"
+                    }
+            })
+    
+})
 
-    localidad.addEventListener('change', function(e){
-        console.log("cambio", e.target.value)
-        console.log(valorSeleccionado)
+  currentlocalidad.addEventListener("change", function(e){
+    
+    if(e.target.value == usuarioFind.localidad){
+        switchInput.localidad = false
+    }else{
+        switchInput.localidad = true;
+    }
 
-    })
-
-
-// if(selectedLocalidad){
-// selectedLocalidad.addEventListener("change", function(e){
-// console.log("localidad", usuarioFind.localidad)
-// console.log(e.target.value)
-
-
-// })
-// }
+})
     
 codigoPostal.addEventListener("input", function (e) {
-    switchInput = true;
+  
     if (isNaN(parseInt(e.target.value))) {
         codigoPostal.style.border = '2px solid red';
         errorCodigoPostal.textContent = 'Tiene que ingresar solo números';
@@ -253,10 +266,18 @@ codigoPostal.addEventListener("input", function (e) {
         codigoPostal.style.border = '2px solid green';
         errorCodigoPostal.style.display = 'none';
     }
+
+    if(usuarioFind.codigoPostal == e.target.value){
+        switchInput.codigoPostal = false
+    }else{
+        switchInput.codigoPostal = true;
+    }
+
+
 });
 
 streetnumber.addEventListener("input", function (e) {
-    switchInput = true;
+    
     if (isNaN(parseInt(e.target.value))) {
         streetnumber.style.border = '2px solid red';
         errorStreetNumber.textContent = 'Tiene que ingresar solo números';
@@ -266,10 +287,17 @@ streetnumber.addEventListener("input", function (e) {
         streetnumber.style.border = '2px solid green';
         errorStreetNumber.style.display = 'none';
     }
+
+    if(usuarioFind.calleNumero == e.target.value){
+        switchInput.streetnumber = false
+    }else{
+        switchInput.streetnumber = true;
+    }
+
 });
 
 email.addEventListener("input", function(e){
-    switchInput = true;    
+       
     if(e.target.value === ""){
         email.style.border = '2px solid red'
         errorEmail.textContent = "Este campo no puede estar vacio"
@@ -290,12 +318,46 @@ email.addEventListener("input", function(e){
         email.style.border = '2px solid green'
         errorEmail.style.display = 'none'
     }
+
+    if(usuarioFind.email === e.target.value){
+        switchInput.email = false
+    }else{
+        switchInput.email = true;
+    }
 });
+
+street.addEventListener("input", function(e){
+
+    if(usuarioFind.calle == e.target.value){
+        switchInput.calle = false
+    }else{
+        switchInput.calle = true;
+    }
+})
+
+piso.addEventListener("input", function(e){
+
+    if(usuarioFind.piso == e.target.value){
+        switchInput.piso = false
+    }else{
+        switchInput.piso = true;
+    }
+})
+
+departamento.addEventListener("input", function(e){
+
+    if(usuarioFind.departamento == e.target.value){
+        switchInput.departamento = false
+    }else{
+        switchInput.departamento = true;
+    }
+})
 
 document.getElementById("backButton").addEventListener("click", function(e) {
     e.preventDefault()
     window.history.back();
 });
+
 
 
 //FUNCIONES
@@ -374,15 +436,14 @@ document.getElementById("backButton").addEventListener("click", function(e) {
     }
 }
 
-  function findUser(objet, id){
+    function findUser(objet, id){
+
         if(Object.keys(objet).length > 0){
             let userEncontrado = objet.filter(element => element.id == id)
             return userEncontrado[0]
         }else{
             return false
         }
-
-}
-
+    }
 
 })
