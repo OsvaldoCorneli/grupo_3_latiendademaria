@@ -2,7 +2,8 @@ const db = require('../database/models')
 const fs = require('fs');
 const path = require('path');
 const bcrypt = require('bcryptjs');
-const { Console } = require('console');
+const { sendEmail } = require('../middlewares/mailer');
+const jwt = require('../middlewares/jsonwebtoken')
 
 
 const usersFilePath = path.join(__dirname, '../data/users.json');
@@ -116,9 +117,6 @@ module.exports = {
         }}catch(error){return error}
         
     }, 
-    restore: function (id) {
-        
-    },
     cartAdd: async function(data){
          
         try {
@@ -189,6 +187,46 @@ module.exports = {
              return error
         }
        
-      }
-    
+      },
+    restorePassword: async function (userData) {
+        try {
+            const user = await this.detail(userData.id)
+            if (user) {
+                const email = {
+                    to: user.email,
+                    subject: `Restaurar contraseña de La tienda de Maria💚`,
+                    text: `Querido ${user.nombre}. Restaura tu contraseña del sitio`,
+                    html: `<p><strong>Querid@ ${user.nombre}</strong></p>
+                    <p>restaura tu contraseña en el sitio usando el siguiente <b>Token</b>. tendras hasta 10 minutos antes de que expire. seleccionalo y copialo en el sitio<b>¡No lo compartas con nadie!</b></p>
+                    <p><b>Token:</b></br>
+                    ${userData.token}</p>
+                    <p>Saludos,</p></br>
+                    <hr>
+                    <p>El equipo de La Tienda de Maria</p>
+                    <p>@2024 La Tienda de Maria💚. Todos los derechos reservados.</p>
+                    <img src="" alt="logo"/>
+                    `
+                }
+                sendEmail(email.to, email.subject, email.text, email.html)
+            } else {
+                throw Error('el usuario no existe')
+            }
+        } catch (error) {
+            return error
+        }
+    },
+    updatePassword: async function (userData) {
+        try {
+            const {password, repeatPassword, id} = userData
+            const passEncriptada = bcrypt.hashSync(password, 10)
+            const checkPass = await bcrypt.compare(repeatPassword, passEncriptada);
+            if (checkPass) {
+                const updatePassword = await db.Users.update({password: passEncriptada},{where: {id: id}})
+                console.log(updatePassword)
+                return updatePassword
+            } else throw Error('las contraseñas no coinciden')
+        } catch (error) {
+            return error
+        }
+    },
 }
