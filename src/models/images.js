@@ -44,8 +44,8 @@ module.exports = {
             for (let i in productImages) {
                 const { id, pathName, products } = productImages[i]
                 if (!holdImage.includes(pathName)) {
-                    await db.Prod_images.destroy({where: {id: products[0].prod_images.id}})
-                    await db.Images.destroy({where: {id: id}})
+                    await db.prod_images.destroy({where: {id: products[0].prod_images.id}})
+                    await db.images.destroy({where: {id: id}})
                 }
             }
             if (upload) {
