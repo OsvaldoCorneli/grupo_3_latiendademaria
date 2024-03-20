@@ -16,6 +16,15 @@ main > h1.titulo {
     width: 100%
 }
 
+fieldset {
+    border-radius: 5px;
+    border: solid 1px black;
+    display:flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
 form {
     display: flex;
     flex-direction: column;
@@ -24,15 +33,16 @@ form {
     gap: 10px;
     background-color: #32A97F;
     border-radius: 5px;
-    padding: 5px;
+    padding: 10px;
     min-width: 250px;
     max-width: 300px
 }
-input {
+input, textarea {
     border: none;
     padding: 5px;
     border-radius: 5px;
     width: 100%;
+    padding: 5px;
 }
 
 button {

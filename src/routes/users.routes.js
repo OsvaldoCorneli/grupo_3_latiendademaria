@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const users = require('../controllers/user');
-const validacionForm = require('../middlewares/validacionForm') 
+const validacionForm = require('../middlewares/validacionForm') ;
 const upload = require('../middlewares/multerMid');
+const jwt = require('../middlewares/jsonwebtoken')
 
 const db = require("../database/models")
 
@@ -17,6 +18,8 @@ router.route('/register')
     .post(upload.any(), validacionForm.registerUser(), users.postCreateForm);
 
 router.get('/restore', users.getRestoreUser);
+router.post('/restore', jwt.restorePassToken, users.getRestoreToken);
+router.post('/restore/token', jwt.checkToken, validacionForm.restore(), users.restorePassword);
 
 router.get('/profile', users.profile);
 

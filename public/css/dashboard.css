@@ -156,7 +156,3 @@ button.delete:hover {
 .requiredinput:invalid {
     border: 2px solid red;
 }
-.errors {
-    font-weight: 400;
-    color: red
-}

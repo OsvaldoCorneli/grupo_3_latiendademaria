@@ -95,11 +95,6 @@ main {
     border: 2px solid red;
 }
 
-.errors {
-    color: rgb(187, 0, 0);
-    font-size: 75%;
-    margin: 0 0 5px 0;
-}
 
 #mensajePassword{
     display: none;

@@ -30,13 +30,14 @@
             <% if (locals.errors && errors.description) { %>
                 <small id="description" class="errors"><%= errors.description.msg %></small>
             <% } %>
-            <label for="line"><b>Linea:</b>
-                <label><input id="line" name="line" type="radio" value="sublimada" <%= body.line == "sublimada" && "checked" %> >Sublimada</input></label>
-                <label><input id="line" name="line" type="radio" value="artesanal" <%= body.line == "artesanal" && "checked" %> >Artesanal</input></label>
-            </label>
-            <% if (locals.errors && errors.line) { %>
-                <small id="line" class="errors"><%= errors.line.msg %></small>
-            <% } %>
+            <fieldset>
+                <legend><b>Linea</b></legend>
+                <label><input id="line" name="line" type="radio" value="sublimada" <%= body.line == "sublimada" && "checked" %>/>Sublimada</label>
+                <label><input id="line" name="line" type="radio" value="artesanal" <%= body.line == "artesanal" && "checked" %>/>Artesanal</label>
+                <% if (locals.errors && errors.line) { %>
+                    <small id="line" class="errors"><%= errors.line.msg %></small>
+                <% } %>
+            </fieldset>
             <label for="category"><b>Categoria:</b>
                 <select id="category" name="category" required>
                     <% categorias.forEach(({id,name}) => { %>
@@ -56,15 +57,18 @@
                 <small id="category" class="errors"><%= errors.category.msg %></small>
             <% } %>
             
-            <label for="color"><b>Colores:</b> </label>
-            <div class="container-colorinputs"> 
+            <fieldset class="container-colorinputs">
+                <legend><b>Colores</b></legend>
             <% if (body.color) { %> 
                 <% if (typeof(body.color) == 'string') { %>
                     <div>
-                        <input class="c0" type="color" name="color" id="color" value="<%= body.color %>"/>
-                        <span id="c0" style=<%= body.color %>></span>
-                        <label for="stock">Stock:</label>
-                        <input type="number" name="stock" value="<%= body.stock? body.stock : 1 %>" required/>
+                        <label for="color">
+                            <input class="c0" type="color" name="color" id="color" value="<%= body.color %>"/>
+                            <span id="c0" style=<%= body.color %>></span>
+                        </label>
+                        <label for="stock">Stock:
+                            <input type="number" name="stock" value="<%= body.stock? body.stock : 1 %>" required/>
+                        </label>
                     </div>
                 <% } else { %>
                     <% body.color.forEach((color,index) => { let background=`color:${color};` %>
@@ -82,7 +86,7 @@
                         </div>
             <% })}} %>
                 <span id="agregar" class="button">Agregar color</span>
-            </div>
+            </fieldset>
 
             <label for="price">Precio:</label>
             <input class="inputForm number" 
@@ -96,6 +100,8 @@
             <% if (locals.errors && errors.price) { %>
                 <small id="price" class="errors"><%= errors.price.msg %></small>
             <% } %>
+            <fieldset>
+                <legend><b>Imagenes</b></legend>
             <div class="inputform button-wrap">
                 <label class="button" for="imageinput">Subir imagen</label>
                 <input 
@@ -123,6 +129,7 @@
             <% if (locals.errors && errors.image) { %>
                 <small id="image" class="errors"><%= errors.image.msg %></small>
             <% } %>
+        </fieldset>
             <button class="button" type="submit">Enviar</button>
         </form>
         <script src="\scripts\ntc.js"></script>

@@ -164,5 +164,16 @@ module.exports = {
             // body('departamento', 'no puede superar 10 caracteres')
             //     .isLength({max:10}) 
         ]
+    },
+    restore: function () {
+        return [
+            body('password')
+                .notEmpty().withMessage('La contraseña no puede estar en blanco')
+                .isLength({min: 8}).withMessage('la contraseña debe ser mayor a 8 caracteres')
+                .custom(value => regexPassword.test(value)).withMessage('La contraseña debe contener letras mayúsculas, minúsculas, un número y un carácter especial.'),
+            body('repeatPassword').custom((value, {req}) => {
+                return value === req.body.password
+            }).withMessage('las contraseñas no coinciden')
+        ]
     }
 }

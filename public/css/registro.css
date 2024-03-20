@@ -123,10 +123,6 @@ input[type="file"] {
 .requiredinput:invalid {
     border: 2px solid red;
 }
-.errors {
-    font-size: 75%;
-    color: rgb(187, 0, 0)
-}
 .error-contraseña {
     color: rgb(187, 0, 0);
     font-size: 75%

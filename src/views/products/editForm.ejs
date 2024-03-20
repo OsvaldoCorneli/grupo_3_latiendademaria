@@ -37,21 +37,22 @@
                     <% if (locals.errors && errors.description) { %>
                         <small id="description" class="errors"><%= errors.description.msg %></small>
                     <% } %>
-
-                    <label for="line"><b>Linea:</b>
+                <fieldset>
+                    <legend><b>Linea</b></legend>
+                    <label for="line">
                         <input type="radio" id="line" name="line" value="sublimada" <% if (productEdit.line == 'sublimada') { %>
                             <%= checked="checked" %>
-                            <% } %>>Sublimada
-                        </input>
+                            <% } %>/>Sublimada
+                    </label>
+                    <label for="line">
                         <input type="radio" id="line" name="line" value="artesanal" <% if (productEdit.line == 'artesanal') { %>
                             <%= checked="checked" %>
-                            <% } %>>Artesanal
-                        </input>
+                            <% } %>/>Artesanal
                     </label>
                     <% if (locals.errors && errors.line) { %>
                         <small id="line" class="errors"><%= errors.line.msg %></small>
                     <% } %>
-                    
+                </fieldset>
                     <label for="category"><b>Categoria:</b>
                         <select id="category" name="category">
                             <% categorias.forEach(({id,name}) => { %>
@@ -64,31 +65,27 @@
                         <small id="category" class="errors"><%= errors.category.msg %></small>
                     <% } %>
                     </label>
-                    <label for="color"><b>Colores:</b></label>
+                <fieldset>
+                    <legend><b>Colores</b></legend>
                     <div class="container-colorinputs">
-                    <!-- <% if (typeof(productEdit.colors) == 'string') { let background=`color:${productEdit.colors.hex};`%>
-                        <div>
-                            <input class="c0" type="color" name="color" id="color" value="<%= productEdit.colors.hex %>"/>
-                            <span id="c0" style=<%= background %>><%= productEdit.colors.name %></span>
-                        </div>
-                    <% } else { %> -->
                     <% productEdit.colors?.forEach(({stock, color},index) =>  { let background=`color:${color.hex};`%>
                         <div>
+                            <label for="color"></label>
                             <input class="c<%= index %>" type="color" name="color" id="color" value="<%= color.hex %>"/>
                             <span id="c<%= index %>" style=<%= background %>><%= color.hex %></span>
                             <% if (locals.errors && errors.color) { %>
                                 <small id="color" class="errors"><%= errors.color.msg %></small>
                             <% } %>
                             <label for="stock">Stock:</label>
-                            <input type="number" name="stock" class="number" value="<%= stock %>" required/>
+                            <input type="number" name="stock" class="inputForm number" value="<%= stock %>" required/>
                             <% if (locals.errors && errors.stock) { %>
                                 <small id="stock" class="errors"><%= errors.stock.msg %></small>
                             <% } %>
                         </div>
-                    <% })} %>
+                    <% }) %>
                         <span id="agregar" class="button">Agregar color</span>
                     </div>
-
+                </fieldset>
                     <label for="price"><b>Precio:</b></label>
                     <input class="inputForm number" 
                         type="number"
@@ -101,6 +98,8 @@
                         <small id="price" class="errors"><%= errors.price.msg %></small>
                     <% } %>
                 </span>
+            <fieldset>
+                <legend><b>Imagenes</b></legend>
                 <div class="inputform button-wrap">
                     <label class="button" for="imageinput">Subir Imagen
                         <input
@@ -127,6 +126,7 @@
                         </span>
                     <% }) %>
                 </span>
+            </fieldset>
                 <button class="button" type="submit">Editar</button>
                 </form>
             </div>
