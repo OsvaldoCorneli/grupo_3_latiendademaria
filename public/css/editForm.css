@@ -219,10 +219,7 @@ input:valid {
 input:invalid {
     border: 2px solid red;
 }
-.errors {
-    font-weight: 400;
-    color: red
-}
+
 .error-contraseña {
     display: none;
     color: red;

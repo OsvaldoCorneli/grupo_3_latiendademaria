@@ -1,5 +1,8 @@
 
-
+.errors {
+    font-weight: 400;
+    color: red
+}
 .number {
     font-family: 'Dejavu-Sans';
     text-align: right;

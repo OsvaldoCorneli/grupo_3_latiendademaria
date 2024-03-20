@@ -163,7 +163,6 @@ module.exports = {
     getRestoreToken: async function(req,res) {
         try {
             if (req.user) {
-                console.log(req.user)
                 const sendToken = await users.restorePassword(req.user)
             }
             res.render('users/restore', {token: true})
@@ -173,10 +172,14 @@ module.exports = {
     },
     restorePassword: async function (req,res) {
         try {
-            console.log(req.body, req.user)
-            const updatePassword = await users.updatePassword({...req.body, ...req.user})
-            if (updatePassword) {
-                res.status(200).render('users/restore', {token: false, message: "Contraseña actualizada con Exito!"})
+            const errores = validationResult(req)
+            if (errores.isEmpty()) {
+                const updatePassword = await users.updatePassword({...req.body, ...req.user})
+                if (updatePassword) {
+                    res.status(200).render('users/login',{body: {}, errors: {}})
+                }
+            } else {
+                res.status(200).render('users/restore', {token: false, errors: errores.mapped()})
             }
         } catch (error) {
             res.status(500).json(error.message)

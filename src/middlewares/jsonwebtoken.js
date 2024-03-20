@@ -20,14 +20,12 @@ module.exports = {
         }
     },
     checkToken: function (req,res,next) {
-        console.log('middleware linea 23:',req.body)
         const token = req.body.token
         jwt.verify(token, JWT_KEY, function (err, data) {
             if (err) {
                 res.render("users/restore", {token: false, errors: {email: "el Token no es valido o ya expiró"} })
             } else {
                 req.user = data
-                console.log('middleware linea 30',data)
                 next()
             }
         })

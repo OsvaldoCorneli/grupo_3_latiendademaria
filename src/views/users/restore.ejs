@@ -13,7 +13,7 @@
             <label for="email">Email:</label>
             <input id="email" type="email" name="email" placeholder="email..." required/>
             <% if (locals.errors && errors.email) {%>
-                <small class="errors"><%= errors.email %></small>
+                <small id="email" class="errors"><%= errors.email %></small>
             <% } %>
             <button>Enviar</button>
         </form>
@@ -25,16 +25,22 @@
                     <legend><b>Contraseña</b></legend>
                     <label for="password">Nueva</label>
                     <input id="password" type="password" name="password" placeholder="Ingresa tu nueva contraseña..." required/>
-                
+                <% if (locals.errors && errors.password) { %>
+                    <small id="password" class="errors"><%= errors.password %></small>
+                <% } %>
                 <label for="repeatPassword">Repetir</label>
                 <input id="repeatPassword" type="password" name="repeatPassword" placeholder="Ingresa tu nueva contraseña..." required/>
+                <% if (locals.errors && errors.password) { %>
+                    <small id="repeatPassword" class="errors"><%= errors.repeatPassword %></small>
+                <% } %>
             </fieldset>
                 <label for="token"><b>Token:</b></label>
-                <textarea id="token" name="token" placeholder="token"></textarea>
+                <textarea id="token" name="token" placeholder="token" rows="6" cols="60"></textarea>
                 <button>Enviar</button>
             </form>
         <% } %>
     </main>
     <%- include('../partials/footer.ejs') %>
+    <script src="\scripts\restore.js"></script>
 </body>
 </html>

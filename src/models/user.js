@@ -219,12 +219,8 @@ module.exports = {
         try {
             const {password, repeatPassword, id} = userData
             const passEncriptada = bcrypt.hashSync(password, 10)
-            const checkPass = await bcrypt.compare(repeatPassword, passEncriptada);
-            if (checkPass) {
-                const updatePassword = await db.Users.update({password: passEncriptada},{where: {id: id}})
-                console.log(updatePassword)
-                return updatePassword
-            } else throw Error('las contraseñas no coinciden')
+            const updatePassword = await db.Users.update({password: passEncriptada},{where: {id: id}})
+            return updatePassword
         } catch (error) {
             return error
         }

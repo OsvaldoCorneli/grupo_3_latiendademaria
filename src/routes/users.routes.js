@@ -19,7 +19,7 @@ router.route('/register')
 
 router.get('/restore', users.getRestoreUser);
 router.post('/restore', jwt.restorePassToken, users.getRestoreToken);
-router.post('/restore/token', jwt.checkToken, users.restorePassword);
+router.post('/restore/token', jwt.checkToken, validacionForm.restore(), users.restorePassword);
 
 router.get('/profile', users.profile);
 
