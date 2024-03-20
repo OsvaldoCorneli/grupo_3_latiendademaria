@@ -98,13 +98,13 @@ main {
 
 #mensajePassword{
     display: none;
-    color: red;
+    color: rgb(187, 0, 0);
     font-size: 75%;
     margin: 0 0 5px 0;
 }
 #mensajeEmail{
     display: none;
-    color: red;
+    color: rgb(187, 0, 0);
     font-size: 75%;
     margin: 0 0 5px 0;
 }
