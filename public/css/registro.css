@@ -124,12 +124,12 @@ input[type="file"] {
     border: 2px solid red;
 }
 .errors {
-    font-weight: 400;
-    color: red
+    font-size: 75%;
+    color: rgb(187, 0, 0)
 }
 .error-contraseña {
-    color: red;
-    font-weight: bold;
+    color: rgb(187, 0, 0);
+    font-size: 75%
 }
 
 #errorNombre{
@@ -197,7 +197,18 @@ input[type="file"] {
     font-size: 75%;
     margin: 0 0 5px 0;
 }
-
+#errorProvincia{
+    display: none;
+    color: rgb(187, 0, 0);
+    font-size: 75%;
+    margin: 0 0 5px 0;
+}
+#errorLocalidad{
+    display: none;
+    color: rgb(187, 0, 0);
+    font-size: 75%;
+    margin: 0 0 5px 0;
+}
 
 
 @media (min-width: 760px){
