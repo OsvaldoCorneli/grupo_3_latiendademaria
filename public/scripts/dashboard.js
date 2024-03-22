@@ -4,6 +4,10 @@ const host = window.location.host
 let errores = {}
 function handleErrors(input, formulario){
     const {desde, hasta, estado} = formulario
+    if (errores[input]) {
+        delete errores[input]
+        document.querySelector(`small#${input}`).remove()
+    }
     switch (input) {
         case 'desde':
             if (desde.valueAsDate == null) errores.desde = "ingresar una fecha"
@@ -25,8 +29,6 @@ function handleErrors(input, formulario){
 
 Array.from(form).forEach((key,i) => {
     key.onchange= () => {
-        if (document.querySelector(`small#${key.name}`)) document.querySelector(`small#${key.name}`).remove()
-        if (errores.hasOwnProperty(key.name)) delete errores[key.name]
         handleErrors(key.name, form)
         if (errores[key.name]) {
             let htmlError = `<small id="${key.name}" class="errors">${errores[key.name]}</small>`
@@ -34,8 +36,6 @@ Array.from(form).forEach((key,i) => {
         }
     }
     key.onfocus = () => {
-        if (document.querySelector(`small#${key.name}`)) document.querySelector(`small#${key.name}`).remove()
-        if (errores.hasOwnProperty(key.name)) delete errores[key.name]
         handleErrors(key.name, form)
         if (errores[key.name]) {
             let htmlError = `<small id="${key.name}" class="errors">${errores[key.name]}</small>`
@@ -46,7 +46,8 @@ Array.from(form).forEach((key,i) => {
 
 
 form.onsubmit = (e) => {
-    Array.from(form).forEach((key) => {handleErrors(key.name,form)})
+    Array.from(form).forEach((key) => {
+        handleErrors(key.name,form)})
     if(Object.keys(errores).length > 0) {
         e.preventDefault()
         alert('corregir los errores del formulario')

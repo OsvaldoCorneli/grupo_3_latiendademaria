@@ -4,6 +4,10 @@ const form = document.querySelector('form')
 let errores = {}
 function validateForm(inputs) {
     const {name, description, image, line, category, price, stock, color } = document.querySelector('form')
+    if (errores[inputs]) {
+        document.querySelector(`small#${inputs}`).remove()
+        delete errores[inputs]
+    }
     switch (inputs) {
         case 'name':
             if (name.value.length <= 5 || name.value.length > 30) errores.name = "el nombre debe ser mayor a 5 caracteres";
@@ -76,8 +80,6 @@ Array.from(form).forEach((key) => {
                 imageInfo.appendChild(deleteButton);
             }; //fin de la presente iteracion, continuar con el siguiente archivo, si es que hay mas.
         }
-        document.querySelector(`small#${key.name}`) && document.querySelector(`small#${key.name}`).remove()
-        delete errores[key.name]
         validateForm(key.name)
         if(errores[key.name]) {
             let htmlError = `<small id="${key.name}" class="errors">${errores[key.name]}</small>`
@@ -85,8 +87,6 @@ Array.from(form).forEach((key) => {
         }
     }
     key.onfocus = () => {
-        document.querySelector(`small#${key.name}`) && document.querySelector(`small#${key.name}`).remove()
-        delete errores[key.name]
         validateForm(key.name)
         if(errores[key.name]) {
             let htmlError = `<small id="${key.name}" class="errors">${errores[key.name]}</small>`
@@ -117,8 +117,8 @@ Array.from(deleteButton).forEach((key,i) => {
 })
 
 form.onsubmit = (event) => {
+    Array.from(form).forEach(input => validateForm(input.name))
     if(Object.keys(errores).length > 0) {
-        console.log(Object.keys(errores))
         event.preventDefault()
         alert('corregir los errores del formulario')
     }
