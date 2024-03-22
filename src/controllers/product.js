@@ -7,7 +7,7 @@ const favorites = require('../models/favorites');
 const images = require('../models/images')
 const fs = require('fs');
 const {validationResult} = require('express-validator');
-const { start } = require('repl');
+
 
 const view = path.join(__dirname,'../views/products/');
 
@@ -82,7 +82,7 @@ module.exports = {
             if (errores.isEmpty()) {
                 const newProduct = await products.create(req.body, req.files)
                 if (newProduct) {
-                    res.status(200).redirect(`/products/${id}/edit?message=editado`)
+                    res.status(200).redirect(`/products/${newProduct.id}/edit?message=editado`)
                 }
             } else {
                 if (req.files) {

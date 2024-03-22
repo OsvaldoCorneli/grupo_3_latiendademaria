@@ -122,17 +122,18 @@ module.exports = {
     create: async function (data, images) {
         try {
             const { name, description, line, category, color, price, stock, imageHold } = data
+            console.log(data)
             const newProduct = await db.Products.create({
                 name: name,
                 description: description,
-                category_id: category,
+                category_id: +category,
                 line: line,
                 price: +price
             })
             if (newProduct) {
                 await Colors.createProductColor(color, stock, newProduct.id);
                 await Images.newProductImage(imageHold, images, newProduct.id)
-                return this.detail(newProduct.id)
+                return await this.detail(newProduct.id)
             } else {
                 throw new Error('error al crear producto')
             }

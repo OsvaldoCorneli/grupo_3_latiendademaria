@@ -136,6 +136,8 @@ a.arrow-next1 {
     border: none;
 }
 ul.color {
+    border-width: 1px;
+    border-color: black;
     display: flex;
     flex-direction: row;
     list-style: none;
@@ -183,6 +185,17 @@ ul > li {
     border-image: radial-gradient(white 69%, #0000 70%) 84.5%/50%;
     clip-path: polygon(-41% 0, 50% 91%, 141% 0);
 }
+fieldset.colors{ 
+    height:200px;
+    overflow-y:auto;
+    display:flex;
+    flex-direction:column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 3px;
+}
+
+
 @media (min-width: 760px) {
 
     #categoria , #color{
@@ -200,17 +213,21 @@ ul > li {
     
     }
 
-
-    
-   
+    form#filtros {
+        display:flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: wrap;
+    }
 }
 
 @media (min-width: 1200px) {
 
 .filter{
     width: 50%;
-    min-width: 300px;
-    max-width: 400px;
+    min-width: 280px;
+    max-width: 300px;
 }    
 
 main{    

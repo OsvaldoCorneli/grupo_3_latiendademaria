@@ -6,6 +6,7 @@
                 <tr>
                     <th></th>
                     <th colspan="2">Producto</th>
+                    <th>Color</th>
                     <th>Precio</th>
                     <th>Cantidad</th>
                     <th>Subtotal</th>
@@ -13,8 +14,11 @@
             <% carrito.forEach(el => { %>
                 <tr id="product-<%= el.id %>-<%= el.colorSelected %>">
                     <td id="X" onclick="eliminarProducto('<%= el.id %>', '<%= el.colorSelected %>')">X</td>
-                    <td ><img src="<%= el.images[0] %>" alt="<%= el.name %>"/></td>
+                    <td ><img src="<%= el.images[0].pathName %>" alt="<%= el.name %>"/></td>
                     <td id="product"><%= el.name %></td>
+                    <% let prodColor = el.colors.find(({color}) => color.id == el.colorSelected).color %>
+                    <% let background = `background-color:${prodColor.hex};color:${prodColor.hex};border-radius:50%;width:20px;height:20px;border-style:solid;border-width:1px;border-color:black;` %>
+                    <td><li style=<%= background %>></li></td>
                     <td id="precio" class="number"><%= el.price %></td>
                     <td class="sumarRestar">
                         <button id="restar" onclick="this.parentNode.querySelector('input[type=number]').stepDown(); restarCantidad('<%= el.id %>', '<%= el.colorSelected %>')">-</button>
@@ -25,7 +29,7 @@
                 </tr>
             <% }); %>
                 <tr id="totales">
-                    <td colspan="4">Totales:</td>
+                    <td colspan="5">Totales:</td>
                     <td id="cantidadTotal"><%= carrito.reduce((acum, el) => acum + el.cantidad, 0) %></td>
                     <td class="number"><b class="number"><%= carrito.reduce((acum, el) => acum + (el.cantidad*el.price), 0).toFixed(2) %></b></td>
                 </tr>

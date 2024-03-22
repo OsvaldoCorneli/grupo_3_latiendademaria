@@ -22,8 +22,7 @@ module.exports = {
                 }));
     
                 user.carrito = cartDetails;
-                
-                 return user;
+                return user;
             } else {
                 user.carrito = []
                 return user
