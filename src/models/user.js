@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const bcrypt = require('bcryptjs');
 const { sendEmail } = require('../middlewares/mailer');
-const jwt = require('../middlewares/jsonwebtoken')
+const images = require('./images');
 
 
 const usersFilePath = path.join(__dirname, '../data/users.json');
@@ -28,8 +28,13 @@ module.exports = {
         try {
             let imagen = "";
             if(image){
-             imagen = image.map(element => element.path.split('public')[1]).join(', ')}
-       
+                for (let i in image) {
+                    const uploadImage = await images.uploadFile(image[i].path)
+                    imagen = uploadImage.url
+                    break
+                }
+            }
+
             const { nombre, apellido, fechaNacimiento, provincia, localidad, codigoPostal, calle, calleNumero, piso, departamento, email, userName, password } = data
             const passEncriptada = bcrypt.hashSync(password, 10)
         

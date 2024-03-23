@@ -419,9 +419,9 @@ insert into payment_products values(default,'6','1','23','7','3463.07'),
 unlock tables;
 
 lock tables images write;
-insert into images values ('1','/images/uploads/image-1703994594448.jpeg',default,default),
-('2','/images/uploads/image-1703994594449.jpg',default,default),
-('3','https://http2.mlstatic.com/D_NQ_NP_2X_814598-MLA43768156184_102020-F.webp',default,default),
+insert into images values ('1','https://res.cloudinary.com/dbowsjk6p/image/upload/v1710976968/image-1703994594449_s3bl2l.jpg',default,default),
+('2','https://res.cloudinary.com/dbowsjk6p/image/upload/v1710976967/image-1703994594448_nqiqza.jpg',default,default),
+('3','https://res.cloudinary.com/dbowsjk6p/image/upload/v1710976681/qf0f4kfkgftpwkgrpsls.webp',default,default),
 ('4','https://http2.mlstatic.com/D_NQ_NP_2X_611445-MLA49153801786_022022-F.webp',default,default),
 ('5','https://canvasbynumbers.es/cdn/shop/products/ezgif.com-gif-maker_40_9b05be40-d052-4411-871d-f3d9f2f378f7.jpg?crop=center&height=600&v=1668950492&width=600',default,default),
 ('6','https://d22fxaf9t8d39k.cloudfront.net/0e97fce301e0e550163ccdfb905f890410d5d4d7a0daa77d2f1c8879edf24c5281650.jpeg',default,default),
@@ -434,8 +434,8 @@ insert into images values ('1','/images/uploads/image-1703994594448.jpeg',defaul
 ('13','https://http2.mlstatic.com/D_NQ_NP_2X_987102-MLA51617498795_092022-F.webp',default,default),
 ('14','https://i0.wp.com/papeleracontemporanea.com/wp-content/uploads/2019/12/Cuaderno-Kraft-A6.jpg?fit=800%2C800&ssl=1',default,default),
 ('15','https://http2.mlstatic.com/D_NQ_NP_2X_813248-MLA72092373311_102023-F.webp',default,default),
-('16','/images/uploads/image-1702699424547.jpg',default,default),
-('17','/images/uploads/image-1702744640465.jpg',default,default);
+('16','https://res.cloudinary.com/dbowsjk6p/image/upload/v1710976966/image-1702699424547_mua4ox.jpg',default,default),
+('17','https://res.cloudinary.com/dbowsjk6p/image/upload/v1710976968/image-1702744640465_zqghdc.jpg',default,default);
 unlock tables;
 
 lock tables prod_images write;

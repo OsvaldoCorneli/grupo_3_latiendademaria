@@ -54,10 +54,11 @@
                     <a onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+</a>
                 </label>
                 <span class="color"> Color:
-                <% colors.forEach(({stock, color},index) => { let background = `background-color:${color.hex};color:${color.hex};border-radius:50%; border:0.1px-solid-black;;` %>
-                    <label for=<%= color.name %>><i style=<%= background %>>oo</i></label>
-                    <input id="<%= color.name %>" type="radio" name="color" value="<%= color.id %>" <%= index === 0 ? 'checked' : '' %> />
-                <% })%>
+                <% colors.forEach(({stock, color},index) => { let background = `background-color:${color.hex};color:${color.hex};border-radius:50%;padding-inline:10px` %>
+                    <label for="<%= color.name %>"><i style=<%= background %>></i>
+                        <input id="<%= color.name %>" type="radio" name="color" value="<%= color.id %>" <%= index === 0 ? 'checked' : '' %> />
+                    </label>
+                    <% })%>
                 </span>
                 <% if (user) { %>
                     <button id="botonCarrito1" class="presionado" onclick="event.preventDefault(); addCart('<%=id%>')">Agregar a carrito</button>

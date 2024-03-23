@@ -55,6 +55,24 @@ window.onload = () => {
             })
         })
     })
+
+    const query = new URLSearchParams(location.search)
+    const form = document.querySelector('form#filtros')
+    Array.from(form).forEach(input => {
+        if (query.has(input.name) && query.getAll(input.name).includes(input.value)) {
+            input.checked = true
+            form.insertAdjacentHTML('beforebegin',`<small style="background-color:darkgray;border-radius:5px;padding:5px;width:fit-content;">${input.name}: ${input.parentNode.innerText}</small>`)
+        }
+        if (input.value == "Reset") {
+            input.onclick = (e) => {
+                e.preventDefault()
+                window.history.replaceState({},'',`${location.pathname}`)
+                form.reset()
+                form.submit()
+            }
+        }
+        }
+    );
 };
 
 async function fetchData(endpoint, body) {

@@ -3,6 +3,10 @@ function handleErrors(inputs) {
     const {password, repeatPassword, token, email} = document.querySelector('form')
     let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     let regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (errores[inputs]) {
+        document.querySelector(`small#${inputs}`).remove()
+        delete errores[inputs]
+    }
     switch(inputs){
         case 'email':
             if (email.value.length == 0) errores.email = "Este campo no puede estar vacio"
@@ -30,8 +34,6 @@ const form = document.querySelector('form')
 
 Array.from(form).forEach((key) => {
     key.onchange = () => {
-        if (document.querySelector(`small#${key.name}`)) document.querySelector(`small#${key.name}`).remove()
-        delete errores[key.name]
         handleErrors(key.name)
         if(errores[key.name]) {
             let htmlError = `<small id="${key.name}" class="errors">${errores[key.name]}</small>`
@@ -39,8 +41,6 @@ Array.from(form).forEach((key) => {
         }
     }
     key.onfocus = () => {
-        if (document.querySelector(`small#${key.name}`)) document.querySelector(`small#${key.name}`).remove()
-        delete errores[key.name]
         handleErrors(key.name)
         if(errores[key.name]) {
             let htmlError = `<small id="${key.name}" class="errors">${errores[key.name]}</small>`
