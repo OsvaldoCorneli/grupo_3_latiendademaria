@@ -38,9 +38,6 @@ module.exports = {
                     const oneDayInMillis = 24 * 60 * 60 * 1000;
                     res.cookie('recordame', user.email, { expires: new Date(Date.now() + oneDayInMillis), httpOnly: true });
                 }
-                if (res.redirectUrl || req.redirectUrl) {
-                    res.redirect(res.redirectUrl || req.redirectUrl)
-                }
                 res.status(200).redirect('/')
             } else {
                 res.render('users/login', {

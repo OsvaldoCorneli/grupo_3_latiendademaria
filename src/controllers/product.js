@@ -82,7 +82,7 @@ module.exports = {
             if (errores.isEmpty()) {
                 const newProduct = await products.create(req.body, req.files)
                 if (newProduct) {
-                    res.status(200).redirect(`/products/${newProduct.id}/edit?message=editado`)
+                    res.status(200).redirect(`/products/${newProduct.id}`)
                 }
             } else {
                 if (req.files) {

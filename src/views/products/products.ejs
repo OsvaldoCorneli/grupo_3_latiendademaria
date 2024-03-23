@@ -18,15 +18,18 @@
                         <legend><b>Categoria</b></legend>
                     <% categorias.forEach((category) => { %>
                         <label for="<%= category.name %>">
-                            <input id="<%= category.name %>" type="checkbox" name="category" value=<%= category.id %>><%= category.name+'('+ category.productsCount +')' %></option>
+                            <input id="<%= category.name %>" type="checkbox" name="category" value=<%= category.id %>>
+                            <%= category.name+'('+ category.productsCount +')' %>
                         </label>
                     <% }) %>
                 </fieldset>
                 <fieldset class="colors">
                     <legend><b>Colores</b></legend>
                     <% colors.forEach((color) => {  %>
-                    <label for="<%= color.hex %>" style="background-color:<%= color.hex %>;border-radius:5px;padding:5px;">
+                    <label for="<%= color.hex %>" >
+                        <!-- style="background-color:<%= color.hex %>;border-radius:5px;padding:5px;" -->
                         <input id="<%= color.hex %>" type="checkbox" name="color" value=<%= color.id %> />
+                        <i class="colorIcon" style="background-color:<%= color.hex %>;"></i>
                         <%= color.name + '('+color.productsCount+')' %>
                     </label>
                     <% }) %>

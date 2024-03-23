@@ -122,7 +122,6 @@ module.exports = {
     create: async function (data, images) {
         try {
             const { name, description, line, category, color, price, stock, imageHold } = data
-            console.log(data)
             const newProduct = await db.Products.create({
                 name: name,
                 description: description,

@@ -17,8 +17,8 @@
                     <td ><img src="<%= el.images[0].pathName %>" alt="<%= el.name %>"/></td>
                     <td id="product"><%= el.name %></td>
                     <% let prodColor = el.colors.find(({color}) => color.id == el.colorSelected).color %>
-                    <% let background = `background-color:${prodColor.hex};color:${prodColor.hex};border-radius:50%;width:20px;height:20px;border-style:solid;border-width:1px;border-color:black;` %>
-                    <td><li style=<%= background %>></li></td>
+                    <% let background = `background-color:${prodColor.hex};color:${prodColor.hex};` %>
+                    <td><i class="colorIcon" style=<%= background %>></i></td>
                     <td id="precio" class="number"><%= el.price %></td>
                     <td class="sumarRestar">
                         <button id="restar" onclick="this.parentNode.querySelector('input[type=number]').stepDown(); restarCantidad('<%= el.id %>', '<%= el.colorSelected %>')">-</button>
