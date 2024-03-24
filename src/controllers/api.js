@@ -11,7 +11,15 @@ module.exports = {
     products: {
         list: async function (req,res) {
             try {
-                const response = await products.filter(req.query)
+                const filter = await products.filter(req.query)
+                const response = {
+                    count: filter.length,
+                    countByCategory: {},
+                    products: filter.map(prod => {
+                        let data = prod.get({plain:true})
+                        return {...data, detail: `http://${process.env.DB_HOST}:${process.env.API_PORT}/api/products/${data.id}`}
+                    })
+                }
                 res.status(200).json(response)
             } catch (error) {
                 res.status(500).json(error.message)
@@ -136,5 +144,4 @@ module.exports = {
             }
         }
     }
-
 }
