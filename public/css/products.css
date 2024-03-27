@@ -35,9 +35,12 @@ main{
 
 }
 
-.filter-price label{
-    margin-top: 5px;
+.filter .filter-price label{
+    display: flex;
+    width: 30%;
+    justify-content: space-between;
 }
+
 
 .botonFilter{
 
@@ -77,10 +80,11 @@ main{
     border: solid 1px #5394b0;
     border-radius: 5px;
     text-align: center;
-    box-shadow: 0px 0px 10px rgb(100, 100, 100);
+   
 }
 .cards article:hover {
-    box-shadow: 0px 5px black;
+    box-shadow: 0px 0px 10px rgb(100, 100, 100);
+    color: #32A97F;
 }
 .cards article img {
     width: fit-content;
@@ -195,6 +199,12 @@ fieldset.colors{
     gap: 3px;
 }
 
+.labelColor{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    border-bottom: 0.1px solid rgba(0, 0, 0, 0.1);
+}
 
 @media (min-width: 760px) {
 
@@ -216,13 +226,31 @@ fieldset.colors{
     form#filtros {
         display:flex;
         flex-direction: row;
-        justify-content: flex-start;
+        justify-content: space-around;
         align-items: center;
         flex-wrap: wrap;
+    }
+
+    form#botonFilter{
+        display: flex;
+        align-self: flex-end;
     }
 }
 
 @media (min-width: 1200px) {
+
+    
+    form#filtros {
+        display:flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: stretch;
+        flex-wrap: wrap;
+    }
+   
+fieldset{
+        margin: 10px 0 10px 0;
+    }
 
 .filter{
     width: 50%;
@@ -248,4 +276,22 @@ display: flex;
     margin-left: 5px;
 
 }
+
+.productos{
+    width: 100%;
+    margin: 0 25px 25px 25px
+}
+.pagination{
+   margin: 0 0 27px 0;
+}
+
+
+
+} 
+@media (min-width: 1604px){
+
+    .cards article{
+        margin: 0 2% 0 2%;
+
+    }
 }
