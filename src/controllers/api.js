@@ -3,7 +3,7 @@ const payments = require('../models/payments');
 const categories = require('../models/categories.js');
 const favorites = require('../models/favorites');
 const colors = require('../models/colors.js'); 
-const users = require('../models/user');
+const User = require('../models/user');
 const {validationResult} = require('express-validator')
 
 
@@ -14,7 +14,7 @@ module.exports = {
                 const filter = await products.filter(req.query)
                 const response = {
                     count: filter.length,
-                    countByCategory: {},
+                    countByCategory: await categories.countByCategory(),
                     products: filter.map(prod => {
                         let data = prod.get({plain:true})
                         return {...data, detail: `http://${process.env.DB_HOST}:${process.env.API_PORT}/api/products/${data.id}`}
@@ -112,7 +112,7 @@ module.exports = {
     users: {
         all: async function(req, res){
             try {
-                const users = await user.index()
+                const users = await User.index()
                 if(!users) throw new Error ("no hay usuario")
                 res.status(200).json(users)
             } catch (error) {
@@ -123,9 +123,8 @@ module.exports = {
             try {
                 const errores = validationResult(req)
                 if (errores.isEmpty()) {
-                    const user = await users.login(req.body)
+                    const user = await User.login(req.body)
                     if (user.access) {
-                        delete user?.password
                         req.session.user = user? user : {};
                         
                         if(req.body.recordame != undefined){
