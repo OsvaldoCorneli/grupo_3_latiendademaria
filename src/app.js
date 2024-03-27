@@ -33,7 +33,7 @@ app.disable('x-powered-by')
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.use(cors());
+app.use(cors({origin: true, credentials: true}));
 app.use(methodOverride('_method'));
 app.use(session({
     secret: 'la tienda de maria 2024', 

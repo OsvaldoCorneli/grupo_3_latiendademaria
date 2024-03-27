@@ -26,7 +26,7 @@ module.exports = {
                 logging: false,
                 raw:true
             })
-            return response.filter(c => c.productsCount !== 0)
+            return response
         } catch (error) {
             return error
         }
@@ -42,6 +42,18 @@ module.exports = {
         try {
             const newCat = await db.Categories.create({...body}, {logging: false})
             return newCat
+        } catch (error) {
+            return error
+        }
+    },
+    countByCategory: async function () {
+        try {
+            const data = await this.countAll()
+            let count = {}
+            data.forEach(({name, productsCount})=> {
+                count = {...count, [name]: productsCount}
+            })
+            return count
         } catch (error) {
             return error
         }

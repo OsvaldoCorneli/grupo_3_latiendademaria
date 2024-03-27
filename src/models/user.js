@@ -4,6 +4,7 @@ const path = require('path');
 const bcrypt = require('bcryptjs');
 const { sendEmail } = require('../middlewares/mailer');
 const images = require('./images');
+const {Op} = require('sequelize')
 
 
 const usersFilePath = path.join(__dirname, '../data/users.json');
@@ -64,11 +65,17 @@ module.exports = {
     login: async function (data) {
         try{
         let { email, password } = data
-        const Users1 = await db.Users.findAll({raw: true, logging: false})
-        let user = Users1.find((user) => user.email == email || user.userName == email)
+        const user = await db.Users.findOne({where: {
+            [Op.or]: [
+                {email: email},
+                {username: email}
+            ]},
+            raw: true,
+            logging: false})
         if (!user) return {access: false, error: 'usuario inexistente'}
         const checkPass = bcrypt.compareSync(password, user.password)
         if (checkPass) {
+            delete user.password
             return {...user, access: true}
         } else {
             return {access: false, error: 'contraseña incorrecta'}

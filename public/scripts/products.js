@@ -17,10 +17,10 @@ window.onload = () => {
             if (isLogged) favoritos = await fetchData(`/api/user/favorites`);
             articles.forEach(async (element,i) => {
                 let [t0,titulo,t1,anchorImagen,t2,precio,t3,colores,t4 ] = element.childNodes;
-                if (+i >= data.length) {
+                if (+i >= data.products.length) {
                     element.style.display = 'none'
                 } else {
-                    const {categories, colors, created_at, id, images, line, name, price, updated_at} = data[i]
+                    const {categories, colors, created_at, id, images, line, name, price, updated_at} = data.products[i]
                     element.style.display = 'flex'
                     titulo.innerHTML = name;
                     if (isLogged) {

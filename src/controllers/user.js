@@ -31,7 +31,6 @@ module.exports = {
         if (errores.isEmpty()) {
             const user = await users.login(req.body)
             if (user.access) {
-                delete user?.password
                 req.session.user = user? user : {};
                 
                 if(req.body.recordame != undefined){

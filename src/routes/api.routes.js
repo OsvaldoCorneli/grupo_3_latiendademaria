@@ -7,6 +7,7 @@ const forRegister = require('../middlewares/forRegister.js')
 const validateForm = require('../middlewares/validacionForm.js')
 
 router.get('/products', api.products.list);
+router.get('/products/:id', api.products.detail);
 router.get('/users', forRegister, api.users.all);
 router.get('/payment', isLogged, api.payments.all);
 router.post('/payment', isAdmin, api.payments.new);
@@ -19,7 +20,6 @@ router.post('/user/favorites', isLogged, api.favorites.add);
 router.post('/user/login', validateForm.login(), api.users.login);
 //router.get('/colors', isLogged, api.colors.list)
 // router.get('/products', api.products.list);
-// router.get('/products/:id', api.products.detail);
 
 
 module.exports = router
