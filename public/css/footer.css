@@ -118,3 +118,9 @@ font-size: 17px;
 
 
 }
+
+@media (min-width: 1680px){
+    footer{
+    justify-content: space-around;
+    
+}}
