@@ -47,19 +47,22 @@
                     </span>
                 </h2>
                 <h2 class="precio">$<%= price %></h3>
-                <h5>cantidad: <%= stock %></h5>
+                <h5>Cantidad: </h5>
                 <label for="cantidad">
-                    <a onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</a>
+                    <a id="restar" onclick="this.parentNode.querySelector('input[type=number]').stepDown()" style="cursor: pointer;">-</a>
                     <input id="cantidad" type="number" min="1" placeholder="cantidad" name="cantidad" value="1"/>
-                    <a onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+</a>
+                    <a id="sumar" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" style="cursor: pointer;">+</a>
                 </label>
-                <span class="color"> Color:
+                <h3 style="margin: 2px 0 0 0;">Colores:</h3>
+                <span class="color"> 
                 <% colors.forEach(({stock, color},index) => { let background = `background-color:${color.hex};color:${color.hex};border-radius:50%;padding-inline:10px` %>
-                    <label for="<%= color.name %>"><i style=<%= background %>></i>
-                        <input id="<%= color.name %>" type="radio" name="color" value="<%= color.id %>" <%= index === 0 ? 'checked' : '' %> />
+                    <label class="coloresinput" for="<%= color.name %>"><i style=<%= background %>></i>
+                        <input style="margin: 0 2px 0 2px; cursor: pointer; " id="<%= color.name %>" type="radio" name="color" value="<%= color.id %>" <%= index === 0 ? 'checked' : '' %> />
                     </label>
+                    <p class="stockcolores" id="<%= color.name %>-stock" style="font-size: 12px;">stock: <%= parseInt(stock) %></p>
                     <% })%>
                 </span>
+                <span id="error-stock" style="color: red; display: none;">No hay suficiente stock para de color seleccionado</span>
                 <% if (user) { %>
                     <button id="botonCarrito1" class="presionado" onclick="event.preventDefault(); addCart('<%=id%>')">Agregar a carrito</button>
                 <% } else { %>

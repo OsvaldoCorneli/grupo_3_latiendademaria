@@ -2,12 +2,96 @@ const host = window.location.host
 window.onload = () => {
     const id = document.querySelector("input[name='id']")
     const FavoriteIcon = document.querySelector('#heart')
+    const cantidad = document.querySelector("input[type=number]")
+    const precio = document.querySelector(".precio")
+    const price = precio.textContent.split("$")[1];
+    const sumar = document.querySelector("#sumar")
+    const restar = document.querySelector("#restar")
+    const errorStock = document.querySelector("#error-stock")
+    const checked = document.querySelectorAll(".color input")
+
+    checked.forEach(element =>{
+    element.addEventListener("input", (e)=>{
+        const stockValue = document.querySelector(`#${e.target.id}-stock`).textContent
+        const stockValueNumber = stockValue[stockValue.length - 1]
+
+            if(parseInt(cantidad.value) <= parseInt(stockValueNumber)){    
+            errorStock.style.display = "none"
+            }else{
+                errorStock.style.display = "block"  
+            }
+            
+    }) })
+
     FavoriteIcon.addEventListener('click', async (e) => {
         const data = await fetchData(`/api/user/favorites`, {product: id.value})
         if (data.success) {
             FavoriteIcon.firstChild.nextSibling.classList.toggle('unheart')
         }
     })
+
+
+    cantidad.addEventListener("input",(e)=>{
+        const colorName = document.querySelector(".color input:checked").id;
+        const stockValue = document.querySelector(`#${colorName}-stock`).textContent
+        const stockValueNumber = stockValue[stockValue.length - 1]
+        if(e.data == null){
+            precio.textContent = "$0"
+            errorStock.style.display = "none"
+        }
+        else{
+            if(parseInt(cantidad.value) <= parseInt(stockValueNumber)){
+                precio.textContent = `$${(parseFloat(price)*parseFloat(cantidad.value)).toFixed(2)}`
+                errorStock.style.display = "none"
+            }
+            else{
+                precio.textContent = `$${(parseFloat(price)*parseFloat(cantidad.value)).toFixed(2)}`
+                errorStock.style.display = "block"
+            }
+            }
+    })
+
+    sumar.addEventListener("click",(e)=>{ 
+        const colorName = document.querySelector(".color input:checked").id;
+        const stockValue = document.querySelector(`#${colorName}-stock`).textContent
+        const stockValueNumber = stockValue[stockValue.length - 1]
+        if(parseInt(cantidad.value) <= parseInt(stockValueNumber)){
+        precio.textContent = `$${(parseFloat(precio.textContent.split("$")[1]) + parseFloat(price)).toFixed(2)}`;
+        cantidad.value = parseFloat(cantidad.value)
+        errorStock.style.display = "none"
+        }else{
+            precio.textContent = `$${(parseFloat(precio.textContent.split("$")[1]) + parseFloat(price)).toFixed(2)}`;
+            cantidad.value = parseFloat(cantidad.value)
+            errorStock.style.display = "block"
+        }
+        
+    })
+
+    restar.addEventListener("click",(e)=>{ 
+        const colorName = document.querySelector(".color input:checked").id;
+        const stockValue = document.querySelector(`#${colorName}-stock`).textContent
+        const stockValueNumber = stockValue[stockValue.length - 1]
+        
+        if(cantidad.value != 1){
+        if(parseInt(cantidad.value) <= parseInt(stockValueNumber)){    
+        precio.textContent = `$${(parseFloat(precio.textContent.split("$")[1]) - parseFloat(price)).toFixed(2)}`;
+        cantidad.value = parseFloat(cantidad.value)
+        errorStock.style.display = "none"
+        }else{
+            precio.textContent = `$${(parseFloat(precio.textContent.split("$")[1]) - parseFloat(price)).toFixed(2)}`;
+            cantidad.value = parseFloat(cantidad.value)
+            errorStock.style.display = "block"  
+        }
+        }else{
+            precio.textContent = `$${parseFloat(price)}`
+            errorStock.style.display = "none"
+        }
+
+
+}) 
+    
+
+
 }
 
 async function fetchData(endpoint, body) {
@@ -78,4 +162,10 @@ fetch(`/users/cart/${id}`, {
 .catch(error => {
     console.error('Error al agregar el producto:', error);
 });
+
+
+
+
+
+
 }
