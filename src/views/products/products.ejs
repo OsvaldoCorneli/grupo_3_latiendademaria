@@ -15,6 +15,8 @@
                 <p>Filtros</p>
                 <div class="filtrosAll">
                 <form id="filtros" action="/products/filter" method="GET">
+                    <span class="smalls">
+                    </span>
                     <fieldset class="colors">
                         <legend><b>Categoria</b></legend>
                     <% categorias.forEach((category) => { %>
@@ -34,7 +36,7 @@
                             <%= color.name + '('+color.productsCount+')' %>
                         </div>
                         <div>
-                            <i class="colorIcon" style="background-color:<%= color.hex %>"></i>
+                            <i class="colorIcon" style="background-color: <%= color.hex %>"></i>
                         </div>
                     </label>
                     <% }) %>
