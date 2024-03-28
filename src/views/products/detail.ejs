@@ -56,10 +56,11 @@
                 <h3 style="margin: 2px 0 0 0;">Colores:</h3>
                 <span class="color"> 
                 <% colors.forEach(({stock, color},index) => { let background = `background-color:${color.hex};color:${color.hex};border-radius:50%;padding-inline:10px` %>
+                <% let name = color.name.includes(" ") ? color.name.split(" ").join("-") : color.name %> 
                     <label class="coloresinput" for="<%= color.name %>"><i style=<%= background %>></i>
-                        <input style="margin: 0 2px 0 2px; cursor: pointer; " id="<%= color.name %>" type="radio" name="color" value="<%= color.id %>" <%= index === 0 ? 'checked' : '' %> />
+                        <input style="margin: 0 2px 0 2px; cursor: pointer; " id="<%= name %>" type="radio" name="color" value="<%= color.id %>" <%= index === 0 ? 'checked' : '' %> />
                     </label>
-                    <p class="stockcolores" id="<%= color.name %>-stock" style="font-size: 12px;">stock: <%= parseInt(stock) %></p>
+                    <p class="stockcolores" id="<%= name %>-stock" style="font-size: 12px;">stock: <%= parseInt(stock) %></p>
                     <% })%>
                 </span>
                 <span id="error-stock" style="color: red; display: none;">No hay suficiente stock para de color seleccionado</span>

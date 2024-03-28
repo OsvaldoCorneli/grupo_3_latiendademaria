@@ -12,8 +12,8 @@ window.onload = () => {
 
     checked.forEach(element =>{
     element.addEventListener("input", (e)=>{
-        const stockValue = document.querySelector(`#${e.target.id}-stock`).textContent
-        const stockValueNumber = stockValue[stockValue.length - 1]
+        const stockValue = document.querySelector(`#${e.target.id}-stock`).textContent.split(": ")
+        const stockValueNumber = stockValue[1]
 
             if(parseInt(cantidad.value) <= parseInt(stockValueNumber)){    
             errorStock.style.display = "none"
@@ -33,8 +33,9 @@ window.onload = () => {
 
     cantidad.addEventListener("input",(e)=>{
         const colorName = document.querySelector(".color input:checked").id;
-        const stockValue = document.querySelector(`#${colorName}-stock`).textContent
-        const stockValueNumber = stockValue[stockValue.length - 1]
+        const stockValue = document.querySelector(`#${colorName}-stock`).textContent.split(": ")
+        const stockValueNumber = stockValue[1]
+        
         if(e.data == null){
             precio.textContent = "$0"
             errorStock.style.display = "none"
@@ -53,8 +54,8 @@ window.onload = () => {
 
     sumar.addEventListener("click",(e)=>{ 
         const colorName = document.querySelector(".color input:checked").id;
-        const stockValue = document.querySelector(`#${colorName}-stock`).textContent
-        const stockValueNumber = stockValue[stockValue.length - 1]
+        const stockValue = document.querySelector(`#${colorName}-stock`).textContent.split(": ")
+        const stockValueNumber = stockValue[1]
         if(parseInt(cantidad.value) <= parseInt(stockValueNumber)){
         precio.textContent = `$${(parseFloat(precio.textContent.split("$")[1]) + parseFloat(price)).toFixed(2)}`;
         cantidad.value = parseFloat(cantidad.value)
@@ -69,9 +70,9 @@ window.onload = () => {
 
     restar.addEventListener("click",(e)=>{ 
         const colorName = document.querySelector(".color input:checked").id;
-        const stockValue = document.querySelector(`#${colorName}-stock`).textContent
-        const stockValueNumber = stockValue[stockValue.length - 1]
-        
+        const stockValue = document.querySelector(`#${colorName}-stock`).textContent.split(": ")
+        const stockValueNumber = stockValue[1]
+
         if(cantidad.value != 1){
         if(parseInt(cantidad.value) <= parseInt(stockValueNumber)){    
         precio.textContent = `$${(parseFloat(precio.textContent.split("$")[1]) - parseFloat(price)).toFixed(2)}`;
@@ -122,7 +123,9 @@ function redireccionarAlogin(){
 function addCart(id) {
 const colorInput = document.querySelector(".color input:checked");
 const cantidadInput = document.querySelector("#cantidad");
-
+const errorStock1 = document.querySelector("#error-stock")
+const count = document.querySelector("input[type=number]")
+if(errorStock1.style.display == "none" && count.value > 0 && count.value != null){
 if (!colorInput || !cantidadInput) {
 console.error('No se encontraron elementos de entrada de color o cantidad');
 return;
@@ -162,10 +165,5 @@ fetch(`/users/cart/${id}`, {
 .catch(error => {
     console.error('Error al agregar el producto:', error);
 });
-
-
-
-
-
-
+}
 }
