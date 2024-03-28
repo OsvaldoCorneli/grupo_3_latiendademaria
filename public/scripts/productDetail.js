@@ -9,6 +9,8 @@ window.onload = () => {
     const restar = document.querySelector("#restar")
     const errorStock = document.querySelector("#error-stock")
     const checked = document.querySelectorAll(".color input")
+    const coloresStock = document.querySelectorAll(".stockcolores")
+
 
     checked.forEach(element =>{
     element.addEventListener("input", (e)=>{
@@ -22,6 +24,15 @@ window.onload = () => {
             }
             
     }) })
+
+    if(coloresStock){
+        let stocktotal = 0;
+         coloresStock.forEach(element => {
+            let numero = element.textContent.split(": ")[1]
+            stocktotal = parseInt(stocktotal) + parseInt(numero)
+        });
+        document.querySelector("h4").textContent += stocktotal;
+    }
 
     FavoriteIcon.addEventListener('click', async (e) => {
         const data = await fetchData(`/api/user/favorites`, {product: id.value})

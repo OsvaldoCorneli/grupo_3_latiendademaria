@@ -202,10 +202,12 @@ input[type=number]::-webkit-outer-spin-button {
     padding: 10px 10px 5px 10px;
     transition: 250ms;
 } */
-.containerheart:hover {
-    
+.color{
+    width: 100%;
+    max-width: 180px;
+    display: flex;
+    justify-content: space-around;
 }
-
 .unheart {
     display: inline-block;
     width: 22px;
@@ -256,14 +258,13 @@ input[type=number]::-webkit-outer-spin-button {
         max-width: 900px
     }
     .color{
-        width: 100%;
-        display: flex;
-        justify-content: center;
+        justify-content: space-around;
         margin: 3% 0 3% 0;
     }
     .coloresinput{
         margin: 0 1.5% 0 1.5%;
     }
+    
 }
 
 @media (min-width: 1200px) {
