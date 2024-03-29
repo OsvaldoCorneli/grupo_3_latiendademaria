@@ -7,31 +7,33 @@
                     <th></th>
                     <th colspan="2">Producto</th>
                     <th>Color</th>
-                    <th>Precio</th>
+                    <th id="thprecio">Precio</th>
                     <th>Cantidad</th>
                     <th>Subtotal</th>
                 </tr>
             <% carrito.forEach(el => { %>
-                <tr id="product-<%= el.id %>-<%= el.colorSelected %>">
+                <tr class="cartascart" id="product-<%= el.id %>-<%= el.colorSelected %>">
                     <td id="X" onclick="eliminarProducto('<%= el.id %>', '<%= el.colorSelected %>')">X</td>
                     <td ><img src="<%= el.images[0].pathName %>" alt="<%= el.name %>"/></td>
                     <td id="product"><%= el.name %></td>
                     <% let prodColor = el.colors.find(({color}) => color.id == el.colorSelected).color %>
                     <% let background = `background-color:${prodColor.hex};color:${prodColor.hex};` %>
-                    <td><i class="colorIcon" style=<%= background %>></i></td>
+                    <% let stocks = el.colors.find(({color}) => color.id == el.colorSelected).stock %>
+                    <td id="tdcolors" class="tdcolors"><i class="colorIcon" style=<%= background %>></i>stock: <%= parseInt(stocks) %></td>
                     <td id="precio" class="number"><%= el.price %></td>
                     <td class="sumarRestar">
-                        <button id="restar" onclick="this.parentNode.querySelector('input[type=number]').stepDown(); restarCantidad('<%= el.id %>', '<%= el.colorSelected %>')">-</button>
+                        <button id="restar" onclick="this.parentNode.querySelector('input[type=number]').stepDown(); ">-</button>
                         <input id="cantidad" type="number" min="1" placeholder="cantidad" name="cantidad" value="<%= el.cantidad %>"/>
-                        <button id="sumar" onclick="this.parentNode.querySelector('input[type=number]').stepUp(); sumarCantidad('<%= el.id %>', '<%= el.colorSelected %>')">+</button>
+                        <button id="sumar" onclick="this.parentNode.querySelector('input[type=number]').stepUp();">+</button> 
                     </td>
                     <td id="subtotalproduct" class="total number"><%= (el.price*el.cantidad).toFixed(2) %></td>
                 </tr>
             <% }); %>
                 <tr id="totales">
-                    <td colspan="5">Totales:</td>
-                    <td id="cantidadTotal"><%= carrito.reduce((acum, el) => acum + el.cantidad, 0) %></td>
-                    <td class="number"><b class="number"><%= carrito.reduce((acum, el) => acum + (el.cantidad*el.price), 0).toFixed(2) %></b></td>
+                    <td id="totalesprecio" style="font-weight: bold;" colspan="4">Totales:</td>
+                    <td id="tdcomodin"></td>
+                    <td id="cantidadTotal" style="font-weight: bold;"><%= carrito.reduce((acum, el) => acum + el.cantidad, 0) %></td>
+                    <td id="precioSubTotal" class="number"><b class="number"><%= carrito.reduce((acum, el) => acum + (el.cantidad*el.price), 0).toFixed(2) %></b></td>
                 </tr>
             </tbody>
         </table>
@@ -48,7 +50,7 @@
        
         <span id="cartsubtotal">
             <h3>Subtotal</h3>
-            <p class="number"><%= carrito.reduce((acum, el) => acum + (el.cantidad*el.price), 0).toFixed(2) %></p>
+            <p id="subtotalfinal" class="number"><%= carrito.reduce((acum, el) => acum + (el.cantidad*el.price), 0).toFixed(2) %></p>
         </span>
         <span id="cartenvio">
             <h3>Envio</h3>

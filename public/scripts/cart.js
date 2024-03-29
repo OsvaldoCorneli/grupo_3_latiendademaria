@@ -36,44 +36,76 @@ function eliminarProducto(id, color) {
     }
 }
   
-  
-function restarCantidad(id, color){
-   const cantidad = document.querySelector(`#product-${id}-${color} #cantidad`).value
-
-   if(parseInt(cantidad) >= 1){
-       
-       const precio = document.querySelector(`#product-${id}-${color} #precio`).innerHTML
-       let subTotal = document.querySelector(`#product-${id}-${color} #subtotalproduct`)
-       const total = document.querySelector("#totales b")
-       const cantidadTotal = document.querySelector("#cantidadTotal")
-       cantidadTotal.innerHTML = parseInt(cantidadTotal.innerHTML) - 1
-       subtotal = parseFloat(precio)*parseInt(cantidad)
-       subTotal.innerHTML = subtotal
-       const newTotal = parseFloat(total.innerHTML) - parseFloat(precio)
-       total.innerHTML = newTotal.toFixed(2);
-
-   }
-       
-
-}
-
-function sumarCantidad(id, color){
-   const cantidad = document.querySelector(`#product-${id}-${color} #cantidad`).value
-   if(parseInt(cantidad) >= 1){
-       
-         
-       const precio = document.querySelector(`#product-${id}-${color} #precio`).innerHTML
-       let subTotal = document.querySelector(`#product-${id}-${color} #subtotalproduct`)
-       const total = document.querySelector("#totales b")
-       const cantidadTotal = document.querySelector("#cantidadTotal")
-       cantidadTotal.innerHTML = parseInt(cantidadTotal.innerHTML) + 1
-       subtotal = parseFloat(precio)*parseInt(cantidad)
-       subTotal.innerHTML = subtotal.toFixed(2)
-       const newTotal = parseFloat(total.innerHTML) + parseFloat(precio)
-       total.innerHTML = newTotal.toFixed(2);
-
-   }}
-       
 
   
-  
+const cartascart = document.querySelectorAll(".cartascart")
+
+
+cartascart.forEach((e) => {
+    const sumar = document.querySelector(`#${e.id} #sumar`)
+    const restar = document.querySelector(`#${e.id} #restar`)
+    const subTotal = document.querySelector(`#${e.id} #subtotalproduct`) 
+    const count = document.querySelector(`#${e.id} #cantidad`).value
+    const totalCompleto = document.querySelector("#subtotalfinal")
+    const stock = document.querySelector(`#${e.id} #tdcolors`)
+    const stockValue = document.querySelector(`#${e.id} #tdcolors`).textContent.split(" ")[1]
+
+    
+    if(count == 1){
+        restar.disabled = true
+    }
+
+    sumar.addEventListener("click", () => {
+        const cantidad = document.querySelector(`#${e.id} #cantidad`).value
+        const precioindividual = parseFloat(document.querySelector(`#${e.id} #precio`).textContent)
+        let subTotalSuma = parseFloat(subTotal.textContent) + precioindividual 
+        subTotal.textContent = subTotalSuma.toFixed(2)
+        
+        if(cantidad > 1){
+            restar.disabled = false
+        }
+
+        
+        const cantidadfinal = parseInt(document.querySelector(`#cantidadTotal`).textContent)
+        const sumacantidad = cantidadfinal + 1
+        document.querySelector(`#cantidadTotal`).textContent = sumacantidad
+        
+
+        const precioFinal = parseFloat(document.querySelector("#precioSubTotal").textContent)
+        const sumaPrecioFinal = precioFinal + precioindividual
+        document.querySelector("#precioSubTotal").textContent = sumaPrecioFinal.toFixed(2)
+        totalCompleto.textContent = sumaPrecioFinal.toFixed(2)
+
+        if(cantidad == stockValue){
+            sumar.disabled = true;
+            stock.style.color = "red"
+        }
+        
+    })
+
+    restar.addEventListener("click", (element) => {
+        const cantidad = document.querySelector(`#${e.id} #cantidad`).value
+        const precioindividual = parseFloat(document.querySelector(`#${e.id} #precio`).textContent)
+        let subTotalresta = parseFloat(subTotal.textContent) - precioindividual 
+        subTotal.textContent = subTotalresta.toFixed(2) 
+        
+        if(cantidad == 1){
+            restar.disabled = true
+        }
+
+        const cantidadfinal = parseInt(document.querySelector(`#cantidadTotal`).textContent)
+        const sumacantidad = cantidadfinal - 1
+        document.querySelector(`#cantidadTotal`).textContent = sumacantidad
+
+        const precioFinal = parseFloat(document.querySelector("#precioSubTotal").textContent)
+        const restaPrecioFinal = precioFinal - precioindividual
+        document.querySelector("#precioSubTotal").textContent = restaPrecioFinal.toFixed(2)
+        totalCompleto.textContent = restaPrecioFinal.toFixed(2)
+
+        if(cantidad < stockValue){
+            sumar.disabled = false;
+            stock.style.color = "black"
+        }
+
+    })
+})
