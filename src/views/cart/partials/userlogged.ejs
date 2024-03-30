@@ -23,7 +23,7 @@
                     <td id="precio" class="number"><%= el.price %></td>
                     <td class="sumarRestar">
                         <button id="restar" onclick="this.parentNode.querySelector('input[type=number]').stepDown(); ">-</button>
-                        <input id="cantidad" type="number" min="1" placeholder="cantidad" name="cantidad" value="<%= el.cantidad %>"/>
+                        <input id="cantidad" type="number" min="1" placeholder="cantidad" name="cantidad" value="<%= el.cantidad %>" disabled />
                         <button id="sumar" onclick="this.parentNode.querySelector('input[type=number]').stepUp();">+</button> 
                     </td>
                     <td id="subtotalproduct" class="total number"><%= (el.price*el.cantidad).toFixed(2) %></td>
@@ -49,22 +49,30 @@
             <p><b>Calle:</b> <%= `${calle} ${calleNumero}` %></p>
        
         <span id="cartsubtotal">
-            <h3>Subtotal</h3>
+            <h3>Total</h3>
             <p id="subtotalfinal" class="number"><%= carrito.reduce((acum, el) => acum + (el.cantidad*el.price), 0).toFixed(2) %></p>
         </span>
         <span id="cartenvio">
-            <h3>Envio</h3>
-            <div>
-                <select name="envio" required>
-                    <option value="moto">Moto $1000</option>
-                    <option value="micro">Terminal de Micro $1000</option>
-                    <option value="local">Retiro en local $0</option>
-                    <option value="domicilio">Domicilio</option>
-                </select></br>
-                <button>Calcular envio</button>
+            <div id="calcularEnvio">
+                <h3>¿Necesitas envío?</h3>
+                <div id="labels">
+                <label for="administrativo">Si
+                <input type="radio" name="tipoEnvio" id="SiEnvio" value="Si"/></label>
+                <label for="comercial">No
+                <input  type="radio" name="tipoEnvio" id="NoEnvio" value="No" checked/></label>
             </div>
+            </div>
+            
+                <p>El método de envío se determina<br>
+                posterior a la compra.<br>
+                Para consultas o cotizaciones de<br>
+                envío,<br>
+                por favor contáctenos.</p>
+              
         </span>
-        <h3>Total</h3>
+        <div id="finalizarcompra">
         <button>Finalizar Compra</button>
+       </div>
+
     </section>
 </div>
