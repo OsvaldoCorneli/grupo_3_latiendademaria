@@ -165,15 +165,17 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .form-detalle > button{
+    cursor: pointer;
     border-radius: 5px;
     border: hidden;
     padding: 5px;
-    background-color: #1259c3;
+    background-color: #26775b;
     color: white;
     transition: 500ms;
+    max-width: 105px;
 }
 .form-detalle > button:hover{
-    background-color: #5394b0;
+    background-color: #2f9b75;
 }
 
 .contenedordescription{
@@ -200,10 +202,12 @@ input[type=number]::-webkit-outer-spin-button {
     padding: 10px 10px 5px 10px;
     transition: 250ms;
 } */
-.containerheart:hover {
-    
+.color{
+    width: 100%;
+    max-width: 180px;
+    display: flex;
+    justify-content: space-around;
 }
-
 .unheart {
     display: inline-block;
     width: 22px;
@@ -212,6 +216,11 @@ input[type=number]::-webkit-outer-spin-button {
     border-image: radial-gradient(white 69%, #0000 70%) 84.5%/50%;
     clip-path: polygon(-41% 0, 50% 91%, 141% 0);
 }
+
+#MensajeCart{
+    display: none
+}
+
 @media (width >= 760px){
     main{
         width: 100%;
@@ -253,6 +262,14 @@ input[type=number]::-webkit-outer-spin-button {
     .contenedordescription{
         max-width: 900px
     }
+    .color{
+        justify-content: space-around;
+        margin: 3% 0 3% 0;
+    }
+    .coloresinput{
+        margin: 0 1.5% 0 1.5%;
+    }
+    
 }
 
 @media (min-width: 1200px) {
