@@ -1,16 +1,36 @@
 
 const cartascart = document.querySelectorAll(".cartascart")
 
+let productosCarrito = []
+
+
 
 cartascart.forEach((e) => {
+   
+    //obtener id productos y del color
+    const ids = e.id.split("-")
+    const idProducto = parseInt(ids[1])
+    const idColor = parseInt(ids[2])
     const sumar = document.querySelector(`#${e.id} #sumar`)
     const restar = document.querySelector(`#${e.id} #restar`)
+    const priceIndividual = parseFloat(document.querySelector(`#${e.id} #precio`).textContent)
     const subTotal = document.querySelector(`#${e.id} #subtotalproduct`) 
     const count = document.querySelector(`#${e.id} #cantidad`).value
     const totalCompleto = document.querySelector("#subtotalfinal")
     const stock = document.querySelector(`#${e.id} #tdcolors`)
     const stockValue = document.querySelector(`#${e.id} #tdcolors`).textContent.split(" ")[1]
     
+     let producto = {
+        product_id: idProducto,
+        precio: priceIndividual,
+        color_id: idColor,
+        cantidad: parseInt(count)
+    };
+
+    productosCarrito.push(producto)
+
+   
+  
     if(parseInt(count) == 1){
         restar.disabled = true
     }
@@ -21,6 +41,7 @@ cartascart.forEach((e) => {
     }
 
     sumar.addEventListener("click", () => {
+   
         const cantidad = document.querySelector(`#${e.id} #cantidad`).value
         const precioindividual = parseFloat(document.querySelector(`#${e.id} #precio`).textContent)
         let subTotalSuma = parseFloat(subTotal.textContent) + precioindividual 
@@ -45,6 +66,10 @@ cartascart.forEach((e) => {
             sumar.disabled = true;
             stock.style.color = "red"
         }
+
+        productosCarrito.forEach(element =>{
+            element.color_id == idColor ? element.cantidad = parseInt(cantidad) : "";
+        })
         
     })
 
@@ -67,24 +92,24 @@ cartascart.forEach((e) => {
         document.querySelector("#precioSubTotal").textContent = restaPrecioFinal.toFixed(2)
         totalCompleto.textContent = restaPrecioFinal.toFixed(2)
 
-        console.log(parseInt(cantidad) < parseInt(stockValue))
-        console.log(cantidad, "cantidad")
-        console.log("stock", stockValue)
         if(parseInt(cantidad) < parseInt(stockValue)){
             sumar.disabled = false;
             stock.style.color = "black"
-        }else{}
+        }
+
+        productosCarrito.forEach(element =>{
+            element.color_id == idColor ? element.cantidad = parseInt(cantidad) : "";
+        })
 
     })
-
-
-    
+ 
 })
 
 
 function eliminarProducto(id, color) {
+   
     const totals = document.querySelector("#precioSubTotal").textContent
-    console.log("totals", totals)
+  
     if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
         fetch(`/users/cart/${id}`, {
             method: 'delete',
@@ -102,7 +127,7 @@ function eliminarProducto(id, color) {
             }
             console.log("Response", response.status)
             if(response.status === 201){
-                console.log("ingresa 201")
+            
                const productRow = document.getElementById(`product-${id}-${color}`);
                const subTotal = document.querySelector(`#product-${id}-${color} #subtotalproduct`).textContent
                const cantidad = document.querySelector(`#product-${id}-${color} #cantidad`).value
@@ -117,6 +142,12 @@ function eliminarProducto(id, color) {
                    totalesCompleto.textContent = newTotal.toFixed(2);
                    cantidadTotal.textContent -= cantidad;
                    
+                   productosCarrito = productosCarrito.filter((element)=>{
+                   
+                    return element.product_id !== parseInt(id) || element.color_id !== parseInt(color);
+
+                   })
+
                }
             }
         })
@@ -124,4 +155,17 @@ function eliminarProducto(id, color) {
             console.error('Error al eliminar el producto:', error);
         });
     }
+}
+
+
+function finalizarCompra(id){
+    const envio = document.querySelector('#calcularEnvio input:checked').value
+
+    let carrito = {
+        idUser: parseInt(id),
+        products: productosCarrito,
+        envio: envio == "true" ? true : false,
+        status: "enproceso"
+    }
+
 }

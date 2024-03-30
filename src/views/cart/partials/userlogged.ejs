@@ -1,4 +1,4 @@
-<% let { nombre, apellido, provincia, localidad, codigoPostal, calle, calleNumero, piso, departamento, carrito } = cartDetail %>
+<% let { id, nombre, apellido, provincia, localidad, codigoPostal, calle, calleNumero, piso, departamento, carrito } = cartDetail %>
 <div class="cart-modal">
     <section class="cartdetail">
         <table>
@@ -57,9 +57,9 @@
                 <h3>¿Necesitas envío?</h3>
                 <div id="labels">
                 <label for="administrativo">Si
-                <input type="radio" name="tipoEnvio" id="SiEnvio" value="Si"/></label>
+                <input type="radio" name="tipoEnvio" id="SiEnvio" value="true"/></label>
                 <label for="comercial">No
-                <input  type="radio" name="tipoEnvio" id="NoEnvio" value="No" checked/></label>
+                <input  type="radio" name="tipoEnvio" id="NoEnvio" value="false" checked/></label>
             </div>
             </div>
             
@@ -71,7 +71,7 @@
               
         </span>
         <div id="finalizarcompra">
-        <button>Finalizar Compra</button>
+        <button onclick="finalizarCompra('<%= id %>')">Finalizar Compra</button>
        </div>
 
     </section>
