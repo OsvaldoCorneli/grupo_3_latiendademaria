@@ -14,6 +14,7 @@ window.onload = () => {
 
     checked.forEach(element =>{
     element.addEventListener("input", (e)=>{
+        const mensajeCart = document.querySelector("#MensajeCart")
         const stockValue = document.querySelector(`#${e.target.id}-stock`).textContent.split(": ")
         const stockValueNumber = stockValue[1]
 
@@ -22,6 +23,10 @@ window.onload = () => {
             }else{
                 errorStock.style.display = "block"  
             }
+
+        if(mensajeCart.style.display === "block"){
+            mensajeCart.style.display = "none"
+        }    
             
     }) })
 
@@ -164,13 +169,14 @@ fetch(`/users/cart/${id}`, {
 .then(respuesta => {
 
     if(respuesta.success){
-      if(confirm(`${respuesta.message}, ¿Le gustaría ir al carrito?`)){
-          window.location.href = "/cart"
-      }
-
+    document.querySelector("#MensajeCart").textContent = respuesta.message
+    document.querySelector("#MensajeCart").style.display = "block"
+    document.querySelector("#MensajeCart").style.color = "green"
     }
     else{
-        alert(respuesta.message)
+    document.querySelector("#MensajeCart").textContent = respuesta.message
+    document.querySelector("#MensajeCart").style.display = "block"
+    document.querySelector("#MensajeCart").style.color = "red"
     }
 })
 .catch(error => {

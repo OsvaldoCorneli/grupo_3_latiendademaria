@@ -66,6 +66,7 @@
                     <% })%>
                 </span>
                 <span id="error-stock" style="color: red; display: none;">No hay suficiente stock para de color seleccionado</span>
+                <span id="MensajeCart" style="color: green">Mensaje</span>
                 <% if (user) { %>
                     <button id="botonCarrito1" class="presionado" onclick="event.preventDefault(); addCart('<%=id%>')">Agregar a carrito</button>
                 <% } else { %>

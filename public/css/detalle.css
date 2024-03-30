@@ -216,6 +216,11 @@ input[type=number]::-webkit-outer-spin-button {
     border-image: radial-gradient(white 69%, #0000 70%) 84.5%/50%;
     clip-path: polygon(-41% 0, 50% 91%, 141% 0);
 }
+
+#MensajeCart{
+    display: none
+}
+
 @media (width >= 760px){
     main{
         width: 100%;
