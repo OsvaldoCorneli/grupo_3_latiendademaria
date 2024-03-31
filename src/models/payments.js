@@ -3,8 +3,8 @@ const path = require('path');
 const db = require('../database/models');
 const {Op, Sequelize} = require('sequelize');
 
-const pagosPath = path.join(__dirname+'/../data/payments.json')
-const pagosJson = JSON.parse(fs.readFileSync(pagosPath, 'utf-8'))
+// const pagosPath = path.join(__dirname+'/../data/payments.json')
+// const pagosJson = JSON.parse(fs.readFileSync(pagosPath, 'utf-8'))
 
 module.exports = {
     all: async function(query) {

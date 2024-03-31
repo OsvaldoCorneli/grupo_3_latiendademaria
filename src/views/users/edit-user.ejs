@@ -26,7 +26,7 @@
                         name="nombre"
                         id="nombre"
                         placeholder="ingrese su nombre"
-                        required
+                        
                         minlength="10"
                         value="<%- body.nombre? body.nombre : nombre %>"
                     />
@@ -43,7 +43,7 @@
                         name="apellido"
                         type="text"
                         placeholder="Ingresar apellido"
-                        required
+                        
                         value="<%= body.apellido? body.apellido : apellido %>"
                     />
                     <% if (locals.errors && errors.apellido) { %>
@@ -58,7 +58,7 @@
                     type="date"
                     name="fechaNacimiento"
                     id="fechaNacimiento"
-                    required
+                    
                     value="<%= body.fechaNacimiento? body.fechaNacimiento : fechaNacimiento %>"
                     />
                     <% if (locals.errors && errors.fechaNacimiento) { %>
@@ -101,7 +101,7 @@
                     name="codigoPostal"
                     id="codigoPostal"
                     placeholder="Codigo Postal"
-                    required
+                    
                     minlength="2"
                     maxlength="10"
                     value="<%= body.codigoPostal? body.codigoPostal : codigoPostal %>"
@@ -179,7 +179,7 @@
                     name="email"
                     id="email"
                     placeholder="Email"
-                    required
+                    
                     minlength="10"
                     maxlength="40"
                     value="<%= body.email? body.email : email %>"

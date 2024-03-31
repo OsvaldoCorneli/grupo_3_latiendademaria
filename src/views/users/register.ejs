@@ -26,7 +26,7 @@
                         name="nombre"
                         id="nombre"
                         placeholder="ingrese su nombre"
-                        required
+                        
                         minlength="2"
                         value="<%= body.nombre? body.nombre : null  %>"
                     />
@@ -43,7 +43,7 @@
                         name="apellido"
                         type="text"
                         placeholder="Ingresar apellido"
-                        required
+                        
                         minlength="2"
                         value="<%= body.apellido? body.apellido : null  %>"
                     />
@@ -60,7 +60,7 @@
                     type="date"
                     name="fechaNacimiento"
                     id="fechaNacimiento"
-                    required
+                    
                     value="<%= body.fechaNacimiento? body.fechaNacimiento : null  %>"
                     />
                 </div>
@@ -199,7 +199,7 @@
                     name="email"
                     id="email"
                     placeholder="Email"
-                    required
+                    
                     minlength="10"
                     maxlength="30"
                     value="<%= body.email? body.email : null %>"
@@ -217,7 +217,7 @@
                     name="userName"
                     id="userName"
                     placeholder="Nombre de usuario"
-                    required
+                    
                     minlength="6"
                     value="<%= body.userName? body.userName : null %>"
                 />
@@ -235,7 +235,7 @@
                     name="password"
                     id="password"
                     placeholder="contraseña"
-                    required
+                    
                     minlength="8"
                     value="<%= body.password? body.password : null %>"
                     />
@@ -252,7 +252,7 @@
                     name="repassword"
                     id="repassword"
                     placeholder="repetir contraseña"
-                    required
+                    
                     minlength="8"
                     value="<%= body.repassword? body.repassword : null %>"
                 />
