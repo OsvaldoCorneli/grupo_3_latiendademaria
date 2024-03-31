@@ -12,6 +12,7 @@ router.get('/users', forRegister, api.users.all);
 router.get('/payment', isLogged, api.payments.all);
 router.post('/payment', isAdmin, api.payments.new);
 router.put('/payment', isAdmin, api.payments.update);
+router.get('/payment/metric', /*isLogged,*/ api.payments.metrics);
 router.get('/payment/user', isLogged, api.payments.userPayment);
 router.get('/payment/:id', isLogged, api.payments.detail);
 router.post('/categories', isAdmin, api.categories.new);

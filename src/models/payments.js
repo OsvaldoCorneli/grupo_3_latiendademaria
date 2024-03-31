@@ -9,15 +9,18 @@ const pagosJson = JSON.parse(fs.readFileSync(pagosPath, 'utf-8'))
 module.exports = {
     all: async function(query) {
         try {
-            let {user,desde,hasta,estado} = query
+            let {user,desde,hasta,estado, limit} = query
             let condition = {}
             if (user) condition.user_id = user;
             if (desde && hasta) condition.created_at = {[Op.between]: [new Date(desde), new Date(hasta)]};
             if (estado) condition.status = estado;
-
+            let pagination = {}
+            if (limit) pagination.limit = +limit
             const response = await db.Payments.findAll({
                 where: condition,
                 attributes: {exclude: ['user_id']},
+                order: [['created_at', 'DESC']],
+                limit: pagination?.limit,
                 logging: false,
                 raw: true
             })
@@ -166,6 +169,64 @@ module.exports = {
             return response
         } catch (error) {
             return error
+        }
+    },
+    metrics: async function () {
+        try {
+            const totalSales = await this.totalSales()
+            const topProduct = await this.topProductSales()
+            const lastProductSales = await this.lastProductSales()
+            return {totalSales, topProduct, lastProductSales}
+        } catch (error) {
+            return error
+        }
+    },
+    totalSales: async function(){
+        try {
+            const [results, metadata] = await db.sequelize.query('select sum(cantidad) as quantity, sum(cantidad*precio) as totalAmount from payment_products;',
+                {logging: false});
+            return results[0]
+        } catch (error) {
+            return error
+        }
+    },
+    topProductSales: async function(){
+        try {
+            const response = await db.payment_products.findAll({
+                include: {
+                    association: 'product',
+                    attributes: {exclude: ['category_id', 'description']},
+                    include: [
+                        {
+                            association: 'categories',
+                            attributes: ['id','name'],
+                        }
+                    ]
+                },
+                attributes: [
+                    'product_id',
+                    [Sequelize.fn('sum',Sequelize.col('cantidad')), 'cantidadVendida'],
+                ],
+                group: ['product_id'],
+                order: [['cantidadVendida', 'DESC']],
+                limit: 5,
+                logging: false,
+            })
+            return response
+        } catch (error) {
+            return error
+        }
+    },
+    lastProductSales: async function () {
+        try {
+            const [results, metadata] = await db.sequelize.query(`select pr.id as product_id, pr.name as name,pr.category_id as category_id, pp.color_id as color_id, pp.precio as price, pp.cantidad as cantidad, pp.payment_id as payment_id,p.created_at as created_at
+                from payment_products pp 
+                left join payments p on p.id = pp.payment_id 
+                inner join products pr on pr.id = pp.product_id 
+                where p.status = 'completado' order by p.created_at desc limit 5;`, {logging: false});
+            return results
+        } catch (error) {
+            
         }
     }
 }
