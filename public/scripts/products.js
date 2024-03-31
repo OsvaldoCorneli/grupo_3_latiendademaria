@@ -4,6 +4,7 @@ window.onload = () => {
     const isLogged = document.querySelector('a#cerrarsesion');
     let articles = Array.from(document.querySelectorAll("article"));
     let pageAnchor = document.querySelectorAll('a#page');
+    let smalls = document.querySelector(".smalls")
     pageAnchor.forEach((anchor) => {
         anchor.addEventListener('click', async (e) => {
             e.preventDefault();
@@ -61,7 +62,7 @@ window.onload = () => {
     Array.from(form).forEach(input => {
         if (query.has(input.name) && query.getAll(input.name).includes(input.value)) {
             input.checked = true
-            form.insertAdjacentHTML('beforebegin',`<small style="background-color:darkgray;border-radius:5px;padding:5px;width:fit-content;">${input.name}: ${input.parentNode.innerText}</small>`)
+            smalls.insertAdjacentHTML('beforebegin',`<small style="background-color:darkgray;border-radius:5px;padding:5px;width:fit-content;">${input.name}: ${input.parentNode.innerText}</small>`)
         }
         if (input.value == "Reset") {
             input.onclick = (e) => {

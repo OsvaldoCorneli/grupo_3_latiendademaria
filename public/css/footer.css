@@ -43,13 +43,13 @@ footer{
     justify-content: space-evenly;
 }
 
-.fa-envelope, .fa-facebook, .fa-square-instagram, .fa-square-whatsapp {
+.fa-square-envelope, .fa-square-facebook, .fa-square-instagram, .fa-square-whatsapp {
     font-size: 30px; 
     color: #32A97F;
     transition: transform 0.3s ease; 
 }
 
-.fa-envelope:hover, .fa-facebook:hover, .fa-square-instagram:hover, .fa-square-whatsapp:hover {
+.fa-square-envelope:hover, .fa-square-facebook:hover, .fa-square-instagram:hover, .fa-square-whatsapp:hover {
     transform: scale(1.2); }
 
 .derechosres{
@@ -118,3 +118,9 @@ font-size: 17px;
 
 
 }
+
+@media (min-width: 1680px){
+    footer{
+    justify-content: space-around;
+    
+}}
