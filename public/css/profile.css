@@ -158,12 +158,12 @@ button.edit {
     border-radius: 5px;
     border: hidden;
     padding: 5px;
-    background-color: #1259c3;
+    background-color: #26775b;
     color: white;
     transition: 500ms;
 }
 button.edit:hover {
-    background-color: #5394b0;
+    background-color: #2f9b75;
 }
 
 button.create {

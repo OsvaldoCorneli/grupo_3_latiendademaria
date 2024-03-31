@@ -111,6 +111,8 @@ window.onload = () => {
 
 }
 
+
+
 async function fetchData(endpoint, body) {
     try {
         const response = await fetch(`http://${host}${endpoint}`,{
@@ -130,10 +132,19 @@ async function fetchData(endpoint, body) {
 
 
 function redireccionarAlogin(){
-    const response = confirm("Debe iniciar sesion para agregar el producto al carrito")
-    if(response){
-       window.location.href = "/users/login"
-    } 
+    const body = document.querySelector("body")
+    
+    body.innerHTML += `<span class="popupscreen";">
+        <div class="popUps" id="popUpDetailLogin">
+            <h3>Es necesario iniciar sesión para añadir productos al carrito.</h3>
+            <div class="botonPopup">
+                <a onclick="popUpoOff()">Aceptar</a>
+                <a href='/users/login'>Login</a>
+                <a href='/users/register'>Regístrate</a>
+            </div>  
+        </div>
+    </span>`;
+
 }
 
 function addCart(id) {
@@ -174,13 +185,33 @@ fetch(`/users/cart/${id}`, {
     document.querySelector("#MensajeCart").style.color = "green"
     }
     else{
-    document.querySelector("#MensajeCart").textContent = respuesta.message
-    document.querySelector("#MensajeCart").style.display = "block"
-    document.querySelector("#MensajeCart").style.color = "red"
+    const body = document.querySelector("body")
+    body.innerHTML += `<span class="popupscreen">
+    <div class="popUps" id="popUpProductoEnCart">
+    <h3>${respuesta.message}</h3>
+    <div class="botonPopup">
+        <a onclick="popUpoOff()">Aceptar</a>
+    </div>
+</div>
+
+</span>`
+    
+    
     }
 })
 .catch(error => {
     console.error('Error al agregar el producto:', error);
 });
 }
+
+
+}
+
+
+function popUpoOff(){
+    
+    const elementosPopup = document.querySelector('.popupscreen');
+    const body = document.querySelector("body")
+    body.removeChild(elementosPopup);
+    
 }

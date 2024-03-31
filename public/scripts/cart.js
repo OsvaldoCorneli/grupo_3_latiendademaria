@@ -107,10 +107,27 @@ cartascart.forEach((e) => {
 
 
 function eliminarProducto(id, color) {
-   
+    console.log("id", typeof id)
+    console.log("color", typeof color)
+    const body = document.querySelector("body")
+    body.innerHTML += `
+        <span class="popupscreen">
+            <div class="popUps" id="popUpDetailLogin">
+                <h3>¿Estás seguro de que deseas eliminar este producto del carrito?</h3>
+                <div class="botonPopup">
+                    <a onclick="deleted('${id}','${color}')">Aceptar</a>
+                    <a onclick="popUpoOff()">Cancelar</a>
+                </div>  
+            </div>
+        </span>
+    `;
+}
+
+
+
+function deleted(id, color){ 
     const totals = document.querySelector("#precioSubTotal").textContent
   
-    if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
         fetch(`/users/cart/${id}`, {
             method: 'delete',
             headers: {
@@ -147,7 +164,7 @@ function eliminarProducto(id, color) {
                     return element.product_id !== parseInt(id) || element.color_id !== parseInt(color);
 
                    })
-
+                   popUpoOff()
                }
             }
         })
@@ -155,7 +172,8 @@ function eliminarProducto(id, color) {
             console.error('Error al eliminar el producto:', error);
         });
     }
-}
+
+
 
 
 function finalizarCompra(id){
@@ -168,4 +186,12 @@ function finalizarCompra(id){
         status: "enproceso"
     }
 
+}
+
+function popUpoOff(){
+    
+    const elementosPopup = document.querySelector('.popupscreen');
+    const body = document.querySelector("body")
+    body.removeChild(elementosPopup);
+    
 }
