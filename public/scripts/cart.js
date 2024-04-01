@@ -2,7 +2,7 @@
 const cartascart = document.querySelectorAll(".cartascart")
 
 let productosCarrito = []
-
+const body = document.querySelector("body")
 
 
 cartascart.forEach((e) => {
@@ -19,6 +19,7 @@ cartascart.forEach((e) => {
     const totalCompleto = document.querySelector("#subtotalfinal")
     const stock = document.querySelector(`#${e.id} #tdcolors`)
     const stockValue = document.querySelector(`#${e.id} #tdcolors`).textContent.split(" ")[1]
+    
     
      let producto = {
         product_id: idProducto,
@@ -41,7 +42,7 @@ cartascart.forEach((e) => {
     }
 
     sumar.addEventListener("click", () => {
-   
+        console.log("ingresa suma")
         const cantidad = document.querySelector(`#${e.id} #cantidad`).value
         const precioindividual = parseFloat(document.querySelector(`#${e.id} #precio`).textContent)
         let subTotalSuma = parseFloat(subTotal.textContent) + precioindividual 
@@ -72,8 +73,9 @@ cartascart.forEach((e) => {
         })
         
     })
-
+    
     restar.addEventListener("click", (element) => {
+        console.log("ingresa resta")
         const cantidad = document.querySelector(`#${e.id} #cantidad`).value
         const precioindividual = parseFloat(document.querySelector(`#${e.id} #precio`).textContent)
         let subTotalresta = parseFloat(subTotal.textContent) - precioindividual 
@@ -107,23 +109,22 @@ cartascart.forEach((e) => {
 
 
 function eliminarProducto(id, color) {
-    console.log("id", typeof id)
-    console.log("color", typeof color)
-    const body = document.querySelector("body")
-    body.innerHTML += `
-        <span class="popupscreen">
-            <div class="popUps" id="popUpDetailLogin">
-                <h3>¿Estás seguro de que deseas eliminar este producto del carrito?</h3>
-                <div class="botonPopup">
-                    <a onclick="deleted('${id}','${color}')">Aceptar</a>
-                    <a onclick="popUpoOff()">Cancelar</a>
-                </div>  
-            </div>
-        </span>
+    const popup = document.createElement('span');
+    popup.classList.add('popupscreen');
+    popup.innerHTML = `
+        <div class="popUps" id="popUpDetailLogin">
+            <h3>¿Estás seguro de que deseas eliminar este producto del carrito?</h3>
+            <div class="botonPopup">
+                <a onclick="deleted('${id}','${color}')">Aceptar</a>
+                <a onclick="popUpoOff()">Cancelar</a>
+            </div>  
+        </div>
     `;
+    body.appendChild(popup);
 }
 
 
+ 
 
 function deleted(id, color){ 
     const totals = document.querySelector("#precioSubTotal").textContent
@@ -180,7 +181,7 @@ function finalizarCompra(id){
     const envio = document.querySelector('#calcularEnvio input:checked').value
 
     let carrito = {
-        idUser: parseInt(id),
+        idUser: parseInt(id), 
         products: productosCarrito,
         envio: envio == "true" ? true : false,
         status: "enproceso"
@@ -191,7 +192,7 @@ function finalizarCompra(id){
 function popUpoOff(){
     
     const elementosPopup = document.querySelector('.popupscreen');
-    const body = document.querySelector("body")
+    
     body.removeChild(elementosPopup);
     
 }
