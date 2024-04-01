@@ -7,10 +7,10 @@ window.addEventListener("load", async function(){
     let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     let regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     let provincias = document.querySelector('select[name="provincia"]');
-    let selectedLocalidad = provincias.selectedOptions[0].innerText
-    if(selectedLocalidad == "- seleccionar -"){
-        provincias.style.border = '2px solid red'
-    }
+    //let selectedLocalidad = provincias.selectedOptions[0].innerText
+    // if(selectedLocalidad == "- seleccionar -"){
+    //     provincias.style.border = '2px solid red'
+    // }
     let submitButton = document.querySelector('input[type="submit"]')
     let email = document.querySelector("#email")
     let userName = document.querySelector("#userName")
@@ -43,51 +43,51 @@ window.addEventListener("load", async function(){
     const mensaje = 'Este campo debe estar completo'
     
     
-    if(selectedLocalidad == "- seleccionar -"){
-        provincias.setCustomValidity('Invalid')
-    }
+    // if(selectedLocalidad == "- seleccionar -"){
+    //     provincias.setCustomValidity('Invalid')
+    // }
 
-    provincias.addEventListener('change', function(e) {
-        previous? previous.style = "display:none;" : null;
-        let prov = provincias.selectedOptions[0].innerText
-        let selected = 'label#'+prov.split(" ").join("")
-        previous = document.querySelector(selected)
-        previous.style = "display:block;"
+    // provincias.addEventListener('change', function(e) {
+    //     previous? previous.style = "display:none;" : null;
+    //     let prov = provincias.selectedOptions[0].innerText
+    //     let selected = 'label#'+prov.split(" ").join("")
+    //     previous = document.querySelector(selected)
+    //     previous.style = "display:block;"
 
-        if(e.target.value != "- seleccionar -"){ 
-            provincias.style.border = '2px solid green'
-            errorProvincia.style.display = "none"
+    //     if(e.target.value != "- seleccionar -"){ 
+    //         provincias.style.border = '2px solid green'
+    //         errorProvincia.style.display = "none"
 
             
-        }else{
-            provincias.style.border = '2px solid red'
-            errorProvincia.style.display = "block"
-        }
+    //     }else{
+    //         provincias.style.border = '2px solid red'
+    //         errorProvincia.style.display = "block"
+    //     }
 
 
-        localidad = document.querySelector(`select[id="${prov}"]`);
-        localidadOption = localidad.selectedOptions[0];
-        localidadSeleccionada = localidadOption.value;
-        errorLocalidad = document.querySelector("#errorLocalidad")
+    //     localidad = document.querySelector(`select[id="${prov}"]`);
+    //     localidadOption = localidad.selectedOptions[0];
+    //     localidadSeleccionada = localidadOption.value;
+    //     errorLocalidad = document.querySelector("#errorLocalidad")
 
-        if(localidadOption.textContent == "- seleccionar -"){
-            localidad.style.border = '2px solid red'
-            errorLocalidad.style.display = "block"
-            errorLocalidad.textContent = "Seleccione una localidad"
-        }
+    //     if(localidadOption.textContent == "- seleccionar -"){
+    //         localidad.style.border = '2px solid red'
+    //         errorLocalidad.style.display = "block"
+    //         errorLocalidad.textContent = "Seleccione una localidad"
+    //     }
     
-        if(localidad){
-            localidad.addEventListener("change", function(e){
-                if(e.target.value == "- seleccionar -"){
-                    localidad.style.border = '2px solid red' 
-                    errorLocalidad.style.display = "block"
-                }else{  
-                    localidad.style.border = '2px solid green' 
-                    errorLocalidad.style.display = "none"
-                        }
-                })
-        }
-    })
+    //     if(localidad){
+    //         localidad.addEventListener("change", function(e){
+    //             if(e.target.value == "- seleccionar -"){
+    //                 localidad.style.border = '2px solid red' 
+    //                 errorLocalidad.style.display = "block"
+    //             }else{  
+    //                 localidad.style.border = '2px solid green' 
+    //                 errorLocalidad.style.display = "none"
+    //                     }
+    //             })
+    //     }
+    // })
 
     submitButton.addEventListener("click", function(e){
         let errors = {}
@@ -118,9 +118,9 @@ window.addEventListener("load", async function(){
         if(repassword.value.length < 1){
             errors.repassword = mensaje
         }
-        if(provincias.style.border == '2px solid red'){
-           errors.provincia = mensaje
-        }
+        // if(provincias.style.border == '2px solid red'){
+        //    errors.provincia = mensaje
+        // }
         if(localidad && localidad.style.border == '2px solid red'){
            
            errors.localidad = mensaje

@@ -25,9 +25,9 @@ imagen: false
 
 //ELEMENTOS
 let provincias = document.querySelector('select[name="provincia"]');
-let selectedLocalidad = provincias.selectedOptions[0].innerText
-let previous = document.querySelector('label#'+selectedLocalidad.split(" ").join(""))
-const currentlocalidad = document.querySelector(`select[id="${selectedLocalidad}"]`);
+//let selectedLocalidad = /*provincias.selectedOptions[0].innerText*/
+//let previous = document.querySelector('label#'+selectedLocalidad.split(" ").join(""))
+const currentlocalidad = document.querySelector('input#localidad') /*document.querySelector(`select[id="${selectedLocalidad}"]`);*/
 let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 let email = document.querySelector("#email")
 let nombre = document.querySelector("#nombre")
@@ -203,57 +203,57 @@ fechaNacimiento.addEventListener("change", function(e){
     
 });
 
-provincias.addEventListener('change', function(e) {
-    previous? previous.style = "display:none;" : null;
-    let prov = provincias.selectedOptions[0].innerText
-    let selected = 'label#'+prov.split(" ").join("")
-    previous = document.querySelector(selected)
-    previous.style = "display:block;"
+// provincias.addEventListener('change', function(e) {
+//     previous? previous.style = "display:none;" : null;
+//     let prov = provincias.selectedOptions[0].innerText
+//     let selected = 'label#'+prov.split(" ").join("")
+//     previous = document.querySelector(selected)
+//     previous.style = "display:block;"
     
-    if(e.target.value == usuarioFind.provincia){
-        switchInput.provincias = false
-    }else{
-        switchInput.provincias = true;
-    }
+//     if(e.target.value == usuarioFind.provincia){
+//         switchInput.provincias = false
+//     }else{
+//         switchInput.provincias = true;
+//     }
 
-    localidad = document.querySelector(`select[id="${e.target.value}"]`);
-    localidadOption = localidad.selectedOptions[0].textContent;
-    errorLocalidad = document.querySelector("#errorLocalidad")
+    // localidad = document.querySelector(`select[id="${e.target.value}"]`);
+    // localidadOption = localidad.selectedOptions[0].textContent;
+    // errorLocalidad = document.querySelector("#errorLocalidad")
 
-    if(localidadOption == "- seleccionar -"){
-        localidad.style.border = '2px solid red'
-        errorLocalidad.style.display = "block"
-        errorLocalidad.textContent = "Seleccione una localidad"
-    }
+    // if(localidadOption == "- seleccionar -"){
+    //     localidad.style.border = '2px solid red'
+    //     errorLocalidad.style.display = "block"
+    //     errorLocalidad.textContent = "Seleccione una localidad"
+    // }
 
-        localidad.addEventListener("change", function(e){
+//         localidad.addEventListener("change", function(e){
 
-            if(usuarioFind.localidad == e.target.value){
-                switchInput.localidad = false
-            }else{
-                 switchInput.localidad = true;
-            }
+//             if(usuarioFind.localidad == e.target.value){
+//                 switchInput.localidad = false
+//             }else{
+//                  switchInput.localidad = true;
+//             }
             
-            if(e.target.value == "- seleccionar -"){
-                localidad.style.border = '2px solid red' 
-                errorLocalidad.style.display = "block"
-            }else{  
-                localidad.style.border = '2px solid green' 
-                errorLocalidad.style.display = "none"
-                    }
-            })
+//             if(e.target.value == "- seleccionar -"){
+//                 localidad.style.border = '2px solid red' 
+//                 errorLocalidad.style.display = "block"
+//             }else{  
+//                 localidad.style.border = '2px solid green' 
+//                 errorLocalidad.style.display = "none"
+//                     }
+//             })
     
-})
+// })
 
-  currentlocalidad.addEventListener("change", function(e){
+// currentlocalidad.addEventListener("change", function(e){
     
-    if(e.target.value == usuarioFind.localidad){
-        switchInput.localidad = false
-    }else{
-        switchInput.localidad = true;
-    }
+//     if(e.target.value == usuarioFind.localidad){
+//         switchInput.localidad = false
+//     }else{
+//         switchInput.localidad = true;
+//     }
 
-})
+// })
     
 codigoPostal.addEventListener("input", function (e) {
   
