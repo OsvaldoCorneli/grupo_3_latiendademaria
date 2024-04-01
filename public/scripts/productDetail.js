@@ -14,7 +14,7 @@ window.onload = () => {
 
     checked.forEach(element =>{
     element.addEventListener("input", (e)=>{
-        console.log("ingresa")
+     
         const mensajeCart = document.querySelector("#MensajeCart")
         const stockValue = document.querySelector(`#${e.target.id}-stock`).textContent.split(": ")
         const stockValueNumber = stockValue[1]

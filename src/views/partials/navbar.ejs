@@ -14,7 +14,7 @@
                 <% if (locals.login) { %>
                     <a id="cerrarsesion" href="/users/logout">Cerrar Sesión</a>
                 <% } else { %>
-                    <a href="/users/login">Ingresá</a>
+                    <a id="ingresar" href="/users/login">Ingresá</a>
                 <% } %>
             </button>
             
@@ -32,7 +32,7 @@
             <% } %>
         </ul>
         <div class="burger-menu">
-            <a href="#menu" class="target"><i class="fa-solid fa-bars"></i></a>
+            <a id="menuburguer" class="target"><i class="fa-solid fa-bars"></i></a>
         </div>
     </div>
 </nav>
