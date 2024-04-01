@@ -70,9 +70,9 @@ nav ul {
     text-align: center;
 }
 .loginNavbar {
+    display: none;
     min-width: 20%;
     max-width: 30%;
-    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
