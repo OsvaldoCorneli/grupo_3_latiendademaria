@@ -42,7 +42,7 @@ cartascart.forEach((e) => {
     }
 
     sumar.addEventListener("click", () => {
-        console.log("ingresa suma")
+    
         const cantidad = document.querySelector(`#${e.id} #cantidad`).value
         const precioindividual = parseFloat(document.querySelector(`#${e.id} #precio`).textContent)
         let subTotalSuma = parseFloat(subTotal.textContent) + precioindividual 
@@ -75,7 +75,7 @@ cartascart.forEach((e) => {
     })
     
     restar.addEventListener("click", (element) => {
-        console.log("ingresa resta")
+  
         const cantidad = document.querySelector(`#${e.id} #cantidad`).value
         const precioindividual = parseFloat(document.querySelector(`#${e.id} #precio`).textContent)
         let subTotalresta = parseFloat(subTotal.textContent) - precioindividual 
@@ -143,7 +143,6 @@ function deleted(id, color){
             if (!response.ok) {
                 throw new Error(`Error al eliminar el producto: ${response.status}`);
             }
-            console.log("Response", response.status)
             if(response.status === 201){
             
                const productRow = document.getElementById(`product-${id}-${color}`);
