@@ -21,5 +21,25 @@ module.exports = {
             const localidades = localidadesProv.localidades.map((loc) => {return loc.nombre})
             return localidades
         }
+    },
+    findProvincias: async function (query) {
+        try {
+            let {nombre} = query
+            const response = await fetch(`https://apis.datos.gob.ar/georef/api/provincias?nombre=${nombre}`)
+            const data = await response.json()
+            return data
+        } catch (error) {
+            return error
+        }
+    },
+    findLocalidades: async function (query) {
+        try {
+            let {provincia, nombre} = query
+            const response = await fetch(`https://apis.datos.gob.ar/georef/api/localidades?provincia=${provincia}&campos=id,nombre&nombre=${nombre}`)
+            const data = await response.json()
+            return data
+        } catch (error) {
+            return error
+        }
     }
 }

@@ -16,7 +16,7 @@
 
     <div class="contenedores">
         <div class="contenedor1">
-            <form action="/users/<%= id %>/update?_method=PUT" method="POST" enctype="multipart/form-data">
+            <form  id="formulario" action="/users/<%= id %>/update?_method=PUT" method="POST" enctype="multipart/form-data">
                 <div class="inputform">
                     <label for="nombre">Nombre/s:</label>
                     <span id="errorNombre">Mensaje de error</span>
@@ -26,7 +26,7 @@
                         name="nombre"
                         id="nombre"
                         placeholder="ingrese su nombre"
-                        required
+                        
                         minlength="10"
                         value="<%- body.nombre? body.nombre : nombre %>"
                     />
@@ -43,7 +43,7 @@
                         name="apellido"
                         type="text"
                         placeholder="Ingresar apellido"
-                        required
+                        
                         value="<%= body.apellido? body.apellido : apellido %>"
                     />
                     <% if (locals.errors && errors.apellido) { %>
@@ -58,7 +58,7 @@
                     type="date"
                     name="fechaNacimiento"
                     id="fechaNacimiento"
-                    required
+                    
                     value="<%= body.fechaNacimiento? body.fechaNacimiento : fechaNacimiento %>"
                     />
                     <% if (locals.errors && errors.fechaNacimiento) { %>
@@ -67,30 +67,28 @@
                 </div>
                 <div class="inputform">
                     <label for="provincia">Provincia:</label>
-                    <select id='pronvincia' name="provincia">
-                        <option disabled selected value>- seleccionar -</option>
-                        <% localidades.forEach((el) => { %>
-                            <option value="<%= el.provincia %>" <%= body.provincia == el.provincia || provincia == el.provincia? "selected" : null %>><%= el.provincia %></option>
-                        <% }) %>
-                    </select>
+                    <input class="requiredinput" 
+                        id="provincia" 
+                        type="search" 
+                        name="provincia" 
+                        placeholder="buscar provincia por nombre..." 
+                        value="<%= body.provincia? body.provincia : provincia %>"
+                    />
                     <% if (locals.errors && errors.provincia) { %>
                         <p class="errors"><%= errors.provincia.msg %></p>
                     <% } %>
                 </div>
                 <div class="inputform">
-                    <% localidades.forEach((el) => { %>
-                        <span id="errorLocalidad">Mensaje de error</span>
-                        <label id="<%= el.provincia.split(" ").join("") %>" for="<%= el.provincia %>" style=<%= provincia == el.provincia? "display:block;" : "display:none;" %>>Localidad:
-                        <select id="<%= el.provincia %>" name="localidad">
-                            <option disabled selected value>- seleccionar -</option>
-                            <% el.localidades.forEach((loc) => { %>
-                                <option value="<%= loc %>" <%= body.localidad == loc || localidad == loc? "selected" : null %>><%= loc %></option>
-                            <% }) %>
-                        </select>
-                        </label>
-                    <% }) %>
-                <% if (locals.errors && errors.localidades) { %>
-                    <p class="errors"><%= errors.localidades.msg %></p>
+                    <label for="localidad">Localidad:</label>
+                    <input class="requiredinput" 
+                        id="localidad" 
+                        type="search" 
+                        name="localidad" 
+                        placeholder="buscar localidad..." 
+                        value="<%= body.localidad? body.localidad : localidad %>"
+                    />
+                <% if (locals.errors && errors.localidad) { %>
+                    <p class="errors"><%= errors.localidad.msg %></p>
                 <% } %>
                 </div>
             <div class="inputform">
@@ -101,7 +99,7 @@
                     name="codigoPostal"
                     id="codigoPostal"
                     placeholder="Codigo Postal"
-                    required
+                    
                     minlength="2"
                     maxlength="10"
                     value="<%= body.codigoPostal? body.codigoPostal : codigoPostal %>"
@@ -179,7 +177,7 @@
                     name="email"
                     id="email"
                     placeholder="Email"
-                    required
+                    
                     minlength="10"
                     maxlength="40"
                     value="<%= body.email? body.email : email %>"
@@ -219,6 +217,7 @@
         </article>
     </div>
     <script src="\scripts\editUser.js"></script>
+    <!-- <script src="\scripts\georef.js"></script>  -->
     </main>
     <%- include('../partials/footer.ejs') %>
     

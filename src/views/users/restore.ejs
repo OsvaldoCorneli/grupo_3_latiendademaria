@@ -11,7 +11,7 @@
         <p>completa el formulario con tu email registrado en el sitio y te enviaremos un email a esa misma direccion con los pasos a seguir para el blanqueo de clave</p>
         <form action="/users/restore" method="POST">
             <label for="email">Email:</label>
-            <input id="email" type="email" name="email" placeholder="email..." required/>
+            <input id="email" type="email" name="email" placeholder="email..." />
             <% if (locals.errors && errors.email) {%>
                 <small id="email" class="errors"><%= errors.email %></small>
             <% } %>
@@ -24,12 +24,12 @@
                 <fieldset>
                     <legend><b>Contraseña</b></legend>
                     <label for="password">Nueva</label>
-                    <input id="password" type="password" name="password" placeholder="Ingresa tu nueva contraseña..." required/>
+                    <input id="password" type="password" name="password" placeholder="Ingresa tu nueva contraseña..." />
                 <% if (locals.errors && errors.password) { %>
                     <small id="password" class="errors"><%= errors.password %></small>
                 <% } %>
                 <label for="repeatPassword">Repetir</label>
-                <input id="repeatPassword" type="password" name="repeatPassword" placeholder="Ingresa tu nueva contraseña..." required/>
+                <input id="repeatPassword" type="password" name="repeatPassword" placeholder="Ingresa tu nueva contraseña..." />
                 <% if (locals.errors && errors.password) { %>
                     <small id="repeatPassword" class="errors"><%= errors.repeatPassword %></small>
                 <% } %>

@@ -26,7 +26,7 @@
                         name="nombre"
                         id="nombre"
                         placeholder="ingrese su nombre"
-                        required
+                        
                         minlength="2"
                         value="<%= body.nombre? body.nombre : null  %>"
                     />
@@ -43,7 +43,7 @@
                         name="apellido"
                         type="text"
                         placeholder="Ingresar apellido"
-                        required
+                        
                         minlength="2"
                         value="<%= body.apellido? body.apellido : null  %>"
                     />
@@ -60,7 +60,7 @@
                     type="date"
                     name="fechaNacimiento"
                     id="fechaNacimiento"
-                    required
+                    
                     value="<%= body.fechaNacimiento? body.fechaNacimiento : null  %>"
                     />
                 </div>
@@ -71,20 +71,34 @@
                     <% } %>
                     <label for="provincia">Provincia:</label>
                     <span id="errorProvincia">Mensaje de error</span>
-                    <select id='provincia' name="provincia">
-                        <option disabled selected value>- seleccionar -</option>
-                        <% localidades.forEach((el) => { %>
-                            <option value="<%= el.provincia %>" <%= body.provincia == el.provincia? "selected" : null %>><%= el.provincia %></option>
-                        <% }) %>
-                    </select>
+                    <input class="requiredinput" 
+                        id="provincia" 
+                        type="search" 
+                        name="provincia" 
+                        placeholder="buscar provincia por nombre" 
+                        value="<%= body?.provincia? body.provincia : "" %>"
+                    />
                 </div>
                 <div class="inputform">
-                        <% localidades.forEach((el) => { %>
+                    <span id="errorLocalidad">Mensaje de error</span>
+                    <label for="localidad">Localidad:</label>
+                    <input class="requiredinput"
+                        id="localidad" 
+                        type="search" 
+                        name="localidad" 
+                        placeholder="buscar localidad..." 
+                        value="<%= body?.localidad? body.localidad : "" %>"
+                    />
+                    <span id="errorLocalidad">Mensaje de error</span>
+                    <% if (locals.errors && errors.localidades) { %>
+                        <span class="errors"><%= errors.localidades.msg %></span>
+                    <% } %>
+                        <!-- <% localidades.forEach((el) => { %>
                             <% if (locals.errors && errors.localidades) { %>
                                 <span class="errors"><%= errors.localidades.msg %></span>
                             <% } %>
                             <span id="errorLocalidad">Mensaje de error</span>
-                            <label id="<%= el.provincia.split(" ").join("") %>" for="<%= el.provincia %>" style="display:none;">Localidad: 
+                                <label id="<%= el.provincia.split(" ").join("") %>" for="<%= el.provincia %>" style="display:none;">Localidad: 
                                 <select id="<%= el.provincia %>" name="localidad">
                                 <option disabled selected value>- seleccionar -</option>
                                 <% el.localidades.forEach((loc) => { %>
@@ -92,7 +106,7 @@
                                 <% }) %>
                             </select>
                             </label>
-                        <% }) %>
+                        <% }) %> -->
                 </div>
             <div class="inputform">
                 <label for="codigoPostal">Codigo postal:</label>
@@ -199,7 +213,7 @@
                     name="email"
                     id="email"
                     placeholder="Email"
-                    required
+                    
                     minlength="10"
                     maxlength="30"
                     value="<%= body.email? body.email : null %>"
@@ -217,7 +231,7 @@
                     name="userName"
                     id="userName"
                     placeholder="Nombre de usuario"
-                    required
+                    
                     minlength="6"
                     value="<%= body.userName? body.userName : null %>"
                 />
@@ -235,7 +249,7 @@
                     name="password"
                     id="password"
                     placeholder="contraseña"
-                    required
+                    
                     minlength="8"
                     value="<%= body.password? body.password : null %>"
                     />
@@ -252,7 +266,7 @@
                     name="repassword"
                     id="repassword"
                     placeholder="repetir contraseña"
-                    required
+                    
                     minlength="8"
                     value="<%= body.repassword? body.repassword : null %>"
                 />

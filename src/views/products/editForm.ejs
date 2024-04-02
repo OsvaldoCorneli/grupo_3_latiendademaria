@@ -77,7 +77,7 @@
                                 <small id="color" class="errors"><%= errors.color.msg %></small>
                             <% } %>
                             <label for="stock">Stock:</label>
-                            <input type="number" name="stock" class="inputForm number" value="<%= stock %>" required/>
+                            <input type="number" name="stock" class="inputForm number" value="<%= stock %>" />
                             <% if (locals.errors && errors.stock) { %>
                                 <small id="stock" class="errors"><%= errors.stock.msg %></small>
                             <% } %>
@@ -91,7 +91,6 @@
                         type="number"
                         id="price" 
                         name="price"
-                        required
                         value="<%= productEdit.price %>" 
                     />
                     <% if (locals.errors && errors.price) { %>

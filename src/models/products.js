@@ -29,6 +29,7 @@ module.exports = {
                     }
                 ],
                 attributes: {exclude: ['category_id']},
+                order: [['created_at', 'ASC']],
                 logging: false,
             })
             return response

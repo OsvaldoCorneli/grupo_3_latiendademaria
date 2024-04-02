@@ -1,19 +1,9 @@
 const db = require('../database/models')
-const fs = require('fs');
-const path = require('path');
 const bcrypt = require('bcryptjs');
 const { sendEmail } = require('../middlewares/mailer');
 const images = require('./images');
 const {Op} = require('sequelize')
 
-
-const usersFilePath = path.join(__dirname, '../data/users.json');
-const Users = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
-
-const dataGeoFilePath = path.join(__dirname, '../data/users.json');
-const dataGeo = JSON.parse(fs.readFileSync(dataGeoFilePath, 'utf-8'));
-
-const preferencias = path.join(__dirname, '../data/users.json');
 
 module.exports = {
     index: async function () {
@@ -88,8 +78,12 @@ module.exports = {
         try {
             let { id } = data
             if(data.imagen){
-                    data.imagen = data.imagen.map(element => element.path.split('public')[1]).join(', ')}
-                
+                for (let i in data.imagen) {
+                    const uploadImage = await images.uploadFile(data.imagen[i].path)
+                    data.imagen = uploadImage.url
+                    break
+                }
+            }
             let updateUser = await db.Users.findByPk(id, {raw:true, logging: false})
             if(data.imagen?.length === 0){
                 {data.imagen = updateUser.imagen }

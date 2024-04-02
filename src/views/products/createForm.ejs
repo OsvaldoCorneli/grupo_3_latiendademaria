@@ -17,7 +17,6 @@
                 name="name" 
                 placeholder="Ingresar Nombre"
                 value="<%= body.name && body.name %>"
-                required
                 />
             <% if (locals.errors && errors.name) { %>
                 <small id="name" class="errors"><%= errors.name.msg %></small>
@@ -39,7 +38,7 @@
                 <% } %>
             </fieldset>
             <label for="category"><b>Categoria:</b>
-                <select id="category" name="category" required>
+                <select id="category" name="category" >
                     <% categorias.forEach(({id,name}) => { %>
                         <option value="<%= id %>" <%= body.category == id && "checked" %>>
                         <%= name %>
@@ -48,7 +47,7 @@
                 </select>
                 <!-- <% categorias.forEach(({id,name}) => { %>
                     <label>
-                        <input type="radio" name="category" value="<%= id %>" <%= body.category == id && "checked" %> required/>
+                        <input type="radio" name="category" value="<%= id %>" <%= body.category == id && "checked" %> />
                     <%= name %>
                     </label>
                 <% }) %> -->
@@ -67,7 +66,7 @@
                             <span id="c0" style=<%= body.color %>></span>
                         </label>
                         <label for="stock">Stock:
-                            <input type="number" name="stock" value="<%= body.stock? body.stock : 1 %>" required/>
+                            <input type="number" name="stock" value="<%= body.stock? body.stock : 1 %>" />
                         </label>
                     </div>
                 <% } else { %>
@@ -79,7 +78,7 @@
                                 <small id="color" class="errors"><%= errors.color.msg %></small>
                             <% } %>
                             <label for="stock">Stock:</label>
-                            <input type="number" name="stock" value="<%= body.stock[index]? body.stock[index] : 0 %>" class="number" required/>
+                            <input type="number" name="stock" value="<%= body.stock[index]? body.stock[index] : 0 %>" class="number" />
                             <% if (locals.errors && errors.stock) { %>
                                 <small id="stock" class="errors"><%= errors.stock.msg %></small>
                             <% } %>
@@ -95,7 +94,6 @@
                 name="price"
                 step=".10"
                 value="<%= body.price && body.price %>"
-                required
             />
             <% if (locals.errors && errors.price) { %>
                 <small id="price" class="errors"><%= errors.price.msg %></small>

@@ -6,11 +6,8 @@ window.addEventListener("load", async function(){
     const day = currentDay()
     let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     let regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    let provincias = document.querySelector('select[name="provincia"]');
-    let selectedLocalidad = provincias.selectedOptions[0].innerText
-    if(selectedLocalidad == "- seleccionar -"){
-        provincias.style.border = '2px solid red'
-    }
+    let provincias = document.querySelector('input[name="provincia"]');
+    let localidad = document.querySelector(`input[name="localidad"]`);
     let submitButton = document.querySelector('input[type="submit"]')
     let email = document.querySelector("#email")
     let userName = document.querySelector("#userName")
@@ -23,10 +20,7 @@ window.addEventListener("load", async function(){
     let password = document.querySelector('#password')
     let repassword = document.querySelector('#repassword')
     let codigoPostal = document.querySelector("#codigoPostal")
-    let localidad;
-    let localidadOption;
-    let previous;
-    let errorLocalidad;
+    
     const errorNombre = document.querySelector("#errorNombre")
     const errorApellido = document.querySelector("#errorApellido")
     const errorEmail = document.querySelector("#errorEmail")
@@ -38,56 +32,11 @@ window.addEventListener("load", async function(){
     const errorCodigoPostal = document.querySelector("#errorCodigoPostal")
     const errorStreetNumber = document.querySelector("#errorNumero")
     const requiredinput = document.querySelectorAll(".requiredinput")
-    const formulario = document.querySelector("#formulario")
+    const formulario = document.querySelector("form#formulario")
     const errorProvincia = this.document.querySelector("#errorProvincia")
+    let errorLocalidad = document.querySelector("#errorLocalidad")
+    
     const mensaje = 'Este campo debe estar completo'
-    
-    
-    if(selectedLocalidad == "- seleccionar -"){
-        provincias.setCustomValidity('Invalid')
-    }
-
-    provincias.addEventListener('change', function(e) {
-        previous? previous.style = "display:none;" : null;
-        let prov = provincias.selectedOptions[0].innerText
-        let selected = 'label#'+prov.split(" ").join("")
-        previous = document.querySelector(selected)
-        previous.style = "display:block;"
-
-        if(e.target.value != "- seleccionar -"){ 
-            provincias.style.border = '2px solid green'
-            errorProvincia.style.display = "none"
-
-            
-        }else{
-            provincias.style.border = '2px solid red'
-            errorProvincia.style.display = "block"
-        }
-
-
-        localidad = document.querySelector(`select[id="${prov}"]`);
-        localidadOption = localidad.selectedOptions[0];
-        localidadSeleccionada = localidadOption.value;
-        errorLocalidad = document.querySelector("#errorLocalidad")
-
-        if(localidadOption.textContent == "- seleccionar -"){
-            localidad.style.border = '2px solid red'
-            errorLocalidad.style.display = "block"
-            errorLocalidad.textContent = "Seleccione una localidad"
-        }
-    
-        if(localidad){
-            localidad.addEventListener("change", function(e){
-                if(e.target.value == "- seleccionar -"){
-                    localidad.style.border = '2px solid red' 
-                    errorLocalidad.style.display = "block"
-                }else{  
-                    localidad.style.border = '2px solid green' 
-                    errorLocalidad.style.display = "none"
-                        }
-                })
-        }
-    })
 
     submitButton.addEventListener("click", function(e){
         let errors = {}
@@ -118,10 +67,10 @@ window.addEventListener("load", async function(){
         if(repassword.value.length < 1){
             errors.repassword = mensaje
         }
-        if(provincias.style.border == '2px solid red'){
+        if(provincias.value.length == 0 || provincias.style.border == '2px solid red'){
            errors.provincia = mensaje
         }
-        if(localidad && localidad.style.border == '2px solid red'){
+        if (localidad.value.length == 0 || localidad.style.border == '2px solid red'){
            
            errors.localidad = mensaje
         }
@@ -185,16 +134,24 @@ window.addEventListener("load", async function(){
             default:
             break
 
-                     }     
-                 }
-              }
-        else{
-               
-               if(validacionCompleta()){
-                formulario.submit()
-               }
-               
-        }
+                    }     
+                }
+            }
+        else {
+            // if(validacionCompleta()){
+                const promises = [
+                    new Promise(resolve => resolve(validateForm(localidad.name))),
+                    new Promise(resolve => resolve(validateForm(provincias.name)))
+                ]
+                Promise.all(promises).then(() => {
+                    if (Object.keys(errores).length > 0) {
+                        alert(`corregir los errores del formulario en ${Object.keys(errores).join(', ')}`)
+                    } else {
+                        formulario.submit()
+                    }
+                })
+            }
+        //}
 
     })
     
@@ -492,7 +449,7 @@ window.addEventListener("load", async function(){
 
             let elemento = element.id 
               elemento = document.querySelector(`#${elemento}`)
-
+            console.log(elemento)
             if(!elemento.checkValidity()){
                 validaciones = false
             }
@@ -507,12 +464,170 @@ window.addEventListener("load", async function(){
     
 
 
+    const form = document.querySelector('form#formulario')
 
-    // let formRegistro = document.querySelector('form');
+    if (!form.localidad.value) form.localidad.disabled = true
+    if (form.provincia.value) form.localidad.disabled = false
     
-    // formRegistro.addEventListener('submit', function() {
-    //     document.querySelector('input#repassword').remove()
-    // })
-
+    let errores = {}
+    async function validateForm(input) {
+        try {
+            const {provincia, localidad} = document.querySelector('form#formulario')
+            if (document.querySelector(`small#${input}`)) {
+                document.querySelector(`small#${input}`).remove()
+                document.querySelector(`input[name=${input}]`).style.border = 'none'
+                delete errores[input]
+            }
+            switch(input) {
+                case 'provincia':
+                    if (provincia.value.length == 0) {
+                        errores.provincia = 'ingresar provincia'
+                        break}
+                    const {provincias} = await fetchProvincia(provincia.value)
+                    if (provincias[0].nombre !== provincia.value) errores.provincia = 'la provincia ingresada no existe'
+                    break
+                case 'localidad':
+                    if (errores.provincia) break
+                    if (localidad.value.length == 0) {
+                        errores.localidad = 'ingresar localidad'
+                        break
+                    }
+                    const {localidades} = await fetchLocalidad(provincia.value, localidad.value)
+                    if (!localidades.some(({nombre})=> nombre == localidad.value)) errores.localidad = 'seleccionar una localidad valida'
+                    break
+                default:
+                    break
+            }
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+    
+    form.provincia.oninput = async (e) => {
+        if (e.target.value.length > 3) {
+        try {
+            form.localidad.disabled = true
+            form.localidad.value = ""
+            if (document.querySelector(`small#${e.target.name}`)) {
+                document.querySelector(`small#${e.target.name}`).remove()
+                e.target.style.border = 'none'
+            }
+            const data = await fetchProvincia(e.target.value)
+            const {cantidad, provincias} = data
+    
+            const selectProvincia = document.createElement('select')
+            selectProvincia.name = "idProvincia"
+            selectProvincia.multiple = true
+            selectProvincia.style.backgroundColor = '#B6E5DB'
+            provincias.forEach((prov) => {
+                const option = document.createElement('option')
+                option.value = prov.id
+                option.innerText = prov.nombre
+                selectProvincia.appendChild(option)
+            })
+            selectProvincia.onchange = (s) => {
+                let nombreProvincia = provincias.find(({id})=> id == s.target.value).nombre
+                form.provincia.value = nombreProvincia
+                form.localidad.disabled = false
+                form.provincia.focus()
+                form.provincia.blur()
+                s.target.remove()
+            }
+            e.target.parentNode.appendChild(selectProvincia)
+            selectProvincia.focus()
+            selectProvincia.onblur = (s) => {
+                s.target.remove()
+            }
+        } catch (error) {
+            let errorhtml = `<small id="${e.target.name}" class="errors">Hubo un error al procesar la peticion</small>`
+            e.target.parentNode.insertAdjacentHTML('beforebegin', errorhtml)
+        }
+    }
+    }
+    
+    form.provincia.onblur = (e) => {
+        validateForm(form.provincia.name)
+        .then(() => {
+            if (errores[form.provincia.name]) {
+                e.target.style.border = '2px solid red'
+                let errorhtml = `<small id="${e.target.name}" class="errors">${errores[e.target.name]}</small>`
+                e.target.parentNode.insertAdjacentHTML('beforebegin', errorhtml)
+            }
+        })
+    }
+    
+    form.localidad.oninput = async (e) => {
+        if (e.target.value.length > 3) {
+        try {
+            if (document.querySelector(`small#${e.target.name}`)) {
+                document.querySelector(`small#${e.target.name}`).remove()
+                e.target.style.border = 'none'
+            }
+            const {provincias} = await fetchProvincia(form.provincia.value)
+            const id = provincias[0]?.id
+    
+            const {localidades} = await fetchLocalidad(id,form.localidad.value)
+    
+            const selectLocalidad = document.createElement('select')
+            selectLocalidad.name = "idLocalidad"
+            selectLocalidad.multiple = true
+            selectLocalidad.style.backgroundColor = '#B6E5DB'
+            localidades.forEach((loc) => {
+                const option = document.createElement('option')
+                option.value = loc.id
+                option.innerText = loc.nombre
+                selectLocalidad.appendChild(option)
+            })
+            selectLocalidad.onchange = (s) => {
+                let nombreLocalidad = localidades.find(({id})=> id == s.target.value).nombre
+                form.localidad.value = nombreLocalidad
+                form.localidad.focus()
+                form.localidad.blur()
+                s.target.remove()
+            }
+            e.target.parentNode.appendChild(selectLocalidad)
+            selectLocalidad.focus()
+            selectLocalidad.onblur = (s) => {
+                s.target.remove()
+            }
+        } catch (error) {
+            let errorhtml = `<small id="${e.target.name}" class="errors">Hubo un error al procesar la peticion</small>`
+            e.target.parentNode.insertAdjacentHTML('beforebegin', errorhtml)
+        }
+    }
+    }
+    
+    form.localidad.onblur = (e) => {
+        validateForm(form.localidad.name).then(()=> {
+            if (errores[form.localidad.name]) {
+                e.target.style.border = '2px solid red'
+                let errorhtml = `<small id="${e.target.name}" class="errors">${errores[e.target.name]}</small>`
+                e.target.parentNode.insertAdjacentHTML('beforebegin', errorhtml)
+            }
+        })
+    }
+    
+    async function fetchLocalidad(provincia,nombre) {
+        try {
+            //prop provincia es un numero de id
+            //prop nombre es el nombre de la localidad
+            const response = await fetch(`https://apis.datos.gob.ar/georef/api/localidades?provincia=${provincia}&campos=id,nombre&nombre=${nombre}`)
+            const data = await response.json()
+            return data
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+    
+    async function fetchProvincia(nombre) {
+        try {
+            //prop nombre es el nombre de la provincia
+            const response = await fetch(`https://apis.datos.gob.ar/georef/api/provincias?nombre=${nombre}`)
+            const data = await response.json()
+            return data
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
 
 })

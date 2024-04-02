@@ -117,7 +117,7 @@ Array.from(deleteButton).forEach((key,i) => {
 })
 
 form.onsubmit = (event) => {
-    Array.from(form).forEach(input => validateForm(input.name))
+    //Array.from(form).forEach(input => validateForm(input.name))
     if(Object.keys(errores).length > 0) {
         event.preventDefault()
         alert('corregir los errores del formulario')

@@ -18,10 +18,10 @@ window.onload = () => {
             const data = await fetchData(`/api/products${query}&page=${page}&perPage=${perPage}`);
             articles.forEach((element,i) => {
                 let [t0,imgTag,t1,titulo,t2,categoria,t3,colores,t4,precio,t5,stock,t6,buttons ] = element.childNodes;
-                if (+i >= data.length) {
+                if (+i >= data.products.length) {
                     element.style.display = 'none';
                 } else {
-                    const {categories, colors, created_at, id, images, line, name, price, updated_at} = data[i]
+                    const {categories, colors, created_at, id, images, line, name, price, updated_at} = data.products[i]
                     element.style.display = 'flex';
                     titulo.innerHTML = name;
                     titulo.href = `/products/${id}`;
