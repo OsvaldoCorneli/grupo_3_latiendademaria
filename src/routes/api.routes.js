@@ -10,7 +10,7 @@ router.get('/products', api.products.list);
 router.get('/products/:id', api.products.detail);
 router.get('/users', forRegister, api.users.all);
 router.get('/payment', isLogged, api.payments.all);
-router.post('/payment', isAdmin, api.payments.new);
+router.post('/payment', isLogged, api.payments.new);
 router.put('/payment', isAdmin, api.payments.update);
 router.get('/payment/metric', /*isLogged,*/ api.payments.metrics);
 router.get('/payment/user', isLogged, api.payments.userPayment);
@@ -19,8 +19,6 @@ router.post('/categories', isAdmin, api.categories.new);
 router.get('/user/favorites', api.favorites.user);
 router.post('/user/favorites', isLogged, api.favorites.add);
 router.post('/user/login', validateForm.login(), api.users.login);
-router.get('/georef/provincias', api.georef.findProvincia);
-router.get('/georef/municipios', api.georef.findMunicipio);
 //router.get('/colors', isLogged, api.colors.list)
 // router.get('/products', api.products.list);
 

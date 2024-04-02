@@ -151,24 +151,5 @@ module.exports = {
                 res.status(500).json(error.message)
             }
         }
-    },
-    georef: {
-        findProvincia: async function (req,res) {
-            try {
-                const response = await dataGeo.findProvincias(req.query)
-                res.status(200).json(response)
-            } catch (error) {
-                res.status(500).json(error.message)
-            }
-        },
-        findMunicipio: async function (req,res) {
-            try {
-                const response = await dataGeo.findMunicipios(req.query)
-                res.status(200).json(response)
-            } catch (error) {
-                res.status(500).json(error.message)
-            }
-        }
     }
-
 }

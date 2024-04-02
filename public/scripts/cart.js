@@ -1,4 +1,4 @@
-
+const host = window.location.host
 const cartascart = document.querySelectorAll(".cartascart")
 
 let productosCarrito = []
@@ -177,6 +177,7 @@ function deleted(id, color){
 
 
 function finalizarCompra(id){
+    
     const envio = document.querySelector('#calcularEnvio input:checked').value
 
     let carrito = {
@@ -185,7 +186,17 @@ function finalizarCompra(id){
         envio: envio == "true" ? true : false,
         status: "enproceso"
     }
-
+    fetch(`http://${host}/api/payment`,{
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(carrito)
+        }).then(res => res.json())
+        .then(data => {
+            alert(`carrito enviado con exito ${JSON.parse(data)}`)
+        })
 }
 
 function popUpoOff(){
