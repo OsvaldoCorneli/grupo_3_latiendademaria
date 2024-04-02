@@ -140,17 +140,18 @@ module.exports = {
     create: async function(body) {
         try {
             const { idUser, status, products, envio } = body
-            const productData = await db.Products.findAll({where: {id: products.map(p => p.product_id)}, logging:false})
+            const user = await db.Users.findByPk(+idUser, {logging: false})
+            const productData = await db.Products.findAll({where: {id: products.map(p =>  p.product_id)}, logging:false})
             const total = productData.reduce((acum,{id,price})=> acum+Number(price)*Number(products.find(e => e.product_id == id).cantidad),0)
             const newPay = await db.Payments.create({
-                user_id: +idUser,
+                user_id: +user.id,
                 total: total,
                 status: status? status : 'enproceso',
                 deliver: envio? 1 : 0
             },{logging: false})
             for (let i in products) {
-                const {product_id, color_id, cantidad } = products[i]
-                const {price} = await db.Products.findByPk(+product_id, {logging: false})
+                const { product_id, color_id, cantidad } = products[i]
+                const { price } = productData.find(p => p.id == product_id)
                 await db.payment_products.create({
                     payment_id: newPay.id,
                     product_id: +product_id,
@@ -159,6 +160,7 @@ module.exports = {
                     precio: Number(price)
                 },{logging: false})
                 if (i == products.length-1) {
+                    await user.update({carrito: []})
                     return this.detallePago(newPay.id)
                 }
             }
@@ -169,8 +171,36 @@ module.exports = {
     updateStatus: async function (body) {
         try {
             const { status, id } = body
-            const response = await db.Payments.update({status: status}, {where: {id: +id}})
-            return response
+            const pago = await db.Payments.findByPk(+id,{
+                include: {
+                    association: 'products',
+                    include: {
+                        association: 'color',
+                        include: {
+                            association: 'color_products',
+                        }
+                    }
+                },
+                logging: false})
+            if (pago.status == status) return this.detallePago(id)
+            for (let i in pago.products) {
+                const {product_id, color_id, cantidad} = pago.products[i]
+                const stock = pago.products[i].color.color_products.find(p => p.product_id == product_id).stock
+                if (status == 'completado' && pago.status != 'completado') {
+                    if (+stock >= +cantidad) {
+                        await db.product_colors.update({stock: +stock - +cantidad},{where: {product_id, color_id}})
+                    } else {
+                        throw new Error(`Stock insuficiente en el articulo ${product_id}`)
+                    }
+                } else if (status != 'completado' && pago.status == 'completado') {
+                    await db.product_colors.update({stock: +stock + +cantidad},{where: {product_id, color_id}})
+                }
+                if (i == pago.products.length-1) {
+                    pago.status = status
+                    await pago.save()
+                    return this.detallePago(id)
+                }
+            }
         } catch (error) {
             return error
         }
