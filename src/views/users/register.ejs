@@ -12,10 +12,13 @@
     <main>
         <h2>Registrate</h2>   
     <article class="contenedor-form">
-        <form class="contenedores" action="/users/register" method="POST" enctype="multipart/form-data">
+        <form id="formulario" class="contenedores" action="/users/register" method="POST" enctype="multipart/form-data">
             <div class="contenedor1">
                 <div class="inputform">
                     <label for="nombre">Nombre/s:</label>
+                    <% if (locals.errors && errors.nombre) { %>
+                        <span class="errors"><%= errors.nombre.msg %></span>
+                    <% } %>
                     <span id="errorNombre">Mensaje de error</span>
                     <input 
                         class="requiredinput"
@@ -23,16 +26,16 @@
                         name="nombre"
                         id="nombre"
                         placeholder="ingrese su nombre"
-                        required
+                        
                         minlength="2"
                         value="<%= body.nombre? body.nombre : null  %>"
                     />
-                    <% if (locals.errors && errors.nombre) { %>
-                        <p class="errors"><%= errors.nombre.msg %></p>
-                    <% } %>
                 </div>
                 <div class="inputform">
                     <label for="apellido">Apellido/s:</label>
+                    <% if (locals.errors && errors.apellido) { %>
+                        <span class="errors"><%= errors.apellido.msg %></span>
+                    <% } %>
                     <span id="errorApellido">Mensaje de error</span>
                     <input
                         class="requiredinput"
@@ -40,76 +43,92 @@
                         name="apellido"
                         type="text"
                         placeholder="Ingresar apellido"
-                        required
+                        
                         minlength="2"
                         value="<%= body.apellido? body.apellido : null  %>"
                     />
-                    <% if (locals.errors && errors.apellido) { %>
-                        <p class="errors"><%= errors.apellido.msg %></p>
-                    <% } %>
                 </div>
                 <div class="inputform">
 
                     <label for="birthdate">fecha de nacimiento:</label>
+                    <% if (locals.errors && errors.fechaNacimiento) { %>
+                        <span class="errors"><%= errors.fechaNacimiento.msg %></span>
+                    <% } %>
                     <span id="errorFechaNacimiento">Mensaje de error</span>
                     <input 
                     class="requiredinput"
                     type="date"
                     name="fechaNacimiento"
                     id="fechaNacimiento"
-                    required
+                    
                     value="<%= body.fechaNacimiento? body.fechaNacimiento : null  %>"
                     />
-                    <% if (locals.errors && errors.fechaNacimiento) { %>
-                        <p class="errors"><%= errors.fechaNacimiento.msg %></p>
-                    <% } %>
                 </div>
 
                 <div class="inputform">   
-                    <label for="provincia">Provincia:</label>
-                    <select id='provincia' name="provincia">
-                        <option disabled selected value>- seleccionar -</option>
-                        <% localidades.forEach((el) => { %>
-                            <option value="<%= el.provincia %>" <%= body.provincia == el.provincia? "selected" : null %>><%= el.provincia %></option>
-                        <% }) %>
-                    </select>
                     <% if (locals.errors && errors.provincia) { %>
-                        <p class="errors"><%= errors.provincia.msg %></p>
+                        <span class="errors"><%= errors.provincia.msg %></span>
                     <% } %>
+                    <label for="provincia">Provincia:</label>
+                    <span id="errorProvincia">Mensaje de error</span>
+                    <input class="requiredinput" 
+                        id="provincia" 
+                        type="search" 
+                        name="provincia" 
+                        placeholder="buscar provincia por nombre" 
+                        value="<%= body?.provincia? body.provincia : "" %>"
+                    />
                 </div>
                 <div class="inputform">
-                        <% localidades.forEach((el) => { %>
-                            <label id="<%= el.provincia.split(" ").join("") %>" for="<%= el.provincia %>" style="display:none;">Localidad:
-                            <select id="<%= el.provincia %>" name="localidad">
+                    <span id="errorLocalidad">Mensaje de error</span>
+                    <label for="localidad">Localidad:</label>
+                    <input class="requiredinput"
+                        id="localidad" 
+                        type="search" 
+                        name="localidad" 
+                        placeholder="buscar localidad..." 
+                        value="<%= body?.localidad? body.localidad : "" %>"
+                    />
+                    <span id="errorLocalidad">Mensaje de error</span>
+                    <% if (locals.errors && errors.localidades) { %>
+                        <span class="errors"><%= errors.localidades.msg %></span>
+                    <% } %>
+                        <!-- <% localidades.forEach((el) => { %>
+                            <% if (locals.errors && errors.localidades) { %>
+                                <span class="errors"><%= errors.localidades.msg %></span>
+                            <% } %>
+                            <span id="errorLocalidad">Mensaje de error</span>
+                                <label id="<%= el.provincia.split(" ").join("") %>" for="<%= el.provincia %>" style="display:none;">Localidad: 
+                                <select id="<%= el.provincia %>" name="localidad">
                                 <option disabled selected value>- seleccionar -</option>
                                 <% el.localidades.forEach((loc) => { %>
                                     <option value="<%= loc %>" <%= body.localidad == loc? "selected" : null %>><%= loc %></option>
                                 <% }) %>
                             </select>
                             </label>
-                        <% }) %>
-                    <% if (locals.errors && errors.localidades) { %>
-                        <p class="errors"><%= errors.localidades.msg %></p>
-                    <% } %>
+                        <% }) %> -->
                 </div>
             <div class="inputform">
                 <label for="codigoPostal">Codigo postal:</label>
+                <% if (locals.errors && errors.codigoPostal) { %>
+                    <span class="errors"><%= errors.codigoPostal.msg %></span>
+                <% } %>
                 <span id="errorCodigoPostal">Mensaje de error</span>
                 <input 
                     type="text"
                     name="codigoPostal"
                     id="codigoPostal"
                     placeholder="Codigo Postal"
-                    minlength="2"
-                    maxlength="10"
+                    minlength="4"
+                    maxlength="9"
                     value="<%= body.codigoPostal? body.codigoPostal :  parseInt(0) %>"
                 />
-                <% if (locals.errors && errors.codigoPostal) { %>
-                    <p class="errors"><%= errors.codigoPostal.msg %></p>
-                <% } %>
             </div>
             <div class="inputform">
                 <label for="street">Calle:</label>
+                <% if (locals.errors && errors.calle) { %>
+                    <span class="errors"><%= errors.calle.msg %></span>
+                <% } %>
                 <input 
                     type="text"
                     name="calle"
@@ -119,30 +138,30 @@
                     maxlength="20"
                     value="<%= body.calle? body.calle : null %>"
                     />
-                    <% if (locals.errors && errors.calle) { %>
-                        <p class="errors"><%= errors.calle.msg %></p>
-                    <% } %>
             </div>
             <div class="inputform">
                 <label for="streetnumber">Numero:</label>
+                <% if (locals.errors && errors.calleNumero) { %>
+                    <span class="errors"><%= errors.calleNumero.msg %></span>
+                <% } %>
                 <span id="errorNumero">Mensaje de error</span>
                 <input 
                     type="text"
                     name="calleNumero"
                     id="streetnumber"
                     placeholder="Numero"
-                    minlength="10"
+                    minlength="1"
                     maxlength="20"
                     value="<%= body.calleNumero ? body.calleNumero : parseInt(0) %>"
                     />
-                    <% if (locals.errors && errors.calleNumero) { %>
-                        <p class="errors"><%= errors.calleNumero.msg %></p>
-                    <% } %>
             </div>
         </div>
         <div class="contenedor2">
             <div class="inputform button-wrap">
                 <label class=button for="imageinput">Imagen de perfil</label>
+                <% if (locals.errors && errors.imagen) { %>
+                    <span class="errors"><%= errors.imagen.msg %></span>
+                <% } %>
                 <span id="errorImagen">Mensaje de error</span>
                 <input 
                 type="file"
@@ -150,13 +169,13 @@
                 id="imageinput"
                 accept="image/jpeg, image/png, image/jpg"
             />
-            <% if (locals.errors && errors.imagen) { %>
-                <p class="errors"><%= errors.imagen.msg %></p>
-            <% } %>
             <i id="iconoCheck" class="fas fa-check" style="color: green; font-size: 24px; display: none; position: absolute; left: 45%; bottom: 20%;"></i>
         </div>
             <div class="inputform">
                 <label for="buildingfloor">Piso:</label>
+                <% if (locals.errors && errors.piso) { %>
+                    <span class="errors"><%= errors.piso.msg %></span>
+                <% } %>
                 <input 
                     type="text"
                     name="piso"
@@ -166,12 +185,12 @@
                     maxlength="20"
                     value="<%= body.piso? body.piso : null %>"
                     />
-                    <% if (locals.errors && errors.piso) { %>
-                        <p class="errors"><%= errors.piso.msg %></p>
-                    <% } %>
             </div>
             <div class="inputform">
                 <label for="departamento">Departamento:</label>
+                <% if (locals.errors && errors.departamento) { %>
+                    <span class="errors"><%= errors.departamento.msg %></span>
+                <% } %>
                 <input 
                     type="text"
                     name="departamento"
@@ -181,12 +200,12 @@
                     maxlength="20"
                     value="<%= body.departamento? body.departamento : null %>"
                     />
-                    <% if (locals.errors && errors.departamento) { %>
-                        <p class="errors"><%= errors.departamento.msg %></p>
-                    <% } %>
             </div>
             <div class="inputform">
                 <label for="email">Email:</label>
+                <% if (locals.errors && errors.email) { %>
+                    <span class="errors"><%= errors.email.msg %></span>
+                <% } %>
                 <span id="errorEmail">Mensaje de error</span>
                 <input 
                     class="requiredinput"
@@ -194,17 +213,17 @@
                     name="email"
                     id="email"
                     placeholder="Email"
-                    required
+                    
                     minlength="10"
                     maxlength="30"
                     value="<%= body.email? body.email : null %>"
                     />
-                    <% if (locals.errors && errors.email) { %>
-                        <p class="errors"><%= errors.email.msg %></p>
-                    <% } %>
             </div>
             <div class="inputform">
                 <label for="username">Nombre de usuario:</label>
+                <% if (locals.errors && errors.username) { %>
+                    <span class="errors"><%= errors.username.msg %></span>
+                <% } %>
                 <span id="errorUserName">Mensaje de error</span>
                 <input 
                     class="requiredinput"
@@ -212,17 +231,17 @@
                     name="userName"
                     id="userName"
                     placeholder="Nombre de usuario"
-                    required
+                    
                     minlength="6"
                     value="<%= body.userName? body.userName : null %>"
                 />
-                <% if (locals.errors && errors.username) { %>
-                    <p class="errors"><%= errors.username.msg %></p>
-                <% } %>
             </div>
 
             <div class="inputform">
                 <label for="password">contraseña:</label>
+                <% if (locals.errors && errors.password) { %>
+                    <span class="errors"><%= errors.password.msg %></span>
+                <% } %>
                 <span id="errorPassword">Mensaje de error</span>
                 <input 
                     class="requiredinput"
@@ -230,16 +249,16 @@
                     name="password"
                     id="password"
                     placeholder="contraseña"
-                    required
+                    
                     minlength="8"
                     value="<%= body.password? body.password : null %>"
                     />
-                    <% if (locals.errors && errors.password) { %>
-                        <p class="errors"><%= errors.password.msg %></p>
-                    <% } %>
             </div>
             <div class="inputform">
                 <label for="repassword">repetir contraseña:</label>
+                <% if (locals.errors && errors.repassword) { %>
+                    <span class="errors"><%= errors.repassword.msg %></span>
+                <% } %>
                 <span id="errorRepetirPassword">Mensaje de error</span>
                 <input 
                     class="requiredinput"
@@ -247,13 +266,10 @@
                     name="repassword"
                     id="repassword"
                     placeholder="repetir contraseña"
-                    required
+                    
                     minlength="8"
                     value="<%= body.repassword? body.repassword : null %>"
                 />
-                <% if (locals.errors && errors.repassword) { %>
-                    <p class="errors"><%= errors.repassword.msg %></p>
-                <% } %>
             </div>
             <div class="inputform">
                 <input type="submit" class="send" value="Registrar"/>

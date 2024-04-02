@@ -8,36 +8,36 @@
     <main>
         <div class="login-modal">
             <!-- <img src="https://assets.stickpng.com/images/585e4beacb11b227491c3399.png" alt="profile"/> -->
-            <form action="/users/login" method="POST">
+            <form id="formulario-login" action="/users/login" method="POST">
                 <label for="email">Usuario / E-mail</label>
+                <% if (locals.errors && errors.email) { %>
+                    <span class="errors"><%= errors.email.msg %></span>
+                <% } %>
                 <span id="mensajeEmail">Mensaje de error</span>
                 <input 
                     type="text"
                     name="email"
                     id="email"
                     placeholder="Ingresar email"
-                    required
+                    
                     class="validacionusername"
                     value="<%= body.email? body.email : null %>"
                 />
-                <% if (locals.errors && errors.email) { %>
-                    <p class="errors"><%= errors.email.msg %></p>
-                <% } %>
                 <label for="password">Contraseña</label>
+                <% if (locals.errors && errors.password) { %>
+                    <span class="errors"><%= errors.password.msg %></span>
+                <% } %>
                 <span id="mensajePassword">Mensaje de error</span>
                 <input
                     id="password"
                     name="password"
                     type="password"
                     placeholder="Ingresar contraseña"
-                    required
+                    
                     minlength="6"
                     class="validacionpassword"
                     value="<%= body.password? body.password : null %>"
                 />
-                <% if (locals.errors && errors.password) { %>
-                    <p class="errors"><%= errors.password.msg %></p>
-                <% } %>
                 <% if (errors.hasOwnProperty('login')) { %>
                     <p class="errors"><%= errors.login %></p>
                 <% } %>

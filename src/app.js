@@ -12,6 +12,7 @@ const cookieParser = require('cookie-parser');
 const loguearRuta = require('./middlewares/loguearRutas') 
 const rutaNoEncontrada = require('./middlewares/rutaNoEncontrada');
 const recordameMiddleware = require('./middlewares/recordameMiddleware');
+const cors = require('cors')
 const { Sequelize } = require('sequelize');
 const dotenv = require('dotenv');
 dotenv.config();
@@ -28,10 +29,11 @@ const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
 const PORT = 3001;
 
 
-
+app.disable('x-powered-by')
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use(cors({origin: true, credentials: true}));
 app.use(methodOverride('_method'));
 app.use(session({
     secret: 'la tienda de maria 2024', 

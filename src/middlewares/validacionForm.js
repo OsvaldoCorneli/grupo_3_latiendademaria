@@ -87,8 +87,10 @@ module.exports = {
                 }),
             body('fechaNacimiento')
                 .isISO8601().withMessage('ingresar una fecha valida'),
-            // body('provincia')
-            //     .notEmpty().withMessage('selecciona una provincia'),
+            body('provincia')
+                .notEmpty().withMessage('selecciona una provincia'),
+            body('localidad')
+                .notEmpty().withMessage('selecciona una localidad'),    
             body('codigoPostal')
                 .isNumeric({ min: 1, max: 10000 }).withMessage('solo numeros')
                 .notEmpty().withMessage('el codigo postal no puede estar vacio'),
@@ -96,7 +98,7 @@ module.exports = {
             //     .isLength({min: 3, max:30}) 
             //     .notEmpty().withMessage('la calle no puede estar vacia'),
             body('calleNumero')
-                .isNumeric({ min: 1, max: 10000 }).withMessage('ingresar el numero de calle'),
+                .isNumeric({ min: 1, max: 10000 }).withMessage('ingresar el numero de calle/solo numeros'),
             body('imagen')
                 .custom((value, {req})=>{
                     const extensionName = req.files.map((x) => {return path.extname(x.path)})
@@ -134,10 +136,10 @@ module.exports = {
                    }),
             body('fechaNacimiento')
                 .isISO8601().withMessage('ingresar una fecha valida'),
-            // body('provincia')
-            //     .notEmpty().withMessage('selecciona una provincia'),
-            // body('localidad')
-            //     .notEmpty().withMessage('selecciona una localidad'),
+            body('provincia')
+                .notEmpty().withMessage('selecciona una provincia'),
+            body('localidad')
+                .notEmpty().withMessage('selecciona una localidad'),
             body('codigoPostal')
                 .isNumeric({ min: 1, max: 10000 }).withMessage('solo numeros')
                 .notEmpty().withMessage('el codigo postal no puede estar vacio'),
@@ -148,10 +150,12 @@ module.exports = {
                 .isNumeric({ min: 1, max: 10000 }).withMessage('ingresar el numero de calle'),
             body('imagen')
                 .custom((value, {req})=>{
+                    if(req.files.length === 0){return true}
                     const extensionName = req.files.map((x) => {return path.extname(x.path)})
                     return extensionName.some((ext) => extNames.includes(ext))
                 }).withMessage(`solo se admiten archivos ${extNames.join(', ')}`)
                 .custom((value, {req})=>{
+                    if(req.files.length === 0){return true}
                     const filesSizes = req.files.map((x) => {return x.size})
                     return !filesSizes.some((file) => file >= maxFileSize)
                 }).withMessage(`el tamaño maximo permitido por imagen es ${maxFileSize/1024} KB`),
@@ -159,6 +163,17 @@ module.exports = {
             //     .isLength({max:10}),
             // body('departamento', 'no puede superar 10 caracteres')
             //     .isLength({max:10}) 
+        ]
+    },
+    restore: function () {
+        return [
+            body('password')
+                .notEmpty().withMessage('La contraseña no puede estar en blanco')
+                .isLength({min: 8}).withMessage('la contraseña debe ser mayor a 8 caracteres')
+                .custom(value => regexPassword.test(value)).withMessage('La contraseña debe contener letras mayúsculas, minúsculas, un número y un carácter especial.'),
+            body('repeatPassword').custom((value, {req}) => {
+                return value === req.body.password
+            }).withMessage('las contraseñas no coinciden')
         ]
     }
 }

@@ -1,6 +1,18 @@
 * {
     font-family: 'Gidole';
+    box-sizing: border-box;    
 }
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+tbody{
+    width: 100%;
+}
+
+
 
 .cart-modal {
     display: flex;
@@ -16,7 +28,7 @@
 }
 .cart-modal tr td {
     padding: 5px;
-    text-align: right;
+    text-align: center;
     border-bottom: solid 2px gray;
 }
 .cartdetail #product {
@@ -54,13 +66,13 @@ td#X:hover {
     border-radius: 5px;
     border: hidden;
     padding: 5px;
-    background-color: #1259c3;
+    background-color: #26775b;
     color: white;
     width: 35%;
     transition: 500ms;
 }
 .cartresume button:hover {
-    background-color: #5394b0;
+    background-color: #2f9b75;
 }
 input[type="number"] {
     -webkit-appearance: textfield;
@@ -84,13 +96,54 @@ td > img {
     max-width: 100px;
 }
 
-@media (max-width: 400px) {
-    .cartdetail img {
-        display: none;
-    }
+.tdcolors{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 88px;
+   
 }
 
-@media (min-width: 700px) {
+#finalizarcompra{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0 5px 0;
+    
+}
+
+#cartenvio{
+    display: flex;
+    flex-direction: column;
+}
+#calcularEnvio{
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+
+#labels {
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+}
+
+
+
+
+
+@media (max-width: 570px) {
+    .cartdetail img, #precio, #thprecio, #tdcomodin {
+        display: none;
+    }
+    
+    
+}
+
+
+@media (min-width: 805px) {
     .cart-modal {
         display: grid;
         grid-template-columns: 1fr fit-content(60%);

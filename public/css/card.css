@@ -5,13 +5,15 @@
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
-    gap: 20px
+    gap: 20px;
+    
 }
 
 .cards article {
     border: solid 1px #5394b0;
     border-radius: 5px;
     padding: 10px;
+    
     /* height: 100%;
     width: 70%; */
     /* min-width: 225px;
@@ -20,8 +22,19 @@
     max-height: 310px; */
 }
 
+.cards article:hover{
+    background-color:  #b6e5db
+
+}
+
+
 .titulocard{
     margin: 15px 0 5px 0;
+}
+
+.cards article p{
+    font-size: 20px;    
+    font-weight: bold;
 }
 
 

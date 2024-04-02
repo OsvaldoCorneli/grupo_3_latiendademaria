@@ -3,21 +3,24 @@ const path = require('path');
 const db = require('../database/models');
 const {Op, Sequelize} = require('sequelize');
 
-const pagosPath = path.join(__dirname+'/../data/payments.json')
-const pagosJson = JSON.parse(fs.readFileSync(pagosPath, 'utf-8'))
+// const pagosPath = path.join(__dirname+'/../data/payments.json')
+// const pagosJson = JSON.parse(fs.readFileSync(pagosPath, 'utf-8'))
 
 module.exports = {
     all: async function(query) {
         try {
-            let {user,desde,hasta,estado} = query
+            let {user,desde,hasta,estado, limit} = query
             let condition = {}
             if (user) condition.user_id = user;
             if (desde && hasta) condition.created_at = {[Op.between]: [new Date(desde), new Date(hasta)]};
             if (estado) condition.status = estado;
-
+            let pagination = {}
+            if (limit) pagination.limit = +limit
             const response = await db.Payments.findAll({
                 where: condition,
                 attributes: {exclude: ['user_id']},
+                order: [['created_at', 'DESC']],
+                limit: pagination?.limit,
                 logging: false,
                 raw: true
             })
@@ -136,22 +139,28 @@ module.exports = {
     },
     create: async function(body) {
         try {
-            const {userId, status, products } = body
+            const { idUser, status, products, envio } = body
+            const user = await db.Users.findByPk(+idUser, {logging: false})
+            const productData = await db.Products.findAll({where: {id: products.map(p =>  p.product_id)}, logging:false})
+            const total = productData.reduce((acum,{id,price})=> acum+Number(price)*Number(products.find(e => e.product_id == id).cantidad),0)
             const newPay = await db.Payments.create({
-                user_id: +userId,
-                total: products.reduce((acum,{precio, cantidad}) => acum+(Number(precio)*Number(cantidad)),0),
+                user_id: +user.id,
+                total: total,
                 status: status? status : 'enproceso',
+                deliver: envio? 1 : 0
             },{logging: false})
             for (let i in products) {
-                const {product_id, color_id, cantidad, precio} = products[i]
+                const { product_id, color_id, cantidad } = products[i]
+                const { price } = productData.find(p => p.id == product_id)
                 await db.payment_products.create({
                     payment_id: newPay.id,
                     product_id: +product_id,
                     color_id: +color_id,
                     cantidad: Number(cantidad),
-                    precio: Number(precio)
+                    precio: Number(price)
                 },{logging: false})
                 if (i == products.length-1) {
+                    await user.update({carrito: []})
                     return this.detallePago(newPay.id)
                 }
             }
@@ -162,10 +171,96 @@ module.exports = {
     updateStatus: async function (body) {
         try {
             const { status, id } = body
-            const response = await db.Payments.update({status: status}, {where: {id: +id}})
+            const pago = await db.Payments.findByPk(+id,{
+                include: {
+                    association: 'products',
+                    include: {
+                        association: 'color',
+                        include: {
+                            association: 'color_products',
+                        }
+                    }
+                },
+                logging: false})
+            if (pago.status == status) return this.detallePago(id)
+            for (let i in pago.products) {
+                const {product_id, color_id, cantidad} = pago.products[i]
+                const stock = pago.products[i].color.color_products.find(p => p.product_id == product_id).stock
+                if (status == 'completado' && pago.status != 'completado') {
+                    if (+stock >= +cantidad) {
+                        await db.product_colors.update({stock: +stock - +cantidad},{where: {product_id, color_id}})
+                    } else {
+                        throw new Error(`Stock insuficiente en el articulo ${product_id}`)
+                    }
+                } else if (status != 'completado' && pago.status == 'completado') {
+                    await db.product_colors.update({stock: +stock + +cantidad},{where: {product_id, color_id}})
+                }
+                if (i == pago.products.length-1) {
+                    pago.status = status
+                    await pago.save()
+                    return this.detallePago(id)
+                }
+            }
+        } catch (error) {
+            return error
+        }
+    },
+    metrics: async function () {
+        try {
+            const totalSales = await this.totalSales()
+            const topProduct = await this.topProductSales()
+            const lastProductSales = await this.lastProductSales()
+            return {totalSales, topProduct, lastProductSales}
+        } catch (error) {
+            return error
+        }
+    },
+    totalSales: async function(){
+        try {
+            const [results, metadata] = await db.sequelize.query('select sum(cantidad) as quantity, sum(cantidad*precio) as totalAmount from payment_products;',
+                {logging: false});
+            return results[0]
+        } catch (error) {
+            return error
+        }
+    },
+    topProductSales: async function(){
+        try {
+            const response = await db.payment_products.findAll({
+                include: {
+                    association: 'product',
+                    attributes: {exclude: ['category_id', 'description']},
+                    include: [
+                        {
+                            association: 'categories',
+                            attributes: ['id','name'],
+                        }
+                    ]
+                },
+                attributes: [
+                    'product_id',
+                    [Sequelize.fn('sum',Sequelize.col('cantidad')), 'cantidadVendida'],
+                ],
+                group: ['product_id'],
+                order: [['cantidadVendida', 'DESC']],
+                limit: 5,
+                logging: false,
+            })
             return response
         } catch (error) {
             return error
+        }
+    },
+    lastProductSales: async function () {
+        try {
+            const [results, metadata] = await db.sequelize.query(`select pr.id as product_id, pr.name as name,pr.category_id as category_id, pp.color_id as color_id, pp.precio as price, pp.cantidad as cantidad, pp.payment_id as payment_id,p.created_at as created_at
+                from payment_products pp 
+                left join payments p on p.id = pp.payment_id 
+                inner join products pr on pr.id = pp.product_id 
+                where p.status = 'completado' order by p.created_at desc limit 5;`, {logging: false});
+            return results
+        } catch (error) {
+            
         }
     }
 }

@@ -55,14 +55,14 @@ main {
 .login-modal button {
     border-radius: 5px;
     padding: 10px;
-    background-color: #1259c3;
+    background-color: #1f634b;
     color: white;
     width: 35%;
     margin: 10px 0 0 0;
     transition: 500ms;
 }
 .login-modal button:hover {
-    background-color: #5394b0;
+    background-color: #2f9b75;
 }
 .login-modal img {
     /* min-width: 20vh;
@@ -95,20 +95,16 @@ main {
     border: 2px solid red;
 }
 
-.errors {
-    font-weight: 400;
-    color: red
-}
 
 #mensajePassword{
     display: none;
-    color: red;
+    color: rgb(187, 0, 0);
     font-size: 75%;
     margin: 0 0 5px 0;
 }
 #mensajeEmail{
     display: none;
-    color: red;
+    color: rgb(187, 0, 0);
     font-size: 75%;
     margin: 0 0 5px 0;
 }

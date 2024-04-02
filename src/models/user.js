@@ -1,17 +1,9 @@
 const db = require('../database/models')
-const fs = require('fs');
-const path = require('path');
 const bcrypt = require('bcryptjs');
-const { Console } = require('console');
+const { sendEmail } = require('../middlewares/mailer');
+const images = require('./images');
+const {Op} = require('sequelize')
 
-
-const usersFilePath = path.join(__dirname, '../data/users.json');
-const Users = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
-
-const dataGeoFilePath = path.join(__dirname, '../data/users.json');
-const dataGeo = JSON.parse(fs.readFileSync(dataGeoFilePath, 'utf-8'));
-
-const preferencias = path.join(__dirname, '../data/users.json');
 
 module.exports = {
     index: async function () {
@@ -27,8 +19,13 @@ module.exports = {
         try {
             let imagen = "";
             if(image){
-             imagen = image.map(element => element.path.split('public')[1]).join(', ')}
-       
+                for (let i in image) {
+                    const uploadImage = await images.uploadFile(image[i].path)
+                    imagen = uploadImage.url
+                    break
+                }
+            }
+
             const { nombre, apellido, fechaNacimiento, provincia, localidad, codigoPostal, calle, calleNumero, piso, departamento, email, userName, password } = data
             const passEncriptada = bcrypt.hashSync(password, 10)
         
@@ -58,11 +55,17 @@ module.exports = {
     login: async function (data) {
         try{
         let { email, password } = data
-        const Users1 = await db.Users.findAll({raw: true, logging: false})
-        let user = Users1.find((user) => user.email == email || user.userName == email)
+        const user = await db.Users.findOne({where: {
+            [Op.or]: [
+                {email: email},
+                {username: email}
+            ]},
+            raw: true,
+            logging: false})
         if (!user) return {access: false, error: 'usuario inexistente'}
         const checkPass = bcrypt.compareSync(password, user.password)
         if (checkPass) {
+            delete user.password
             return {...user, access: true}
         } else {
             return {access: false, error: 'contraseña incorrecta'}
@@ -75,8 +78,12 @@ module.exports = {
         try {
             let { id } = data
             if(data.imagen){
-                    data.imagen = data.imagen.map(element => element.path.split('public')[1]).join(', ')}
-                
+                for (let i in data.imagen) {
+                    const uploadImage = await images.uploadFile(data.imagen[i].path)
+                    data.imagen = uploadImage.url
+                    break
+                }
+            }
             let updateUser = await db.Users.findByPk(id, {raw:true, logging: false})
             if(data.imagen?.length === 0){
                 {data.imagen = updateUser.imagen }
@@ -116,9 +123,6 @@ module.exports = {
         }}catch(error){return error}
         
     }, 
-    restore: function (id) {
-        
-    },
     cartAdd: async function(data){
          
         try {
@@ -189,6 +193,42 @@ module.exports = {
              return error
         }
        
-      }
-    
+      },
+    restorePassword: async function (userData) {
+        try {
+            const user = await this.detail(userData.id)
+            if (user) {
+                const email = {
+                    to: user.email,
+                    subject: `Restaurar contraseña de La tienda de Maria💚`,
+                    text: `Querido ${user.nombre}. Restaura tu contraseña del sitio`,
+                    html: `<p><strong>Querid@ ${user.nombre}</strong></p>
+                    <p>restaura tu contraseña en el sitio usando el siguiente <b>Token</b>. tendras hasta 10 minutos antes de que expire. seleccionalo y copialo en el sitio<b>¡No lo compartas con nadie!</b></p>
+                    <p><b>Token:</b></br>
+                    ${userData.token}</p>
+                    <p>Saludos,</p></br>
+                    <hr>
+                    <p>El equipo de La Tienda de Maria</p>
+                    <p>@2024 La Tienda de Maria💚. Todos los derechos reservados.</p>
+                    <img src="" alt="logo"/>
+                    `
+                }
+                sendEmail(email.to, email.subject, email.text, email.html)
+            } else {
+                throw Error('el usuario no existe')
+            }
+        } catch (error) {
+            return error
+        }
+    },
+    updatePassword: async function (userData) {
+        try {
+            const {password, repeatPassword, id} = userData
+            const passEncriptada = bcrypt.hashSync(password, 10)
+            const updatePassword = await db.Users.update({password: passEncriptada},{where: {id: id}})
+            return updatePassword
+        } catch (error) {
+            return error
+        }
+    },
 }

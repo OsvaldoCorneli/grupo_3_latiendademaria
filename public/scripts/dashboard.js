@@ -2,18 +2,24 @@ const form = document.querySelector('form#payment')
 const host = window.location.host
 
 let errores = {}
-function handleErrors(input, formulario){
-    const {desde, hasta, estado} = formulario
+function handleErrors(input){
+    const {desde, hasta, estado} = form
+    if (errores[input]) {
+        delete errores[input]
+        document.querySelector(`small#${input}`).remove()
+    }
     switch (input) {
         case 'desde':
             if (desde.valueAsDate == null) errores.desde = "ingresar una fecha"
             if (desde.value.length != 10) errores.desde = "formato de fecha invalido"
             else if (desde.valueAsDate > hasta.valueAsDate) errores.desde = "la fecha desde no puede ser mayor a fecha hasta"
+            if (errores.hasOwnProperty('hasta')) handleErrors('hasta')
             break
         case 'hasta':
-            if (desde.valueAsDate == null) errores.desde = "ingresar una fecha"
-            if (desde.value.length != 10) errores.hasta = "formato de fecha invalido"
+            if (hasta.valueAsDate == null) errores.hasta = "ingresar una fecha"
+            if (hasta.value.length != 10) errores.hasta = "formato de fecha invalido"
             else if (desde.valueAsDate > hasta.valueAsDate) errores.hasta = "la fecha hasta no puede ser menor a fecha desde"
+            if(errores.hasOwnProperty('desde')) handleErrors('desde')
             break
         case 'estado':
             if (estado.value.length == 0) errores.estado = "seleccionar un estado"
@@ -25,28 +31,25 @@ function handleErrors(input, formulario){
 
 Array.from(form).forEach((key,i) => {
     key.onchange= () => {
-        if (document.querySelector(`small#${key.name}`)) document.querySelector(`small#${key.name}`).remove()
-        if (errores.hasOwnProperty(key.name)) delete errores[key.name]
-        handleErrors(key.name, form)
+        handleErrors(key.name)
         if (errores[key.name]) {
             let htmlError = `<small id="${key.name}" class="errors">${errores[key.name]}</small>`
-            key.insertAdjacentHTML('beforebegin',htmlError)
+            key.insertAdjacentHTML('afterend',htmlError)
         }
     }
     key.onfocus = () => {
-        if (document.querySelector(`small#${key.name}`)) document.querySelector(`small#${key.name}`).remove()
-        if (errores.hasOwnProperty(key.name)) delete errores[key.name]
-        handleErrors(key.name, form)
+        handleErrors(key.name)
         if (errores[key.name]) {
             let htmlError = `<small id="${key.name}" class="errors">${errores[key.name]}</small>`
-            key.insertAdjacentHTML('beforebegin',htmlError)
+            key.insertAdjacentHTML('afterend',htmlError)
         }
     }
 })
 
 
 form.onsubmit = (e) => {
-    Array.from(form).forEach((key) => {handleErrors(key.name,form)})
+    Array.from(form).forEach((key) => {
+        handleErrors(key.name,form)})
     if(Object.keys(errores).length > 0) {
         e.preventDefault()
         alert('corregir los errores del formulario')

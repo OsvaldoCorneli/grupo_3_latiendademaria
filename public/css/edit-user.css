@@ -41,6 +41,11 @@ main{
     padding: 5px;
     border: none;
 }
+.contenedores{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .contenedor1{
     width: 90%;
     margin: 0;
@@ -51,12 +56,18 @@ main{
     margin: 0;
 }
 .contenedor3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: fit-content;
     margin: 0;
+    order: -1;
 }
 .contenedor3 > img {
     border-radius: 50%;
     border: solid 1px black;
+    width: 70%;
+    max-width: 230px;
 }
 
 .button-wrap {
@@ -67,6 +78,7 @@ main{
     display: inline-block;
     padding: 10px 16px;
     cursor: pointer;
+    margin: 0;
     border-radius: 5px;
     background-color: #1259c3;
     font-size: inherit;
@@ -78,6 +90,22 @@ main{
 }
 .button:hover {
     background-color: #5394b0;
+}
+
+ #botonModificar{
+    max-width: 10%;
+    display: inline-block;
+    padding: 10px 16px;
+    cursor: pointer;
+    margin: 0;
+    border-radius: 5px;
+    background-color: #1259c3;
+    font-size: inherit;
+    font-weight: bold;
+    color: #fff;
+    transition: all 500ms;
+    width: fit-content;
+    max-width: 250px;
 }
 
 /* input.uploadFile {
@@ -92,6 +120,7 @@ main{
 input.uploadFile:hover {
     background-color: #5394b0;
 } */
+
 input[type="file"] {
     position: absolute;
     background-color: #1259c3;
@@ -107,10 +136,7 @@ input[type="file"] {
 .requiredinput:invalid {
     border: 2px solid red;
 }
-.errors {
-    font-weight: 400;
-    color: red
-}
+
 .error-contraseña {
     display: none;
     color: red;
@@ -163,8 +189,21 @@ input[type="file"] {
     margin: 0 0 5px 0;
 }
 
+#errorLocalidad{
+    display: none;
+    color: rgb(187, 0, 0);
+    font-size: 75%;
+    margin: 0 0 5px 0;
+}
+
+
+#botones{
+    display: flex;
+}
+
 
 @media (min-width: 760px){
+    
 
     .contenedor-form{
         width: 50%;
@@ -178,11 +217,21 @@ input[type="file"] {
         margin: 15px 0 0 0;
     }
     .contenedores{
-        display: flex;
-        justify-content: center;
+        flex-direction: row;
     }
     .contenedor-form {
         width: 65%;
         max-width: 1200px;
+    }
+    .contenedor3 {
+        width: fit-content;
+        margin: 0;
+        order: 1;
+    }
+    .contenedor3 > img {
+        border-radius: 50%;
+        border: solid 1px black;
+        width: 100%;
+        max-width: 400px;
     }
 }

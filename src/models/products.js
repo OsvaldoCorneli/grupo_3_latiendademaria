@@ -29,6 +29,7 @@ module.exports = {
                     }
                 ],
                 attributes: {exclude: ['category_id']},
+                order: [['created_at', 'ASC']],
                 logging: false,
             })
             return response
@@ -57,6 +58,11 @@ module.exports = {
                     {
                         association: 'categories',
                         attributes: ['id','name']
+                    },
+                    {
+                        association: 'favorites',
+                        attributes: ['id', [Sequelize.fn("concat",Sequelize.col('nombre'),", ",Sequelize.col('apellido')),"nombreApellido"]],
+                        through: {attributes:[]}
                     }
                 ],
                 attributes: {exclude: ['category_id']},
@@ -80,7 +86,7 @@ module.exports = {
                 ]};
             if (category) condition.categories = { ...condition.categories, id: category};
             if (color) condition.colors = {...condition.colors, color_id: color};
-            let pagination = {}
+            let pagination;
             if (page && perPage) pagination = {limit: +perPage, offset: ((+page-1)*+perPage)};
             const filter = await db.Products.findAll({
                 include: [
@@ -110,8 +116,8 @@ module.exports = {
                 where: condition.products,
                 attributes: {exclude: ['category_id']},
                 logging: false,
-                limit: pagination.limit,
-                offset: pagination.offset
+                limit: pagination?.limit,
+                offset: pagination?.offset
             })
             return filter
         } catch (error) {
@@ -125,14 +131,14 @@ module.exports = {
             const newProduct = await db.Products.create({
                 name: name,
                 description: description,
-                category_id: category,
+                category_id: +category,
                 line: line,
                 price: +price
             })
             if (newProduct) {
                 await Colors.createProductColor(color, stock, newProduct.id);
                 await Images.newProductImage(imageHold, images, newProduct.id)
-                return this.detail(newProduct.id)
+                return await this.detail(newProduct.id)
             } else {
                 throw new Error('error al crear producto')
             }

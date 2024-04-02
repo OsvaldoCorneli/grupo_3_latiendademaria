@@ -1,5 +1,16 @@
 
+i.colorIcon {
+    border-radius:50%;
+    width:20px;
+    height:20px;
+    border: solid 1px black;
+    padding-inline: 10px;
+}
 
+.errors {
+    font-weight: 400;
+    color: red
+}
 .number {
     font-family: 'Dejavu-Sans';
     text-align: right;
@@ -47,6 +58,8 @@ a.logoa{
 }
 nav {
     height: fit-content;
+    background-color: #b6e5db;
+    padding-top: 20px;
 }
 
 nav ul {
@@ -57,9 +70,9 @@ nav ul {
     text-align: center;
 }
 .loginNavbar {
+    display: none;
     min-width: 20%;
     max-width: 30%;
-    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -94,13 +107,31 @@ nav ul {
     min-width: 70px;
     width: 12vw;
     font-size: 1rem;
-    background-color: #1259c3;
+    background-color: #26775b;
     color: white;
     border-radius: 5px;
     padding: 3px;
     transition-duration: 500ms;
     
 }
+
+.fa-user {
+    color: #26775b;
+
+}
+
+.fa-user:hover{
+    color: #2f9b75
+}
+
+.fa-cart-shopping{
+    color: #26775b;
+}
+
+.fa-cart-shopping:hover{
+    color: #2f9b75
+}
+
 .loginNavbar button a {
     text-decoration:none;
     color: white;
@@ -108,7 +139,7 @@ nav ul {
     
 }
 .loginNavbar button:hover {
-    background-color: #5394b0;
+    background-color: #2f9b75;
 }
 
 .site {
@@ -136,7 +167,7 @@ img.perfil {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-color: #1259c3;
+    background-color: #32A97F;
     font-size: 110px;
     color: white;
     font-weight: bold;
@@ -146,6 +177,10 @@ input[type='number'] {
     text-align: right;
 }
 
+fieldset {
+    border-radius: 5px;
+    border: solid 1px black;
+}
 
 @media (min-width: 760px) {
     *{
@@ -153,16 +188,12 @@ input[type='number'] {
     }
 
 
-    body{
-        padding-top: 7px;
-      }
-
       /* .loginNavbar button {
         max-width: 80px;
         margin-right: 0;
       } */
       .loginNavbar {
-        min-width: 15%;
+        min-width: 11.5%;
         max-width: 30%;
         display: flex;
         flex-direction: column;
@@ -171,6 +202,12 @@ input[type='number'] {
         gap: 5px;
         height: 70px;
     }
+    .loginNavbar button{
+        width: 60%;
+        min-width: 55%;
+        max-width: 65%;
+    }
+
 
     .site{
         margin: 0;  
@@ -185,6 +222,8 @@ input[type='number'] {
         display: block;
         padding-top: 10px;
         height: 100%;
+        padding-left: 2%;
+        margin-right: 4%;
     }
     .logoa {
         width: 70%
@@ -231,21 +270,22 @@ input[type='number'] {
     .burger-menu {
     display: none;
 }
-    
+
 }
 
-@media (min-width: 1368px) {
+@media (min-width: 1680px) {
 
 
     body{
         position: absolute;
-        left: calc((100% - 1368px) / 2);
-        right: calc((100% - 1368px) / 2);
-        padding-top: 25px;
+        left: calc((100% - 1680px) / 2);
+        right: calc((100% - 1680px) / 2);
+        padding-top: 5px;
+        padding-bottom: 25px;
         align-content: center;
-        width: 1368px;
+        width: 1680px;
     }
-
+    
     .loginNavbar > span{
         width: 80%
       }
@@ -290,4 +330,17 @@ input[type='number'] {
     .burger-menu {
         display: none;
     }
+
+    img.logo {
+        padding-top: 10px;
+        height: 100%;
+        padding-left: 5%;
+        margin-right: 8%;
+    }
+
+    .loginNavbar {
+        min-width: 15%;
+        max-width: 30%;
+    }
+
 }
