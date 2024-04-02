@@ -80,6 +80,7 @@
                     />
                 </div>
                 <div class="inputform">
+                    <span id="errorLocalidad">Mensaje de error</span>
                     <label for="localidad">Localidad:</label>
                     <input class="requiredinput"
                         id="localidad" 
@@ -88,6 +89,7 @@
                         placeholder="buscar localidad..." 
                         value="<%= body?.localidad? body.localidad : "" %>"
                     />
+                    <span id="errorLocalidad">Mensaje de error</span>
                     <% if (locals.errors && errors.localidades) { %>
                         <span class="errors"><%= errors.localidades.msg %></span>
                     <% } %>
@@ -279,7 +281,6 @@
 <%- include('../partials/footer.ejs') %>
 
     <script src="\scripts\register.js"></script>
-    <script src="\scripts\georef.js"></script>
 
 </body>
 </html>

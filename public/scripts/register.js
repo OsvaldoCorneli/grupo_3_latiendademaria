@@ -21,7 +21,6 @@ window.addEventListener("load", async function(){
     let repassword = document.querySelector('#repassword')
     let codigoPostal = document.querySelector("#codigoPostal")
     
-    let errorLocalidad;
     const errorNombre = document.querySelector("#errorNombre")
     const errorApellido = document.querySelector("#errorApellido")
     const errorEmail = document.querySelector("#errorEmail")
@@ -33,8 +32,10 @@ window.addEventListener("load", async function(){
     const errorCodigoPostal = document.querySelector("#errorCodigoPostal")
     const errorStreetNumber = document.querySelector("#errorNumero")
     const requiredinput = document.querySelectorAll(".requiredinput")
-    const formulario = document.querySelector("#formulario")
+    const formulario = document.querySelector("form#formulario")
     const errorProvincia = this.document.querySelector("#errorProvincia")
+    let errorLocalidad = document.querySelector("#errorLocalidad")
+    
     const mensaje = 'Este campo debe estar completo'
 
     submitButton.addEventListener("click", function(e){
@@ -66,10 +67,10 @@ window.addEventListener("load", async function(){
         if(repassword.value.length < 1){
             errors.repassword = mensaje
         }
-        if(provincias.style.border == '2px solid red'){
+        if(provincias.value.length == 0 || provincias.style.border == '2px solid red'){
            errors.provincia = mensaje
         }
-        if(localidad && localidad.style.border == '2px solid red'){
+        if (localidad.value.length == 0 || localidad.style.border == '2px solid red'){
            
            errors.localidad = mensaje
         }
@@ -133,16 +134,24 @@ window.addEventListener("load", async function(){
             default:
             break
 
-                     }     
-                 }
-              }
-        else{
-               
-               if(validacionCompleta()){
-                formulario.submit()
-               }
-               
-        }
+                    }     
+                }
+            }
+        else {
+            // if(validacionCompleta()){
+                const promises = [
+                    new Promise(resolve => resolve(validateForm(localidad.name))),
+                    new Promise(resolve => resolve(validateForm(provincias.name)))
+                ]
+                Promise.all(promises).then(() => {
+                    if (Object.keys(errores).length > 0) {
+                        alert(`corregir los errores del formulario en ${Object.keys(errores).join(', ')}`)
+                    } else {
+                        formulario.submit()
+                    }
+                })
+            }
+        //}
 
     })
     
@@ -440,7 +449,7 @@ window.addEventListener("load", async function(){
 
             let elemento = element.id 
               elemento = document.querySelector(`#${elemento}`)
-
+            console.log(elemento)
             if(!elemento.checkValidity()){
                 validaciones = false
             }
@@ -457,9 +466,8 @@ window.addEventListener("load", async function(){
 
     const form = document.querySelector('form#formulario')
 
-    if (!form.localidad.value) {
-        form.localidad.disabled = true
-    }
+    if (!form.localidad.value) form.localidad.disabled = true
+    if (form.provincia.value) form.localidad.disabled = false
     
     let errores = {}
     async function validateForm(input) {
@@ -472,7 +480,7 @@ window.addEventListener("load", async function(){
             }
             switch(input) {
                 case 'provincia':
-                    if (!provincia.value) {
+                    if (provincia.value.length == 0) {
                         errores.provincia = 'ingresar provincia'
                         break}
                     const {provincias} = await fetchProvincia(provincia.value)
@@ -480,7 +488,7 @@ window.addEventListener("load", async function(){
                     break
                 case 'localidad':
                     if (errores.provincia) break
-                    if (!localidad.value) {
+                    if (localidad.value.length == 0) {
                         errores.localidad = 'ingresar localidad'
                         break
                     }

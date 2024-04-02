@@ -201,11 +201,10 @@ fechaNacimiento.addEventListener("change", function(e){
 });
 
 
-const form = document.querySelector('form#formulario')
+    const form = document.querySelector('form#formulario')
 
-    if (!form.localidad.value) {
-        form.localidad.disabled = true
-    }
+    if (!form.localidad.value) form.localidad.disabled = true
+    if (form.provincia.value) form.localidad.disabled = false
     
     let errores = {}
     async function validateForm(input) {
