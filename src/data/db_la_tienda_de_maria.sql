@@ -46,6 +46,7 @@ create table payments(
     status enum('cancelado', 'completado','enproceso', 'rechazado') not null default('enproceso'),
     created_at datetime not null default current_timestamp,
     updated_at datetime default current_timestamp,
+    deliver boolean default(false),
     foreign key(user_id) references users(id)
 );
 
