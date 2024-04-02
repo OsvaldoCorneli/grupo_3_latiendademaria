@@ -24,10 +24,6 @@ imagen: false
 };
 
 //ELEMENTOS
-let provincias = document.querySelector('select[name="provincia"]');
-//let selectedLocalidad = /*provincias.selectedOptions[0].innerText*/
-//let previous = document.querySelector('label#'+selectedLocalidad.split(" ").join(""))
-const currentlocalidad = document.querySelector('input#localidad') /*document.querySelector(`select[id="${selectedLocalidad}"]`);*/
 let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 let email = document.querySelector("#email")
 let nombre = document.querySelector("#nombre")
@@ -37,7 +33,6 @@ const iconoCheck = document.getElementById('iconoCheck');
 const fechaNacimiento = document.querySelector('#fechaNacimiento')
 let streetnumber = document.querySelector("#calleNumero")
 let codigoPostal = document.querySelector("#codigoPostal")
-let localidad;
 const street = document.querySelector("#street")
 const piso = document.querySelector("#buildingfloor")
 const departamento = document.querySelector("#departamento")
@@ -78,10 +73,12 @@ submitButton.addEventListener('click', function(e) {
         if(switchInput[elemento] == true){
             cambio = true
         }
-    }
+     }
         if(cambio == false){
         window.history.back()}
-        else{
+        else if (Object.keys(errores).length > 0) {
+            alert(`corregir los errores del formulario de ${Object.keys(errores).join(', ')}`)
+        } else {
             formulario.submit()
         }
     
@@ -203,57 +200,179 @@ fechaNacimiento.addEventListener("change", function(e){
     
 });
 
-// provincias.addEventListener('change', function(e) {
-//     previous? previous.style = "display:none;" : null;
-//     let prov = provincias.selectedOptions[0].innerText
-//     let selected = 'label#'+prov.split(" ").join("")
-//     previous = document.querySelector(selected)
-//     previous.style = "display:block;"
+
+const form = document.querySelector('form#formulario')
+
+    if (!form.localidad.value) {
+        form.localidad.disabled = true
+    }
     
-//     if(e.target.value == usuarioFind.provincia){
-//         switchInput.provincias = false
-//     }else{
-//         switchInput.provincias = true;
-//     }
-
-    // localidad = document.querySelector(`select[id="${e.target.value}"]`);
-    // localidadOption = localidad.selectedOptions[0].textContent;
-    // errorLocalidad = document.querySelector("#errorLocalidad")
-
-    // if(localidadOption == "- seleccionar -"){
-    //     localidad.style.border = '2px solid red'
-    //     errorLocalidad.style.display = "block"
-    //     errorLocalidad.textContent = "Seleccione una localidad"
-    // }
-
-//         localidad.addEventListener("change", function(e){
-
-//             if(usuarioFind.localidad == e.target.value){
-//                 switchInput.localidad = false
-//             }else{
-//                  switchInput.localidad = true;
-//             }
-            
-//             if(e.target.value == "- seleccionar -"){
-//                 localidad.style.border = '2px solid red' 
-//                 errorLocalidad.style.display = "block"
-//             }else{  
-//                 localidad.style.border = '2px solid green' 
-//                 errorLocalidad.style.display = "none"
-//                     }
-//             })
+    let errores = {}
+    async function validateForm(input) {
+        try {
+            const {provincia, localidad} = document.querySelector('form#formulario')
+            if (document.querySelector(`small#${input}`)) {
+                document.querySelector(`small#${input}`).remove()
+                document.querySelector(`input[name=${input}]`).style.border = 'none'
+                delete errores[input]
+            }
+            if(form[input].value == usuarioFind[input]){
+                switchInput[input] = false
+            } else {
+                switchInput[input] = true;
+            }
+            switch(input) {
+                case 'provincia':
+                    if (!provincia.value) {
+                        errores.provincia = 'ingresar provincia'
+                        break}
+                    const {provincias} = await fetchProvincia(provincia.value)
+                    if (provincias[0].nombre !== provincia.value) errores.provincia = 'la provincia ingresada no existe'
+                    break
+                case 'localidad':
+                    if (errores.provincia) break
+                    if (!localidad.value) {
+                        errores.localidad = 'ingresar localidad'
+                        break
+                    }
+                    const {localidades} = await fetchLocalidad(provincia.value, localidad.value)
+                    if (!localidades.some(({nombre})=> nombre == localidad.value)) errores.localidad = 'seleccionar una localidad valida'
+                    break
+                default:
+                    break
+            }
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
     
-// })
-
-// currentlocalidad.addEventListener("change", function(e){
+    form.provincia.oninput = async (e) => {
+        if (e.target.value.length > 3) {
+        try {
+            form.localidad.disabled = true
+            form.localidad.value = ""
+            if (document.querySelector(`small#${e.target.name}`)) {
+                document.querySelector(`small#${e.target.name}`).remove()
+                e.target.style.border = 'none'
+            }
+            const data = await fetchProvincia(e.target.value)
+            const {cantidad, provincias} = data
     
-//     if(e.target.value == usuarioFind.localidad){
-//         switchInput.localidad = false
-//     }else{
-//         switchInput.localidad = true;
-//     }
+            const selectProvincia = document.createElement('select')
+            selectProvincia.name = "idProvincia"
+            selectProvincia.multiple = true
+            selectProvincia.style.backgroundColor = '#B6E5DB'
+            provincias.forEach((prov) => {
+                const option = document.createElement('option')
+                option.value = prov.id
+                option.innerText = prov.nombre
+                selectProvincia.appendChild(option)
+            })
+            selectProvincia.onchange = (s) => {
+                let nombreProvincia = provincias.find(({id})=> id == s.target.value).nombre
+                form.provincia.value = nombreProvincia
+                form.localidad.disabled = false
+                form.provincia.focus()
+                form.provincia.blur()
+                s.target.remove()
+            }
+            e.target.parentNode.appendChild(selectProvincia)
+            selectProvincia.focus()
+            selectProvincia.onblur = (s) => {
+                s.target.remove()
+            }
+        } catch (error) {
+            let errorhtml = `<small id="${e.target.name}" class="errors">Hubo un error al procesar la peticion</small>`
+            e.target.parentNode.insertAdjacentHTML('beforebegin', errorhtml)
+        }
+    }
+    }
+    
+    form.provincia.onblur = (e) => {
+        validateForm(form.provincia.name)
+        .then(() => {
+            if (errores[form.provincia.name]) {
+                e.target.style.border = '2px solid red'
+                let errorhtml = `<small id="${e.target.name}" class="errors">${errores[e.target.name]}</small>`
+                e.target.parentNode.insertAdjacentHTML('beforebegin', errorhtml)
+            }
+        })
+    }
+    
+    form.localidad.oninput = async (e) => {
+        if (e.target.value.length > 3) {
+        try {
+            if (document.querySelector(`small#${e.target.name}`)) {
+                document.querySelector(`small#${e.target.name}`).remove()
+                e.target.style.border = 'none'
+            }
+            const {provincias} = await fetchProvincia(form.provincia.value)
+            const id = provincias[0]?.id
+    
+            const {localidades} = await fetchLocalidad(id,form.localidad.value)
+    
+            const selectLocalidad = document.createElement('select')
+            selectLocalidad.name = "idLocalidad"
+            selectLocalidad.multiple = true
+            selectLocalidad.style.backgroundColor = '#B6E5DB'
+            localidades.forEach((loc) => {
+                const option = document.createElement('option')
+                option.value = loc.id
+                option.innerText = loc.nombre
+                selectLocalidad.appendChild(option)
+            })
+            selectLocalidad.onchange = (s) => {
+                let nombreLocalidad = localidades.find(({id})=> id == s.target.value).nombre
+                form.localidad.value = nombreLocalidad
+                form.localidad.focus()
+                form.localidad.blur()
+                s.target.remove()
+            }
+            e.target.parentNode.appendChild(selectLocalidad)
+            selectLocalidad.focus()
+            selectLocalidad.onblur = (s) => {
+                s.target.remove()
+            }
+        } catch (error) {
+            let errorhtml = `<small id="${e.target.name}" class="errors">Hubo un error al procesar la peticion</small>`
+            e.target.parentNode.insertAdjacentHTML('beforebegin', errorhtml)
+        }
+    }
+    }
+    
+    form.localidad.onblur = (e) => {
+        validateForm(form.localidad.name).then(()=> {
+            if (errores[form.localidad.name]) {
+                e.target.style.border = '2px solid red'
+                let errorhtml = `<small id="${e.target.name}" class="errors">${errores[e.target.name]}</small>`
+                e.target.parentNode.insertAdjacentHTML('beforebegin', errorhtml)
+            }
+        })
+    }
+    
+    async function fetchLocalidad(provincia,nombre) {
+        try {
+            //prop provincia es un numero de id
+            //prop nombre es el nombre de la localidad
+            const response = await fetch(`https://apis.datos.gob.ar/georef/api/localidades?provincia=${provincia}&campos=id,nombre&nombre=${nombre}`)
+            const data = await response.json()
+            return data
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+    
+    async function fetchProvincia(nombre) {
+        try {
+            //prop nombre es el nombre de la provincia
+            const response = await fetch(`https://apis.datos.gob.ar/georef/api/provincias?nombre=${nombre}`)
+            const data = await response.json()
+            return data
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
 
-// })
     
 codigoPostal.addEventListener("input", function (e) {
   
@@ -293,7 +412,6 @@ streetnumber.addEventListener("input", function (e) {
     }else{
         switchInput.streetnumber = true;
     }
-
 });
 
 email.addEventListener("input", function(e){

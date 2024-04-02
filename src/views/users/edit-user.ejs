@@ -67,14 +67,26 @@
                 </div>
                 <div class="inputform">
                     <label for="provincia">Provincia:</label>
-                    <input id="provincia" type="search" name="provincia" placeholder="buscar provincia por nombre..." value="<%= body.provincia? body.provincia : provincia %>"/>
+                    <input class="requiredinput" 
+                        id="provincia" 
+                        type="search" 
+                        name="provincia" 
+                        placeholder="buscar provincia por nombre..." 
+                        value="<%= body.provincia? body.provincia : provincia %>"
+                    />
                     <% if (locals.errors && errors.provincia) { %>
                         <p class="errors"><%= errors.provincia.msg %></p>
                     <% } %>
                 </div>
                 <div class="inputform">
                     <label for="localidad">Localidad:</label>
-                    <input id="localidad" type="search" name="localidad" placeholder="buscar localidad..." value="<%= body.localidad? body.localidad : localidad %>"/>
+                    <input class="requiredinput" 
+                        id="localidad" 
+                        type="search" 
+                        name="localidad" 
+                        placeholder="buscar localidad..." 
+                        value="<%= body.localidad? body.localidad : localidad %>"
+                    />
                 <% if (locals.errors && errors.localidad) { %>
                     <p class="errors"><%= errors.localidad.msg %></p>
                 <% } %>
@@ -204,8 +216,8 @@
         </form>
         </article>
     </div>
-    <!-- <script src="\scripts\editUser.js"></script> -->
-    <script src="\scripts\georef.js"></script>
+    <script src="\scripts\editUser.js"></script>
+    <!-- <script src="\scripts\georef.js"></script>  -->
     </main>
     <%- include('../partials/footer.ejs') %>
     

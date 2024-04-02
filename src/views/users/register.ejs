@@ -71,11 +71,23 @@
                     <% } %>
                     <label for="provincia">Provincia:</label>
                     <span id="errorProvincia">Mensaje de error</span>
-                    <input id="provincia" type="search" name="provincia" placeholder="buscar provincia por nombre" value="<%= body?.provincia? body.provincia : "" %>"/>
+                    <input class="requiredinput" 
+                        id="provincia" 
+                        type="search" 
+                        name="provincia" 
+                        placeholder="buscar provincia por nombre" 
+                        value="<%= body?.provincia? body.provincia : "" %>"
+                    />
                 </div>
                 <div class="inputform">
                     <label for="localidad">Localidad:</label>
-                    <input id="localidad" type="search" name="localidad" placeholder="buscar localidad..." value="<%= body?.localidad? body.localidad : "" %>"/>
+                    <input class="requiredinput"
+                        id="localidad" 
+                        type="search" 
+                        name="localidad" 
+                        placeholder="buscar localidad..." 
+                        value="<%= body?.localidad? body.localidad : "" %>"
+                    />
                     <% if (locals.errors && errors.localidades) { %>
                         <span class="errors"><%= errors.localidades.msg %></span>
                     <% } %>
