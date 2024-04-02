@@ -6,6 +6,8 @@
 body {
     margin-bottom: 4.5vh;
 }
+
+
 .carousel {
     position: relative;
     box-sizing: border-box;
@@ -221,6 +223,7 @@ input[type=number]::-webkit-outer-spin-button {
     display: none
 }
 
+
 @media (width >= 760px){
     main{
         width: 100%;
@@ -269,7 +272,6 @@ input[type=number]::-webkit-outer-spin-button {
     .coloresinput{
         margin: 0 1.5% 0 1.5%;
     }
-    
 }
 
 @media (min-width: 1200px) {

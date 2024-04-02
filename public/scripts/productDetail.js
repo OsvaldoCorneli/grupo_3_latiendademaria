@@ -14,6 +14,7 @@ window.onload = () => {
 
     checked.forEach(element =>{
     element.addEventListener("input", (e)=>{
+     
         const mensajeCart = document.querySelector("#MensajeCart")
         const stockValue = document.querySelector(`#${e.target.id}-stock`).textContent.split(": ")
         const stockValueNumber = stockValue[1]
@@ -111,6 +112,8 @@ window.onload = () => {
 
 }
 
+
+
 async function fetchData(endpoint, body) {
     try {
         const response = await fetch(`http://${host}${endpoint}`,{
@@ -130,10 +133,22 @@ async function fetchData(endpoint, body) {
 
 
 function redireccionarAlogin(){
-    const response = confirm("Debe iniciar sesion para agregar el producto al carrito")
-    if(response){
-       window.location.href = "/users/login"
-    } 
+
+    const body = document.querySelector("body")
+    const popup = document.createElement('span');
+    popup.classList.add('popupscreen');
+    popup.innerHTML = `
+    <div class="popUps" id="popUpDetailLogin">
+    <h3>Es necesario iniciar sesión para añadir productos al carrito.</h3>
+    <div class="botonPopup">
+        <a onclick="popUpoOff()">Aceptar</a>
+        <a href='/users/login'>Login</a>
+        <a href='/users/register'>Regístrate</a>
+    </div>  
+</div>
+    `;
+    body.appendChild(popup);
+
 }
 
 function addCart(id) {
@@ -174,13 +189,36 @@ fetch(`/users/cart/${id}`, {
     document.querySelector("#MensajeCart").style.color = "green"
     }
     else{
-    document.querySelector("#MensajeCart").textContent = respuesta.message
-    document.querySelector("#MensajeCart").style.display = "block"
-    document.querySelector("#MensajeCart").style.color = "red"
+    const body = document.querySelector("body")
+    const popup = document.createElement("span")
+    popup.classList.add("popupscreen")
+    popup.innerHTML = `
+    <div class="popUps" id="popUpProductoEnCart">
+    <h3>${respuesta.message}</h3>
+    <div class="botonPopup">
+        <a onclick="popUpoOff()">Aceptar</a>
+    </div>
+</div>`
+
+
+    body.appendChild(popup)
+    
+    
     }
 })
 .catch(error => {
     console.error('Error al agregar el producto:', error);
 });
 }
+
+
+}
+
+
+function popUpoOff(){
+    
+    const elementosPopup = document.querySelector('.popupscreen');
+    const body = document.querySelector("body")
+    body.removeChild(elementosPopup);
+    
 }
