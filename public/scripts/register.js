@@ -20,7 +20,7 @@ window.addEventListener("load", async function(){
     let password = document.querySelector('#password')
     let repassword = document.querySelector('#repassword')
     let codigoPostal = document.querySelector("#codigoPostal")
-    
+
     const errorNombre = document.querySelector("#errorNombre")
     const errorApellido = document.querySelector("#errorApellido")
     const errorEmail = document.querySelector("#errorEmail")
@@ -481,19 +481,36 @@ window.addEventListener("load", async function(){
             switch(input) {
                 case 'provincia':
                     if (provincia.value.length == 0) {
-                        errores.provincia = 'ingresar provincia'
+                        errorProvincia.innerText = 'Debe ingresar una provincia'
+                        errorProvincia.style.display = "block"
                         break}
                     const {provincias} = await fetchProvincia(provincia.value)
-                    if (provincias[0].nombre !== provincia.value) errores.provincia = 'la provincia ingresada no existe'
+                    if (provincias[0].nombre !== provincia.value) {
+                        errorProvincia.innerText = 'La provincia ingresada no existe'
+                        errorProvincia.style.display = "block"
+                    }else{
+                        errorProvincia.style.display = "none"
+                        provincia.style.border = "green"
+                    }
                     break
                 case 'localidad':
                     if (errores.provincia) break
                     if (localidad.value.length == 0) {
-                        errores.localidad = 'ingresar localidad'
+                        errorLocalidad.innerText = 'Debe ingresar una localidad'
+                        localidad.style.border = '2px solid red'
+                        errorLocalidad.style.display = "block"
                         break
                     }
                     const {localidades} = await fetchLocalidad(provincia.value, localidad.value)
-                    if (!localidades.some(({nombre})=> nombre == localidad.value)) errores.localidad = 'seleccionar una localidad valida'
+                    if (!localidades.some(({nombre})=> nombre == localidad.value)){ 
+                        errorLocalidad.innerText = 'Seleccionar una localidad valida'
+                        localidad.style.border = '2px solid red'
+                        errorLocalidad.style.display = "block"
+                    }
+                    else{
+                        errorLocalidad.style.display = "none";
+                        localidad.style.border = "green"
+                    }
                     break
                 default:
                     break
