@@ -66,6 +66,7 @@ menu.addEventListener("click", ()=>{
     `  
     burgermenu.appendChild(menudiv)
     body.appendChild(burgermenu)
+    body.style.overflow = 'hidden';
 })
 
 function cerrarmenu(){
@@ -73,5 +74,5 @@ function cerrarmenu(){
     const menu = document.querySelector(".burgermenu")
 
     body.removeChild(menu)
-
+    body.style.overflow = '';
 }
