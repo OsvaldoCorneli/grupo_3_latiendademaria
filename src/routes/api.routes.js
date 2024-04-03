@@ -8,7 +8,9 @@ const validateForm = require('../middlewares/validacionForm.js')
 
 router.get('/products', api.products.list);
 router.get('/products/:id', api.products.detail);
-router.get('/users', forRegister, api.users.all);
+router.get('/users', isAdmin, api.users.all);
+router.get('/usersregistro', forRegister, api.users.allregistro);
+router.get('/users/:id', isAdmin, api.users.byid);
 router.get('/payment', isLogged, api.payments.all);
 router.post('/payment', isLogged, api.payments.new);
 router.put('/payment', isAdmin, api.payments.update);

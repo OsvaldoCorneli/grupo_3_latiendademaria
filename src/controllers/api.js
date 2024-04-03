@@ -121,11 +121,27 @@ module.exports = {
     users: {
         all: async function(req, res){
             try {
-                const users = await User.index()
-                if(!users) throw new Error ("no hay usuario")
-                res.status(200).json(users)
+                let userArray = [];
+                
+                const users = await User.index();
+                if(!users) throw new Error ("no hay usuario");
+                for (let user in users){
+                    let usersobj = {
+                        id: users[user].id,
+                        name: users[user].nombre,
+                        email: users[user].email,
+                        detail: `http://${process.env.DB_HOST}:${process.env.API_PORT}/api/users/${users[user].id}`
+                    }; 
+    
+                    userArray.push(usersobj);
+                }
+                const usersApi = {
+                    count: users.length,
+                    users: userArray
+                };
+                res.status(200).json(usersApi);
             } catch (error) {
-                res.status(500).json(error.message)
+                res.status(500).json(error.message);
             }
         },
         login: async function (req,res) {
@@ -149,6 +165,28 @@ module.exports = {
                 } 
             } catch (error) {
                 res.status(500).json(error.message)
+            }
+        },
+        byid: async function(req,res){
+            try {
+                const {id} = req.params
+                const user = await User.findOneUser(id)
+                if(user){
+                    res.status(200).json(user)
+                }
+
+
+            } catch (error) {
+                res.status(500).json(error.message)
+            }
+        },
+        allregistro: async function(req,res){
+            try {
+                const users = await User.forRegistro();
+                if(!users) throw new Error ("no hay usuario");
+                res.status(200).json(users);
+            } catch (error) {
+                res.status(500).json(error.message);
             }
         }
     }

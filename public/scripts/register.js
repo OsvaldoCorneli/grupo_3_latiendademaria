@@ -1,467 +1,428 @@
 window.addEventListener("load", async function(){
-
-    let usuarios = await fetch("http://localhost:3001/api/users?key=allUsers")
+let usuarios = await fetch("http://localhost:3001/api/usersregistro?key=allUsers")
     .then(response => response.json())
     .then(data => data)
-    const day = currentDay()
-    let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    let regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    let provincias = document.querySelector('input[name="provincia"]');
-    let localidad = document.querySelector(`input[name="localidad"]`);
-    let submitButton = document.querySelector('input[type="submit"]')
-    let email = document.querySelector("#email")
-    let userName = document.querySelector("#userName")
-    let nombre = document.querySelector("#nombre")
-    let apellido = document.querySelector("#apellido")
-    let inputImagen = document.querySelector("#imageinput")
-    let streetnumber = document.querySelector("#streetnumber")
-    const iconoCheck = document.getElementById('iconoCheck');
-    const fechaNacimiento = document.getElementById('fechaNacimiento')
-    let password = document.querySelector('#password')
-    let repassword = document.querySelector('#repassword')
-    let codigoPostal = document.querySelector("#codigoPostal")
+const day = currentDay()
+let submitButton = document.querySelector('input[type="submit"]')
+const requiredinput = document.querySelectorAll(".requiredinput")
+let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+let regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+const mensaje = 'Este campo debe estar completo'
+const streetnumber = document.querySelector("#streetnumber")
+const errorStreetNumber = document.querySelector("#errorNumero")
+const codigoPostal = document.querySelector("#codigoPostal")
+const errorCodigoPostal = document.querySelector("#errorCodigoPostal")
+
+let withOutErrors = {
+    nombre: false,
+    apellido: false,
+    nacimiento: false,
+    codigoPostal: true,
+    calle: true,
+    numeroCalle: true,
+    imagen: false,
+    piso: true,
+    departamento: true,
+    email: false,
+    userName: false,
+    pass: false,
+    repass: false,
+    provincia: false,
+    localidad: false
+}
+
+
+submitButton.addEventListener("click", (e)=>{
+    e.preventDefault()
     
-    const errorNombre = document.querySelector("#errorNombre")
-    const errorApellido = document.querySelector("#errorApellido")
-    const errorEmail = document.querySelector("#errorEmail")
-    const errorUserName = document.querySelector("#errorUserName")
-    const errorPassword = document.querySelector("#errorPassword")
-    const errorRepetirPassword = document.querySelector("#errorRepetirPassword")
-    const errorImagen = document.querySelector("#errorImagen")
-    const errorFechaNacimiento = document.querySelector("#errorFechaNacimiento")
-    const errorCodigoPostal = document.querySelector("#errorCodigoPostal")
-    const errorStreetNumber = document.querySelector("#errorNumero")
-    const requiredinput = document.querySelectorAll(".requiredinput")
-    const formulario = document.querySelector("form#formulario")
-    const errorProvincia = this.document.querySelector("#errorProvincia")
-    let errorLocalidad = document.querySelector("#errorLocalidad")
+    const requiredinputForm = document.querySelectorAll(".requiredinput")
     
-    const mensaje = 'Este campo debe estar completo'
+    requiredinputForm.forEach((elemento)=>{
 
-    submitButton.addEventListener("click", function(e){
-        let errors = {}
+        if(elemento.value.length < 1){
+            const error = document.querySelector(`#error-${elemento.name}`)
+            error.style.display = "block"
+            error.textContent = mensaje
+            elemento.style.border = "2px solid red"
+         }
 
-        e.preventDefault()
-
-        if(nombre.value.length < 1){
-            errors.nombre = mensaje
-        }
-        if(apellido.value.length < 1){
-            errors.apellido = mensaje
-        }
-        if(fechaNacimiento.value.length < 1){
-            errors.fechaNacimiento = mensaje
-        }
-        if(inputImagen.value.length < 1){
-            errors.inputImagen = mensaje
-        }
-        if(email.value.length < 1){
-            errors.email = mensaje
-        }
-        if(userName.value.length < 1){
-            errors.userName = mensaje
-        }
-        if(password.value.length < 1){
-            errors.password = mensaje
-        }
-        if(repassword.value.length < 1){
-            errors.repassword = mensaje
-        }
-        if(provincias.value.length == 0 || provincias.style.border == '2px solid red'){
-           errors.provincia = mensaje
-        }
-        if (localidad.value.length == 0 || localidad.style.border == '2px solid red'){
+        if(elemento.name == "provincia"){
+    
+            if(elemento.style.border === "2px solid green"){
+                    withOutErrors.provincia = true;
+             }else{
+                  
+                    withOutErrors.provincia = false;
+             }
+        }else if(elemento.name == "localidad"){
            
-           errors.localidad = mensaje
+            if(elemento.style.border === "2px solid green"){
+               
+                    withOutErrors.localidad = true;
+             }else{
+               
+                    withOutErrors.localidad = false;
+             }
         }
 
         
-        if(Object.keys(errors).length > 0){
-         
-            for(objeto in errors){
+    })
+    
+    let submitform = true
+    let contador = 0
+    for(let error in withOutErrors){
+        if(!withOutErrors[error]){
+            contador++;
+            submitform = false
+        }
 
-           switch(objeto) {
+    }
+   if(submitform){
+    console.log("ingresa")
+    const body = document.querySelector("body")
+    const popup = document.createElement('span');
+    popup.classList.add('popupscreenregistro');
+    popup.innerHTML = `
+    <div class="popUpsregistro">
+            <h2>Verificación de Registro</h2>
+            <p>Por favor, revise sus detalles antes de continuar.</p>
+            <h3>¿Desea modificar algo?</h3>
+            
+            <div class="botonPopup">
+                <a onClick="popUpOff()">Modificar </a>
+                <a onClick="registrar()">Registrarse</a>
+            </div>  
+            
+                ¡Gracias por su atención!</p>
+        </div>
+    `;
+    body.appendChild(popup);
+    
+   }
+})
+
+codigoPostal.addEventListener("input", function (e) {
+    if (isNaN(parseInt(e.target.value))) {
+        codigoPostal.style.border = '2px solid red';
+        errorCodigoPostal.textContent = 'Tiene que ingresar solo números';
+        errorCodigoPostal.style.display = 'block';
+        withOutErrors.codigoPostal = false;
+    } else {
+        codigoPostal.value = e.target.value === "" ? 0 : parseInt(e.target.value);
+        codigoPostal.style.border = '2px solid green';
+        errorCodigoPostal.style.display = 'none';
+        withOutErrors.codigoPostal = true;
+    }
+});
+
+streetnumber.addEventListener("input", function (e) {
+    if (isNaN(parseInt(e.target.value))) {
+        streetnumber.style.border = '2px solid red';
+        errorStreetNumber.textContent = 'Tiene que ingresar solo números';
+        errorStreetNumber.style.display = 'block';
+        withOutErrors.numeroCalle = false;
+    } else {
+        streetnumber.value = e.target.value === "" ? 0 : parseInt(e.target.value);
+        streetnumber.style.border = '2px solid green';
+        errorStreetNumber.style.display = 'none';
+        withOutErrors.numeroCalle = true;
+    }
+});
+
+
+requiredinput.forEach((element)=>{
+
+element.addEventListener("input", (e)=>{
+
+    const error = document.querySelector(`#error-${element.name}`)
+    
+    switch(element.name) {
             case "nombre":
-                nombre.style.border = '2px solid red'
-                errorNombre.textContent = errors[objeto]
-                errorNombre.style.display = 'block'
-                break
+                if(e.target.value === ""){
+                    element.style.border = '2px solid red'
+                    error.textContent = mensaje
+                    error.style.display = 'block'
+                    withOutErrors.nombre = false;
+                }
+                else if(e.target.value.length === 1){
+                    element.style.border = '2px solid red'
+                    error.textContent = "El nombre debe tener al menos 2 caracteres"
+                    error.style.display = 'block'
+                    withOutErrors.nombre = false;
+                   
+                }else{
+                    element.style.border = '2px solid green'
+                    error.style.display = 'none'
+                    withOutErrors.nombre = true;
+                }
+            break
             case "apellido":
-                apellido.style.border = '2px solid red'
-                errorApellido.textContent = errors[objeto]
-                errorApellido.style.display = 'block'
-                break
+                if(e.target.value === ""){
+                    element.style.border = '2px solid red'
+                    error.textContent = mensaje
+                    error.style.display = 'block'
+                    withOutErrors.apellido = false;
+                }
+                else if(e.target.value.length === 1){
+                    element.style.border = '2px solid red'
+                    error.textContent = "El apellido debe tener al menos 2 caracteres"
+                    error.style.display = 'block'
+                    withOutErrors.apellido = false;
+        
+                }else{
+                    element.style.border = '2px solid green'
+                    error.style.display = 'none'
+                    withOutErrors.apellido = true;
+                }
+         
+            break
             case "fechaNacimiento":
-                fechaNacimiento.style.border = '2px solid red'
-                errorFechaNacimiento.textContent = errors[objeto]
-                errorFechaNacimiento.style.display = 'block'
-                break
-            case "inputImagen":
-                errorImagen.textContent = "Debe seleccionar una imagen de perfil"
-                errorImagen.style.display = 'block'
-                break
+                if(e.target.value === ""){
+                    element.style.border = '2px solid red'
+                    error.textContent = mensaje;
+                    error.style.display = 'block'
+                    withOutErrors.nacimiento = false;
+                   
+                }
+                else if(fechaFutura(day,e.target.value)){
+                    element.style.border = '2px solid red'
+                    error.textContent = 'No puede seleccionar una fecha en el futuro'
+                    error.style.display = 'block'
+                    withOutErrors.nacimiento = false;
+                }
+                else if(mayorEdad(day,e.target.value)){
+                    element.style.border = '2px solid red'
+                    error.textContent = 'Debes tener o ser mayor de 16 años'
+                    error.style.display = 'block'
+                    withOutErrors.nacimiento = false;
+                }
+                else if(aniospasado(day, e.target.value)){
+                    element.style.border = '2px solid red'
+                    error.textContent = 'No puede seleccionar un año tan en el pasado'
+                    error.style.display = 'block'
+                    withOutErrors.nacimiento = false;
+                }
+                else{
+                    element.style.border = '2px solid green'
+                    error.style.display = 'none'
+                    withOutErrors.nacimiento = true;
+                }
+            break
+            case "imagen":
+                const iconoCheck = document.getElementById('iconoCheck');
+                if(e.target.files[0].type === "image/jpeg" || e.target.files[0].type === "image/png"|| e.target.files[0].type === "image/jpg"){
+                    error.style.display = "none";
+                    iconoCheck.style.display = 'block';
+                    withOutErrors.imagen = true
+                 }else{
+                    error.textContent = "La imagen tiene que ser formato .jpeg, .png, .jpg"
+                    error.style.display = "block"
+                    iconoCheck.style.display = 'none';
+                    withOutErrors.imagen = false
+                 }
+            break
             case "email":
-                email.style.border = '2px solid red'
-                errorEmail.textContent = errors[objeto]
-                errorEmail.style.display = 'block'
-                break
+                if(e.target.value === ""){
+                    email.style.border = '2px solid red'
+                    error.textContent = mensaje
+                    error.style.display = 'block'
+                    withOutErrors.email = false
+                    
+                }
+                else if(!regex.test(e.target.value)){
+                    element.style.border = '2px solid red'
+                    error.textContent = "Debe ingresar un Email valido"
+                    error.style.display = 'block'
+                    withOutErrors.email = false
+                }
+                else if(usuarios.some(elemento => elemento.email === e.target.value)){
+                    element.style.border = '2px solid red'
+                    error.textContent = "Este email ya esta registrado"
+                    error.style.display = 'block'
+                    withOutErrors.email = false
+                }
+                else{
+                    element.style.border = '2px solid green'
+                    error.style.display = 'none'
+                    withOutErrors.email = true
+                }
+            break
             case "userName":
-                userName.style.border = '2px solid red'
-                errorUserName.textContent = errors[objeto]
-                errorUserName.style.display = 'block'
-                break
+                if(e.target.value === ""){
+                    element.style.border = '2px solid red'
+                    error.textContent = mensaje
+                    error.style.display = 'block'
+                    withOutErrors.userName = false;
+                }
+        
+                else if(e.target.value.length < 6){
+                    element.style.border = '2px solid red'
+                    error.textContent = "El nombre de usuario debe tener al menos 6 caracteres"
+                    error.style.display = 'block'
+                    withOutErrors.userName = false;
+                }
+        
+                else if(usuarios.some(elemento => elemento.userName === e.target.value)){
+                    element.style.border = '2px solid red'
+                    error.textContent = "El nombre de usuario ya está en uso"
+                    error.style.display = 'block'
+                    withOutErrors.userName = false;
+                }
+        
+                else{
+                    element.style.border = '2px solid green'
+                    error.style.display = 'none'
+                    withOutErrors.userName = true;
+                }
+            break
             case "password":
-                password.style.border = '2px solid red'
-                errorPassword.textContent = errors[objeto]
-                errorPassword.style.display = "block"
+                if(e.target.value === ""){
+                    element.style.border = '2px solid red'
+                    error.textContent = mensaje;
+                    error.style.display = "block"
+                    withOutErrors.pass = false;
+          
+                }
+                else if(e.target.value.length < 7){
+                  element.style.border = '2px solid red'
+                  error.textContent = "La contraseña debe tener al menos 8 caracteres, letras mayúsculas, minúsculas, un número y un carácter especial."
+                  error.style.display = "block"
+                  withOutErrors.pass = false;
+                }
+                else if(!regexPassword.test(e.target.value)){
+                  element.style.border = '2px solid red'
+                  error.textContent = "La contraseña debe contener letras mayúsculas, minúsculas, un número y un carácter especial."
+                  error.style.display = "block"
+                  withOutErrors.pass = false;
+                }
+                else{
+                  element.style.border = '2px solid green'
+                  error.style.display = "none"
+                  withOutErrors.pass = true;
+                }
             break
             case "repassword":
-                repassword.style.border = '2px solid red'
-                errorRepetirPassword.textContent = errors[objeto]
-                errorRepetirPassword.style.display = "block"
-            break
-            case "provincia":
-                provincias.style.border = '2px solid red'
-                errorProvincia.textContent = errors[objeto]
-                errorProvincia.style.display = "block"
-            break
-            case "localidad":
-                localidad.style.border = '2px solid red'
-                errorLocalidad.textContent = errors[objeto]
-                errorLocalidad.style.display = "block" 
-            break
+            let password = document.querySelector('#password')
 
-            default:
-            break
-
-                    }     
+            if(e.target.value === ""){
+                    element.style.border = '2px solid red'
+                    error.textContent = mensaje
+                    error.style.display = "block"
+                    withOutErrors.repass = false;
                 }
-            }
-        else {
-            // if(validacionCompleta()){
-                const promises = [
-                    new Promise(resolve => resolve(validateForm(localidad.name))),
-                    new Promise(resolve => resolve(validateForm(provincias.name)))
-                ]
-                Promise.all(promises).then(() => {
-                    if (Object.keys(errores).length > 0) {
-                        alert(`corregir los errores del formulario en ${Object.keys(errores).join(', ')}`)
-                    } else {
-                        formulario.submit()
-                    }
-                })
-            }
-        //}
-
-    })
-    
-    nombre.addEventListener("input", function(e){
-         
-        if(e.target.value === ""){
-         nombre.style.border = '2px solid red'
-         errorNombre.textContent = mensaje
-         errorNombre.style.display = 'block'
-        }
-        else if(e.target.value.length === 1){
-         nombre.style.border = '2px solid red'
-         errorNombre.textContent = "El nombre debe tener al menos 2 caracteres"
-         errorNombre.style.display = 'block'
-
-        }else{
-            nombre.style.border = '2px solid green'
-            errorNombre.style.display = 'none'
-        }
-    })
-     
-     apellido.addEventListener("input", function(e){
-         
-        if(e.target.value === ""){
-            apellido.style.border = '2px solid red'
-         errorApellido.textContent = mensaje
-         errorApellido.style.display = 'block'
-        }
-        else if(e.target.value.length === 1){
-            apellido.style.border = '2px solid red'
-         errorApellido.textContent = "El nombre debe tener al menos 2 caracteres"
-         errorApellido.style.display = 'block'
-
-        }else{
-            apellido.style.border = '2px solid green'
-            errorApellido.style.display = 'none'
-
-        }
- 
- 
-    })
-
-    email.addEventListener("input", function(e){
+            else if(password.style.border != '2px solid green'){
+                    element.style.border = '2px solid red'
+                    error.textContent = "Ingrese una contraseña correcta"
+                    error.style.display = "block"
+                    withOutErrors.repass = false;
+                }
+                else if(password.value != e.target.value){
+                    element.style.border = '2px solid red'
+                    error.textContent = "Las contraseñas no coinciden"
+                    error.style.display = "block"
+                    withOutErrors.repass = false;
+                }
+                else{
+                    element.style.border = '2px solid green';
+                    error.style.display = "none";
+                    withOutErrors.repass = true;
+                }                
+                break
+                default:
+                break
         
-        if(e.target.value === ""){
-            email.style.border = '2px solid red'
-            errorEmail.textContent = mensaje
-            errorEmail.style.display = 'block'
-            
-        }
-        else if(!regex.test(e.target.value)){
-            email.style.border = '2px solid red'
-            errorEmail.textContent = "Debe ingresar un Email valido"
-            errorEmail.style.display = 'block'
-        }
-        else if(usuarios.some(element => element.email === e.target.value)){
-            email.style.border = '2px solid red'
-            errorEmail.textContent = "Este email ya esta registrado"
-            errorEmail.style.display = 'block'
-        }
-        else{
-            email.style.border = '2px solid green'
-            errorEmail.style.display = 'none'
-        }
-    })
+                     }    
+                      
 
-    userName.addEventListener("input", function(e){
-        
-        if(e.target.value === ""){
-            userName.style.border = '2px solid red'
-            errorUserName.textContent = mensaje
-            errorUserName.style.display = 'block'
-        }
-
-        else if(e.target.value.length < 6){
-            userName.style.border = '2px solid red'
-            errorUserName.textContent = "El nombre de usuario debe tener al menos 6 caracteres"
-            errorUserName.style.display = 'block'
-        }
-
-        else if(usuarios.some(element => element.userName === e.target.value)){
-            userName.style.border = '2px solid red'
-            errorUserName.textContent = "El nombre de usuario ya está en uso"
-            errorUserName.style.display = 'block'
-        }
-
-        else{
-            userName.style.border = '2px solid green'
-            errorUserName.style.display = 'none'
-        }
-    })
-
-    password.addEventListener("input", function(e){
-      if(e.target.value === ""){
-          password.style.border = '2px solid red'
-          errorPassword.textContent = mensaje;
-          errorPassword.style.display = "block"
-
-      }
-      else if(e.target.value.length < 7){
-        password.style.border = '2px solid red'
-          errorPassword.textContent = "La contraseña debe tener al menos 8 caracteres, letras mayúsculas, minúsculas, un número y un carácter especial."
-          errorPassword.style.display = "block"
-
-      }
-      else if(!regexPassword.test(e.target.value)){
-        password.style.border = '2px solid red'
-          errorPassword.textContent = "La contraseña debe contener letras mayúsculas, minúsculas, un número y un carácter especial."
-          errorPassword.style.display = "block"
-      }
-      else{
-        password.style.border = '2px solid green'
-          errorPassword.style.display = "none"
-      }
-
-    })
-
-    repassword.addEventListener("input", function(e){
-
-      if(e.target.value === ""){
-        this.style.border = '2px solid red'
-        errorRepetirPassword.textContent = mensaje
-        errorRepetirPassword.style.display = "block"
-      }
-        else if(password.style.border != '2px solid green'){
-         this.style.border = '2px solid red'
-         errorRepetirPassword.textContent = "Ingrese una contraseña correcta"
-         errorRepetirPassword.style.display = "block"
-      }
-        else if(password.value != e.target.value){
-         this.style.border = '2px solid red'
-         errorRepetirPassword.textContent = "Las contraseñas no coinciden"
-         errorRepetirPassword.style.display = "block"
-      }
-       else{
-        this.style.border = '2px solid green';
-        errorRepetirPassword.style.display = "none";
-        }
-    })
-
-
-     inputImagen.addEventListener("change", function (e){
-   
-     if(e.target.files[0].type === "image/jpeg" || e.target.files[0].type === "image/png"|| e.target.files[0].type === "image/jpg"){
-        errorImagen.style.display = "none";
-        iconoCheck.style.display = 'block';
-     }else{
-        errorImagen.textContent = "La imagen tiene que ser formato .jpeg, .png, .jpg"
-        errorImagen.style.display = "block"
-        iconoCheck.style.display = 'none';
-     }
-
-    })
-     
-     fechaNacimiento.addEventListener("change", function(e){
-        if(e.target.value === ""){
-            fechaNacimiento.style.border = '2px solid red'
-            errorFechaNacimiento.textContent = mensaje;
-            errorFechaNacimiento.style.display = 'block'
-           
-        }
-        else if(fechaFutura(day,e.target.value)){
-            fechaNacimiento.style.border = '2px solid red'
-            errorFechaNacimiento.textContent = 'No puede seleccionar una fecha en el futuro'
-            errorFechaNacimiento.style.display = 'block'
-        }
-        else if(mayorEdad(day,e.target.value)){
-            fechaNacimiento.style.border = '2px solid red'
-            errorFechaNacimiento.textContent = 'Debes tener o ser mayor de 16 años'
-            errorFechaNacimiento.style.display = 'block'
-        }
-        else if(aniospasado(day, e.target.value)){
-            fechaNacimiento.style.border = '2px solid red'
-            errorFechaNacimiento.textContent = 'No puede seleccionar un año tan en el pasado'
-            errorFechaNacimiento.style.display = 'block'
-        }
-        else{
-            fechaNacimiento.style.border = '2px solid green'
-            errorFechaNacimiento.style.display = 'none'
-        }
-
-    })
-
-
-     codigoPostal.addEventListener("input", function (e) {
-        if (isNaN(parseInt(e.target.value))) {
-            codigoPostal.style.border = '2px solid red';
-            errorCodigoPostal.textContent = 'Tiene que ingresar solo números';
-            errorCodigoPostal.style.display = 'block';
-        } else {
-            codigoPostal.value = e.target.value === "" ? 0 : parseInt(e.target.value);
-            codigoPostal.style.border = '2px solid green';
-            errorCodigoPostal.style.display = 'none';
-        }
-    });
-
-    streetnumber.addEventListener("input", function (e) {
-        if (isNaN(parseInt(e.target.value))) {
-            streetnumber.style.border = '2px solid red';
-            errorStreetNumber.textContent = 'Tiene que ingresar solo números';
-            errorStreetNumber.style.display = 'block';
-        } else {
-            streetnumber.value = e.target.value === "" ? 0 : parseInt(e.target.value);
-            streetnumber.style.border = '2px solid green';
-            errorStreetNumber.style.display = 'none';
-        }
-    });
-    
-    
-    function currentDay(){
-
-      const date = new Date()
-      const year = date.getFullYear();
-      let mes = date.getMonth() + 1; 
-      let dia = date.getDate();
-      
-      return `${year}-${mes}-${dia}`
-
-    }
-
-    function fechaFutura(hoy, value){
-        let interruptor = 0
-        const hoySplit = hoy.split("-") 
-        const valueSplit = value.split("-") 
-        
-        if(parseInt(hoySplit[0]) < parseInt(valueSplit[0])){
-            interruptor = 1
-            
-        } 
-        else if(parseInt(hoySplit[1]) < parseInt(valueSplit[1]) && parseInt(hoySplit[0]) === parseInt(valueSplit[0])){
-            interruptor = 1
-            }
-        else if(parseInt(hoySplit[1]) === parseInt(valueSplit[1]) && parseInt(hoySplit[2]) < parseInt(valueSplit[2]) && parseInt(hoySplit[0]) <= parseInt(valueSplit[0])){
-            interruptor = 1
-        }
-
-        if(interruptor === 0){
-            return false
-           }
-        else{ 
-            return true
-        }
-            
-    }
-
-    function mayorEdad(hoy, value){
-        let interruptor = 0;
-        const hoySplit = hoy.split("-") //[ "2024", "3", "11" ]
-        const valueSplit = value.split("-") //[ "2024", "12", "10" ]
-
-        if(parseInt(hoySplit[0]) - parseInt(valueSplit[0]) < 16){
-            interruptor = 1
-            
-        }
-        else if(parseInt(hoySplit[0]) - parseInt(valueSplit[0]) == 16 && parseInt(hoySplit[1]) < parseInt(valueSplit[1]) ){
-            interruptor = 1
-            
-        }
-        else if(parseInt(hoySplit[1]) === parseInt(valueSplit[1]) && parseInt(hoySplit[2]) < parseInt(valueSplit[2])){
-            interruptor = 1
-            
-        }
-        
-        if(interruptor === 0){
-            return false
-           }
-        else{ 
-            return true
-        }
-                
-    }
-
-    function aniospasado(hoy, value){
-        let interruptor = 0
-        const hoySplit = hoy.split("-") 
-        const valueSplit = value.split("-") 
-        
-        if((parseInt(hoySplit[0]) - parseInt(valueSplit[0])) > 110){
-            interruptor = 1
-        } 
-        if(interruptor === 0){
-            return false
-           }
-        else{ 
-            return true
-        }
-            
-    }
-
-    function validacionCompleta(){
-        
-        let validaciones = true
-
-        requiredinput.forEach(element => {
-
-            let elemento = element.id 
-              elemento = document.querySelector(`#${elemento}`)
-            console.log(elemento)
-            if(!elemento.checkValidity()){
-                validaciones = false
-            }
         })
-          if(validaciones && (codigoPostal.style.border != '2px solid red' && streetnumber.style.border != '2px solid red')){
-            return true
-          }
-          else{
-            return false
-        }  
-    }
+    })
+
+})
+
+
+
+
+
+
+function currentDay(){
+
+    const date = new Date()
+    const year = date.getFullYear();
+    let mes = date.getMonth() + 1; 
+    let dia = date.getDate();
     
+    return `${year}-${mes}-${dia}`
+
+  }
+
+  function fechaFutura(hoy, value){
+      let interruptor = 0
+      const hoySplit = hoy.split("-") 
+      const valueSplit = value.split("-") 
+      
+      if(parseInt(hoySplit[0]) < parseInt(valueSplit[0])){
+          interruptor = 1
+          
+      } 
+      else if(parseInt(hoySplit[1]) < parseInt(valueSplit[1]) && parseInt(hoySplit[0]) === parseInt(valueSplit[0])){
+          interruptor = 1
+          }
+      else if(parseInt(hoySplit[1]) === parseInt(valueSplit[1]) && parseInt(hoySplit[2]) < parseInt(valueSplit[2]) && parseInt(hoySplit[0]) <= parseInt(valueSplit[0])){
+          interruptor = 1
+      }
+
+      if(interruptor === 0){
+          return false
+         }
+      else{ 
+          return true
+      }
+          
+  }
+
+  function mayorEdad(hoy, value){
+      let interruptor = 0;
+      const hoySplit = hoy.split("-") //[ "2024", "3", "11" ]
+      const valueSplit = value.split("-") //[ "2024", "12", "10" ]
+
+      if(parseInt(hoySplit[0]) - parseInt(valueSplit[0]) < 16){
+          interruptor = 1
+          
+      }
+      else if(parseInt(hoySplit[0]) - parseInt(valueSplit[0]) == 16 && parseInt(hoySplit[1]) < parseInt(valueSplit[1]) ){
+          interruptor = 1
+          
+      }
+      else if(parseInt(hoySplit[1]) === parseInt(valueSplit[1]) && parseInt(hoySplit[2]) < parseInt(valueSplit[2])){
+          interruptor = 1
+          
+      }
+      
+      if(interruptor === 0){
+          return false
+         }
+      else{ 
+          return true
+      }
+              
+  }
+
+  function aniospasado(hoy, value){
+      let interruptor = 0
+      const hoySplit = hoy.split("-") 
+      const valueSplit = value.split("-") 
+      
+      if((parseInt(hoySplit[0]) - parseInt(valueSplit[0])) > 110){
+          interruptor = 1
+      } 
+      if(interruptor === 0){
+          return false
+         }
+      else{ 
+          return true
+      }
+          
+  }
 
 
     const form = document.querySelector('form#formulario')
@@ -480,26 +441,51 @@ window.addEventListener("load", async function(){
             }
             switch(input) {
                 case 'provincia':
+                    const errorProvincia = document.querySelector("#error-provincia")
                     if (provincia.value.length == 0) {
-                        errores.provincia = 'ingresar provincia'
-                        break}
+                        errorProvincia.innerText = 'Debe ingresar una provincia'
+                        errorProvincia.style.display = "block"
+                        provincia.style.border = '2px solid red'
+                        break
+                    }
                     const {provincias} = await fetchProvincia(provincia.value)
-                    if (provincias[0].nombre !== provincia.value) errores.provincia = 'la provincia ingresada no existe'
+                    if (provincias[0].nombre !== provincia.value) {
+                        errorProvincia.innerText = 'La provincia ingresada no existe'
+                        errorProvincia.style.display = "block"
+                        provincia.style.border = '2px solid red'
+                    }else{
+                        errorProvincia.style.display = "none"
+                        provincia.style.border = '2px solid green'
+                    }
                     break
                 case 'localidad':
+                    const errorLocalidad = document.querySelector("#error-localidad")
                     if (errores.provincia) break
                     if (localidad.value.length == 0) {
-                        errores.localidad = 'ingresar localidad'
+                        errorLocalidad.innerText = 'Debe ingresar una localidad'
+                        localidad.style.border = '2px solid red'
+                        errorLocalidad.style.display = "block"
+                        
                         break
                     }
                     const {localidades} = await fetchLocalidad(provincia.value, localidad.value)
-                    if (!localidades.some(({nombre})=> nombre == localidad.value)) errores.localidad = 'seleccionar una localidad valida'
+                    if (!localidades.some(({nombre})=> nombre == localidad.value)){ 
+                        errorLocalidad.innerText = 'Seleccionar una localidad valida'
+                        localidad.style.border = '2px solid red'
+                        errorLocalidad.style.display = "block"
+                        
+                    }
+                    else{
+                        errorLocalidad.style.display = "none";
+                        localidad.style.border = "2px solid green"
+                       
+                    }
                     break
                 default:
                     break
             }
         } catch (error) {
-            alert(error.message)
+            console.log(error.message)
         }
     }
     
@@ -630,4 +616,35 @@ window.addEventListener("load", async function(){
         }
     }
 
-})
+    function popUpOff(){
+    
+        const elementosPopup = document.querySelector('.popupscreenregistro');
+        const body = document.querySelector("body")
+        body.removeChild(elementosPopup);
+        
+    }
+
+    function registrar(){
+        let formulario = document.querySelector("#formulario")
+        formulario.submit()
+    }
+
+//         else {
+//             // if(validacionCompleta()){
+//                 const promises = [
+//                     new Promise(resolve => resolve(validateForm(localidad.name))),
+//                     new Promise(resolve => resolve(validateForm(provincias.name)))
+//                 ]
+//                 Promise.all(promises).then(() => {
+//                     if (Object.keys(errores).length > 0) {
+//                         alert(`corregir los errores del formulario en ${Object.keys(errores).join(', ')}`)
+//                     } else {
+//                         console.log("Submit")
+//                         // formulario.submit()
+//                     }
+//                 })
+//             }
+//         //}
+
+//     })
+    
