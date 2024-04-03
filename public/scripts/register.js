@@ -4,7 +4,6 @@ let usuarios = await fetch("http://localhost:3001/api/users?key=allUsers")
     .then(data => data)
 const day = currentDay()
 let submitButton = document.querySelector('input[type="submit"]')
-let formulario = document.querySelector("#formulario")
 const requiredinput = document.querySelectorAll(".requiredinput")
 let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 let regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -79,7 +78,26 @@ submitButton.addEventListener("click", (e)=>{
 
     }
    if(submitform){
-    formulario.submit()
+    console.log("ingresa")
+    const body = document.querySelector("body")
+    const popup = document.createElement('span');
+    popup.classList.add('popupscreenregistro');
+    popup.innerHTML = `
+    <div class="popUpsregistro">
+            <h2>Verificación de Registro</h2>
+            <p>Por favor, revise sus detalles antes de continuar.</p>
+            <h3>¿Desea modificar algo?</h3>
+            
+            <div class="botonPopup">
+                <a onClick="popUpOff()">Modificar </a>
+                <a onClick="registrar()">Registrarse</a>
+            </div>  
+            
+                ¡Gracias por su atención!</p>
+        </div>
+    `;
+    body.appendChild(popup);
+    
    }
 })
 
@@ -596,6 +614,19 @@ function currentDay(){
         } catch (error) {
             console.log(error.message)
         }
+    }
+
+    function popUpOff(){
+    
+        const elementosPopup = document.querySelector('.popupscreenregistro');
+        const body = document.querySelector("body")
+        body.removeChild(elementosPopup);
+        
+    }
+
+    function registrar(){
+        let formulario = document.querySelector("#formulario")
+        formulario.submit()
     }
 
 //         else {
