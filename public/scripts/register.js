@@ -1,5 +1,5 @@
 window.addEventListener("load", async function(){
-let usuarios = await fetch("http://localhost:3001/api/users?key=allUsers")
+let usuarios = await fetch("http://localhost:3001/api/usersregistro?key=allUsers")
     .then(response => response.json())
     .then(data => data)
 const day = currentDay()
