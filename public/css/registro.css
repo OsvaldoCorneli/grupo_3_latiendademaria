@@ -134,6 +134,12 @@ font-size: 80%;
 
 }
 
+#errorCodigoPostal , #errorNumero{
+    display: none;
+    color: red;
+    font-size: 80%;
+}
+
 @media (min-width: 760px){
 
     .contenedor-form{

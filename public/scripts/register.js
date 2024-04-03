@@ -4,17 +4,23 @@ let usuarios = await fetch("http://localhost:3001/api/users?key=allUsers")
     .then(data => data)
 const day = currentDay()
 let submitButton = document.querySelector('input[type="submit"]')
+let formulario = document.querySelector("#formulario")
 const requiredinput = document.querySelectorAll(".requiredinput")
 let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 let regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 const mensaje = 'Este campo debe estar completo'
+const streetnumber = document.querySelector("#streetnumber")
+const errorStreetNumber = document.querySelector("#errorNumero")
+const codigoPostal = document.querySelector("#codigoPostal")
+const errorCodigoPostal = document.querySelector("#errorCodigoPostal")
+
 let withOutErrors = {
     nombre: false,
     apellido: false,
     nacimiento: false,
     codigoPostal: true,
     calle: true,
-    numero: true,
+    numeroCalle: true,
     imagen: false,
     piso: true,
     departamento: true,
@@ -42,39 +48,76 @@ submitButton.addEventListener("click", (e)=>{
          }
 
         if(elemento.name == "provincia"){
-            console.log(elemento.name, "ingresa")
-            console.log("style", elemento.style.border)
+    
             if(elemento.style.border === "2px solid green"){
-                    console.log("ingresa al if")
                     withOutErrors.provincia = true;
-                    console.log(withOutErrors.provincia)
              }else{
-                    console.log("ingresa al else")
+                  
                     withOutErrors.provincia = false;
              }
         }else if(elemento.name == "localidad"){
+           
             if(elemento.style.border === "2px solid green"){
-                    withOutErrors.provincia = true;
+               
+                    withOutErrors.localidad = true;
              }else{
-                    withOutErrors.provincia = false;
+               
+                    withOutErrors.localidad = false;
              }
         }
-      
+
         
     })
     
-    
-    console.log(withOutErrors)
+    let submitform = true
+    let contador = 0
+    for(let error in withOutErrors){
+        if(!withOutErrors[error]){
+            contador++;
+            submitform = false
+        }
 
+    }
+   if(submitform){
+    formulario.submit()
+   }
 })
+
+codigoPostal.addEventListener("input", function (e) {
+    if (isNaN(parseInt(e.target.value))) {
+        codigoPostal.style.border = '2px solid red';
+        errorCodigoPostal.textContent = 'Tiene que ingresar solo números';
+        errorCodigoPostal.style.display = 'block';
+        withOutErrors.codigoPostal = false;
+    } else {
+        codigoPostal.value = e.target.value === "" ? 0 : parseInt(e.target.value);
+        codigoPostal.style.border = '2px solid green';
+        errorCodigoPostal.style.display = 'none';
+        withOutErrors.codigoPostal = true;
+    }
+});
+
+streetnumber.addEventListener("input", function (e) {
+    if (isNaN(parseInt(e.target.value))) {
+        streetnumber.style.border = '2px solid red';
+        errorStreetNumber.textContent = 'Tiene que ingresar solo números';
+        errorStreetNumber.style.display = 'block';
+        withOutErrors.numeroCalle = false;
+    } else {
+        streetnumber.value = e.target.value === "" ? 0 : parseInt(e.target.value);
+        streetnumber.style.border = '2px solid green';
+        errorStreetNumber.style.display = 'none';
+        withOutErrors.numeroCalle = true;
+    }
+});
 
 
 requiredinput.forEach((element)=>{
 
 element.addEventListener("input", (e)=>{
-    
-    const error = document.querySelector(`#error-${element.name}`)
 
+    const error = document.querySelector(`#error-${element.name}`)
+    
     switch(element.name) {
             case "nombre":
                 if(e.target.value === ""){
@@ -152,12 +195,12 @@ element.addEventListener("input", (e)=>{
                 if(e.target.files[0].type === "image/jpeg" || e.target.files[0].type === "image/png"|| e.target.files[0].type === "image/jpg"){
                     error.style.display = "none";
                     iconoCheck.style.display = 'block';
-                    withOutErrors.imagen = false
+                    withOutErrors.imagen = true
                  }else{
                     error.textContent = "La imagen tiene que ser formato .jpeg, .png, .jpg"
                     error.style.display = "block"
                     iconoCheck.style.display = 'none';
-                    withOutErrors.imagen = true
+                    withOutErrors.imagen = false
                  }
             break
             case "email":
@@ -264,7 +307,7 @@ element.addEventListener("input", (e)=>{
                 else{
                     element.style.border = '2px solid green';
                     error.style.display = "none";
-                    withOutErrors.repass = false;
+                    withOutErrors.repass = true;
                 }                
                 break
                 default:
@@ -273,10 +316,15 @@ element.addEventListener("input", (e)=>{
                      }    
                       
 
-})
-})
+        })
+    })
 
 })
+
+
+
+
+
 
 function currentDay(){
 
@@ -359,52 +407,6 @@ function currentDay(){
   }
 
 
-
-//         else {
-//             // if(validacionCompleta()){
-//                 const promises = [
-//                     new Promise(resolve => resolve(validateForm(localidad.name))),
-//                     new Promise(resolve => resolve(validateForm(provincias.name)))
-//                 ]
-//                 Promise.all(promises).then(() => {
-//                     if (Object.keys(errores).length > 0) {
-//                         alert(`corregir los errores del formulario en ${Object.keys(errores).join(', ')}`)
-//                     } else {
-//                         console.log("Submit")
-//                         // formulario.submit()
-//                     }
-//                 })
-//             }
-//         //}
-
-//     })
-    
-
-
-//      codigoPostal.addEventListener("input", function (e) {
-//         if (isNaN(parseInt(e.target.value))) {
-//             codigoPostal.style.border = '2px solid red';
-//             errorCodigoPostal.textContent = 'Tiene que ingresar solo números';
-//             errorCodigoPostal.style.display = 'block';
-//         } else {
-//             codigoPostal.value = e.target.value === "" ? 0 : parseInt(e.target.value);
-//             codigoPostal.style.border = '2px solid green';
-//             errorCodigoPostal.style.display = 'none';
-//         }
-//     });
-
-//     streetnumber.addEventListener("input", function (e) {
-//         if (isNaN(parseInt(e.target.value))) {
-//             streetnumber.style.border = '2px solid red';
-//             errorStreetNumber.textContent = 'Tiene que ingresar solo números';
-//             errorStreetNumber.style.display = 'block';
-//         } else {
-//             streetnumber.value = e.target.value === "" ? 0 : parseInt(e.target.value);
-//             streetnumber.style.border = '2px solid green';
-//             errorStreetNumber.style.display = 'none';
-//         }
-//     });
-
     const form = document.querySelector('form#formulario')
 
     if (!form.localidad.value) form.localidad.disabled = true
@@ -457,7 +459,7 @@ function currentDay(){
                     }
                     else{
                         errorLocalidad.style.display = "none";
-                        localidad.style.border = "'2px solid green'"
+                        localidad.style.border = "2px solid green"
                        
                     }
                     break
@@ -596,3 +598,22 @@ function currentDay(){
         }
     }
 
+//         else {
+//             // if(validacionCompleta()){
+//                 const promises = [
+//                     new Promise(resolve => resolve(validateForm(localidad.name))),
+//                     new Promise(resolve => resolve(validateForm(provincias.name)))
+//                 ]
+//                 Promise.all(promises).then(() => {
+//                     if (Object.keys(errores).length > 0) {
+//                         alert(`corregir los errores del formulario en ${Object.keys(errores).join(', ')}`)
+//                     } else {
+//                         console.log("Submit")
+//                         // formulario.submit()
+//                     }
+//                 })
+//             }
+//         //}
+
+//     })
+    
