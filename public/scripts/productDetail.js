@@ -177,7 +177,7 @@ fetch(`/users/cart/${id}`, {
 })
 .then(response => {
     if (response.status === 500) {
-        throw new Error(`Error al agregar el producto: ${response.status}`);
+        throw new Error(response);
     }else{
    return response.json()
 }})
@@ -208,6 +208,19 @@ fetch(`/users/cart/${id}`, {
 })
 .catch(error => {
     console.error('Error al agregar el producto:', error);
+    const body = document.querySelector("body")
+    const popup = document.createElement("span")
+    popup.classList.add("popupscreen")
+    popup.innerHTML = `
+    <div class="popUps" id="popUpProductoEnCart">
+    <h3>Error al agregar el producto</h3>
+    <div class="botonPopup">
+        <a onclick="popUpoOff()">Aceptar</a>
+    </div>
+</div>`
+
+
+    body.appendChild(popup)
 });
 }
 
