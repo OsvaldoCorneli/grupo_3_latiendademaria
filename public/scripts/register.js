@@ -60,7 +60,7 @@ submitButton.addEventListener("click", (e)=>{
                
                     withOutErrors.localidad = true;
              }else{
-               
+            
                     withOutErrors.localidad = false;
              }
         }
@@ -78,7 +78,6 @@ submitButton.addEventListener("click", (e)=>{
 
     }
    if(submitform){
-    console.log("ingresa")
     const body = document.querySelector("body")
     const popup = document.createElement('span');
     popup.classList.add('popupscreenregistro');
@@ -626,6 +625,8 @@ function currentDay(){
 
     function registrar(){
         let formulario = document.querySelector("#formulario")
+        let nombre = document.querySelector("#nombre").value
+        localStorage.setItem("userName",nombre)
         formulario.submit()
     }
 

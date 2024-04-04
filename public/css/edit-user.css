@@ -145,55 +145,55 @@ input[type="file"] {
 
 #errorNombre{
     display: none;
-    color: rgb(187, 0, 0);
-    font-size: 75%;
-    margin: 0 0 5px 0;
+    color: rgb(131, 1, 1);
+    font-size: 85%;
+    margin: 0 0 5px 0 ;
 }
 #errorApellido{
     display: none;
-    color: rgb(187, 0, 0);
-    font-size: 75%;
-    margin: 0 0 5px 0;
+    color: rgb(131, 1, 1);
+    font-size: 85%;
+    margin: 0 0 2px 0 ;
 }
 #errorImagen{
     display: none;
-    color: rgb(187, 0, 0);
-    font-size: 75%;
-    
+    color: rgb(131, 1, 1);
+    font-size: 85%;
+    margin: 0 0 2px 0 ;
 }
 #errorEmail{
     display: none;
-    color: rgb(187, 0, 0);
-    font-size: 75%;
-    margin: 0 0 5px 0;
+    color: rgb(131, 1, 1);
+    font-size: 85%;
+    margin: 0 0 2px 0 ;
 
 }
 
 #errorFechaNacimiento{
     display: none;
-    color: rgb(187, 0, 0);
-    font-size: 75%;
-    margin: 0 0 5px 0;
+    color: rgb(131, 1, 1);
+    font-size: 85%;
+    margin: 0 0 2px 0 ;
 }
 #errorCodigoPostal{
     display: none;
-    color: rgb(187, 0, 0);
-    font-size: 75%;
-    margin: 0 0 5px 0;
+    color: rgb(131, 1, 1);
+    font-size: 85%;
+    margin: 0 0 2px 0 ;;
 }
 
 #errorNumero{
     display: none;
-    color: rgb(187, 0, 0);
-    font-size: 75%;
-    margin: 0 0 5px 0;
+    color: rgb(131, 1, 1);
+    font-size: 85%;
+    margin: 0 0 2px 0 ;
 }
 
 #errorLocalidad{
     display: none;
-    color: rgb(187, 0, 0);
-    font-size: 75%;
-    margin: 0 0 5px 0;
+    color: rgb(131, 1, 1);
+    font-size: 85%;
+    margin: 0 0 2px 0 ;
 }
 
 
