@@ -72,8 +72,7 @@ window.onload = () => {
                 form.submit()
             }
         }
-        }
-    );
+    });
 };
 
 async function fetchData(endpoint, body) {
