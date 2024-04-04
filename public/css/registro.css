@@ -127,85 +127,18 @@ input[type="file"] {
     color: rgb(187, 0, 0);
     font-size: 75%
 }
-
-#errorNombre{
-    display: none;
-    color: rgb(187, 0, 0);
-    font-size: 75%;
-    margin: 0 0 5px 0;
-}
-#errorApellido{
-    display: none;
-    color: rgb(187, 0, 0);
-    font-size: 75%;
-    margin: 0 0 5px 0;
-}
-#errorImagen{
-    display: none;
-    color: rgb(187, 0, 0);
-    font-size: 75%;
-    
-}
-#errorEmail{
-    display: none;
-    color: rgb(187, 0, 0);
-    font-size: 75%;
-    margin: 0 0 5px 0;
-
-}
-#errorUserName{
-    display: none;
-    color: rgb(187, 0, 0);
-    font-size: 75%;
-    margin: 0 0 5px 0;
-}
-#errorPassword{
-    display: none;
-    color: rgb(187, 0, 0);
-    font-size: 75%;
-    margin: 0 0 5px 0;
-}
-#errorRepetirPassword{
-    display: none;
-    color: rgb(187, 0, 0);
-    font-size: 75%;
-    margin: 0 0 5px 0;
+.error-required{
+display: none;
+color: red;
+font-size: 80%;
 
 }
 
-#errorFechaNacimiento{
+#errorCodigoPostal , #errorNumero{
     display: none;
-    color: rgb(187, 0, 0);
-    font-size: 75%;
-    margin: 0 0 5px 0;
+    color: red;
+    font-size: 80%;
 }
-
-#errorCodigoPostal{
-    display: none;
-    color: rgb(187, 0, 0);
-    font-size: 75%;
-    margin: 0 0 5px 0;
-}
-
-#errorNumero{
-    display: none;
-    color: rgb(187, 0, 0);
-    font-size: 75%;
-    margin: 0 0 5px 0;
-}
-#errorProvincia{
-    display: none;
-    color: rgb(187, 0, 0);
-    font-size: 75%;
-    margin: 0 0 5px 0;
-}
-#errorLocalidad{
-    display: none;
-    color: rgb(187, 0, 0);
-    font-size: 75%;
-    margin: 0 0 5px 0;
-}
-
 
 @media (min-width: 760px){
 

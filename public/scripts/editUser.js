@@ -1,6 +1,6 @@
 window.addEventListener("load", async function(){
 
-let usuarios = await fetch("http://localhost:3001/api/users?key=allUsers")
+let usuarios = await fetch("http://localhost:3001/api/usersregistro?key=allUsers")
 .then(response => response.json())
 .then(data => data)
 const URL = window.location.href
@@ -185,6 +185,12 @@ fechaNacimiento.addEventListener("change", function(e){
                 errorFechaNacimiento.textContent = 'Debes tener o ser mayor de 16 años'
                 errorFechaNacimiento.style.display = 'block'
             }
+          else if(aniospasado(day, e.target.value)){
+                fechaNacimiento.style.border = '2px solid red'
+                errorFechaNacimiento.textContent = 'No puede seleccionar un año tan en el pasado'
+                errorFechaNacimiento.style.display = 'block'
+            
+        }
             else{
                 fechaNacimiento.style.border = '2px solid green'
                 errorFechaNacimiento.style.display = 'none'
@@ -540,6 +546,23 @@ document.getElementById("backButton").addEventListener("click", function(e) {
             return true
         }
                 
+}
+
+function aniospasado(hoy, value){
+    let interruptor = 0
+    const hoySplit = hoy.split("-") 
+    const valueSplit = value.split("-") 
+    
+    if((parseInt(hoySplit[0]) - parseInt(valueSplit[0])) > 110){
+        interruptor = 1
+    } 
+    if(interruptor === 0){
+        return false
+       }
+    else{ 
+        return true
+    }
+        
 }
 
     function obtenerIdDesdeUrl(url) {
