@@ -1,4 +1,6 @@
-
+body{
+    background-color: #e5e9e6;
+}
 i.colorIcon {
     border-radius:50%;
     width:20px;
