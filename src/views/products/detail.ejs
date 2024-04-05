@@ -62,6 +62,7 @@
                     <label class="coloresinput" for="<%= color.name %>"><i style=<%= background %>></i>
                         <input style="margin: 0 2px 0 2px; cursor: pointer; " id="<%= name %>" type="radio" name="color" value="<%= color.id %>" <%= index === 0 ? 'checked' : '' %> />
                     </label>
+                    <p class="stockcolores" style="font-size: 12px;"><%= color.name_es %></p>
                     <p class="stockcolores" id="<%= name %>-stock" style="font-size: 12px;">stock: <%= parseInt(stock) %></p>
                     </div>
                     <% })%>
