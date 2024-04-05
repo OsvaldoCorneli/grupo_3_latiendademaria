@@ -3,7 +3,7 @@
     <h3>Mis Datos</h3>
     <% let { id, nombre, apellido, email, calle, calleNumero, provincia, imagen, codigoPostal, piso, departamento } = userData %>
     <span>
-        <img class="perfil" src="<%= imagen %>" alt="<%= nombre.slice(0,1).toUpperCase()+apellido.slice(0,1).toUpperCase() %>"/>
+        <img class="perfil" src="<%= imagen %>" alt="<%= nombre.slice(0,1).toUpperCase()+apellido.slice(0,1).toUpperCase() %>"/><br>
     </span>
     <span class="userData">
         <div>
@@ -22,9 +22,7 @@
         <% if (departamento) { %>
             <div><b>Departamento:</b> <%= departamento %></div>
         <% } %>
-
-        <p><b>Codigo Postal:</b> <%= codigoPostal %></p>
-       
+        <div><b>Codigo Postal:</b> <%= codigoPostal %></div>
     </span>
 </section>
 <section class="userData">
@@ -32,8 +30,8 @@
         <a href="/users/<%= id %>/update"><li>Editar Perfil</li></a>
         <a><li>Mis compras</li></a>
         <a><li>Mis favoritos</li></a>
-        <a><li>Cambiar contraseña</li></a>
         <a><li>Eliminar Cuenta</li></a>
+        <a><li>Cambiar contraseña</li></a>
     </ul>
     <%- include('./userPayments.ejs', {historialPagos}) %>
     <%- include('./userFavorites.ejs',{favoritos}) %>

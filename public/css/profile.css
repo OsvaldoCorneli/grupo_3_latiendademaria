@@ -94,6 +94,7 @@ section.profile {
     width: 100%;
     max-width: 400px;
     gap: 10px;
+    font-size: 1.5rem;
 }
 section.profile img {
     width: 150px;
@@ -113,7 +114,9 @@ section.profile > .userData > div {
     align-items: center;
     justify-content: space-evenly;
     gap: 5px;
+    margin: 0 0 15px 0;
 }
+
 section.payments {
     display: none;
     flex-direction: column;
@@ -590,10 +593,6 @@ section.delete-acount div input{
         flex-direction: row;
         align-items: start;
         margin: 15px 0 0 0;
-    }
-
-    section.userData{
-        margin: 0 15px 0 0;
     }
 
     section.profile{
