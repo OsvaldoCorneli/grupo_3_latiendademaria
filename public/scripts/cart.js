@@ -232,7 +232,6 @@ function startTimerRedirect(seconds,endpoint) {
             window.location = `http://${host}${endpoint}`
         }
     }, 1000);
-
 }
 
 
