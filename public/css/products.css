@@ -46,14 +46,35 @@ main{
 
     display: flex;
     justify-content: center;
+    
 
 }
 
 .botonFilter input{
     margin: 3px;
+    display: flex;
+    /* margin-right: 43px; */
+    border: hidden;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    min-width: 70px;
+    width: 12vw;
+    max-width: 90px;
+    font-size: 1rem;
+    background-color: #26775b;
+    color: white;
+    border-radius: 5px;
+    padding: 3px;
+    transition-duration: 500ms;
+    cursor: pointer;
 }
 
-.searchBar{
+.botonFilter input:hover{
+    background-color: #32A97F;
+}
+
+form{
     display: flex;
     justify-content: center;
     margin-top: 12px;
@@ -64,13 +85,33 @@ main{
 #inputSearchBar{
     height: 6vw;
     width: 50%;
-    border: solid black 1px;
+    border: solid #26775b 1.5px;
 }
 #botonSearchBar{
     width: 15%;
     margin-left: 5px;
+    display: flex;
+    /* margin-right: 43px; */
+    border: hidden;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    min-width: 70px;
+    width: 12vw;
+    font-size: 1rem;
+    background-color: #26775b;
+    color: white;
+    border-radius: 5px;
+    padding: 3px;
+    transition-duration: 500ms;
+    cursor: pointer;
 
 }
+
+#botonSearchBar:hover{
+    background-color: #32A97F;
+}
+
 .cards article{
     display: flex;
     flex-direction: column;
@@ -101,19 +142,23 @@ main{
 }
 
 .pagination a {
-    border: solid 1px black;
+    border: solid 1px #32A97F;
     padding: 5px;
     border-radius: 5px;
+    cursor: pointer;
+    color: #26775b;
 }
 
 .pagination a:hover {
-    box-shadow: 0px 5px black;
+    box-shadow: 0px 2px 2px #26775b;
 }
 
 .pagination > a.currentPage {
-    border: solid 3px black;
+    border: solid 3px #32A97F;
     font-weight: bold;
+    color: #26775b;
 }
+
 
 #categoria , #color{
     width: 30%;
@@ -155,7 +200,7 @@ ul.color {
 }
 
 ul.color > li {
-    border: solid 1px black;
+    border: solid 1px 32A97F;
     border-radius: 50%;
 }
 
