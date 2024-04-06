@@ -69,7 +69,7 @@ module.exports = {
             const newUser = await users.create(req.body, req.files)
             if (newUser) {
                 req.session.user = newUser
-                res.redirect(`/?welcome=${newUser.nombre}`)
+                res.redirect(`/`)
             }
         } else { 
             res.render('users/register', {

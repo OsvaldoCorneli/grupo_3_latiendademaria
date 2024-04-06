@@ -1,14 +1,7 @@
 const body = document.querySelector("body")
-const ruta = window.location.href
-const split = ruta.split("/")
-const welcome = split[split.length - 1]
-let nombre = welcome.split("=")[1]
+const nombre = localStorage.getItem('userName');
 
-if(nombre.includes("%")){
-    nombre = nombre.split("%")[0]
-}
-
-if(nombre != undefined){
+if(nombre){
     const mensaje = document.createElement("span")
     mensaje.classList.add("welcome")
     mensaje.innerHTML = `
@@ -23,10 +16,7 @@ if(nombre != undefined){
 
 
     body.removeChild(mensaje)
-    
-    const newRuta = ruta.split("?")[0]
-    
-    window.history.replaceState({}, document.title, newRuta);
+    localStorage.removeItem('userName');
     
     
     })

@@ -173,6 +173,27 @@ function deleted(id, color){
         });
     }
 
+function prefinalizacion(id){
+    if (productosCarrito.length == 0) {
+        popUpRedirect('Tu carrito esta vacio, te vamos a redirigir a la seccion Productos', 5, '/products')
+    }else{
+
+    const popup = document.createElement('span');
+    popup.classList.add('popupscreen');
+    popup.innerHTML = `
+        <div class="popUps" id="popUpDetailLogin">
+            <h2>¡Ya casi!</h2>
+            <h3>¿Estás listo para comprar o prefieres hacer alguna modificación?</h3>
+            <div class="botonPopup">
+                <a onclick="finalizarCompra('${id}')">Finalizar</a>
+                <a onclick="popUpoOff()">Modificar</a>
+            </div>  
+        </div>
+    `;
+    body.appendChild(popup);
+    }
+}    
+
 
 function finalizarCompra(id){
     
@@ -209,7 +230,7 @@ function popUpRedirect(message, second, endpoint) {
         <div class="popUps" id="popUpDetailLogin">
             <h3>${message}</h3>
             <div class="botonPopup">
-                Redirigiendote en <b id="counter"><b> segundos ...
+                <p>Redirigiendote en <b id="counter"><b> segundos ...</p>
             </div>  
         </div>
     `;
