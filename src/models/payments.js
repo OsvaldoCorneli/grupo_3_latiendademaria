@@ -141,8 +141,18 @@ module.exports = {
         try {
             const { idUser, status, products, envio } = body
             const user = await db.Users.findByPk(+idUser, {logging: false})
-            const productData = await db.Products.findAll({where: {id: products.map(p =>  p.product_id)}, logging:false})
-            const total = productData.reduce((acum,{id,price})=> acum+Number(price)*Number(products.find(e => e.product_id == id).cantidad),0)
+            const productData = await db.Products.findAll({
+                include: {
+                    association: 'colors',
+                    attributes: ['color_id', 'stock']
+                },
+                attributes: ['id','price', 'colors.color_id', 'colors.stock'],
+                where: {id: products.map(p => p.product_id)},
+                logging:false})
+
+            const total = products.reduce((acum,{color_id,product_id,cantidad})=> {
+                let price = productData.find(({id}) => id == product_id).price
+                return acum+Number(+cantidad)*Number(+price)},0)
             const newPay = await db.Payments.create({
                 user_id: +user.id,
                 total: total,
@@ -164,6 +174,7 @@ module.exports = {
                     return this.detallePago(newPay.id)
                 }
             }
+            return total
         } catch (error) {
             return error
         }
@@ -228,9 +239,7 @@ module.exports = {
                 }
             }
 
-
         } catch (error) {
-            console.log(error)
             return error
         }
     },

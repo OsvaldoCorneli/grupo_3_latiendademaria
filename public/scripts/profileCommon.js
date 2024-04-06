@@ -109,7 +109,7 @@ async function detallePayment(paymentId) {
             products.forEach(({ product, color, cantidad, precio }) => {
                 detalle += `<tr>\n
                         <td><img class="product" src="${product.images[0].pathName}" alt="img"/>(${product.id})${product.name}</td>\n
-                        <td><i style="background-color:${color.name};color:${color.name};border-radius:50%; border:0.1px-solid-black;">oo</i></td>\n
+                        <td><i class="coloricon" style="background-color:${color.hex};color:${color.hex};"></i></td>\n
                         <td>${cantidad}</td>\n
                         <td class="number">${precio}</td>\n
                         <td><b class="number">${(cantidad*precio).toFixed(2)}</b></td>\n
