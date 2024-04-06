@@ -209,7 +209,7 @@ function popUpRedirect(message, second, endpoint) {
         <div class="popUps" id="popUpDetailLogin">
             <h3>${message}</h3>
             <div class="botonPopup">
-                Redirigiendote en <b id="counter"><b> segundos ...
+                <p>Redirigiendote en <b id="counter"><b> segundos ...</p>
             </div>  
         </div>
     `;
