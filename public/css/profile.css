@@ -263,9 +263,9 @@ section.common-profile {
     text-wrap: nowrap;
     width: 600px;
 } */
-.historialpagos > section > span.pago > *{
+/* .historialpagos > section > span.pago > *{
    
-}
+} */
 table > tbody tr th {
     font-weight: bold;
     background-color: #32A97F;
@@ -573,7 +573,7 @@ section.delete-acount div input{
 }
 .change-pass{
     border: 1px solid black;
-    display: flex;
+    display: none;
     height: 400px;
     width: 50%;
 }

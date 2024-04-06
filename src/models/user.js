@@ -184,7 +184,9 @@ module.exports = {
             const user = await db.Users.findByPk(id,{raw:true})
             const checkPass = bcrypt.compareSync(password, user.password)
             if(checkPass){
+                await db.Favorites.destroy({ where: { user_id: id } });
                 const deleted = await db.Users.destroy({where:{id}})
+                
                 if(deleted == 1){
                     return {success: true, message: "Eliminado correctamente"}
                 }
