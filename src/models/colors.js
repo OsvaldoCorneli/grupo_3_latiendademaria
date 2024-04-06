@@ -67,7 +67,7 @@ module.exports = {
                 let newColors = typeof(colors) == 'string'? [colors.toUpperCase()] : colors.map(c => {return c.toUpperCase()});
                 for (let i in productColors) {
                     const { id, hex, products } = productColors[i]
-                    if (!newColors.includes(hex)) {
+                    if (!newColors.includes(hex)) { //si el color en la base de datos no esta incluido en el array de colores del formulario de edicion, lo borra de la DB.
                         await db.product_colors.destroy({where: {id: products[0].product_colors.id}})
                     }
                 }

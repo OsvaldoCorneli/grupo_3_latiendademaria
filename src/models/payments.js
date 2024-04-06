@@ -190,16 +190,17 @@ module.exports = {
                 })
                 const checkStock = await Promise.all(Promises)
                 if (checkStock.some(prod => !prod.check)) {
-                    return { error: true,
+                    return { 
+                        error: true,
                         message: 'sin existencia de stock o el articulo y/o color no existen',
-                            productos: checkStock.filter(pr => !pr.check)
-                        }
+                        productos: checkStock.filter(pr => !pr.check)
+                    }
                 } else {
                     const promisesUpdate = pago.products.map(({product_id, color_id, cantidad, color}) => {
                             return new Promise(resolve => resolve(db.product_colors.decrement('stock',{
                                     by: +cantidad,
                                     where: {product_id, color_id},
-                                    //logging: false
+                                    logging: false
                                 })
                             ))
                         })

@@ -116,7 +116,10 @@ module.exports = {
     },
     detail: async function (id) {
         try{
-        const detailUser = await db.Users.findByPk(id,{logging: false, raw: true})
+        const detailUser = await db.Users.findByPk(id,{ 
+            attributes: {exclude: ['password']},
+            logging: false,
+            raw: true})
         if (detailUser) {
             return detailUser
         } else {
