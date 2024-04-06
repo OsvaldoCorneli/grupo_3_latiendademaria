@@ -16,6 +16,7 @@ const cors = require('cors')
 const { Sequelize } = require('sequelize');
 const dotenv = require('dotenv');
 dotenv.config();
+const apiAuth = require('./middlewares/apiAuth');
 
 const { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT } = process.env;
 
@@ -49,7 +50,7 @@ app.set('views', './src/views')  // <<--- ejemplo de codigo a usar si se quiere 
 
 app.use(loguearRuta);
 
-app.use('/api', api)
+app.use('/api', apiAuth.isAuthenticated, api)
 app.use('/dashboard', dashboard);
 app.use('/products', productRoutes);
 app.use('/users', userRoutes);
