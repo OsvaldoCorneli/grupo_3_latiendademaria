@@ -13,7 +13,7 @@
                 </tr>
             <% carrito.forEach(el => { %>
                 <tr class="cartascart" id="product-<%= el.id %>-<%= el.colorSelected %>">
-                    <td id="X" onclick="eliminarProducto('<%= el.id %>', '<%= el.colorSelected %>')">X</td>
+                    <td id="X" onclick="eliminarProducto('<%= el.id %>', '<%= el.colorSelected %>')"><i class="fa-solid fa-trash"></i></td>
                     <td ><img src="<%= el.images[0].pathName %>" alt="<%= el.name %>"/></td>
                     <td id="product"><%= el.name %></td>
                     <% let prodColor = el.colors.find(({color}) => color.id == el.colorSelected).color %>
@@ -71,7 +71,7 @@
               
         </span>
         <div id="finalizarcompra">
-        <button onclick="finalizarCompra('<%= id %>')">Finalizar Compra</button>
+        <button onclick="prefinalizacion('<%= id %>')">Finalizar Compra</button>
        </div>
 
     </section>

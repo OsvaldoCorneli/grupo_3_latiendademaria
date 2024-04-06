@@ -25,8 +25,6 @@
                         name="nombre"
                         id="nombre"
                         placeholder="ingrese su nombre"
-                        
-                        minlength="2"
                         value="<%= body.nombre? body.nombre : null  %>"
                     />
                 </div>
@@ -42,8 +40,6 @@
                         name="apellido"
                         type="text"
                         placeholder="Ingresar apellido"
-                        
-                        minlength="2"
                         value="<%= body.apellido? body.apellido : null  %>"
                     />
                 </div>
@@ -59,7 +55,6 @@
                     type="date"
                     name="fechaNacimiento"
                     id="fechaNacimiento"
-                    
                     value="<%= body.fechaNacimiento? body.fechaNacimiento : null  %>"
                     />
                 </div>
@@ -118,8 +113,6 @@
                     name="codigoPostal"
                     id="codigoPostal"
                     placeholder="Codigo Postal"
-                    minlength="4"
-                    maxlength="9"
                     value="<%= body.codigoPostal? body.codigoPostal :  parseInt(0) %>"
                 />
             </div>
@@ -133,8 +126,6 @@
                     name="calle"
                     id="street"
                     placeholder="calle"
-                    minlength="2"
-                    maxlength="20"
                     value="<%= body.calle? body.calle : null %>"
                     />
             </div>
@@ -149,8 +140,6 @@
                     name="calleNumero"
                     id="streetnumber"
                     placeholder="Numero"
-                    minlength="1"
-                    maxlength="20"
                     value="<%= body.calleNumero ? body.calleNumero : parseInt(0) %>"
                     />
             </div>
@@ -181,8 +170,6 @@
                     name="piso"
                     id="buildingfloor"
                     placeholder="Piso"
-                    minlength="1"
-                    maxlength="20"
                     value="<%= body.piso? body.piso : null %>"
                     />
             </div>
@@ -196,8 +183,6 @@
                     name="departamento"
                     id="departamento"
                     placeholder="Departamento"
-                    minlength="1"
-                    maxlength="20"
                     value="<%= body.departamento? body.departamento : null %>"
                     />
             </div>
@@ -213,9 +198,6 @@
                     name="email"
                     id="email"
                     placeholder="Email"
-                    
-                    minlength="10"
-                    maxlength="30"
                     value="<%= body.email? body.email : null %>"
                     />
             </div>
@@ -231,8 +213,6 @@
                     name="userName"
                     id="userName"
                     placeholder="Nombre de usuario"
-                    
-                    minlength="6"
                     value="<%= body.userName? body.userName : null %>"
                 />
             </div>
@@ -249,8 +229,6 @@
                     name="password"
                     id="password"
                     placeholder="contraseña"
-                    
-                    minlength="8"
                     value="<%= body.password? body.password : null %>"
                     />
             </div>
@@ -266,8 +244,6 @@
                     name="repassword"
                     id="repassword"
                     placeholder="repetir contraseña"
-                    
-                    minlength="8"
                     value="<%= body.repassword? body.repassword : null %>"
                 />
             </div>

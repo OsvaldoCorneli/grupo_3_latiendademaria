@@ -4,6 +4,7 @@ const users = require('../controllers/user');
 const validacionForm = require('../middlewares/validacionForm') ;
 const upload = require('../middlewares/multerMid');
 const jwt = require('../middlewares/jsonwebtoken')
+const addCart = require("../middlewares/addCart")
 
 const db = require("../database/models")
 
@@ -24,7 +25,7 @@ router.post('/restore/token', jwt.checkToken, validacionForm.restore(), users.re
 router.get('/profile', users.profile);
 
 router.route('/cart/:id') 
-   .post(users.addCart)
+   .post(addCart, users.addCart)
    .delete(users.deleteCart);
 
 router.get('/:id/update', users.getUpdateForm);

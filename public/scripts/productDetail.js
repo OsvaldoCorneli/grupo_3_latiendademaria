@@ -10,11 +10,27 @@ window.onload = () => {
     const errorStock = document.querySelector("#error-stock")
     const checked = document.querySelectorAll(".color input")
     const coloresStock = document.querySelectorAll(".stockcolores")
+    const inputcolores = document.querySelectorAll("input[type=radio]")
+
+    console.log(inputcolores)
+
+        inputcolores.forEach(elemento => {
+        const stock = document.querySelector(`#${elemento.id}-stock`)
+        const stocknumber = stock.textContent.split(": ")[1]    
+        if(stocknumber == 0){
+            elemento.disabled = true;
+            stock.textContent = "SIN STOCK"
+            stock.style.color = "red"
+            stock.style.padding = "3px 0 0 0"
+        } 
+
+        })
+
 
 
     checked.forEach(element =>{
     element.addEventListener("input", (e)=>{
-     
+        
         const mensajeCart = document.querySelector("#MensajeCart")
         const stockValue = document.querySelector(`#${e.target.id}-stock`).textContent.split(": ")
         const stockValueNumber = stockValue[1]
@@ -34,8 +50,12 @@ window.onload = () => {
     if(coloresStock){
         let stocktotal = 0;
          coloresStock.forEach(element => {
+            if (element.textContent.includes("stock")){
+            console.log(element.textContent)
             let numero = element.textContent.split(": ")[1]
             stocktotal = parseInt(stocktotal) + parseInt(numero)
+            }
+        
         });
         document.querySelector("h4").textContent += stocktotal;
     }
@@ -177,7 +197,7 @@ fetch(`/users/cart/${id}`, {
 })
 .then(response => {
     if (response.status === 500) {
-        throw new Error(`Error al agregar el producto: ${response.status}`);
+        throw new Error(response);
     }else{
    return response.json()
 }})
@@ -208,6 +228,7 @@ fetch(`/users/cart/${id}`, {
 })
 .catch(error => {
     console.error('Error al agregar el producto:', error);
+    errorStock1.style.display = "block"
 });
 }
 

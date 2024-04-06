@@ -14,7 +14,7 @@
         <a href="/products/<%= id %>/edit"><button class="edit">Editar</button></a>
         <form action="/products/<%= id %>/delete?_method=DELETE" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este producto?');">
             <input type="hidden">
-            <button type="submit" class="delete">X</button>
+            <button type="submit" class="delete"><i class="fa-solid fa-trash"></i></button>
         </form>
     </span>
 </article>
