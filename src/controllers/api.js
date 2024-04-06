@@ -149,21 +149,25 @@ module.exports = {
             try {
                 const errores = validationResult(req)
                 if (errores.isEmpty()) {
-                    const user = await User.login(req.body)
-                    if (user.access) {
-                        req.session.user = user? user : {};
-                        
-                        if(req.body.recordame != undefined){
-                            const oneDayInMillis = 24 * 60 * 60 * 1000;
-                            res.cookie('recordame', user.email, { expires: new Date(Date.now() + oneDayInMillis), httpOnly: true });
-                        }
-                        res.status(200).json(user)
-                    } else {
-                        res.status(403).json()
+                    if (req.user.token){
+                        res.status(200).json(req.user.token)
                     }
+                    
                 } else {
                     res.status(401).json(errores.mapped())
                 } 
+            } catch (error) {
+                res.status(500).json(error.message)
+            }
+        },
+        profile: async function (req,res) {
+            try {
+                if (req.user.token) {
+                    const user = await User.detail(+req.user.id)
+                    res.status(200).json({...user, access: true})
+                } else {
+                    res.status(401).json({access: false, error: 'NotAuthorized'})
+                }
             } catch (error) {
                 res.status(500).json(error.message)
             }

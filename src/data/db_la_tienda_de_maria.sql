@@ -88,6 +88,9 @@ create table product_colors(
 	product_id int,
     color_id int,
     stock decimal(10,2),
+    created_at datetime not null default current_timestamp,
+    updated_at datetime default current_timestamp,
+    deleted_at datetime default null,
     foreign key(product_id) references products(id),
     foreign key(color_id) references colors(id)
 );

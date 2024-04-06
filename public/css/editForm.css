@@ -6,7 +6,9 @@
 body {
     margin-bottom: 4.5vh;
 }
-
+.colorStock {
+    transition: 500ms;
+}
 .createForm {
     padding: 5px;
     margin-top: 20px;
@@ -102,6 +104,7 @@ form > span > input {
     border-radius: 5px;
     border: none;
 }
+
 select.inputForm {
     height: 100%;
 }
@@ -141,13 +144,18 @@ input[type='color']:hover {
     flex-wrap: wrap;
     gap: 5px
 }
-.container-colorinputs > div {
+.container-colorinputs > fieldset {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 5px;
 }
+
+.container-colorinputs input.number {
+    width: 100px;
+}
+
 input[type="file"] {
     position: absolute;
     background-color: #1259c3;

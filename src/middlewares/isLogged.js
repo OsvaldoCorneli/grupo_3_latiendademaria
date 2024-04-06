@@ -3,6 +3,8 @@ function isLogged (req,res, next) {
     if (req.session.user) {
         res.locals = { login: true, admin: req.session.user.admin, user: {id: req.session.user.id} }
         next()
+    } else if (req.user.token){
+        next()
     } else {
         res.redirect('/')
     }
