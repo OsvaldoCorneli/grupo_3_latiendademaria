@@ -593,6 +593,7 @@ section.delete-acount div input{
     display: none;
     color: red;
     align-self: center;
+    margin: 0 0 5px 0;
 }
 
 

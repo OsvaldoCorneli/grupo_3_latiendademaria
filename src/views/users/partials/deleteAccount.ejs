@@ -14,10 +14,11 @@
             </p>
             <br>
             <h4 style="align-self: flex-end;">Atentamente La tienda de Maria</h4>
-            <div>
+            <div id="deleteMenu">
                 <span id="error-deleteacount">Error</span>
                 <input type="password" id="inputPassword" placeholder="Ingrese su contraseña" />
-                <button class="delete" onclick="preEliminacion('<%= id %>')" >Eliminar Cuenta</button>
+                <button class="delete" id="<%= id %>" >Eliminar Cuenta</button>
+                <!-- onclick="preEliminacion('<%= id %>') -->
             </div>
     </div>
     

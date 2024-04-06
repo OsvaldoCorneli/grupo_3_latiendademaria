@@ -1,3 +1,22 @@
+const errorMensaje = document.querySelector("#error-deleteacount")
+const BotonDelete = document.querySelector("#deleteMenu button")
+
+
+
+BotonDelete.addEventListener("click", (e)=>{
+ const id = document.querySelector("#deleteMenu button").id
+const input = document.querySelector('#inputPassword')
+if(input.value != ""){
+    preEliminacion(id)     
+}else{
+
+errorMensaje.style.display = "block"
+errorMensaje.textContent = "Ingrese su contraseña"
+
+
+}
+
+})
 
 function preEliminacion(id){
     const body = document.querySelector("body")
@@ -18,6 +37,8 @@ function preEliminacion(id){
 }
 
 
+
+
 function popUpoOff(){
     const body = document.querySelector("body")
     const elementosPopup = document.querySelector('.popupscreen');
@@ -28,8 +49,8 @@ function popUpoOff(){
 
 
 function eliminarUsuario(id) {
-    
-    if (confirm("¿Está seguro/a de que desea eliminar su usuario?")) {
+        popUpoOff()
+        errorMensaje.style.display = "none"
         const password = document.querySelector("#inputPassword").value;
         
         if (password) { 
@@ -60,7 +81,9 @@ function eliminarUsuario(id) {
                     
                 }
                 else if(respuesta.message == "La contraseña es incorrecta"){
-                    alert(respuesta.message);
+                    errorMensaje.style.display = "block"
+                    errorMensaje.textContent = respuesta.message
+
                 } else {
                     alert(respuesta.message);
                 }
@@ -71,5 +94,5 @@ function eliminarUsuario(id) {
         } else {
             console.error('Contraseña no proporcionada');
         }
-    }
+    
 }
