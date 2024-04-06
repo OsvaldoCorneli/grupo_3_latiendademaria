@@ -10,11 +10,27 @@ window.onload = () => {
     const errorStock = document.querySelector("#error-stock")
     const checked = document.querySelectorAll(".color input")
     const coloresStock = document.querySelectorAll(".stockcolores")
+    const inputcolores = document.querySelectorAll("input[type=radio]")
+
+    console.log(inputcolores)
+
+        inputcolores.forEach(elemento => {
+        const stock = document.querySelector(`#${elemento.id}-stock`)
+        const stocknumber = stock.textContent.split(": ")[1]    
+        if(stocknumber == 0){
+            elemento.disabled = true;
+            stock.textContent = "SIN STOCK"
+            stock.style.color = "red"
+            stock.style.padding = "3px 0 0 0"
+        } 
+
+        })
+
 
 
     checked.forEach(element =>{
     element.addEventListener("input", (e)=>{
-     
+        
         const mensajeCart = document.querySelector("#MensajeCart")
         const stockValue = document.querySelector(`#${e.target.id}-stock`).textContent.split(": ")
         const stockValueNumber = stockValue[1]
