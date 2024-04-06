@@ -50,8 +50,12 @@ window.onload = () => {
     if(coloresStock){
         let stocktotal = 0;
          coloresStock.forEach(element => {
+            if (element.textContent.includes("stock")){
+            console.log(element.textContent)
             let numero = element.textContent.split(": ")[1]
             stocktotal = parseInt(stocktotal) + parseInt(numero)
+            }
+        
         });
         document.querySelector("h4").textContent += stocktotal;
     }
