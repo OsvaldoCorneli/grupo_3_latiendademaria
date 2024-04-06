@@ -174,30 +174,66 @@ function deleted(id, color){
     }
 
 
-
-
 function finalizarCompra(id){
     
     const envio = document.querySelector('#calcularEnvio input:checked').value
 
-    let carrito = {
-        idUser: parseInt(id), 
-        products: productosCarrito,
-        envio: envio == "true" ? true : false,
-        status: "enproceso"
+    if (productosCarrito.length == 0) {
+        popUpRedirect('Tu carrito esta vacio, te vamos a redirigir a la seccion Productos', 5, '/products')
+    } else {
+        let carrito = {
+            idUser: parseInt(id), 
+            products: productosCarrito,
+            envio: envio == "true" ? true : false,
+            status: "enproceso"
+        }
+        fetch(`http://${host}/api/payment`,{
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(carrito)
+            }).then(res => res.json())
+            .then(data => {
+                popUpRedirect('Tu pedido fue enviado y se encuentra en proceso, contactate con el vendedor para pactar la entrega', 6, '/users/profile')
+            })
     }
-    fetch(`http://${host}/api/payment`,{
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(carrito)
-        }).then(res => res.json())
-        .then(data => {
-            alert(`carrito enviado con exito ${JSON.parse(data)}`)
-        })
 }
+
+function popUpRedirect(message, second, endpoint) {
+    const popup = document.createElement('span');
+    popup.classList.add('popupscreen');
+    
+    popup.innerHTML = `
+        <div class="popUps" id="popUpDetailLogin">
+            <h3>${message}</h3>
+            <div class="botonPopup">
+                Redirigiendote en <b id="counter"><b> segundos ...
+            </div>  
+        </div>
+    `;
+    body.appendChild(popup);
+    startTimerRedirect(second, endpoint)
+}
+
+
+function startTimerRedirect(seconds,endpoint) {
+    const TIME_LIMIT = seconds
+    let timePassed = 0
+    let timeLeft;
+    timerInterval = setInterval(() => {
+        
+        timePassed = timePassed += 1;
+        timeLeft = TIME_LIMIT - timePassed;
+        
+        document.getElementById("counter").innerHTML = timeLeft;
+        if (timePassed == TIME_LIMIT) {
+            window.location = `http://${host}${endpoint}`
+        }
+    }, 1000);
+}
+
 
 function popUpoOff(){
     

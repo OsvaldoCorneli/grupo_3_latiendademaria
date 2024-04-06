@@ -14,7 +14,7 @@ module.exports = {
                         attributes: ['stock'],
                         include: {
                             association: 'color',
-                            attributes: ['id','name','hex']
+                            attributes: ['id','name','name_es','hex']
                         }
                     },
                     {
@@ -46,7 +46,7 @@ module.exports = {
                         attributes: ['stock'],
                         include: {
                             association: 'color',
-                            attributes: ['id','name','hex']
+                            attributes: ['id','name','name_es','hex']
                         }
                     },
                     {
@@ -95,7 +95,7 @@ module.exports = {
                         attributes: ['stock'],
                         include: {
                             association: 'color',
-                            attributes: ['id','name','hex'],
+                            attributes: ['id','name','name_es','hex'],
                             
                         },
                         where: condition.colors,

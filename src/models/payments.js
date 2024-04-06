@@ -171,6 +171,7 @@ module.exports = {
     updateStatus: async function (body) {
         try {
             const { status, id } = body
+            
             const pago = await db.Payments.findByPk(+id,{
                 include: {
                     association: 'products',
@@ -182,25 +183,61 @@ module.exports = {
                     }
                 },
                 logging: false})
-            if (pago.status == status) return this.detallePago(id)
-            for (let i in pago.products) {
-                const {product_id, color_id, cantidad} = pago.products[i]
-                const stock = pago.products[i].color.color_products.find(p => p.product_id == product_id).stock
-                if (status == 'completado' && pago.status != 'completado') {
-                    if (+stock >= +cantidad) {
-                        await db.product_colors.update({stock: +stock - +cantidad},{where: {product_id, color_id}})
-                    } else {
-                        throw new Error(`Stock insuficiente en el articulo ${product_id}`)
+            
+            if (status == 'completado' && pago.status != 'completado') {
+                const Promises = pago.products.map(({product_id, color_id, cantidad})=> {
+                    return new Promise(resolve => resolve(this.checkStock({product_id, color_id, cantidad})))
+                })
+                const checkStock = await Promise.all(Promises)
+                if (checkStock.some(prod => !prod.check)) {
+                    return { error: true,
+                        message: 'sin existencia de stock o el articulo y/o color no existen',
+                            productos: checkStock.filter(pr => !pr.check)
+                        }
+                } else {
+                    const promisesUpdate = pago.products.map(({product_id, color_id, cantidad, color}) => {
+                            return new Promise(resolve => resolve(db.product_colors.decrement('stock',{
+                                    by: +cantidad,
+                                    where: {product_id, color_id},
+                                    //logging: false
+                                })
+                            ))
+                        })
+                    const updateStocks = await Promise.all(promisesUpdate)
+                    if (updateStocks) {
+                        pago.status = status
+                        await pago.save()
+                        return await this.detallePago(id)
                     }
-                } else if (status != 'completado' && pago.status == 'completado') {
-                    await db.product_colors.update({stock: +stock + +cantidad},{where: {product_id, color_id}})
                 }
-                if (i == pago.products.length-1) {
+            } else if (status != 'completado' && pago.status == 'completado') {
+                const promisesUpdate = pago.products.map(({product_id, color_id, cantidad}) => {
+                    return new Promise(resolve => resolve(db.product_colors.increment('stock',{
+                            by: +cantidad,
+                            where: {product_id, color_id},
+                            logging: false
+                        })
+                    ))
+                })
+                const updateStocks = await Promise.all(promisesUpdate)
+                if (updateStocks) {
                     pago.status = status
                     await pago.save()
-                    return this.detallePago(id)
+                    return await this.detallePago(id)
                 }
             }
+
+
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+    },
+    checkStock: async function ({product_id, color_id, cantidad}) {
+        try {
+            const data = await db.product_colors.findOne({where: {product_id, color_id, stock: {[Op.gte]: +cantidad}}, logging: false})
+            if (data) return {product_id, color_id, cantidad, check: true}
+            else return {product_id, color_id, cantidad, check: false}
         } catch (error) {
             return error
         }
