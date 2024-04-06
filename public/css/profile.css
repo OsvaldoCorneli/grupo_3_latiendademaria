@@ -95,6 +95,8 @@ section.profile {
     max-width: 400px;
     gap: 10px;
     font-size: 1.5rem;
+    background-color: #26775b;
+    color: white;
 }
 section.profile img {
     width: 150px;
@@ -568,6 +570,22 @@ section.delete-acount div input{
     width: 250px;
     height: 30px;
 
+}
+.change-pass{
+    border: 1px solid black;
+    display: flex;
+    height: 400px;
+    width: 50%;
+}
+
+#contenedor-pass{
+    /* border: 1px solid black; */
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 20px;
 }
 
 #error-deleteacount{
