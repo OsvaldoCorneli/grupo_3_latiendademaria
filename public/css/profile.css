@@ -21,6 +21,7 @@ main {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    max-width: 850px;
     justify-content: space-around;
     padding: 10px 0 10px 0;
     
@@ -208,13 +209,13 @@ button.create {
     border-radius: 5px;
     border: hidden;
     padding: 5px;
-    background-color: #1259c3;
+    background-color: #26775b;
     color: white;
     width: 150px;
     transition: 500ms;
 }
 button.create:hover {
-    background-color: #5394b0;
+    background-color: #2f9b75;
 }
 button.delete {
     border-radius: 5px;
