@@ -38,11 +38,8 @@ module.exports = {
         const publicRoutes = ['/products', '/user/login']
         if (publicRoutes.includes(req.url.split('?')[0])) {  
             next()
-        } else if (req.session.user?.id) {
-            next()    
-        } else {
-            let token = null
-            if (req.headers?.authorization) token = req.headers['authorization']
+        } else if (req.headers?.authorization) {
+            const token = req.headers['authorization']
             jwt.verify(token, JWT_KEY, function (err, data) {
                 if (err) {
                     res.status(401).send({access: false, error: "NotAuthorized"})
@@ -51,6 +48,8 @@ module.exports = {
                     next()
                 }
             })
+        } else if (req.session.user) {
+            next()
         }
     }
 }

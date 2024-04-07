@@ -37,7 +37,8 @@ create table users(
     admin boolean default false,
     carrito json default null,
 	created_at datetime default current_timestamp,
-    updated_at datetime default current_timestamp
+    updated_at datetime default current_timestamp,
+    deleted_at datetime default null,
 );
 
 create table payments(
