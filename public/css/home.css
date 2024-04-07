@@ -258,6 +258,7 @@ body {
 #mensajewelcome{
  font-size: 30px;
  color: white;
+ text-align: center;
 }
 
 @media (min-width: 760px) {

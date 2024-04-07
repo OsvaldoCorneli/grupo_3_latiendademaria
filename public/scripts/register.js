@@ -84,7 +84,7 @@ submitButton.addEventListener("click", (e)=>{
     popup.innerHTML = `
     <div class="popUpsregistro">
             <h2>Verificación de Registro</h2>
-            <p>Por favor, revise sus detalles antes de continuar.</p>
+            <p>Por favor, revise su informacion antes de continuar.</p>
             <h3>¿Desea modificar algo?</h3>
             
             <div class="botonPopup">
