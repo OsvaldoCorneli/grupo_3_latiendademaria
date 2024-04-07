@@ -85,7 +85,8 @@ module.exports = {
             const detail = await db.Payments.findByPk(+id,{
                 include: [
                     {   association: 'user',
-                        attributes: ['id','nombre','apellido']
+                        attributes: ['id','nombre','apellido'],
+                        paranoid: false
                     },
                     {
                         association: 'products',
@@ -107,7 +108,7 @@ module.exports = {
                     }
                 ],
                 attributes: {exclude: ['user_id']},
-                //raw: true,
+                paranoid: false,
                 logging: false
             })
             return detail

@@ -135,3 +135,4 @@ async function detallePayment(paymentId) {
     }
 };
 
+const deleteUser = document.querySelector('#deleteUser')
