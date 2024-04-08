@@ -161,7 +161,7 @@ function redireccionarAlogin(){
     <div class="popUps" id="popUpDetailLogin">
     <h3>Es necesario iniciar sesión para añadir productos al carrito.</h3>
     <div class="botonPopup">
-        <a onclick="popUpoOff()">Aceptar</a>
+        <a onclick="popUpoOff()">Cerrar</a>
         <a href='/users/login'>Login</a>
         <a href='/users/register'>Regístrate</a>
     </div>  

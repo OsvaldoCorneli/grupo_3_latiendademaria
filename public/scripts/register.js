@@ -1,7 +1,5 @@
 window.addEventListener("load", async function(){
-let usuarios = await fetch("http://localhost:3001/api/usersregistro?key=allUsers")
-    .then(response => response.json())
-    .then(data => data)
+
 const day = currentDay()
 let submitButton = document.querySelector('input[type="submit"]')
 const requiredinput = document.querySelectorAll(".requiredinput")
@@ -234,12 +232,6 @@ element.addEventListener("input", (e)=>{
                     error.style.display = 'block'
                     withOutErrors.email = false
                 }
-                else if(usuarios.some(elemento => elemento.email === e.target.value)){
-                    element.style.border = '2px solid red'
-                    error.textContent = "Este email ya esta registrado"
-                    error.style.display = 'block'
-                    withOutErrors.email = false
-                }
                 else{
                     element.style.border = '2px solid green'
                     error.style.display = 'none'
@@ -260,14 +252,6 @@ element.addEventListener("input", (e)=>{
                     error.style.display = 'block'
                     withOutErrors.userName = false;
                 }
-        
-                else if(usuarios.some(elemento => elemento.userName === e.target.value)){
-                    element.style.border = '2px solid red'
-                    error.textContent = "El nombre de usuario ya está en uso"
-                    error.style.display = 'block'
-                    withOutErrors.userName = false;
-                }
-        
                 else{
                     element.style.border = '2px solid green'
                     error.style.display = 'none'

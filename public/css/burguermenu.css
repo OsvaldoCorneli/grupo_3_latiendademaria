@@ -17,8 +17,12 @@
     color: red;
     background-color: rgba(38, 119, 91, 0.2); 
     z-index: 3;
-    ;
+    
 
+}
+
+#menuburguer{
+    cursor: pointer;
 }
 
 #menu{
@@ -100,6 +104,7 @@ align-items: flex-start;
 }
 #Xboton a i{
    font-size: 75%;
+   cursor: pointer;
 
 }
 

@@ -126,7 +126,7 @@ botones.forEach(element => {
             case "Mis compras":
                 if(changePass){
                     const errores = document.querySelectorAll(".changePassError")
-                    const inputsChange = document.querySelectorAll(".contenedor-pass input")
+                    const inputsChange = document.querySelectorAll("#contenedor-pass input")
                     errores.forEach((elemento)=>{
                         elemento.style.display = "none"
                     })
@@ -151,7 +151,7 @@ botones.forEach(element => {
                 payment.style.display = "none"
                 if(changePass){
                     const errores = document.querySelectorAll(".changePassError")
-                    const inputsChange = document.querySelectorAll(".contenedor-pass input")
+                    const inputsChange = document.querySelectorAll("#contenedor-pass input")
                     errores.forEach((elemento)=>{
                         elemento.style.display = "none"
                     })
@@ -175,7 +175,7 @@ botones.forEach(element => {
                 favorite.style.display = "none"
                 if(changePass){
                     const errores = document.querySelectorAll(".changePassError")
-                    const inputsChange = document.querySelectorAll(".contenedor-pass input")
+                    const inputsChange = document.querySelectorAll("#contenedor-pass input")
                     errores.forEach((elemento)=>{
                         elemento.style.display = "none"
                     })
@@ -204,7 +204,7 @@ botones.forEach(element => {
                 favorite.style.display = "none"
                 if(changePass){
                     const errores = document.querySelectorAll(".changePassError")
-                    const inputsChange = document.querySelectorAll(".contenedor-pass input")
+                    const inputsChange = document.querySelectorAll("#contenedor-pass input")
                     errores.forEach((elemento)=>{
                         elemento.style.display = "none"
                     })

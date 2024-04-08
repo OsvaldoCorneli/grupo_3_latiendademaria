@@ -204,6 +204,11 @@ input[type=number]::-webkit-outer-spin-button {
     padding: 10px 10px 5px 10px;
     transition: 250ms;
 } */
+
+.containerheart{
+    cursor: pointer;
+}
+
 .color{
     width: 100%;
     max-width: 250px;
