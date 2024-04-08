@@ -5,17 +5,21 @@
         <img class="perfil" src="<%= imagen %>" alt="<%= nombre.slice(0,1).toUpperCase()+apellido.slice(0,1).toUpperCase() %>"/>
     </span>
     <span>
-        <p>Nombre: <%= nombre %>, <%= apellido %></p>
-        <p>email: <%= email %></p>
-        <p>Provincia: <%= provincia %></p>
-        <p>Domicilio: <%= calle %> <%= calleNumero %> </p>
+        <div>
+            <b>ID:</b> 
+            <t id="userID"><%= id %></t>
+        </div>
+        <p><b>Nombre:</b> <%= nombre %>, <%= apellido %></p>
+        <p><b>email:</b> <%= email %></p>
+        <p><b>Provincia:</b> <%= provincia %></p>
+        <p><b>Domicilio:</b> <%= calle %> <%= calleNumero %> </p>
         <% if (piso) { %>
-            <p>Piso: <%= piso %></p>
+            <p><b>Piso:</b> <%= piso %></p>
         <% } %>
         <% if (departamento) { %>
-            <p>Departamento: <%= departamento %> </p>
+            <p><b>Departamento:</b> <%= departamento %> </p>
         <% } %>
-        <p>Codigo Postal: <%= codigoPostal %></p>
+        <p><b>Codigo Postal:</b> <%= codigoPostal %></p>
     </span>
     
 </section>
