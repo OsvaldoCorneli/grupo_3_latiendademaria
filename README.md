@@ -20,17 +20,18 @@ La tienda de Maria es un emprendimiento puramente catolico, el publico objetivo 
 lo realizaremos centrándonos en su principal valor agregado que es la creatividad y autenticidad en las imágenes propias, que resultan en la creación de productos únicos, que solamente podrás adquirir en la tienda on line, ademas buscaremos humanizar la marca, para conectar emocionalmente con la audiencia mediante una presencia mas fuerte de la dueña, para ello pusimos en la pagina una sección especial con información y fotos personales y del back stage productivo. Por ultimo el servicio de descargas gratis de imágenes en alta calidad es una estrategia para que mas personas accedan al sitio.
 
 ## **Integrantes del grupo**
-*Osvalo Matias Corneli Nassif*: hola soy Osvalo, tengo 33 años, estado civil, soltero. Actualmente me encuentro sin trabajar de manera formal,estoy enfocado en mejorar mis capacidades como programador, realizando cursos de manera simultanea y formándome de manera autodidacta. 
+*Osvalo Matias Corneli Nassif*: 
+hola soy Osvalo, tengo 33 años, estado civil, soltero. Actualmente me encuentro sin trabajar de manera formal,estoy enfocado en mejorar mis capacidades como programador, realizando cursos de manera simultanea y formándome de manera autodidacta. 
 Mis fortalezas: La empatia, tengo una alta capacidad de comprender las necesidades de los demás, mi paciencia para manejar situaciones imprevistas y problemas también es de destacar, me permite solucionar con calma y resiliencia todos los desafíos que se presenta.
 
 *Ignacio Agustín Jorge*: Hola soy Ignacio, tengo 32 años, estado civil soltero. Soy estudiante de la tecnicatura superior en programación y en simultaneo me encuentro realizando cursos, para mejorar mis habilidades como programador y ampliar mi campo laboral el dia de mañana. No poseo trabajo en relacion de dependencia por lo que tengo una buena disponibilidad horaria.
 Mis capacidades blandas a destacar son la capacidad de escucha, herramienta clave para poder comprender las necedidades de los clientes y la empatia, me permite desenvolverme con mucha armonia en mis entornos laborales. 
 
-*Natalia Nora Rodriguez*: Hola soy Naty, tengo 33 años, estado civil soltera. Trabajo de manera independiente, poseo dos emprendimientos, ambos son de ventas de productos on line.Soy ilustradora digital y diseñadora de marroquineria en cuero. Realice cursos de marketing, creaciones de marcas, logistica, canales de venta on line, capacidades blandas, etc. que me han ayudado a desarrollarme como emprendedora y como persona.
+*Natalia Nora Rodriguez*: 
+Hola soy Naty, tengo 33 años, estado civil soltera. Trabajo de manera independiente, poseo dos emprendimientos, ambos son de ventas de productos on line.Soy ilustradora digital y diseñadora de marroquineria en cuero. Realice cursos de marketing, creaciones de marcas, logistica, canales de venta on line, capacidades blandas, etc. que me han ayudado a desarrollarme como emprendedora y como persona.
 Mis fortalezas blandas: capacidad de adaptarme al cambio y la buena comunicación, aprendí que lo que voy a decir es igual de importante  que como lo voy a decir.
 
-*Gustavo Rodolfo Paz*: Hola soy Gustavo, tengo 33 años. Actualmente trabajo de "freelancer" en el rubro de teconologia. Fui estudiante de Tenico en redes de Computadoras en la Universidad Catolica de santiago del estero, posteriormente cambie de rumbo a estudiante de Contador Publico en la universidad Siglo 21, el cual solo me falta la Tesis. En ese periodo (2012 - 2020), trabajé en el rubro de Distribucion de Bebidas, donde me destaqué en las areas de logistica, facturacion, gestion de inventario, tesoreria y compras.
-Mis fortalezas son: Escuchar a los demas, tolerancia y respeto. Capacidad para adaptarme al cambio, afrontarlos de manera proactiva. 
+*Gustavo Rodolfo Paz*: [gitHub](https://github.com/guspaz0)
 
 ## **Sitios de referencia**
 https://thefishermen.es/
@@ -47,3 +48,6 @@ Fue un desafio buscar tiendas relacionadas a estos productos y al publico objeti
 
 ## **Trello**
 [Trello La tienda de Maria](https://trello.com/b/0Hc3HXnb/la-tienda-de-mar%C3%ADa)
+
+## **Instrucciones Repositorio**
+clonar el repositorio:
