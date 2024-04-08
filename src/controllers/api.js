@@ -149,8 +149,10 @@ module.exports = {
             try {
                 const errores = validationResult(req)
                 if (errores.isEmpty()) {
-                    if (req.user.token){
+                    if (req.user?.token){
                         res.status(200).json(req.user.token)
+                    } else {
+                        res.status(401).json({access: false, message: 'solo administradores'})
                     }
                     
                 } else {

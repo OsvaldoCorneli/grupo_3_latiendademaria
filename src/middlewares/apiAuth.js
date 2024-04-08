@@ -12,9 +12,14 @@ module.exports = {
             db.Users.findOne({where: {email: req.body.email}, logging: false})
             .then(user => {
                 if (user) {
-                    const token = jwt.sign({id: user.id}, JWT_KEY, {expiresIn: 60*30})
-                    req.user = {token}
-                    next()
+                    if (user.admin == 1) {
+                        const token = jwt.sign({id: user.id}, JWT_KEY, {expiresIn: 60*30})
+                        req.user = {token}
+                        next()
+                    } else {
+                        req.user = false
+                        next()
+                    }
                 } else {
                     next()
             }})
