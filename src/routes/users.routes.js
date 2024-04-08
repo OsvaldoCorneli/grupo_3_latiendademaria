@@ -31,8 +31,7 @@ router.route('/cart/:id')
 router.get('/:id/update', users.getUpdateForm);
 router.put('/:id/update', upload.any(), validacionForm.editUser(), users.putUpdateForm);
 
-router.route('/:id/delete')
-    .delete(users.deleteUsers);
+router.delete('/:id/delete', users.deleteUsers);
 
 router.post("/:id/changepass", users.changePass)
 

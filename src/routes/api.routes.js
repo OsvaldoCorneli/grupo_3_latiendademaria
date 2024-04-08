@@ -23,6 +23,7 @@ router.get('/user/favorites', api.favorites.user);
 router.post('/user/favorites', isLogged, api.favorites.add);
 router.post('/user/login', validateForm.login(), apiAuth.getLogin, api.users.login);
 router.get('/user/profile', apiAuth.checkLogin, api.users.profile)
+router.delete('/user/:id/delete', api.users.delete)
 //router.get('/colors', isLogged, api.colors.list)
 // router.get('/products', api.products.list);
 

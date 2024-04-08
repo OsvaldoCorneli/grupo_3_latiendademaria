@@ -9,7 +9,7 @@ const favorites = require('./favorites');
 module.exports = {
     index: async function () {
         try{
-        const users = await db.Users.findAll({raw: true, logging: false})
+        const users = await db.Users.findAll({ raw: true, logging: false})
         return users
         }catch (error) {
             throw new Error(error.message);
@@ -185,18 +185,30 @@ module.exports = {
     deleteUser: async function(id,password){
         try {
             const user = await db.Users.findByPk(id,{raw:true})
-            const checkPass = bcrypt.compareSync(password, user.password)
-            if(checkPass){
-                await db.Favorites.destroy({ where: { user_id: id } });
-                const deleted = await db.Users.destroy({where:{id}})
-                
+            let deleted;
+            let flag = false
+            if (!password) { //para cuando el administrador quiere borrar un usuario sin saber el password
+                deleted = await db.Users.destroy({where:{id}})
+                flag = true
+            } else {
+                const checkPass = bcrypt.compareSync(password, user.password)
+                if(checkPass){
+                    await db.Favorites.destroy({ where: { user_id: id } });
+                    deleted = await db.Users.destroy({where:{id}})
+                    flag = true
+                } else {
+                    return {success: false, message: "La contraseña es incorrecta"}
+                }
+            }
+            if (flag) {
                 if(deleted == 1){
                     return {success: true, message: "Eliminado correctamente"}
+                } else { 
+                    return {success: false, message: "No se pudo eliminar"}
                 }
-                else{ return {success: false, message: "No se pudo eliminar"}}
-            }else{return {success: false, message: "La contraseña es incorrecta"}}
+            }
         } catch (error) {
-             return error
+            return error
         }
        
       },

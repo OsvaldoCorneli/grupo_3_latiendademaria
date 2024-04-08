@@ -193,6 +193,14 @@ module.exports = {
             } catch (error) {
                 res.status(500).json(error.message);
             }
+        },
+        delete: async function(req,res){
+            try {
+                const deleteUser = await User.deleteUser(req.params.id, null)
+                res.status(200).json(deleteUser);
+            } catch (error) {
+                res.status(500).json(error.message);
+            }
         }
     }
 }

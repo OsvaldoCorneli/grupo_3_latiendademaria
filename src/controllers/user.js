@@ -149,7 +149,7 @@ module.exports = {
         try {
             const response = await users.deleteUser(req.session?.user.id, req.body.password)
             if(response.success){
-               res.status(201).json(response);
+                res.status(201).json(response);
             }
             else{
                 res.status(402).json(response);
