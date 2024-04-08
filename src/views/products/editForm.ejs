@@ -74,7 +74,6 @@
                             <legend id="c<%= index %>" style=<%= background %>><%= color.name_es %></legend>
                             <label for="color"></label>
                             <input class="c<%= index %>" type="color" name="color" id="color" value="<%= color.hex %>"/>
-                            <!-- <span id="c<%= index %>" style=<%= background %>><%= color.name_es %></span> -->
                             <% if (locals.errors && errors.color) { %>
                                 <small id="color" class="errors"><%= errors.color.msg %></small>
                             <% } %>

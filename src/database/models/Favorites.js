@@ -21,16 +21,16 @@ module.exports = (sequelize, dataTypes) => {
     const Favorites = sequelize.define(alias, cols, config);
 
     Favorites.associate = function(models) {
-        Favorites.belongsTo(models.Products, {
-            as: 'product',
-            foreignKey: 'product_id',
-            otherKey: 'id'
-        }),
-        Favorites.belongsTo(models.Users, {
-            as: 'user',
-            foreignKey: 'product_id',
-            otherKey: 'id'
-        })
+        // Favorites.belongsTo(models.Products, {
+        //     as: 'product',
+        //     foreignKey: 'product_id',
+        //     otherKey: 'id'
+        // }),
+        // Favorites.belongsTo(models.Users, {
+        //     as: 'user',
+        //     foreignKey: 'product_id',
+        //     otherKey: 'id'
+        // })
     }
 
     

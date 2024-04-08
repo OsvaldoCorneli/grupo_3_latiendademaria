@@ -84,7 +84,8 @@ const config = {
     timestamps: true,
     createdAt: 'created_at',
     updatedAt: 'updated_at',
-    deletedAt: false
+    deletedAt: 'deleted_at',
+    paranoid: true
 }
 
 
