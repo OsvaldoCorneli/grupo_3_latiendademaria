@@ -38,7 +38,7 @@ create table users(
     carrito json default null,
 	created_at datetime default current_timestamp,
     updated_at datetime default current_timestamp,
-    deleted_at datetime default null,
+    deleted_at datetime default null
 );
 
 create table payments(
@@ -273,9 +273,9 @@ insert into colors (name, name_es, hex) values ('Black', 'Negro', '#000000'),
 unlock tables;
 
 lock tables users write;
-insert into users values (default,'Gustavo Rodolfo','Paz','Santiago del Estero','Santiago del Estero','4200','tomas edison','520','\images\users\imagen-1704600266186.jpg','','','gpaz','gpaz@latiendademaria.com','$2a$10$BSB4xD7pqxg.XEPuaIqYHeum4Rgwxm2hFEp46vHp.a.JtRw.jJpHC','1990-06-12',false,default,default,default),
-(default,'pepe','argento','Catamarca','Alijilán','4200','tomas edison','520','','','','pepearg','pepe@latiendademaria.com','$2a$10$IBS5IRK8aczv26KmeiANIO1i/eZXTPnUY7gw7ArxZZ48s2HAGScPW','1990-06-11',false,default,default,default),
-(default,'Jhon','Doe','Buenos Aires','12 de Octubre','1001','lomas de zamora','5100','','','','jaimeterrible','jiamito@latiendademaria.com','$2a$10$BSB4xD7pqxg.XEPuaIqYHeum4Rgwxm2hFEp46vHp.a.JtRw.jJpHC','1990-06-11',true,default,default,default);
+insert into users values (default,'Gustavo Rodolfo','Paz','Santiago del Estero','Santiago del Estero','4200','tomas edison','520','\images\users\imagen-1704600266186.jpg','','','gpaz','gpaz@latiendademaria.com','$2a$10$BSB4xD7pqxg.XEPuaIqYHeum4Rgwxm2hFEp46vHp.a.JtRw.jJpHC','1990-06-12',false,default,default,default,default),
+(default,'pepe','argento','Catamarca','Alijilán','4200','tomas edison','520','','','','pepearg','pepe@latiendademaria.com','$2a$10$IBS5IRK8aczv26KmeiANIO1i/eZXTPnUY7gw7ArxZZ48s2HAGScPW','1990-06-11',false,default,default,default,default),
+(default,'Jhon','Doe','Buenos Aires','12 de Octubre','1001','lomas de zamora','5100','','','','jaimeterrible','jiamito@latiendademaria.com','$2a$10$BSB4xD7pqxg.XEPuaIqYHeum4Rgwxm2hFEp46vHp.a.JtRw.jJpHC','1990-06-11',true,default,default,default,default);
 unlock tables;
 
 lock tables payments write;
