@@ -6,6 +6,7 @@ const BotonDelete = document.querySelector("#deleteMenu button")
 BotonDelete.addEventListener("click", (e)=>{
  const id = document.querySelector("#deleteMenu button").id
 const input = document.querySelector('#inputPassword')
+console.log(input.value)
 if(input.value != ""){
     preEliminacion(id)     
 }else{
@@ -73,12 +74,19 @@ function eliminarUsuario(id) {
             }).then(respuesta =>{
                 
                 if(respuesta.success){
-                    const enlaceCerrarSesion = document.getElementById('cerrarsesion');
-                    if (enlaceCerrarSesion) {
-                        enlaceCerrarSesion.click();
-                        alert(respuesta.message);
-                    }
-                    
+                    const body = document.querySelector("body")
+                    const popup = document.createElement('span');
+                    popup.classList.add('popupscreen');
+                    popup.innerHTML = `
+                        <div class="popUps" id="popUpDetailLogin">
+                        <h3>Su cuenta se elimino correctamente</h3>
+                            <div class="botonPopup">
+                                <a onclick="cerrarSesion()">Aceptar</a>
+                            </div>  
+                        </div>
+                    `;
+                    body.appendChild(popup);
+                
                 }
                 else if(respuesta.message == "La contraseña es incorrecta"){
                     errorMensaje.style.display = "block"
@@ -95,4 +103,11 @@ function eliminarUsuario(id) {
             console.error('Contraseña no proporcionada');
         }
     
+}
+
+function cerrarSesion(){
+    
+    const enlaceCerrarSesion = document.getElementById('cerrarsesion');
+    console.log(enlaceCerrarSesion)
+    enlaceCerrarSesion.click()
 }

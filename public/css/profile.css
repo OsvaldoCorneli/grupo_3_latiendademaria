@@ -55,17 +55,19 @@ main {
 }
 
 .pagination span {
-    border: solid 1px black;
+    border: solid 1px #32A97F;
     padding: 5px;
     border-radius: 5px;
 }
 
 .pagination span:hover {
-    box-shadow: 0px 5px black;
+    box-shadow: 0px 2px 2px #26775b;
 }
 
 .pagination .currentPage {
-    border: solid 3px black;
+    border: solid 3px #32A97F;
+    font-weight: bold;
+    color: #26775b;
 }
 
 .arrow-cards {
@@ -91,18 +93,23 @@ section.profile {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 10px 0 0 0;
     flex-wrap: wrap;
     width: 100%;
     max-width: 400px;
     gap: 10px;
-    font-size: 1.5rem;
-    background-color: #26775b;
+    font-size: 1.2rem;
+    background-color: #32A97F;
     color: white;
+    border-radius: 5px;
+    padding: 15px;
 }
 section.profile img {
-    width: 150px;
+    width: 159px;
+    height: 159px;
     border-radius: 50%;
     border: solid 1px black;
+
 }
 section.profile > .userData {
     display: flex;
@@ -121,7 +128,7 @@ section.profile > .userData > div {
 }
 
 section.payments {
-    display: none;
+    display: flex;
     flex-direction: column;
     text-align: center;
     gap: 10px;
@@ -141,6 +148,7 @@ section.payments > .header{
     border-radius: 5px;
     text-wrap: wrap;
 }
+
 
 section.payments > article{
     display: flex;
@@ -372,13 +380,14 @@ td > img.product {
     border-radius: 5px;
     border: hidden;
     padding: 5px;
-    background-color: #1259c3;
+    background-color: #26775b;
     color: white;
     width: fit-content;
     transition: 500ms;
+    cursor: pointer;
 }
 .button:hover {
-    background-color: #5394b0;
+    background-color: #2f9b75;
 }
 
 canvas {
@@ -576,17 +585,36 @@ section.delete-acount div input{
     border: 1px solid black;
     display: none;
     height: 400px;
-    width: 50%;
+    width: 95%;
 }
 
 #contenedor-pass{
-    /* border: 1px solid black; */
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    align-items: center;
+    justify-content: center;
     padding: 20px;
+}
+
+#contenedor-pass input{
+    width: 50%;
+}
+
+#contenedor-pass a{
+    cursor: pointer;
+    width: 15%;
+    border-radius: 5px;
+    border: hidden;
+    padding: 5px;
+    background-color: #26775b;
+    color: white;
+    transition: 500ms;
+}
+
+#contenedor-pass a{
+background-color: #2f9b75;
 }
 
 #error-deleteacount{
@@ -596,6 +624,11 @@ section.delete-acount div input{
     margin: 0 0 5px 0;
 }
 
+.changePassError{
+    display: none;
+    color: red;
+    margin: 0 0 5px 0;
+}
 
 @media (min-width: 540px) {
     .portraitlayout {
@@ -718,6 +751,54 @@ section.delete-acount div input{
         color: red;
         align-self: center;
     }
+
+    .change-pass{
+        max-width: 500px;
+    }
+    #contenedor-pass{
+      min-width: 400px;
+    }
     
+    section.profile{
+        margin: 0 0 0 5px
+    }
+
+    .header b{
+        width: 85px ;
+    }
     
+    .rows span, .rows p{
+        width: 85px ;
+    }
+    
+    .rows .number{
+        width: 85px;
+        text-align: center;
+    }
+
+    .rows button{
+        width: 20px;
+        margin: 0 32.5px;
+    }
+}
+
+@media (min-width: 1000px){
+    .header b{
+        width: 150px ;
+    }
+    
+    .rows span, .rows p{
+        width: 150px ;
+    }
+    
+    .rows .number{
+        width: 150px;
+        text-align: center;
+    }
+
+    .rows button{
+        width: 30px;
+        margin: 0 60px;
+    }
+
 }
