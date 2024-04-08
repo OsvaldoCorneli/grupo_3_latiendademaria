@@ -305,5 +305,33 @@ module.exports = {
        } catch (error) {
         return error
        }
+    },
+    passChange: async function(body, {id}){
+        try {
+            const user = await db.Users.findByPk(id, {
+                raw: true,
+            });
+            
+            if(!user) throw new Error("Usuario no encontrado");
+
+            const checkPass = bcrypt.compareSync(body.currentPass, user.password)
+            if(checkPass){
+                 console.log("Contraseña Correcta")
+                 const newPassBCrypt = bcrypt.hashSync(body.newPass, 10)
+                 const updateResult  = await db.Users.update({password: newPassBCrypt},{where: {id: id}})
+                 if (updateResult[0] == 1) {
+                    return {success: true, message: "La contraseña se actualizó correctamente."};
+                } else {
+                    return {success: false, message: "No se pudo actualizar la contraseña"}}
+            
+            }else{
+                return {success: false, message: "La contraseña es incorrecta"}
+            }
+        }
+         catch (error) {
+            return error    
+        }    
+
+
     }   
 }

@@ -20,16 +20,22 @@ let inputsNotEmpty = {
 
 const inputChangePass = document.querySelectorAll("#contenedor-pass input")
 const botonChange = document.querySelector("#contenedor-pass a")
-botonChange.addEventListener("click", (e)=>{    
 
+botonChange.addEventListener("click", (e)=>{    
+    let submit = true
     for(let errors in inputsNotEmpty){
         if(!inputsNotEmpty[errors]){
             const error = document.querySelector(`#error-${errors}`)
             error.style.display = "block"
             error.textContent = "Debe llenar este campo"
+            submit = false
         }
     }
-
+    console.log(submit)
+    if(submit){
+        const id = document.querySelector("#userID").textContent    
+        cambiarcontrasena(id)
+    }
 
 })
 
@@ -52,6 +58,7 @@ inputChangePass.forEach((element)=>{
                 }
             break
             case "newPass":
+                const actualPass = document.querySelector("#currentP")
                 const errorNewPass = document.querySelector(`#error-${element.name}`)
                     if(e.target.value == ""){
                         errorNewPass.style.display = "block"
@@ -70,6 +77,13 @@ inputChangePass.forEach((element)=>{
                         errorNewPass.style.display = "block"
                         changepassword.newPass = false
                         inputsNotEmpty.newPass = true;
+                      }
+                      else if(actualPass && actualPass.value == e.target.value){
+                            errorNewPass.textContent = "La nueva contraseña debe ser diferente a la actual"
+                            errorNewPass.style.display = "block"
+                            changepassword.newPass = false
+                            inputsNotEmpty.newPass = true;
+                        
                       }
                       else{
                         errorNewPass.style.display = "none"
@@ -225,3 +239,71 @@ botones.forEach(element => {
     })
 })
 
+function cambiarcontrasena(id){
+    const actual = document.querySelector("#currentP").value
+     const nueva = document.querySelector("#newPass").value
+
+    let bodys = {
+        currentPass: actual,
+        newPass: nueva
+    }
+ 
+        fetch(`/users/${id}/changepass`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(bodys),
+        })
+        .then(response => {
+            if(response.status == 500){
+                throw new Error(response)
+            }
+            else{
+                return response.json()
+            }
+        }).then(respuesta =>{
+            
+            if(respuesta.success){
+                    const body = document.querySelector("body")
+                    const popup = document.createElement('span');
+                    popup.classList.add('popupscreen');
+                    popup.innerHTML = `
+                        <div class="popUps" id="popUpDetailLogin">
+                        <h3>La contraseña se actualizó correctamente</h3>
+                        <h5>Se cerrará la sesión. Por favor, ingrese nuevamente.</h5>
+                            <div class="botonPopup">
+                                <a onclick="cerrarSesion()">Aceptar</a>
+                            </div>  
+                        </div>
+                    `;
+                    body.appendChild(popup);
+                
+            }
+            else if(respuesta.message == "La contraseña es incorrecta"){
+                const errorMensajeCurrentPass = document.querySelector("#error-currentPass")
+                const inputChangePass2 = document.querySelectorAll("#contenedor-pass input")
+                errorMensajeCurrentPass.style.display = "block"
+                errorMensajeCurrentPass.textContent = respuesta.message
+                inputChangePass2.forEach((input)=>{
+                    input.value = ""
+                })
+
+            } else {
+                alert(respuesta.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error al actualizar la contraseña:', error.message);
+        });
+    
+
+ }
+
+ function cerrarSesion(){
+    
+    const enlaceCerrarSesion = document.getElementById('cerrarsesion');
+    console.log(enlaceCerrarSesion)
+    enlaceCerrarSesion.click()
+}
+ 

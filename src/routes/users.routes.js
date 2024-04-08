@@ -34,5 +34,6 @@ router.put('/:id/update', upload.any(), validacionForm.editUser(), users.putUpda
 router.route('/:id/delete')
     .delete(users.deleteUsers)
 
+router.post("/:id/changepass", users.changePass)
 
 module.exports = router

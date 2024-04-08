@@ -20,7 +20,7 @@ module.exports = {
                     const usersdb = await users.index()
                     const user = usersdb.some((u) => u.userName == value || u.email == value)
                     if (!user) {
-                        return Promise.reject('usuario o email no registrados');
+                        return Promise.reject('usuario o correo electronico no registrados');
                     }
             
                     return Promise.resolve();
@@ -65,8 +65,7 @@ module.exports = {
                 .isLength({min: 6}).withMessage('el nombre debe ser mayor a 6 caracteres')
                 .custom(async (value) => {
                     const users1 = await users.index();
-                    const user = users1.some((u) => u.username == value);
-            
+                    const user = users1.some((u) => u.userName == value);
                     if (user) {
                         throw new Error('El nombre de usuario ya está en uso');
                     }

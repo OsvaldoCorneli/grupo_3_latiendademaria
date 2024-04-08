@@ -10,11 +10,13 @@ const streetnumber = document.querySelector("#streetnumber")
 const errorStreetNumber = document.querySelector("#errorNumero")
 const codigoPostal = document.querySelector("#codigoPostal")
 const errorCodigoPostal = document.querySelector("#errorCodigoPostal")
-
+const elementProvincia = document.querySelector("#provincia")
+const elementLocalidad = document.querySelector("#localidad")
+const errorcheck = document.querySelectorAll(".error-required")
 let withOutErrors = {
     nombre: false,
     apellido: false,
-    nacimiento: false,
+    fechaNacimiento: false,
     codigoPostal: true,
     calle: true,
     numeroCalle: true,
@@ -23,15 +25,43 @@ let withOutErrors = {
     departamento: true,
     email: false,
     userName: false,
-    pass: false,
-    repass: false,
+    password: false,
+    repassword: false,
     provincia: false,
     localidad: false
 }
+console.log(elementLocalidad.value)
+if(elementLocalidad.value != ""){
+    elementLocalidad.value = ""
+}
+console.log(elementProvincia.value)
+if(elementProvincia != ""){
+    elementProvincia.value = ""
+}
 
+requiredinput.forEach((element)=>{
+    const error = document.querySelector(`#error-${element.name}`)
+
+    if(element.value != ""){
+        withOutErrors[element.name] = true
+    }
+    if(error.style.display == "block"){
+        withOutErrors[element.name] = false
+    }
+    
+    
+})
+
+errorcheck.forEach((error)=>{
+    if(error.style.display == "block"){
+        localStorage.removeItem('userName');
+    }
+})
 
 submitButton.addEventListener("click", (e)=>{
     e.preventDefault()
+
+    console.log("errores", withOutErrors)
     
     const requiredinputForm = document.querySelectorAll(".requiredinput")
     
@@ -75,6 +105,7 @@ submitButton.addEventListener("click", (e)=>{
         }
 
     }
+    console.log("submitform", submitform)
    if(submitform){
     const body = document.querySelector("body")
     const popup = document.createElement('span');
@@ -178,31 +209,31 @@ element.addEventListener("input", (e)=>{
                     element.style.border = '2px solid red'
                     error.textContent = mensaje;
                     error.style.display = 'block'
-                    withOutErrors.nacimiento = false;
+                    withOutErrors.fechaNacimiento = false;
                    
                 }
                 else if(fechaFutura(day,e.target.value)){
                     element.style.border = '2px solid red'
                     error.textContent = 'No puede seleccionar una fecha en el futuro'
                     error.style.display = 'block'
-                    withOutErrors.nacimiento = false;
+                    withOutErrors.fechaNacimiento = false;
                 }
                 else if(mayorEdad(day,e.target.value)){
                     element.style.border = '2px solid red'
                     error.textContent = 'Debes tener o ser mayor de 16 años'
                     error.style.display = 'block'
-                    withOutErrors.nacimiento = false;
+                    withOutErrors.fechaNacimiento = false;
                 }
                 else if(aniospasado(day, e.target.value)){
                     element.style.border = '2px solid red'
                     error.textContent = 'No puede seleccionar un año tan en el pasado'
                     error.style.display = 'block'
-                    withOutErrors.nacimiento = false;
+                    withOutErrors.fechaNacimiento = false;
                 }
                 else{
                     element.style.border = '2px solid green'
                     error.style.display = 'none'
-                    withOutErrors.nacimiento = true;
+                    withOutErrors.fechaNacimiento = true;
                 }
             break
             case "imagen":
@@ -263,25 +294,25 @@ element.addEventListener("input", (e)=>{
                     element.style.border = '2px solid red'
                     error.textContent = mensaje;
                     error.style.display = "block"
-                    withOutErrors.pass = false;
+                    withOutErrors.password = false;
           
                 }
                 else if(e.target.value.length < 7){
                   element.style.border = '2px solid red'
                   error.textContent = "La contraseña debe tener al menos 8 caracteres, letras mayúsculas, minúsculas, un número y un carácter especial."
                   error.style.display = "block"
-                  withOutErrors.pass = false;
+                  withOutErrors.password = false;
                 }
                 else if(!regexPassword.test(e.target.value)){
                   element.style.border = '2px solid red'
                   error.textContent = "La contraseña debe contener letras mayúsculas, minúsculas, un número y un carácter especial."
                   error.style.display = "block"
-                  withOutErrors.pass = false;
+                  withOutErrors.password = false;
                 }
                 else{
                   element.style.border = '2px solid green'
                   error.style.display = "none"
-                  withOutErrors.pass = true;
+                  withOutErrors.password = true;
                 }
             break
             case "repassword":
@@ -291,24 +322,24 @@ element.addEventListener("input", (e)=>{
                     element.style.border = '2px solid red'
                     error.textContent = mensaje
                     error.style.display = "block"
-                    withOutErrors.repass = false;
+                    withOutErrors.repassword = false;
                 }
             else if(password.style.border != '2px solid green'){
                     element.style.border = '2px solid red'
                     error.textContent = "Ingrese una contraseña correcta"
                     error.style.display = "block"
-                    withOutErrors.repass = false;
+                    withOutErrors.repassword = false;
                 }
                 else if(password.value != e.target.value){
                     element.style.border = '2px solid red'
                     error.textContent = "Las contraseñas no coinciden"
                     error.style.display = "block"
-                    withOutErrors.repass = false;
+                    withOutErrors.repassword = false;
                 }
                 else{
                     element.style.border = '2px solid green';
                     error.style.display = "none";
-                    withOutErrors.repass = true;
+                    withOutErrors.repassword = true;
                 }                
                 break
                 default:

@@ -16,7 +16,7 @@
                 <div class="inputform">
                     <label for="nombre">Nombre/s:</label>
                     <% if (locals.errors && errors.nombre) { %>
-                        <span class="errors"><%= errors.nombre.msg %></span>
+                        <span id="error-nombre" class="error-required" style="display: block;"><%= errors.nombre.msg %></span>
                     <% } %>
                     <span id="error-nombre" class="error-required">Mensaje de error</span>
                     <input 
@@ -31,7 +31,7 @@
                 <div class="inputform">
                     <label for="apellido">Apellido/s:</label>
                     <% if (locals.errors && errors.apellido) { %>
-                        <span class="errors"><%= errors.apellido.msg %></span>
+                        <span id="error-apellido" class="error-required" style="display: block;"><%= errors.apellido.msg %></span>
                     <% } %>
                     <span id="error-apellido" class="error-required">Mensaje de error</span>
                     <input
@@ -47,7 +47,7 @@
 
                     <label for="birthdate">fecha de nacimiento:</label>
                     <% if (locals.errors && errors.fechaNacimiento) { %>
-                        <span class="errors"><%= errors.fechaNacimiento.msg %></span>
+                        <span id="error-fechaNacimiento" class="error-required" style="display: block;"><%= errors.fechaNacimiento.msg %></span>
                     <% } %>
                     <span id="error-fechaNacimiento" class="error-required">Mensaje de error</span>
                     <input 
@@ -61,7 +61,7 @@
 
                 <div class="inputform">   
                     <% if (locals.errors && errors.provincia) { %>
-                        <span class="errors" ><%= errors.provincia.msg %></span>
+                        <span id="error-provincia" class="error-required" style="display: block;"><%= errors.provincia.msg %></span>
                     <% } %>
                     <label for="provincia">Provincia:</label>
                     <span id="error-provincia" class="error-required">Mensaje de error</span>
@@ -85,7 +85,7 @@
                     />
                     <span id="errorLocalidad" class="error-required">Mensaje de error</span>
                     <% if (locals.errors && errors.localidades) { %>
-                        <span class="errors"><%= errors.localidades.msg %></span>
+                        <span id="errorLocalidad" class="error-required" style="display: block;"><%= errors.localidades.msg %></span>
                     <% } %>
                         <!-- <% localidades.forEach((el) => { %>
                             <% if (locals.errors && errors.localidades) { %>
@@ -105,7 +105,7 @@
             <div class="inputform">
                 <label for="codigoPostal">Codigo postal:</label>
                 <% if (locals.errors && errors.codigoPostal) { %>
-                    <span class="errors"><%= errors.codigoPostal.msg %></span>
+                    <span id="errorCodigoPostal" style="display: block;"><%= errors.codigoPostal.msg %></span>
                 <% } %>
                 <span id="errorCodigoPostal" >Mensaje de error</span>
                 <input 
@@ -132,7 +132,7 @@
             <div class="inputform">
                 <label for="streetnumber">Numero:</label>
                 <% if (locals.errors && errors.calleNumero) { %>
-                    <span class="errors"><%= errors.calleNumero.msg %></span>
+                    <span id="errorNumero" style="display: block;"><%= errors.calleNumero.msg %></span>
                 <% } %>
                 <span id="errorNumero">Mensaje de error</span>
                 <input 
@@ -148,7 +148,7 @@
             <div class="inputform button-wrap">
                 <label class=button for="imageinput">Imagen de perfil</label>
                 <% if (locals.errors && errors.imagen) { %>
-                    <span class="errors"><%= errors.imagen.msg %></span>
+                    <span id="error-imagen" class="error-required" style="display: block;"><%= errors.imagen.msg %></span>
                 <% } %>
                 <span id="error-imagen" class="error-required">Mensaje de error</span>
                 <input 
@@ -158,12 +158,12 @@
                 id="imageinput"
                 accept="image/jpeg, image/png, image/jpg"
             />
-            <i id="iconoCheck" class="fas fa-check" style="color: green; font-size: 24px; display: none; position: absolute; left: 45%; bottom: 20%;"></i>
+            <i id="iconoCheck" class="fas fa-check" style="color: green; font-size: 24px; display: none; position: absolute; left: 52%; bottom: 20%;"></i>
         </div>
             <div class="inputform">
                 <label for="buildingfloor">Piso:</label>
                 <% if (locals.errors && errors.piso) { %>
-                    <span class="errors"><%= errors.piso.msg %></span>
+                    <span class="errors" ><%= errors.piso.msg %></span>
                 <% } %>
                 <input 
                     type="text"
@@ -176,7 +176,7 @@
             <div class="inputform">
                 <label for="departamento">Departamento:</label>
                 <% if (locals.errors && errors.departamento) { %>
-                    <span class="errors"><%= errors.departamento.msg %></span>
+                    <span class="errors" ><%= errors.departamento.msg %></span>
                 <% } %>
                 <input 
                     type="text"
@@ -189,7 +189,7 @@
             <div class="inputform">
                 <label for="email">Email:</label>
                 <% if (locals.errors && errors.email) { %>
-                    <span class="errors"><%= errors.email.msg %></span>
+                    <span id="error-email" class="error-required" style="display: block;"><%= errors.email.msg %></span>
                 <% } %>
                 <span id="error-email" class="error-required">Mensaje de error</span>
                 <input 
@@ -202,9 +202,9 @@
                     />
             </div>
             <div class="inputform">
-                <label for="username">Nombre de usuario:</label>
-                <% if (locals.errors && errors.username) { %>
-                    <span class="errors"><%= errors.username.msg %></span>
+                <label for="userName">Nombre de usuario:</label>
+                <% if (locals.errors && errors.userName) { %>
+                    <span id="error-userName" class="error-required" style="display: block;"><%= errors.userName.msg %></span>
                 <% } %>
                 <span id="error-userName" class="error-required">Mensaje de error</span>
                 <input 
@@ -220,7 +220,7 @@
             <div class="inputform">
                 <label for="password">contraseña:</label>
                 <% if (locals.errors && errors.password) { %>
-                    <span class="errors"><%= errors.password.msg %></span>
+                    <span id="error-password" class="error-required" style="display: block;"><%= errors.password.msg %></span>
                 <% } %>
                 <span id="error-password" class="error-required">Mensaje de error</span>
                 <input 
@@ -235,7 +235,7 @@
             <div class="inputform">
                 <label for="repassword">repetir contraseña:</label>
                 <% if (locals.errors && errors.repassword) { %>
-                    <span class="errors"><%= errors.repassword.msg %></span>
+                    <span id="error-repassword" class="error-required" style="display: block;"><%= errors.repassword.msg %></span>
                 <% } %>
                 <span id="error-repassword" class="error-required">Mensaje de error</span>
                 <input 
