@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
     <head>
         <%- include('../partials/head.ejs') %>
@@ -69,10 +70,10 @@
                     <legend><b>Colores</b></legend>
                     <div class="container-colorinputs">
                     <% productEdit.colors?.forEach(({stock, color},index) =>  { let background=`color:${color.hex};`%>
-                        <div>
+                        <fieldset>
+                            <legend id="c<%= index %>" style=<%= background %>><%= color.name_es %></legend>
                             <label for="color"></label>
                             <input class="c<%= index %>" type="color" name="color" id="color" value="<%= color.hex %>"/>
-                            <span id="c<%= index %>" style=<%= background %>><%= color.hex %></span>
                             <% if (locals.errors && errors.color) { %>
                                 <small id="color" class="errors"><%= errors.color.msg %></small>
                             <% } %>
@@ -81,10 +82,12 @@
                             <% if (locals.errors && errors.stock) { %>
                                 <small id="stock" class="errors"><%= errors.stock.msg %></small>
                             <% } %>
-                        </div>
+                            <button id="deleteColor" class="deleteImage">Borrar</button>
+                            </fieldset>
                     <% }) %>
-                        <span id="agregar" class="button">Agregar color</span>
+                        
                     </div>
+                    <span id="agregar" class="button">Agregar color</span>
                 </fieldset>
                     <label for="price"><b>Precio:</b></label>
                     <input class="inputForm number" 

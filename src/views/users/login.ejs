@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
     <head>
         <%- include('../partials/head.ejs') %>
@@ -11,7 +12,7 @@
             <form id="formulario-login" action="/users/login" method="POST">
                 <label for="email">Usuario / E-mail</label>
                 <% if (locals.errors && errors.email) { %>
-                    <span class="errors"><%= errors.email.msg %></span>
+                    <span id="mensajeEmail" style="display: block;"><%= errors.email.msg %></span>
                 <% } %>
                 <span id="mensajeEmail">Mensaje de error</span>
                 <input 
@@ -25,7 +26,7 @@
                 />
                 <label for="password">Contraseña</label>
                 <% if (locals.errors && errors.password) { %>
-                    <span class="errors"><%= errors.password.msg %></span>
+                    <span id="mensajePassword" style="display: block;"><%= errors.password.msg %></span>
                 <% } %>
                 <span id="mensajePassword">Mensaje de error</span>
                 <input

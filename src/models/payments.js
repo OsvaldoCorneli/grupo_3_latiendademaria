@@ -85,7 +85,8 @@ module.exports = {
             const detail = await db.Payments.findByPk(+id,{
                 include: [
                     {   association: 'user',
-                        attributes: ['id','nombre','apellido']
+                        attributes: ['id','nombre','apellido'],
+                        paranoid: false
                     },
                     {
                         association: 'products',
@@ -107,7 +108,7 @@ module.exports = {
                     }
                 ],
                 attributes: {exclude: ['user_id']},
-                //raw: true,
+                paranoid: false,
                 logging: false
             })
             return detail
@@ -141,8 +142,18 @@ module.exports = {
         try {
             const { idUser, status, products, envio } = body
             const user = await db.Users.findByPk(+idUser, {logging: false})
-            const productData = await db.Products.findAll({where: {id: products.map(p =>  p.product_id)}, logging:false})
-            const total = productData.reduce((acum,{id,price})=> acum+Number(price)*Number(products.find(e => e.product_id == id).cantidad),0)
+            const productData = await db.Products.findAll({
+                include: {
+                    association: 'colors',
+                    attributes: ['color_id', 'stock']
+                },
+                attributes: ['id','price', 'colors.color_id', 'colors.stock'],
+                where: {id: products.map(p => p.product_id)},
+                logging:false})
+
+            const total = products.reduce((acum,{color_id,product_id,cantidad})=> {
+                let price = productData.find(({id}) => id == product_id).price
+                return acum+Number(+cantidad)*Number(+price)},0)
             const newPay = await db.Payments.create({
                 user_id: +user.id,
                 total: total,
@@ -164,6 +175,7 @@ module.exports = {
                     return this.detallePago(newPay.id)
                 }
             }
+            return total
         } catch (error) {
             return error
         }
@@ -171,6 +183,7 @@ module.exports = {
     updateStatus: async function (body) {
         try {
             const { status, id } = body
+            
             const pago = await db.Payments.findByPk(+id,{
                 include: {
                     association: 'products',
@@ -182,25 +195,60 @@ module.exports = {
                     }
                 },
                 logging: false})
-            if (pago.status == status) return this.detallePago(id)
-            for (let i in pago.products) {
-                const {product_id, color_id, cantidad} = pago.products[i]
-                const stock = pago.products[i].color.color_products.find(p => p.product_id == product_id).stock
-                if (status == 'completado' && pago.status != 'completado') {
-                    if (+stock >= +cantidad) {
-                        await db.product_colors.update({stock: +stock - +cantidad},{where: {product_id, color_id}})
-                    } else {
-                        throw new Error(`Stock insuficiente en el articulo ${product_id}`)
+            
+            if (status == 'completado' && pago.status != 'completado') {
+                const Promises = pago.products.map(({product_id, color_id, cantidad})=> {
+                    return new Promise(resolve => resolve(this.checkStock({product_id, color_id, cantidad})))
+                })
+                const checkStock = await Promise.all(Promises)
+                if (checkStock.some(prod => !prod.check)) {
+                    return { 
+                        error: true,
+                        message: 'sin existencia de stock o el articulo y/o color no existen',
+                        productos: checkStock.filter(pr => !pr.check)
                     }
-                } else if (status != 'completado' && pago.status == 'completado') {
-                    await db.product_colors.update({stock: +stock + +cantidad},{where: {product_id, color_id}})
+                } else {
+                    const promisesUpdate = pago.products.map(({product_id, color_id, cantidad, color}) => {
+                            return new Promise(resolve => resolve(db.product_colors.decrement('stock',{
+                                    by: +cantidad,
+                                    where: {product_id, color_id},
+                                    logging: false
+                                })
+                            ))
+                        })
+                    const updateStocks = await Promise.all(promisesUpdate)
+                    if (updateStocks) {
+                        pago.status = status
+                        await pago.save()
+                        return await this.detallePago(id)
+                    }
                 }
-                if (i == pago.products.length-1) {
+            } else if (status != 'completado' && pago.status == 'completado') {
+                const promisesUpdate = pago.products.map(({product_id, color_id, cantidad}) => {
+                    return new Promise(resolve => resolve(db.product_colors.increment('stock',{
+                            by: +cantidad,
+                            where: {product_id, color_id},
+                            logging: false
+                        })
+                    ))
+                })
+                const updateStocks = await Promise.all(promisesUpdate)
+                if (updateStocks) {
                     pago.status = status
                     await pago.save()
-                    return this.detallePago(id)
+                    return await this.detallePago(id)
                 }
             }
+
+        } catch (error) {
+            return error
+        }
+    },
+    checkStock: async function ({product_id, color_id, cantidad}) {
+        try {
+            const data = await db.product_colors.findOne({where: {product_id, color_id, stock: {[Op.gte]: +cantidad}}, logging: false})
+            if (data) return {product_id, color_id, cantidad, check: true}
+            else return {product_id, color_id, cantidad, check: false}
         } catch (error) {
             return error
         }

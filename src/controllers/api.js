@@ -75,6 +75,7 @@ module.exports = {
                 const response = await payments.updateStatus(req.body)
                 res.status(200).json(response)
             } catch (error) {
+                console.log(error.message)
                 res.status(500).json(error.message)
             }
         },
@@ -121,34 +122,86 @@ module.exports = {
     users: {
         all: async function(req, res){
             try {
-                const users = await User.index()
-                if(!users) throw new Error ("no hay usuario")
-                res.status(200).json(users)
+                let userArray = [];
+                
+                const users = await User.index();
+                if(!users) throw new Error ("no hay usuario");
+                for (let user in users){
+                    let usersobj = {
+                        id: users[user].id,
+                        name: users[user].nombre,
+                        email: users[user].email,
+                        detail: `http://${process.env.DB_HOST}:${process.env.API_PORT}/api/users/${users[user].id}`
+                    }; 
+    
+                    userArray.push(usersobj);
+                }
+                const usersApi = {
+                    count: users.length,
+                    users: userArray
+                };
+                res.status(200).json(usersApi);
             } catch (error) {
-                res.status(500).json(error.message)
+                res.status(500).json(error.message);
             }
         },
         login: async function (req,res) {
             try {
                 const errores = validationResult(req)
                 if (errores.isEmpty()) {
-                    const user = await User.login(req.body)
-                    if (user.access) {
-                        req.session.user = user? user : {};
-                        
-                        if(req.body.recordame != undefined){
-                            const oneDayInMillis = 24 * 60 * 60 * 1000;
-                            res.cookie('recordame', user.email, { expires: new Date(Date.now() + oneDayInMillis), httpOnly: true });
-                        }
-                        res.status(200).json(user)
+                    if (req.user?.token){
+                        res.status(200).json(req.user.token)
                     } else {
-                        res.status(403).json()
+                        res.status(401).json({access: false, message: 'solo administradores'})
                     }
+                    
                 } else {
                     res.status(401).json(errores.mapped())
                 } 
             } catch (error) {
                 res.status(500).json(error.message)
+            }
+        },
+        profile: async function (req,res) {
+            try {
+                if (req.user.token) {
+                    const user = await User.detail(+req.user.id)
+                    res.status(200).json({...user, access: true})
+                } else {
+                    res.status(401).json({access: false, error: 'NotAuthorized'})
+                }
+            } catch (error) {
+                res.status(500).json(error.message)
+            }
+        },
+        byid: async function(req,res){
+            try {
+                const {id} = req.params
+                const user = await User.findOneUser(id)
+                if(user){
+                    res.status(200).json(user)
+                }
+
+
+            } catch (error) {
+                res.status(500).json(error.message)
+            }
+        },
+        allregistro: async function(req,res){
+            try {
+                const users = await User.forRegistro();
+                if(!users) throw new Error ("no hay usuario");
+                res.status(200).json(users);
+            } catch (error) {
+                res.status(500).json(error.message);
+            }
+        },
+        delete: async function(req,res){
+            try {
+                const deleteUser = await User.deleteUser(req.params.id, null)
+                res.status(200).json(deleteUser);
+            } catch (error) {
+                res.status(500).json(error.message);
             }
         }
     }

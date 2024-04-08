@@ -69,7 +69,7 @@ module.exports = {
             const newUser = await users.create(req.body, req.files)
             if (newUser) {
                 req.session.user = newUser
-                res.redirect(`/?welcome=${newUser.nombre}`)
+                res.redirect(`/`)
             }
         } else { 
             res.render('users/register', {
@@ -149,7 +149,7 @@ module.exports = {
         try {
             const response = await users.deleteUser(req.session?.user.id, req.body.password)
             if(response.success){
-               res.status(201).json(response);
+                res.status(201).json(response);
             }
             else{
                 res.status(402).json(response);
@@ -184,5 +184,19 @@ module.exports = {
         } catch (error) {
             res.status(500).json(error.message)
         }
-    }
+    },
+    changePass: async function(req, res){
+        try{
+        const response = await users.passChange(req.body, req.params)
+        if(response.success){
+            res.status(201).json(response);
+         }
+         else{
+             res.status(402).json(response);
+         }
+ 
+     } catch (error) {
+         res.status(500).json({error: error});
+     }
+    } 
 }

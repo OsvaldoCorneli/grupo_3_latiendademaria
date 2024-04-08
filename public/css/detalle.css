@@ -204,11 +204,21 @@ input[type=number]::-webkit-outer-spin-button {
     padding: 10px 10px 5px 10px;
     transition: 250ms;
 } */
+
+.containerheart{
+    cursor: pointer;
+}
+
 .color{
     width: 100%;
-    max-width: 180px;
+    max-width: 250px;
     display: flex;
     justify-content: space-around;
+    text-align: center;
+}
+
+.color div p{
+    margin: 5px 0 0 0;
 }
 .unheart {
     display: inline-block;

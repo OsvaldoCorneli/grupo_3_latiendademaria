@@ -13,6 +13,10 @@ module.exports = (sequelize, dataTypes) => {
         type: dataTypes.STRING(30),
         allowNull: true,
        },
+       name_es: {
+        type: dataTypes.STRING(30),
+        allowNull: true,
+       },
        hex:{
         type: dataTypes.STRING(6),
         allowNull: true,

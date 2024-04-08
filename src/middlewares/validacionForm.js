@@ -7,6 +7,7 @@ const path = require('path');
 const categories = require('../models/categories');
 const Colors = require('../models/colors');
 const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+const db = require('../database/models')
 
 const extNames = ['.jpg', '.png', '.jpeg']
 const maxFileSize = 2048000 //bytes
@@ -17,10 +18,10 @@ module.exports = {
             body('email')
                 .notEmpty().withMessage('Ingresar Usuario o email registrado')
                 .custom(async (value) => {
-                    const usersdb = await users.index()
+                    const usersdb = await db.Users.findAll()
                     const user = usersdb.some((u) => u.userName == value || u.email == value)
                     if (!user) {
-                        return Promise.reject('usuario o email no registrados');
+                        return Promise.reject('usuario o correo electronico no registrados');
                     }
             
                     return Promise.resolve();
@@ -28,7 +29,7 @@ module.exports = {
             body('password')
                 .notEmpty().withMessage('La contraseña no puede estar en blanco')
                 .custom(async (value, { req }) => {
-                    const usersdb = await users.index();
+                    const usersdb = await db.Users.findAll()
                     const user = usersdb.find((u) => u.userName == req.body.email || u.email == req.body.email);
             
                     if (!user) {
@@ -64,9 +65,8 @@ module.exports = {
                 .notEmpty().withMessage('Debes completar el nombre')
                 .isLength({min: 6}).withMessage('el nombre debe ser mayor a 6 caracteres')
                 .custom(async (value) => {
-                    const users1 = await users.index();
-                    const user = users1.some((u) => u.username == value);
-            
+                    const users1 = await db.Users.findAll({paranoid: false})
+                    const user = users1.some((u) => u.userName == value);
                     if (user) {
                         throw new Error('El nombre de usuario ya está en uso');
                     }
@@ -76,7 +76,7 @@ module.exports = {
             body('email')
                 .isEmail().withMessage('email no valido')
                 .custom(async (value, { req }) => {
-                    const user1 = await users.index();
+                    const user1 = await db.Users.findAll({paranoid: false})
                     const anotherUserWithSameEmail = user1.some((user) => user.email == value);
 
                   if (anotherUserWithSameEmail) {
@@ -126,7 +126,7 @@ module.exports = {
                 .isEmail().withMessage('email invalido')
                 .custom(async (value,{req}) => {
 
-                    const usuario1 = await users.index()
+                    const usuario1 = await db.Users.findAll({paranoid: false})
                     const anotherUserWithSameEmail = usuario1.some((user) => user.id != req.params.id && user.email == value)
                     if (anotherUserWithSameEmail) {
                         throw new Error('El email ya está en uso');

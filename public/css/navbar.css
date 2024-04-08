@@ -1,4 +1,6 @@
-
+body{
+    background-color: #e5e9e6;
+}
 i.colorIcon {
     border-radius:50%;
     width:20px;
@@ -96,6 +98,7 @@ nav ul {
     justify-content: center;
     flex-wrap: wrap;
     font-size: 1.5rem;
+    text-decoration: none;
 }
 .loginNavbar button {
     display: flex;
@@ -254,6 +257,7 @@ fieldset {
         background-color: #32A97F;
         padding: 5px;
         transition: 250ms;
+        letter-spacing: 1px;
         /* border: solid 1px #5394b0;  */
     }
     .site ul li:hover {

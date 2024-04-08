@@ -16,6 +16,35 @@ main {
     justify-content: center;
     width: 100%;
 }
+
+.submenu{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 850px;
+    justify-content: space-around;
+    padding: 10px 0 10px 0;
+    
+}
+
+.submenu li{
+    list-style-type: none;
+    border-radius: 5px;
+    border: hidden;
+    padding: 5px;
+    margin: 0 0 10px 0;
+    background-color: #26775b;
+    color: white;
+    transition: 500ms;
+    cursor: pointer;
+}
+
+.submenu li a{
+    text-decoration: none;
+    
+   
+}
+
 .pagination {
     display: flex;
     flex-direction: row;
@@ -26,17 +55,19 @@ main {
 }
 
 .pagination span {
-    border: solid 1px black;
+    border: solid 1px #32A97F;
     padding: 5px;
     border-radius: 5px;
 }
 
 .pagination span:hover {
-    box-shadow: 0px 5px black;
+    box-shadow: 0px 2px 2px #26775b;
 }
 
 .pagination .currentPage {
-    border: solid 3px black;
+    border: solid 3px #32A97F;
+    font-weight: bold;
+    color: #26775b;
 }
 
 .arrow-cards {
@@ -59,16 +90,26 @@ main {
 }
 section.profile {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 10px 0 0 0;
     flex-wrap: wrap;
+    width: 100%;
+    max-width: 400px;
     gap: 10px;
+    font-size: 1.2rem;
+    background-color: #32A97F;
+    color: white;
+    border-radius: 5px;
+    padding: 15px;
 }
 section.profile img {
-    width: 150px;
+    width: 159px;
+    height: 159px;
     border-radius: 50%;
     border: solid 1px black;
+
 }
 section.profile > .userData {
     display: flex;
@@ -83,19 +124,23 @@ section.profile > .userData > div {
     align-items: center;
     justify-content: space-evenly;
     gap: 5px;
+    margin: 0 0 15px 0;
 }
+
 section.payments {
     display: flex;
     flex-direction: column;
     text-align: center;
     gap: 10px;
+    width: 100%;
     min-width: 50%;
+    max-width: 1000px;
 }
 
 section.payments > .header{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     font-weight: bold;
     background-color: #32A97F;
@@ -103,6 +148,7 @@ section.payments > .header{
     border-radius: 5px;
     text-wrap: wrap;
 }
+
 
 section.payments > article{
     display: flex;
@@ -171,13 +217,13 @@ button.create {
     border-radius: 5px;
     border: hidden;
     padding: 5px;
-    background-color: #1259c3;
+    background-color: #26775b;
     color: white;
     width: 150px;
     transition: 500ms;
 }
 button.create:hover {
-    background-color: #5394b0;
+    background-color: #2f9b75;
 }
 button.delete {
     border-radius: 5px;
@@ -226,9 +272,9 @@ section.common-profile {
     text-wrap: nowrap;
     width: 600px;
 } */
-.historialpagos > section > span.pago > *{
+/* .historialpagos > section > span.pago > *{
    
-}
+} */
 table > tbody tr th {
     font-weight: bold;
     background-color: #32A97F;
@@ -334,13 +380,14 @@ td > img.product {
     border-radius: 5px;
     border: hidden;
     padding: 5px;
-    background-color: #1259c3;
+    background-color: #26775b;
     color: white;
     width: fit-content;
     transition: 500ms;
+    cursor: pointer;
 }
 .button:hover {
-    background-color: #5394b0;
+    background-color: #2f9b75;
 }
 
 canvas {
@@ -348,7 +395,7 @@ canvas {
 }
 
 .detail {
-    position: absolute;
+    /* position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -359,7 +406,20 @@ canvas {
     width: 100%;
     height: 100%;
     top: 1%;
-    z-index: 15;
+    z-index: 15; */
+    display: flex;
+    margin: 0;
+    position: fixed; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    width: 100%;
+    height: 100%;
+    background-color: rgba(26, 99, 73, 0.2); 
+    z-index: 3;
+    align-items: center;
+    justify-content: center;
+
 }
 
 .detail > div {
@@ -424,12 +484,23 @@ section.userData{
     width: 100%;
 }
 section.favoritos {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    max-width: 900px;
+    gap: 10px;
+    height: 400px;
+    overflow-y: auto;
+}
+.favoritos1 {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: start;
-    min-width: 45%;
-    gap: 10px;
+    width: 100%;
+    /* gap: 10px; */
     height: 400px;
     overflow-y: auto;
 }
@@ -439,10 +510,23 @@ section.favoritos .header {
     justify-content: space-around;
     align-items: center;
     font-weight: bold;
+    width: 100%;
     background-color: #32A97F;
     padding: 5px;
     border-radius: 5px;
     text-wrap: wrap;
+}
+
+section.favoritos .header .p{
+    width: 15%;
+}
+section.favoritos .header p{
+    width: 50px;
+}
+section.favoritos .header i{
+    width: 26px;
+    height: 26px;
+    text-align: center;
 }
 section.favoritos img {
     width: 50px;
@@ -450,13 +534,21 @@ section.favoritos img {
 section.favoritos article {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+    flex-wrap: nowrap;
     background-color: #efefef;
+    width: 100%;
     border-radius: 5px;
     margin: 3px;
     padding: 5px;
 }
+section.favoritos article p{
+    width: 15%;
+}
+
+
+
 .productsAdmin {
     width: 100%;
 }
@@ -479,6 +571,78 @@ section.favoritos article {
     border-image: radial-gradient(white 69%, #0000 70%) 84.5%/50%;
     clip-path: polygon(-41% 0, 50% 91%, 141% 0);
 }
+
+section.delete-acount{
+    display: none;
+    border: solid black 0.2px;
+    padding: 10px;
+    width: 100%;
+    
+}
+
+section.delete-acount div{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-self: center;
+}
+
+section.delete-acount div input{
+    margin: 0 0 5px 0;
+    align-self: center;
+    width: 250px;
+    height: 30px;
+
+}
+.change-pass{
+    border: 1px solid black;
+    display: none;
+    height: 400px;
+    width: 95%;
+}
+
+#contenedor-pass{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+#contenedor-pass input{
+    width: 50%;
+}
+
+#contenedor-pass a{
+    cursor: pointer;
+    width: 15%;
+    border-radius: 5px;
+    border: hidden;
+    padding: 5px;
+    background-color: #26775b;
+    color: white;
+    transition: 500ms;
+}
+
+#contenedor-pass a{
+background-color: #2f9b75;
+}
+
+#error-deleteacount{
+    display: none;
+    color: red;
+    align-self: center;
+    margin: 0 0 5px 0;
+}
+
+.changePassError{
+    display: none;
+    color: red;
+    margin: 0 0 5px 0;
+}
+
 @media (min-width: 540px) {
     .portraitlayout {
         display: block;
@@ -486,9 +650,22 @@ section.favoritos article {
     .mobilelayout {
         display: none;
     }
+
+
 }
 
 @media (min-width: 760px) {
+    main{
+        flex-direction: row;
+        align-items: start;
+        margin: 15px 0 0 0;
+    }
+
+    section.profile{
+        align-self: flex-start;
+        
+    }
+
     section.payments > article > ul{
         display: inline-block;
         list-style: none;
@@ -552,4 +729,89 @@ section.favoritos article {
     .productsAdmin {
         width: 90%;
     }
+
+    section.delete-acount{
+        border: solid black 0.2px;
+        padding: 25px;
+        max-width: 500px;
+        height: 400px;
+    }
+    
+    section.delete-acount div{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-self: center;
+        padding: 20px 0 0 0;
+    }
+    
+    section.delete-acount div input{
+        margin: 0 0 5px 0;
+        align-self: center;
+        width: 250px;
+        height: 30px;
+    
+    }
+
+    section.delete-acount div button{
+        max-width: 100px;
+        align-self: center;
+        
+    }
+    
+    #error-deleteacount{
+        display: none;
+        color: red;
+        align-self: center;
+    }
+
+    .change-pass{
+        max-width: 500px;
+    }
+    #contenedor-pass{
+      min-width: 400px;
+    }
+    
+    section.profile{
+        margin: 0 0 0 5px
+    }
+
+    .header b{
+        width: 85px ;
+    }
+    
+    .rows span, .rows p{
+        width: 85px ;
+    }
+    
+    .rows .number{
+        width: 85px;
+        text-align: center;
+    }
+
+    .rows button{
+        width: 20px;
+        margin: 0 32.5px;
+    }
+}
+
+@media (min-width: 1000px){
+    .header b{
+        width: 150px ;
+    }
+    
+    .rows span, .rows p{
+        width: 150px ;
+    }
+    
+    .rows .number{
+        width: 150px;
+        text-align: center;
+    }
+
+    .rows button{
+        width: 30px;
+        margin: 0 60px;
+    }
+
 }

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
     <head>
         <%- include('../partials/head.ejs') %>
@@ -33,7 +34,7 @@
                         <div>
                             <!-- style="background-color:<%= color.hex %>;border-radius:5px;padding:5px;" -->
                             <input id="<%= color.hex %>" type="checkbox" name="color" value=<%= color.id %> />
-                            <%= color.name + '('+color.productsCount+')' %>
+                            <%= color.name_es + '('+color.productsCount+')' %>
                         </div>
                         <div>
                             <i class="colorIcon" style="background-color: <%= color.hex %>"></i>
@@ -84,7 +85,7 @@
                     <% } else { %>
                         <h2>No se ha encontrado ningún producto</h2>
                     <% } %>
-                </section
+                    </section>
         </span>
         </main>
         <%- include('../partials/footer.ejs') %>

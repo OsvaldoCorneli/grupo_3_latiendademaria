@@ -9,14 +9,15 @@ body {
 .carousel {
     position: relative;
     box-sizing: border-box;
-    border: solid 1px #5394b0;
+    /* border: solid 1px #5394b0; */
     color: #32A97F;
     font-size: 2rem;
     width: cover;
     min-height: 20vh;
     height: 10vh;
     max-height: 50vh;
-    background-color: rgba(182, 229, 219, 0.2);
+    /* background-color: rgba(182, 229, 219, 0.2); */
+    background-color: #e5e9e6;
     border-radius: 15px;
     margin: 30px 0;
     padding: 3%;
@@ -112,6 +113,8 @@ body {
     border-top-left-radius: 5px;
     font-weight: bold;
     margin: 0px 0px 5px 0px;
+    font-size: 22px;
+    padding: 5px 0;
 }
 .productos ul{
     display: flex;
@@ -185,6 +188,8 @@ body {
     font-weight: bold;
     margin-top: 20px;
     margin-bottom: 0;
+    font-size: 22px;
+    padding: 5px 0;
 }
 .lineaArtesanal ul{
     display: flex;
@@ -230,7 +235,9 @@ body {
 }
 .servParroquias {
     font-family: "Gidole";
-    font-size: 2rem;
+    /* font-size: 2rem; */
+    font-size: 22px;
+    padding: 5px 0;
     font-weight: bold;
     background-color: #32A97F;
     border: solid 1px #5394b0;
@@ -258,6 +265,7 @@ body {
 #mensajewelcome{
  font-size: 30px;
  color: white;
+ text-align: center;
 }
 
 @media (min-width: 760px) {

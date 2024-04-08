@@ -2,13 +2,14 @@ const db = require('../database/models')
 const bcrypt = require('bcryptjs');
 const { sendEmail } = require('../middlewares/mailer');
 const images = require('./images');
-const {Op} = require('sequelize')
+const {Op} = require('sequelize');
+const favorites = require('./favorites');
 
 
 module.exports = {
     index: async function () {
         try{
-        const users = await db.Users.findAll({raw: true, logging: false})
+        const users = await db.Users.findAll({ raw: true, logging: false})
         return users
         }catch (error) {
             throw new Error(error.message);
@@ -115,7 +116,10 @@ module.exports = {
     },
     detail: async function (id) {
         try{
-        const detailUser = await db.Users.findByPk(id,{logging: false, raw: true})
+        const detailUser = await db.Users.findByPk(id,{ 
+            attributes: {exclude: ['password']},
+            logging: false,
+            raw: true})
         if (detailUser) {
             return detailUser
         } else {
@@ -181,16 +185,30 @@ module.exports = {
     deleteUser: async function(id,password){
         try {
             const user = await db.Users.findByPk(id,{raw:true})
-            const checkPass = bcrypt.compareSync(password, user.password)
-            if(checkPass){
-                const deleted = await db.Users.destroy({where:{id}})
+            let deleted;
+            let flag = false
+            if (!password) { //para cuando el administrador quiere borrar un usuario sin saber el password
+                deleted = await db.Users.destroy({where:{id}})
+                flag = true
+            } else {
+                const checkPass = bcrypt.compareSync(password, user.password)
+                if(checkPass){
+                    await db.Favorites.destroy({ where: { user_id: id } });
+                    deleted = await db.Users.destroy({where:{id}})
+                    flag = true
+                } else {
+                    return {success: false, message: "La contraseña es incorrecta"}
+                }
+            }
+            if (flag) {
                 if(deleted == 1){
                     return {success: true, message: "Eliminado correctamente"}
+                } else { 
+                    return {success: false, message: "No se pudo eliminar"}
                 }
-                else{ return {success: false, message: "No se pudo eliminar"}}
-            }else{return {success: false, message: "La contraseña es incorrecta"}}
+            }
         } catch (error) {
-             return error
+            return error
         }
        
       },
@@ -231,4 +249,101 @@ module.exports = {
             return error
         }
     },
+    findOneUser: async function(id){
+        try {
+            const user = await db.Users.findByPk(id, {
+                raw: true,
+            });
+            if(!user) throw new error("Usuario no encontrado")
+            const userApi = {
+                id: user.id,
+                nombre: user.nombre,
+                apellido: user.apellido,
+                provincia: user.provincia,
+                localidad: user.localidad,
+                codigoPostal: user.codigoPostal,
+                calle: user.calle,
+                calleNumero: user.calleNumero,
+                imagen: user.imagen,
+                piso: user.piso,
+                departamento: user.departamento,
+                userName: user.userName,
+                email: user.email,
+                fechaNacimiento: user.fechaNacimiento,
+                carrito: user.carrito,
+                created_at: user.created_at,
+                updated_at: user.updated_at
+            }
+            return user
+
+        } catch (error) {
+            return error
+        }
+    },
+    forRegistro: async function(){
+       try {
+        let userAll = []
+        const users = await db.Users.findAll({raw: true, logging: false})
+        if(users){
+            for(let usuario in users){
+            const usuarios = {
+                id: users[usuario].id,
+                nombre: users[usuario].nombre,
+                apellido: users[usuario].apellido,
+                provincia: users[usuario].provincia,
+                localidad: users[usuario].localidad,
+                codigoPostal: users[usuario].codigoPostal,
+                calle: users[usuario].calle,
+                calleNumero: users[usuario].calleNumero,
+                imagen: users[usuario].imagen,
+                piso: users[usuario].piso,
+                departamento: users[usuario].departamento,
+                userName: users[usuario].userName,
+                email: users[usuario].email,
+                fechaNacimiento: users[usuario].fechaNacimiento,
+                carrito: users[usuario].carrito,
+                created_at: users[usuario].created_at,
+                updated_at: users[usuario].updated_at
+            }
+                userAll.push(usuarios)
+            
+        }
+
+
+        }
+
+        return userAll
+
+       } catch (error) {
+        return error
+       }
+    },
+    passChange: async function(body, {id}){
+        try {
+            const user = await db.Users.findByPk(id, {
+                raw: true,
+            });
+            
+            if(!user) throw new Error("Usuario no encontrado");
+
+            const checkPass = bcrypt.compareSync(body.currentPass, user.password)
+            if(checkPass){
+                 console.log("Contraseña Correcta")
+                 const newPassBCrypt = bcrypt.hashSync(body.newPass, 10)
+                 const updateResult  = await db.Users.update({password: newPassBCrypt},{where: {id: id}})
+                 if (updateResult[0] == 1) {
+                    return {success: true, message: "La contraseña se actualizó correctamente."};
+                } else {
+                    return {success: false, message: "No se pudo actualizar la contraseña"}}
+            
+            }else{
+                return {success: false, message: "La contraseña es incorrecta"}
+            }
+        }
+         catch (error) {
+            return error    
+        }    
+
+
+    }   
 }

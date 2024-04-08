@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
     <head>
         <%- include('../partials/head.ejs') %>
@@ -60,20 +61,20 @@
                 <legend><b>Colores</b></legend>
             <% if (body.color) { %> 
                 <% if (typeof(body.color) == 'string') { %>
-                    <div>
+                    <fieldset>
+                        <legend id="c0" style=<%= `color:${color};` %>><%= body.color %></legend>
                         <label for="color">
                             <input class="c0" type="color" name="color" id="color" value="<%= body.color %>"/>
-                            <span id="c0" style=<%= body.color %>></span>
                         </label>
                         <label for="stock">Stock:
                             <input type="number" name="stock" value="<%= body.stock? body.stock : 1 %>" />
                         </label>
-                    </div>
+                    </fieldset>
                 <% } else { %>
                     <% body.color.forEach((color,index) => { let background=`color:${color};` %>
-                        <div>
+                        <fieldset>
+                            <legend id="c<%= index %>" style=<%= background %>><%= color %></legend>
                             <input class="c<%= index %>" type="color" name="color" id="color" value="<%= color %>"/>
-                            <span id="c<%= index %>" style=<%= background %>></span>
                             <% if (locals.errors && errors.color) { %>
                                 <small id="color" class="errors"><%= errors.color.msg %></small>
                             <% } %>
@@ -82,7 +83,7 @@
                             <% if (locals.errors && errors.stock) { %>
                                 <small id="stock" class="errors"><%= errors.stock.msg %></small>
                             <% } %>
-                        </div>
+                        </fieldset>
             <% })}} %>
                 <span id="agregar" class="button">Agregar color</span>
             </fieldset>
