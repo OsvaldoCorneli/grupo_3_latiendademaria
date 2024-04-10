@@ -55,6 +55,8 @@ module.exports = {
             })
         } else if (req.session.user) {
             next()
+        } else {
+            res.status(401).send({access: false, error: "NotAuthorized"})
         }
     }
 }
