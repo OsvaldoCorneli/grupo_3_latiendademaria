@@ -251,29 +251,12 @@ module.exports = {
     },
     findOneUser: async function(id){
         try {
-            const user = await db.Users.findByPk(id, {
-                raw: true,
+            const user = await db.Users.findByPk(id,{
+                attributes: {exclude: ['password']},
+                logging: false
             });
-            if(!user) throw new error("Usuario no encontrado")
-            const userApi = {
-                id: user.id,
-                nombre: user.nombre,
-                apellido: user.apellido,
-                provincia: user.provincia,
-                localidad: user.localidad,
-                codigoPostal: user.codigoPostal,
-                calle: user.calle,
-                calleNumero: user.calleNumero,
-                imagen: user.imagen,
-                piso: user.piso,
-                departamento: user.departamento,
-                userName: user.userName,
-                email: user.email,
-                fechaNacimiento: user.fechaNacimiento,
-                carrito: user.carrito,
-                created_at: user.created_at,
-                updated_at: user.updated_at
-            }
+            if(!user) throw new Error("Usuario no encontrado")
+
             return user
 
         } catch (error) {
