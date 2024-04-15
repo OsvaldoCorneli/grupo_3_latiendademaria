@@ -1,6 +1,7 @@
 
 const products = require('../models/products');
 const cart = require('../models/cart');
+const userService = require('../models/user');
 const db = require("../database/models")
 
 module.exports = {
@@ -30,22 +31,6 @@ module.exports = {
     },
     getAutor: function (req,res) {
         res.render('autor')
-    },
-    getCart: async function (req,res) {
-      try {
-        if(!req.session.user){
-          res.redirect("/")}
-        else{  
-        const cartDetail = await cart.cart(req.session.user?.id)
-      
-        if (cartDetail) { 
-            res.render('cart/cart', {cartDetail: cartDetail})
-        } else {
-            res.render('404notfound', {url: req.url})
-        }}
-      } catch (error) {
-        res.status(500).json(error.message)
-      }
-  },
+    }
   
 }

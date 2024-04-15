@@ -43,6 +43,7 @@ module.exports = (sequelize, dataTypes) => {
             as: "color",
             foreignKey: "color_id"
         })
+
     }
 
     return ProductColors

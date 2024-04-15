@@ -70,13 +70,7 @@ const cols = {
    admin:{
     type: dataTypes.BOOLEAN,
     allowNull: true,
-   },
-   carrito: {
-    type: dataTypes.JSON,
-    allowNull: true,
-    defaultValue: [] 
-}
-
+   }
 }
 
 const config = {
@@ -95,6 +89,12 @@ Users.associate = function(models) {
     Users.belongsToMany(models.Products,{
         as: 'favorites',
         through: models.Favorites,
+        foreignKey: 'user_id',
+        otherKey: 'product_id'
+    }),
+    Users.belongsToMany(models.Products,{
+        as: "cart",
+        through: models.Cart,
         foreignKey: 'user_id',
         otherKey: 'product_id'
     })

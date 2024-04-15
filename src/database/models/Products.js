@@ -51,19 +51,27 @@ module.exports = (sequelize, dataTypes) => {
         })
         Products.hasMany(models.product_colors, {
             as: 'colors',
-            foreignKey: 'product_id'
+            foreignKey: 'product_id',
+            onDelete: 'cascade'
         })
         Products.belongsToMany(models.Images,{
             as: 'images',
             through: models.prod_images,
             foreignKey: 'product_id',
-            otherKey: 'image_id'
+            otherKey: 'image_id',
+            onDelete: 'cascade'
         })
         Products.belongsToMany(models.Users,{
             as: 'favorites',
             through: models.Favorites,
             foreignKey: 'product_id',
-            otherKey: 'user_id'
+            otherKey: 'user_id',
+            onDelete: 'cascade'
+        })
+        Products.hasMany(models.Cart,{
+            as: 'cart',
+            foreignKey: 'product_id',
+            onDelete: 'cascade'
         })
     }
 

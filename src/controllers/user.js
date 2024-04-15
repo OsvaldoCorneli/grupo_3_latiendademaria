@@ -144,7 +144,18 @@ module.exports = {
             res.redirect("/error"); r
         }
     },
+    updateCart: async function(req, res){
+        try {
+            const response = 'asd'
     
+            if(response.success){
+                res.status(201).send("producto eliminado del carrito")
+            } 
+        } catch (error) {
+            console.error("Error al eliminar producto del carrito:", error);
+            res.redirect("/error"); r
+        }
+    },
     deleteUsers: async function(req,res){
         try {
             const response = await users.deleteUser(req.session?.user.id, req.body.password)

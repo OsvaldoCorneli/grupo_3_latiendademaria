@@ -172,67 +172,66 @@ function redireccionarAlogin(){
 }
 
 function addCart(id) {
-const colorInput = document.querySelector(".color input:checked");
-const cantidadInput = document.querySelector("#cantidad");
-const errorStock1 = document.querySelector("#error-stock")
-const count = document.querySelector("input[type=number]")
-if(errorStock1.style.display == "none" && count.value > 0 && count.value != null){
-if (!colorInput || !cantidadInput) {
-console.error('No se encontraron elementos de entrada de color o cantidad');
-return;
-}
-const color = colorInput.value;
-const cantidad = cantidadInput.value;
+    const colorInput = document.querySelector(".color input:checked");
+    const cantidadInput = document.querySelector("#cantidad");
+    const errorStock1 = document.querySelector("#error-stock")
+    const count = document.querySelector("input[type=number]")
+    if(errorStock1.style.display == "none" && count.value > 0 && count.value != null){
+    if (!colorInput || !cantidadInput) {
+    console.error('No se encontraron elementos de entrada de color o cantidad');
+    return;
+    }
+    const color = colorInput.value;
+    const cantidad = cantidadInput.value;
 
-fetch(`/users/cart/${id}`, {
-    method: 'post',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-        id: id,
-        cantidad: cantidad,
-        color: color
+    fetch(`/users/cart`, {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            id: id,
+            cantidad: cantidad,
+            color: color
+        })
     })
-})
-.then(response => {
-    if (response.status === 500) {
-        throw new Error(response);
-    }else{
-   return response.json()
-}})
-.then(respuesta => {
+    .then(response => {
+        if (response.status === 500) {
+            console.log(response.error)
+            response.json().then(err => {throw new Error(err)})
+        }else{
+            return response.json()
+    }})
+    .then(respuesta => {
 
-    if(respuesta.success){
-    document.querySelector("#MensajeCart").textContent = respuesta.message
-    document.querySelector("#MensajeCart").style.display = "block"
-    document.querySelector("#MensajeCart").style.color = "green"
-    }
-    else{
-    const body = document.querySelector("body")
-    const popup = document.createElement("span")
-    popup.classList.add("popupscreen")
-    popup.innerHTML = `
-    <div class="popUps" id="popUpProductoEnCart">
-    <h3>${respuesta.message}</h3>
-    <div class="botonPopup">
-        <a onclick="popUpoOff()">Aceptar</a>
-    </div>
-</div>`
+        if(respuesta.success){
+        document.querySelector("#MensajeCart").textContent = respuesta.message
+        document.querySelector("#MensajeCart").style.display = "block"
+        document.querySelector("#MensajeCart").style.color = "green"
+        }
+        else{
+        const body = document.querySelector("body")
+        const popup = document.createElement("span")
+        popup.classList.add("popupscreen")
+        popup.innerHTML = `
+        <div class="popUps" id="popUpProductoEnCart">
+        <h3>${respuesta.message}</h3>
+        <div class="botonPopup">
+            <a onclick="popUpoOff()">Aceptar</a>
+        </div>
+    </div>`
 
 
-    body.appendChild(popup)
-    
-    
-    }
-})
-.catch(error => {
-    console.error('Error al agregar el producto:', error);
-    errorStock1.style.display = "block"
-});
+        body.appendChild(popup)
+        
+        
+        }
+    })
+    .catch(error => {
+        console.error('Error al agregar el producto:', error.message);
+        errorStock1.style.display = "block"
+    });
 }
-
-
 }
 
 

@@ -28,7 +28,7 @@ menu.addEventListener("click", ()=>{
     menudiv.innerHTML +=`
     <div id="logindiv">
             <span>
-                <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
+                <a href="/users/cart"><i class="fa-solid fa-cart-shopping"></i></a>
                 <a href="/users/profile"><i class="fa-solid fa-user"></i></a>
             </span>
             <button>

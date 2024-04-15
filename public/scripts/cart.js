@@ -129,7 +129,7 @@ function eliminarProducto(id, color) {
 function deleted(id, color){ 
     const totals = document.querySelector("#precioSubTotal").textContent
   
-        fetch(`/users/cart/${id}`, {
+        fetch(`/users/cart`, {
             method: 'delete',
             headers: {
                 'Content-Type': 'application/json'

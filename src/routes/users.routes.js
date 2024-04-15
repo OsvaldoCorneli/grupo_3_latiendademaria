@@ -3,6 +3,7 @@ const router = express.Router();
 const users = require('../controllers/user');
 const validacionForm = require('../middlewares/validacionForm') ;
 const upload = require('../middlewares/multerMid');
+const cart = require('../controllers/cart')
 const jwt = require('../middlewares/jsonwebtoken')
 const addCart = require("../middlewares/addCart")
 
@@ -24,9 +25,11 @@ router.post('/restore/token', jwt.checkToken, validacionForm.restore(), users.re
 
 router.get('/profile', users.profile);
 
-router.route('/cart/:id') 
-   .post(addCart, users.addCart)
-   .delete(users.deleteCart);
+router.route('/cart')
+    .get(cart.getCart)
+    .post(addCart, cart.add)
+    .put(addCart, cart.update)
+    .delete(cart.delete);
 
 router.get('/:id/update', users.getUpdateForm);
 router.put('/:id/update', upload.any(), validacionForm.editUser(), users.putUpdateForm);

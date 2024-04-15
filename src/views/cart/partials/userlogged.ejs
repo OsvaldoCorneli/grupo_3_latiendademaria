@@ -11,29 +11,27 @@
                     <th>Cantidad</th>
                     <th>Subtotal</th>
                 </tr>
-            <% carrito.forEach(el => { %>
-                <tr class="cartascart" id="product-<%= el.id %>-<%= el.colorSelected %>">
-                    <td id="X" onclick="eliminarProducto('<%= el.id %>', '<%= el.colorSelected %>')"><i class="fa-solid fa-trash"></i></td>
-                    <td ><img src="<%= el.images[0].pathName %>" alt="<%= el.name %>"/></td>
-                    <td id="product"><%= el.name %></td>
-                    <% let prodColor = el.colors.find(({color}) => color.id == el.colorSelected).color %>
-                    <% let background = `background-color:${prodColor.hex};color:${prodColor.hex};` %>
-                    <% let stocks = el.colors.find(({color}) => color.id == el.colorSelected).stock %>
-                    <td id="tdcolors" class="tdcolors"><i class="colorIcon" style=<%= background %>></i>stock: <%= parseInt(stocks) %></td>
-                    <td id="precio" class="number"><%= el.price %></td>
+            <% carrito.forEach(({quantity, product, color}) => { %>
+                <tr class="cartascart" id="product-<%= product.id %>-<%= color.id %>">
+                    <td id="X" onclick="eliminarProducto('<%= product.id %>', '<%= color.id %>')"><i class="fa-solid fa-trash"></i></td>
+                    <td ><img src="<%= product.images[0].pathName %>" alt="<%= product.name %>"/></td>
+                    <td id="product"><%= product.name %></td>
+                    <% let background = `background-color:${color.hex};color:${color.hex};` %>
+                    <td id="tdcolors" class="tdcolors"><span><i class="colorIcon" style=<%= background %>></i><%= color.name_es %></span>stock: <%= parseInt(color.available.stock) %></td>
+                    <td id="precio" class="number"><%= product.price %></td>
                     <td class="sumarRestar">
                         <button id="restar" onclick="this.parentNode.querySelector('input[type=number]').stepDown(); ">-</button>
-                        <input id="cantidad" type="number" min="1" placeholder="cantidad" name="cantidad" value="<%= el.cantidad %>" disabled />
+                        <input id="cantidad" type="number" min="1" placeholder="cantidad" name="cantidad" value="<%= quantity %>" disabled />
                         <button id="sumar" onclick="this.parentNode.querySelector('input[type=number]').stepUp();">+</button> 
                     </td>
-                    <td id="subtotalproduct" class="total number"><%= (el.price*el.cantidad).toFixed(2) %></td>
+                    <td id="subtotalproduct" class="total number"><%= (product.price*quantity).toFixed(2) %></td>
                 </tr>
             <% }); %>
                 <tr id="totales">
                     <td id="totalesprecio" style="font-weight: bold;" colspan="4">Totales:</td>
                     <td id="tdcomodin"></td>
-                    <td id="cantidadTotal" style="font-weight: bold;"><%= carrito.reduce((acum, el) => acum + el.cantidad, 0) %></td>
-                    <td id="precioSubTotal" class="number"><b class="number"><%= carrito.reduce((acum, el) => acum + (el.cantidad*el.price), 0).toFixed(2) %></b></td>
+                    <td id="cantidadTotal" style="font-weight: bold;"><%= carrito.reduce((acum, el) => acum + el.quantity, 0) %></td>
+                    <td id="precioSubTotal" class="number"><b class="number"><%= carrito.reduce((acum, el) => acum + (el.quantity*el.product.price), 0).toFixed(2) %></b></td>
                 </tr>
             </tbody>
         </table>

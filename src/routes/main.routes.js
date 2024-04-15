@@ -5,10 +5,6 @@ const main = require('../controllers/main')
 router.route('/')
     .get(main.getHome);
 
-router.route('/cart')
-    .get(main.getCart)
-    
-
 router.route("/contacto")
     .get(main.getContacto)
     .post(main.postContacto)

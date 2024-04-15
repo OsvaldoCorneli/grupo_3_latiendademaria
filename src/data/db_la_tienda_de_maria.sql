@@ -35,7 +35,6 @@ create table users(
     password varchar(128) not null,
     fechanacimiento date default null,
     admin boolean default false,
-    carrito json default null,
 	created_at datetime default current_timestamp,
     updated_at datetime default current_timestamp,
     deleted_at datetime default null
@@ -111,6 +110,15 @@ create table prod_images (
     foreign key (image_id) references images(id)
 );
 
+create table cart (
+	product_id int,
+    color_id int,
+    user_id int,
+    quantity decimal(10,2) not null,
+    foreign key (product_id) references products(id),
+    foreign key (color_id) references colors(id),
+    foreign key (user_id) references users(id)
+);
 
 LOCK TABLES categories WRITE;
 insert into categories (name) values ('Mates'),
@@ -273,9 +281,9 @@ insert into colors (name, name_es, hex) values ('Black', 'Negro', '#000000'),
 unlock tables;
 
 lock tables users write;
-insert into users values (default,'Gustavo Rodolfo','Paz','Santiago del Estero','Santiago del Estero','4200','tomas edison','520','\images\users\imagen-1704600266186.jpg','','','gpaz','gpaz@latiendademaria.com','$2a$10$BSB4xD7pqxg.XEPuaIqYHeum4Rgwxm2hFEp46vHp.a.JtRw.jJpHC','1990-06-12',false,default,default,default,default),
-(default,'pepe','argento','Catamarca','Alijilán','4200','tomas edison','520','','','','pepearg','pepe@latiendademaria.com','$2a$10$IBS5IRK8aczv26KmeiANIO1i/eZXTPnUY7gw7ArxZZ48s2HAGScPW','1990-06-11',false,default,default,default,default),
-(default,'Jhon','Doe','Buenos Aires','12 de Octubre','1001','lomas de zamora','5100','','','','jaimeterrible','jiamito@latiendademaria.com','$2a$10$BSB4xD7pqxg.XEPuaIqYHeum4Rgwxm2hFEp46vHp.a.JtRw.jJpHC','1990-06-11',true,default,default,default,default);
+insert into users values (default,'Gustavo Rodolfo','Paz','Santiago del Estero','Santiago del Estero','4200','tomas edison','520','\images\users\imagen-1704600266186.jpg','','','gpaz','gpaz@latiendademaria.com','$2a$10$BSB4xD7pqxg.XEPuaIqYHeum4Rgwxm2hFEp46vHp.a.JtRw.jJpHC','1990-06-12',false,default,default,default),
+(default,'pepe','argento','Catamarca','Alijilán','4200','tomas edison','520','','','','pepearg','pepe@latiendademaria.com','$2a$10$IBS5IRK8aczv26KmeiANIO1i/eZXTPnUY7gw7ArxZZ48s2HAGScPW','1990-06-11',false,default,default,default),
+(default,'Jhon','Doe','Buenos Aires','12 de Octubre','1001','lomas de zamora','5100','','','','jaimeterrible','jiamito@latiendademaria.com','$2a$10$BSB4xD7pqxg.XEPuaIqYHeum4Rgwxm2hFEp46vHp.a.JtRw.jJpHC','1990-06-11',true,default,default,default);
 unlock tables;
 
 lock tables payments write;

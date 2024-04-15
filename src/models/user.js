@@ -4,6 +4,7 @@ const { sendEmail } = require('../middlewares/mailer');
 const images = require('./images');
 const {Op} = require('sequelize');
 const favorites = require('./favorites');
+const CartService = require('./cart')
 
 
 module.exports = {
@@ -128,7 +129,6 @@ module.exports = {
         
     }, 
     cartAdd: async function(data){
-         
         try {
             const user = await db.Users.findByPk(data.id,{raw: true})
             
@@ -137,15 +137,15 @@ module.exports = {
                 cantidad: +data.body.cantidad,
                 color: data.body.color || null
             }
-            
             if(!user) throw new Error ("Usuario no encontrado")
+            //const cartUpdate = await CartService.update(data)
             if(user.carrito == null){ 
                 user.carrito = [cart]
             }
             else{
                 for(let i=0; i<user.carrito.length; i++) {
                     if(user.carrito[i].id == data.body.id && user.carrito[i].color === data.body.color){
-                         return false
+                        return false
                     }
                 } user.carrito.push(cart);
             }
