@@ -4,19 +4,17 @@ const userService = require('../models/user')
 module.exports = {
     getCart: async function (req,res) {
         try {
-            // if(!req.session.user){
-            //     res.redirect("/")}
-            // else{  
+            if(!req.session.user){
+                res.redirect("/")}
+            else{  
             const cartDetail = await Cart.detail(req.session.user?.id)
-
-            console.log(cartDetail.length)
             const userData = await userService.detail(req.session.user?.id)
-            res.status(200).json(cartDetail)
-            // if (cartDetail) { 
-            //     res.render('cart/cart', {cartDetail: {carrito: cartDetail, ...userData}})
-            // } else {
-            //     res.render('404notfound', {url: req.url})
-            // }}
+            //res.status(200).json(cartDetail)
+            if (cartDetail) { 
+                res.render('cart/cart', {cartDetail: {carrito: cartDetail, ...userData}})
+            } else {
+                res.render('404notfound', {url: req.url})
+            }}
         } catch (error) {
             res.status(500).json(error.message)
         }

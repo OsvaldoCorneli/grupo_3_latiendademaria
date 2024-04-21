@@ -135,11 +135,12 @@ function deleted(id, color){
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
+                id: id,
                 color: color
             })
         })
         .then(response => {
-
+            console.log(Object.keys(response))
             if (!response.ok) {
                 throw new Error(`Error al eliminar el producto: ${response.status}`);
             }

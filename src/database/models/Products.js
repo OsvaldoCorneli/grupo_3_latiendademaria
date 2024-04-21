@@ -68,11 +68,6 @@ module.exports = (sequelize, dataTypes) => {
             otherKey: 'user_id',
             onDelete: 'cascade'
         })
-        Products.hasMany(models.Cart,{
-            as: 'cart',
-            foreignKey: 'product_id',
-            onDelete: 'cascade'
-        })
     }
 
 

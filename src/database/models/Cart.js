@@ -7,11 +7,7 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.INTEGER,
             allowNull: false
         },
-        product_id:{
-            type: dataTypes.INTEGER,
-            allowNull: false
-        },
-        color_id: {
+        product_color_id:{
             type: dataTypes.INTEGER,
             allowNull: false
         },
@@ -27,17 +23,8 @@ module.exports = (sequelize, dataTypes) => {
     }
     
     const Cart = sequelize.define(alias, cols, config);
+    Cart.removeAttribute('id')
 
-    Cart.associate = function(models) {
-        Cart.belongsTo(models.Products, {
-            as: 'product',
-            foreignKey: 'product_id'
-            //otherKey: 'product_id'
-        }),
-        Cart.belongsTo(models.Colors, {
-            as: 'color',
-            foreignKey: 'color_id',
-        })
-    }
+
     return Cart
     };

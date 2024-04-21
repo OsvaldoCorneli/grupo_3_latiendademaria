@@ -11,13 +11,13 @@
                     <th>Cantidad</th>
                     <th>Subtotal</th>
                 </tr>
-            <% carrito.forEach(({quantity, product, color}) => { %>
+            <% carrito.forEach(({quantity, stock, product, color}) => { %>
                 <tr class="cartascart" id="product-<%= product.id %>-<%= color.id %>">
                     <td id="X" onclick="eliminarProducto('<%= product.id %>', '<%= color.id %>')"><i class="fa-solid fa-trash"></i></td>
                     <td ><img src="<%= product.images[0].pathName %>" alt="<%= product.name %>"/></td>
                     <td id="product"><%= product.name %></td>
                     <% let background = `background-color:${color.hex};color:${color.hex};` %>
-                    <td id="tdcolors" class="tdcolors"><span><i class="colorIcon" style=<%= background %>></i><%= color.name_es %></span>stock: <%= parseInt(color.available.stock) %></td>
+                    <td id="tdcolors" class="tdcolors"><span><i class="colorIcon" style=<%= background %>></i><%= color.name_es %></span>stock: <%= parseInt(stock) %></td>
                     <td id="precio" class="number"><%= product.price %></td>
                     <td class="sumarRestar">
                         <button id="restar" onclick="this.parentNode.querySelector('input[type=number]').stepDown(); ">-</button>
@@ -31,7 +31,7 @@
                     <td id="totalesprecio" style="font-weight: bold;" colspan="4">Totales:</td>
                     <td id="tdcomodin"></td>
                     <td id="cantidadTotal" style="font-weight: bold;"><%= carrito.reduce((acum, el) => acum + el.quantity, 0) %></td>
-                    <td id="precioSubTotal" class="number"><b class="number"><%= carrito.reduce((acum, el) => acum + (el.quantity*el.product.price), 0).toFixed(2) %></b></td>
+                    <td id="precioSubTotal" class="number"><b class="number"><%= carrito.reduce((acum, el) => acum + Number(+el.quantity*+el.product.price), 0).toFixed(2) %></b></td>
                 </tr>
             </tbody>
         </table>

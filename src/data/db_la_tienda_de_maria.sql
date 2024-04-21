@@ -111,12 +111,10 @@ create table prod_images (
 );
 
 create table cart (
-	product_id int,
-    color_id int,
+	product_color_id int,
     user_id int,
     quantity decimal(10,2) not null,
-    foreign key (product_id) references products(id),
-    foreign key (color_id) references colors(id),
+    foreign key (product_color_id) references product_colors(id),
     foreign key (user_id) references users(id)
 );
 

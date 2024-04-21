@@ -91,13 +91,8 @@ Users.associate = function(models) {
         through: models.Favorites,
         foreignKey: 'user_id',
         otherKey: 'product_id'
-    }),
-    Users.belongsToMany(models.Products,{
-        as: "cart",
-        through: models.Cart,
-        foreignKey: 'user_id',
-        otherKey: 'product_id'
     })
+
 }
 
 
