@@ -71,11 +71,6 @@ module.exports = {
                     },
                     logging: false})
                 if (updCart) {
-                    // console.log(updCart)
-                    // console.log(+updCart.quantity,  typeof(+updCart.quantity))
-                    // console.log(+body.cantidad, typeof(+body.cantidad) )
-                    // updCart.quantity = +body.cantidad
-                    // updCart.save()
                     return {success: true, message: 'Carrito actualizado'}
                 } else if (updCart) return {success: true, message: 'carrito sin cambios'}
                 else throw Error(`No se puedo actualizar la cantidad ${body.cantidad} para el producto: ${body.id} color: ${body.color}`)
@@ -95,7 +90,7 @@ module.exports = {
                     product_color_id: +checkStock.id,
                     user_id: +id,
                 }
-                //,logging: false
+                ,logging: false
             })
             if (deleteProduct >= 1) return {success: true, message: "producto borrado con exito"}
             else throw new Error(`No se pudo borrar el producto: ${body.id}, color: ${body.color}`)
@@ -107,7 +102,7 @@ module.exports = {
     detail: async function (userid) {
         try {
             const [results, metadata] = await db.sequelize.query(`select JSON_OBJECT('id', p.id, 'name', p.name,'price', p.price, 'images', JSON_ARRAYAGG(JSON_OBJECT('id', i.id,'pathName', i.pathName))) as product, 
-            JSON_OBJECT('id',c.id ,'name', c.name, 'name_es', c.name_es, 'hex', c.hex) as color, cart.quantity as quantity,pc.stock as stock from cart
+            JSON_OBJECT('id',c.id ,'name', c.name, 'name_es', c.name_es, 'hex', c.hex) as color, cart.quantity as quantity, pc.stock as stock from cart
             inner join product_colors pc on cart.product_color_id = pc.id
             inner join products p on p.id = pc.product_id
             inner join colors c on c.id = pc.color_id

@@ -41,14 +41,17 @@ cartascart.forEach((e) => {
         stock.style.color = "red"
     }
 
-    sumar.addEventListener("click", () => {
-    
-        const cantidad = document.querySelector(`#${e.id} #cantidad`).value
+    sumar.addEventListener("click", (el) => {
+        el.preventDefault()
+        
+        const cantidad = document.querySelector(`#${e.id} #cantidad`)
+        cantidad.stepUp()
+        updateCart(idProducto,idColor,cantidad.value)
         const precioindividual = parseFloat(document.querySelector(`#${e.id} #precio`).textContent)
         let subTotalSuma = parseFloat(subTotal.textContent) + precioindividual 
         subTotal.textContent = subTotalSuma.toFixed(2)
         
-        if(cantidad > 1){
+        if(cantidad.value > 1){
             restar.disabled = false
         }
 
@@ -63,25 +66,27 @@ cartascart.forEach((e) => {
         document.querySelector("#precioSubTotal").textContent = sumaPrecioFinal.toFixed(2)
         totalCompleto.textContent = sumaPrecioFinal.toFixed(2)
 
-        if(cantidad == stockValue){
+        if(cantidad.value == stockValue){
             sumar.disabled = true;
             stock.style.color = "red"
         }
 
         productosCarrito.forEach(element =>{
-            element.color_id == idColor ? element.cantidad = parseInt(cantidad) : "";
+            element.color_id == idColor ? element.cantidad = parseInt(cantidad.value) : "";
         })
         
     })
     
-    restar.addEventListener("click", (element) => {
-  
-        const cantidad = document.querySelector(`#${e.id} #cantidad`).value
+    restar.addEventListener("click", (el) => {
+        el.preventDefault()
+        const cantidad = document.querySelector(`#${e.id} #cantidad`)
+        cantidad.stepDown()
+        updateCart(idProducto,idColor,cantidad.value)
         const precioindividual = parseFloat(document.querySelector(`#${e.id} #precio`).textContent)
         let subTotalresta = parseFloat(subTotal.textContent) - precioindividual 
         subTotal.textContent = subTotalresta.toFixed(2) 
         
-        if(parseInt(cantidad) == 1){
+        if(parseInt(cantidad.value) == 1){
             restar.disabled = true
         }
 
@@ -94,19 +99,38 @@ cartascart.forEach((e) => {
         document.querySelector("#precioSubTotal").textContent = restaPrecioFinal.toFixed(2)
         totalCompleto.textContent = restaPrecioFinal.toFixed(2)
 
-        if(parseInt(cantidad) < parseInt(stockValue)){
+        if(parseInt(cantidad.value) < parseInt(stockValue)){
             sumar.disabled = false;
             stock.style.color = "black"
         }
 
         productosCarrito.forEach(element =>{
-            element.color_id == idColor ? element.cantidad = parseInt(cantidad) : "";
+            element.color_id == idColor ? element.cantidad = parseInt(cantidad.value) : "";
         })
 
     })
  
 })
 
+function updateCart(productId, colorId, cantidad) {
+
+    fetch('/users/cart', {
+        method: 'PUT', 
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify({id: productId, color: colorId, cantidad})
+    }).then(res => {
+        if (res.status == 200) return res.json()
+        else throw new Error(res)
+    })
+    .then(data => {
+        return data
+    }).catch(err => {
+        console.log(err)
+        return err
+    })
+}
 
 function eliminarProducto(id, color) {
     const popup = document.createElement('span');
@@ -140,7 +164,6 @@ function deleted(id, color){
             })
         })
         .then(response => {
-            console.log(Object.keys(response))
             if (!response.ok) {
                 throw new Error(`Error al eliminar el producto: ${response.status}`);
             }

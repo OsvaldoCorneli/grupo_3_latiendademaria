@@ -49,7 +49,7 @@ module.exports = {
         try {
             const response = await Cart.delete({body: req.body, id: req.session?.user.id})
             if (response instanceof(Error)) throw Error(response)
-            res.status(200).json(response)
+            res.status(201).json(response)
         } catch (error) {
             res.status(500).json(error.message)
         }
